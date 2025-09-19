@@ -1,0 +1,144 @@
+{
+/**
+ * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * 
+ * You may not use, distribute or modify this code without the explicitly
+ * permission of the author.
+ * 
+ */
+}
+
+import { Meta } from "@storybook/blocks";
+import Github from "./assets/github.svg";
+import Discord from "./assets/discord.svg";
+import LinkedIn from "./assets/linkedin.svg";
+import Website from "./assets/website.svg";
+
+export const RightArrow = () => <svg 
+    viewBox="0 0 14 14" 
+    width="8px" 
+    height="14px" 
+    style={{ 
+      marginLeft: '4px',
+      display: 'inline-block',
+      shapeRendering: 'inherit',
+      verticalAlign: 'middle',
+      fill: 'currentColor',
+      'path fill': 'currentColor'
+    }}
+>
+  <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
+</svg>
+
+<Meta title="Welcome" />
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Welcome
+
+    Here you can find an overview of my Storybook component collection. Discover custom UI elements, reusable components and much more written in a [component-driven](https://www.componentdriven.org) way.
+    
+  </div>
+</div>
+
+<div className="sb-section sb-socials">
+    <div className="sb-section-item">
+      <img src={Github} alt="Github logo" className="sb-explore-image"/>
+      Discover my projects.
+
+      <a
+        href="https://github.com/temmiland"
+        target="_blank"
+      >GitHub<RightArrow /></a>
+    </div>
+    <div className="sb-section-item">
+      <img src={LinkedIn} alt="LinkedIn logo" className="sb-explore-image"/>
+      <div>
+        Connect with me.
+
+        <a
+          href="https://www.linkedin.com/in/temmi-pietsch/"
+          target="_blank"
+          >LinkedIn<RightArrow /></a>
+      </div>
+    </div>
+    <div className="sb-section-item">
+      <img src={Discord} alt="Discord logo" className="sb-explore-image"/>
+      <div>
+        Get support and chat with me.
+        
+        <a
+        href="https://discord.com/channels/@me/86842538668867584"
+        target="_blank"
+        >Discord <RightArrow /></a>
+      </div>
+    </div>
+    <div className="sb-section-item">
+      <img src={Website} alt="A book" className="sb-explore-image"/>
+      <p>Visit and discover my website.</p>
+
+      <a
+          href="https://temmi.land"
+          target="_blank"
+        >Website<RightArrow /></a>
+    </div>
+</div>
+
+<style>
+  {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+
+  .sb-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .sb-section-title {
+    margin-bottom: 32px;
+  }
+
+  .sb-section a:not(h1 a, h2 a, h3 a) {
+    font-size: 14px;
+  }
+
+  .sb-section-item, .sb-grid-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sb-socials {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sb-socials p {
+    margin-bottom: 10px;
+  }
+
+  .sb-explore-image {
+    max-height: 32px;
+    max-width: 32px;
+    align-self: flex-start;
+  }
+
+  @media screen and (max-width: 600px) {
+    .sb-section {
+      flex-direction: column;
+    }
+
+    .sb-socials {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+  }
+  `}
+</style>

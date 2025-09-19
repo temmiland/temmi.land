@@ -1,0 +1,39 @@
+#
+# Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+#
+# You may not use, distribute or modify this code without the explicitly
+# permission of the author.
+#
+
+services:
+  server:
+    container_name: temmiland-web
+    restart: always
+    hostname: temmi.land
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "93:93"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.temmiland-web.entrypoints=web"
+      - "traefik.http.routers.temmiland-web.rule=Host(`temmi.land`) || Host(`www.temmi.land`)"
+      - "traefik.http.middlewares.temmiland-web-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.temmiland-web.middlewares=temmiland-web-https-redirect"
+      - "traefik.http.routers.temmiland-web-secure.entrypoints=websecure"
+      - "traefik.http.routers.temmiland-web-secure.rule=Host(`temmi.land`) || Host(`www.temmi.land`)"
+      - "traefik.http.routers.temmiland-web-secure.tls=true"
+      - "traefik.http.routers.temmiland-web-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.temmiland-web-secure.service=temmiland-web"
+      - "traefik.http.services.temmiland-web.loadbalancer.server.port=93"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+      - default
+
+networks:
+  proxy:
+    external: true
+  default:
+    driver: bridge

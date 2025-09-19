@@ -1,0 +1,46 @@
+/**
+ * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ *
+ * You may not use, distribute or modify this code without the explicitly
+ * permission of the author.
+ */
+
+/*
+	NOTE: This serves as a quick fix to transmit the current background properties to the story
+	content, ensuring that CSS properties such as "mix-blend-mode" function as expected.
+*/
+html, body {
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.docs-story > div,
+.docs-story > div > div {
+	background: inherit;
+}
+
+.sb-show-main.sb-main-padded {
+	padding: 1rem 0;
+}
+
+@font-face {
+	font-family: 'Bogart Light';
+	src: local('Bogart Light'), url(/bogart/BOGARTLIGHTTRIAL.TTF) format('truetype');
+}
+
+@font-face {
+	font-family: 'Bogart Regular';
+	src: local('Bogart Regular'), url(/bogart/BOGARTREGULARTRIAL.TTF) format('truetype');
+}
+
+@font-face {
+	font-family: 'Bogart Medium';
+	src: local('Bogart Medium'), url(/bogart/BOGARTMEDIUMTRIAL.TTF) format('truetype');
+}
+
+@font-face {
+	font-family: 'Bogart Bold';
+	src: local('Bogart Bold'), url(/bogart/BOGARTBOLDTRIAL.TTF) format('truetype');
+}

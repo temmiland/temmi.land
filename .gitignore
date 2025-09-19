@@ -1,0 +1,27 @@
+#
+# Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+#
+# You may not use, distribute or modify this code without the explicitly
+# permission of the author.
+#
+
+### React ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+dist
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/

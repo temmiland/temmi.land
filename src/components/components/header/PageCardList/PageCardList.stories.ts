@@ -1,0 +1,39 @@
+/**
+ * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ *
+ * You may not use, distribute or modify this code without the explicitly
+ * permission of the author.
+ */
+
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { pages } from '../../../../data/pages.ts';
+import { PageCardList } from './PageCardList.tsx';
+
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+const meta = {
+	title: 'Components/Footer/PageCardList',
+	component: PageCardList,
+	tags: ['autodocs']
+} satisfies Meta<typeof PageCardList>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Standard: Story = {
+	args: {
+		pages: pages
+	}
+};
+
+export const Inverted: Story = {
+	parameters: {
+		backgrounds: {
+			default: 'dark'
+		}
+	},
+	args: {
+		pages: pages
+	}
+};
