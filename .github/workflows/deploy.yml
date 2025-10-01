@@ -1,0 +1,61 @@
+name: Deploy via Webhook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 1️⃣ Cloudflare Bypass
+      - name: Bypass Cloudflare for GitHub Action
+        uses: xiaotianxt/bypass-cloudflare-for-github-action@v1.1.1
+        with:
+          cf_zone_id: ${{ secrets.CF_ZONE_ID }}
+          cf_api_token: ${{ secrets.CF_API_TOKEN }}
+
+      # 2️⃣ Trigger Deployment
+      - name: Trigger deployment
+        run: |
+          DEPLOY_RESPONSE=$(curl -s -X POST "https://ci.temmi.land/hooks/deploy-project?key=${{ secrets.CI_KEY }}&repo=temmi.land")
+          echo "Deploy response: $DEPLOY_RESPONSE"
+
+      # 3️⃣ Wait for Deployment Status
+      - name: Wait for deployment status
+        run: |
+          MAX_RETRIES=60
+          SLEEP=5
+          COUNT=0
+
+          while true; do
+            STATUS_RESPONSE=$(curl -s -X POST "https://ci.temmi.land/hooks/status-project?key=${{ secrets.CI_KEY }}&repo=temmi.land")
+
+            if echo "$STATUS_RESPONSE" | jq empty >/dev/null 2>&1; then
+              STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
+              echo "Status: $STATUS_RESPONSE"
+            else
+              echo "⚠️ $STATUS_RESPONSE"
+              STATUS="unknown"
+            fi
+
+            if [[ "$STATUS" == "success" ]]; then
+              echo "✅ Deployment successful!"
+              exit 0
+            elif [[ "$STATUS" == "error" || "$STATUS" == "failed" ]]; then
+              echo "❌ Deployment failed!"
+              exit 1
+            fi
+
+            COUNT=$((COUNT+1))
+            if [[ $COUNT -ge $MAX_RETRIES ]]; then
+              echo "⏱ Timeout: Deployment took too long."
+              exit 1
+            fi
+
+            sleep $SLEEP
+          done
