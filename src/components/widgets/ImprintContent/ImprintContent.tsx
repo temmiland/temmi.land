@@ -18,13 +18,11 @@ export const ImprintContent = () => (
 		<Typography variant={ 'p' }>
 			{ 'Temmi Pietsch' }
 			<br />
-			{ 'c/o Postflex #7561' }
+			{ 'c/o Autorenglück #23155' }
 			<br />
-			{ 'Emsdettener Str. 10' }
+			{ 'Albert-Einstein-Straße 47' }
 			<br />
-			{ 'D-48268 Greven' }
-			<br />
-			{ 'Keine Pakete oder Päckchen - Annahme wird verweigert!' }
+			{ 'D-02977 Hoyerswerda' }
 		</Typography>
 
 		<Typography variant={ 'h2' }>{ 'Kontakt' }</Typography>
