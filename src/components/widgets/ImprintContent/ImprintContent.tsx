@@ -23,8 +23,6 @@ export const ImprintContent = () => (
 			{ 'Albert-Einstein-Straße 47' }
 			<br />
 			{ 'D-02977 Hoyerswerda' }
-			<br />
-			{ 'Keine Pakete oder Päckchen - Annahme wird verweigert!' }
 		</Typography>
 
 		<Typography variant={ 'h2' }>{ 'Kontakt' }</Typography>

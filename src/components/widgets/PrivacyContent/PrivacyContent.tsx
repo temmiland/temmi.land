@@ -141,8 +141,6 @@ export const PrivacyContent = () => (
 			{ 'Albert-Einstein-Straße 47' }
 			<br />
 			{ 'D-02977 Hoyerswerda' }
-			<br />
-			{ 'Keine Pakete oder Päckchen - Annahme wird verweigert!' }
 		</Typography>
 		<Typography variant={ 'p' }>{ 'E-Mail: welcome@temmi.land' }</Typography>
 		<Typography variant={ 'p' }>
