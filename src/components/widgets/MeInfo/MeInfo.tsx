@@ -84,13 +84,9 @@ export const MeInfo = () => (
 		</Typography>
 		<Typography variant={ 'h2' }>
 			{ 'I\'m a ' }
-			<Chip color={ '#80cee1' } iconName={ 'mug-hot' } text={ 'Frontend Developer' }/>
+			<Chip color={ '#80cee1' } iconName={ 'mug-hot' } text={ 'Senior Developer' } />
 			{ ' based in ' }
-			<Chip
-				color={ '#d698a1' }
-				iconName={ 'location-dot' }
-				text={ 'Dresden, Germany' }
-			/>
+			<Chip color={ '#d698a1' } iconName={ 'location-dot' } text={ 'Leipzig, Germany' } />
 		</Typography>
 		<MeLinkIconContainer>
 			<LinkIcon

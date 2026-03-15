@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Typography } from '../../util/Typography/Typography.tsx';
 
-export const MadeWithLoveInDresden = () => {
+export const MadeWithLoveInLeipzig = () => {
 	const iconRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {

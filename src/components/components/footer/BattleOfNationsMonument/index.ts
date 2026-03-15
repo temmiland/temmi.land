@@ -5,6 +5,6 @@
  * permission of the author.
  */
 
-import { MadeWithLoveInDresden } from './MadeWithLoveInDresden';
+import { BattleOfNationsMonument } from './BattleOfNationsMonument';
 
-export default MadeWithLoveInDresden;
+export default BattleOfNationsMonument;

@@ -512,7 +512,7 @@ export const About = () => {
 				>
 					<div className={ 'ah-text' }>
 						<Typography variant={ 'p' }>
-							{ 'Hi! I’m a Frontend and Fullstack Developer, currently based in Dresden. ' +
+							{ 'Hi! I’m a Frontend and Fullstack Developer, currently based in Leipzig. ' +
 								'I build modern, interactive web applications using TypeScript, JavaScript' +
 								', HTML, and CSS – always with the goal of turning complex requirements ' +
 								'into intuitive, user-friendly interfaces.' }
@@ -693,24 +693,23 @@ export const About = () => {
 						<ul>
 							<li>
 								<img
+									alt={ 'leipzig logo' }
+									src={ './logos/stadt_leipzig_logo.jpeg' }
+									className={ 'aw-company-image' }
+								/>
+								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
+								<div className={ 'aw-company' }>{ 'Stadt Leipzig' }</div>
+								<div className={ 'aw-timerange' }>{ '2026 - Now' }</div>
+							</li>
+							<li>
+								<img
 									alt={ 'gruene jugend logo' }
 									src={ './logos/grne_jugend_sachsen_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
 								<div className={ 'aw-company' }>{ 'GRÜNE JUGEND' }</div>
-								<div className={ 'aw-timerange' }>{ '2024 - Now' }</div>
-							</li>
-
-							<li>
-								<img
-									alt={ 'dresden logo' }
-									src={ './logos/landeshauptstadt_dresden_logo.jpeg' }
-									className={ 'aw-company-image' }
-								/>
-								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
-								<div className={ 'aw-company' }>{ 'Dresden - AG Wahlhelfer' }</div>
-								<div className={ 'aw-timerange' }>{ '2019 - Now' }</div>
+								<div className={ 'aw-timerange' }>{ '2024 - 2026' }</div>
 							</li>
 							<li>
 								<img
@@ -733,6 +732,16 @@ export const About = () => {
 								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
 								<div className={ 'aw-company' }>{ 'BÜNDNIS 90/DIE GRÜNEN ' }</div>
 								<div className={ 'aw-timerange' }>{ '2024 - 2025' }</div>
+							</li>
+							<li>
+								<img
+									alt={ 'dresden logo' }
+									src={ './logos/landeshauptstadt_dresden_logo.jpeg' }
+									className={ 'aw-company-image' }
+								/>
+								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
+								<div className={ 'aw-company' }>{ 'Landeshauptstadt Dresden' }</div>
+								<div className={ 'aw-timerange' }>{ '2019 - 2026' }</div>
 							</li>
 						</ul>
 					</div>

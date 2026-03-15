@@ -11,30 +11,30 @@ import { Image } from 'antd';
 /**
  * Custom styles for antd Image component.
  */
-const SImage = styled(Image)<ChurchOfOurLadyProps>`
-    width: ${props => props.size}vw !important;
+const SImage = styled(Image)<BattleOfNationsMonumentProps>`
+	width: ${(props) => props.size}vw !important;
 
 	@media (min-width: 320px) and (max-width: 1024px) {
 		width: 8vw !important;
 	}
 
 	@media (min-width: 2000px) {
-		width: ${props => ((props.size ?? 3) / 100)
-			* Math.min(window.innerWidth, 2000)}px !important;
+		width: ${(props) =>
+		((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px !important;
 	}
 `;
 
-type ChurchOfOurLadyProps = {
+type BattleOfNationsMonumentProps = {
 	/**
 	 * What width to use TODO: in vw
 	 */
 	size?: number;
-}
+};
 
-export const ChurchOfOurLady = ({ size = 3 }: ChurchOfOurLadyProps) => (
+export const BattleOfNationsMonument = ({ size = 3 }: BattleOfNationsMonumentProps) => (
 	<SImage
 		size={ size }
-		src={ '/church-of-our-lady.png' }
+		src={ '/battle-of-nations-monument.png' }
 		preview={ false }
 		style={ {
 			verticalAlign: 'bottom',

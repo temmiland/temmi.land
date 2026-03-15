@@ -7,23 +7,21 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ChurchOfOurLady } from './ChurchOfOurLady.tsx';
+import { MadeWithLoveInLeipzig } from './MadeWithLoveInLeipzig.tsx';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-	title: 'Components/Footer/ChurchOfOurLady',
-	component: ChurchOfOurLady,
+	title: 'Components/Footer/MadeWithLoveInLeipzig',
+	component: MadeWithLoveInLeipzig,
 	tags: ['autodocs']
-} satisfies Meta<typeof ChurchOfOurLady>;
+} satisfies Meta<typeof MadeWithLoveInLeipzig>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Standard: Story = {
-	args: {
-		size: 3
-	}
+	args: {}
 };
 
 export const Inverted: Story = {
@@ -32,7 +30,5 @@ export const Inverted: Story = {
 			default: 'dark'
 		}
 	},
-	args: {
-		size: 3
-	}
+	args: {}
 };

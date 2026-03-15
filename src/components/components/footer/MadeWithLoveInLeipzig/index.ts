@@ -5,6 +5,6 @@
  * permission of the author.
  */
 
-import { ChurchOfOurLady } from './ChurchOfOurLady';
+import { MadeWithLoveInLeipzig } from './MadeWithLoveInLeipzig';
 
-export default ChurchOfOurLady;
+export default MadeWithLoveInLeipzig;

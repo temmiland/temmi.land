@@ -5,15 +5,14 @@
  * permission of the author.
  */
 
-import MadeWithLoveInDresden
-	from '../../components/footer/MadeWithLoveInDresden';
+import MadeWithLoveInLeipzig from '../../components/footer/MadeWithLoveInLeipzig';
 import CopyrightNotice from '../../components/footer/CopyrightNotice';
 import Navigation from '../../components/footer/Navigation';
 import Trademark from '../../components/footer/Trademark';
 
 export const Footer = () => (
 	<>
-		<MadeWithLoveInDresden />
+		<MadeWithLoveInLeipzig />
 		<CopyrightNotice />
 		<Navigation />
 		<Trademark />
