@@ -22,7 +22,7 @@ export const MadeWithLoveInLeipzig = () => {
 				'http://www.w3.org/2000/svg',
 				'linearGradient'
 			);
-			linearGradient.setAttribute('id', 'enby');
+			linearGradient.setAttribute('id', 'trans');
 			linearGradient.setAttribute('x1', '0%');
 			linearGradient.setAttribute('y1', '0%');
 			linearGradient.setAttribute('x2', '0%');
@@ -83,7 +83,7 @@ export const MadeWithLoveInLeipzig = () => {
 
 			const path = svg.querySelector('path');
 			if (path) {
-				path.setAttribute('fill', 'url(#enby)');
+				path.setAttribute('fill', 'url(#trans)');
 			}
 		}
 	}, []);

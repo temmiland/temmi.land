@@ -306,7 +306,7 @@ const P = styled(Paragraph)<TypographyProps>`
 		}
 
 		&:hover {
-			color: #8B8B8B;
+			color: #8b8b8b;
 		}
 	}
 `;
@@ -331,18 +331,18 @@ const P_Footer = styled(Paragraph)<TypographyProps>`
 	}
 
 	.heart-icon {
-		font-size: 2vw;
+		font-size: 1.75vw;
 
 		@media (min-width: 320px) and (max-width: 600px) {
-			font-size: 6vw;
+			font-size: 3vw;
 		}
 
 		@media (min-width: 600px) and (max-width: 1024px) {
-			font-size: 4.5vw;
+			font-size: 2.25vw;
 		}
 
 		@media (min-width: 2000px) {
-			font-size: 40px;
+			font-size: 20px;
 		}
 	}
 `;
@@ -406,7 +406,7 @@ const P_Copyright = styled(Paragraph)<TypographyProps>`
 const P_Navigation = styled(Paragraph)<TypographyProps>`
 	font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
 	text-align: center;
-	font-size: 0.90vw;
+	font-size: 0.9vw;
 	color: #fff;
 	z-index: 3;
 
@@ -443,10 +443,7 @@ const P_Trademark = styled(Paragraph)<TypographyProps>`
 	}
 `;
 
-export const Typography = ({
-	variant = 'footer',
-	children = ''
-}: TypographyProps) => {
+export const Typography = ({ variant = 'footer', children = '' }: TypographyProps) => {
 	switch (variant) {
 	case 'h0':
 		return <H0>{ children }</H0>;
