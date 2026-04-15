@@ -512,31 +512,23 @@ export const About = () => {
 				>
 					<div className={ 'ah-text' }>
 						<Typography variant={ 'p' }>
-							{ 'Hi! I’m a Frontend and Fullstack Developer, currently based in Leipzig. ' +
-								'I build modern, interactive web applications using TypeScript, JavaScript' +
-								', HTML, and CSS – always with the goal of turning complex requirements ' +
-								'into intuitive, user-friendly interfaces.' }
+							{ 'Hi, I\'m Temmi — a Senior Software Engineer based in Leipzig, Germany. ' +
+								'I build modern web and mobile applications with TypeScript, React, React ' +
+								'Native, Angular, and Spring (Java/Kotlin), turning complex requirements ' +
+								'into clean, intuitive interfaces.' }
 						</Typography>
 						<Typography variant={ 'p' }>
-							{ 'I’ve worked on diverse projects across web and mobile using React, React ' +
-								'Native, and Angular. I’m also well-versed in tools like GitHub, GitLab, ' +
-								'Bitbucket, Jira, Confluence, and Notion – whether it\'s for version ' +
-								'control, collaboration, or efficient project management.' }
+							{ 'With years of experience across web, mobile, and backend projects, I work ' +
+								'confidently across the full stack — in teams and as a freelancer. I use ' +
+								'AI tooling strategically to ship faster without cutting corners.' }
 						</Typography>
 						<Typography variant={ 'p' }>
-							{ 'I take a structured, solution-oriented approach to development and hold ' +
-								'myself to high standards – whether I’m working in a team or independently ' +
-								'as a freelancer.' }
+							{ 'High standards and structured thinking — not as a motto, but as a habit.' }
 						</Typography>
 						<Typography variant={ 'p' }>
-							{ 'Away from the screen, you’ll find me longboarding, hiking, digging in the ' +
-								'garden, caring for plants, or deep in political discussions. ' +
-								'My passion for storytelling and worldbuilding often finds its way into my ' +
-								'work – I love exploring new ideas and blending technology with creativity.' }
-						</Typography>
-						<Typography variant={ 'p' }>
-							{ 'I believe great software is born where curiosity, empathy, and technology ' +
-								'meet. Let’s build something that doesn’t just work – but inspires. 🚀' }
+							{ '🌸 Open for new projects!' }
+							<br/>
+							{ ' Got something interesting? Let\'s talk!' }
 						</Typography>
 					</div>
 				</Trail>
@@ -583,10 +575,10 @@ export const About = () => {
 						oversize: 0
 					},
 					max: {
-						phone: 950,
-						tablet: 775,
-						desktop: 700,
-						oversize: 700
+						phone: 1025,
+						tablet: 850,
+						desktop: 775,
+						oversize: 775
 					}
 				} }
 				animationDirection={ 'bottom' }
