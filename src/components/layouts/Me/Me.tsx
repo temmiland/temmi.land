@@ -46,7 +46,7 @@ const MeInfoContainer = styled.div`
 `;
 
 const MeImageContainer = styled.div`
-	margin: 1.75vw auto;
+	margin: 2.75vw auto;
 	width: 70%;
 	place-self: center;
 	transform: translateY(-1.5vw);
