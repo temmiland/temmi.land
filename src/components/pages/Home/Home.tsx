@@ -199,7 +199,7 @@ export default function Home() {
 					/>
 				</HeaderSection>
 			</Section>
-			<Section background={ '#090706' }>
+			<Section background={ '#050404' }>
 				<MeSection>
 					<Me />
 				</MeSection>
