@@ -17,6 +17,7 @@ import Home from './routes/Home';
 import Imprint from './routes/Imprint';
 import Privacy from './routes/Privacy';
 import Project from './routes/Project';
+import Skills from './routes/Skills';
 import './index.css';
 
 
@@ -45,6 +46,17 @@ const App = () => {
 						<title>{ 'Temmi Pietsch - Projects' }</title>
 					</Helmet>
 					<Project />
+				</>
+			)
+		},
+		{
+			path: '/skills',
+			element: (
+				<>
+					<Helmet>
+						<title>{ 'Temmi Pietsch - Skills' }</title>
+					</Helmet>
+					<Skills />
 				</>
 			)
 		},

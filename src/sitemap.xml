@@ -65,6 +65,13 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Skills -->
+    <url>
+        <loc>https://temmi.land/skills</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <!-- Privacy -->
     <url>
         <loc>https://temmi.land/privacy</loc>

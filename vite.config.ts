@@ -14,5 +14,11 @@ export default defineConfig({
 	server: {
 		host: true
 	},
+	// Force a single React instance. @temmiland/react-expandable-grid ships
+	// react/react-dom as regular dependencies, so without deduping Vite can
+	// bundle a second copy, breaking hooks ("dispatcher.useRef" is null).
+	resolve: {
+		dedupe: ['react', 'react-dom']
+	},
 	plugins: [react(), eslint()]
 })
