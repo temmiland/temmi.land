@@ -7,7 +7,7 @@
 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import Typography from '../../components/util/Typography';
 import { ExpandableGrid } from '@temmiland/react-expandable-grid';
 import { projects } from '../../../data/projects';

@@ -8,7 +8,7 @@
 import styled from 'styled-components';
 import { projects } from '../../../../data/projects';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '../../util/Typography/Typography';
 import { Button } from 'antd';
 

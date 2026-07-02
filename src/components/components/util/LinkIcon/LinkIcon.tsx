@@ -7,7 +7,7 @@
 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconLookup } from '@fortawesome/fontawesome-svg-core';
+import type { IconLookup } from '@fortawesome/fontawesome-svg-core';
 import Link from '../Link';
 
 

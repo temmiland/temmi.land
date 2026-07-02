@@ -331,19 +331,7 @@ const P_Footer = styled(Paragraph)<TypographyProps>`
 	}
 
 	.heart-icon {
-		font-size: 1.75vw;
-
-		@media (min-width: 320px) and (max-width: 600px) {
-			font-size: 3vw;
-		}
-
-		@media (min-width: 600px) and (max-width: 1024px) {
-			font-size: 2.25vw;
-		}
-
-		@media (min-width: 2000px) {
-			font-size: 20px;
-		}
+		font-size: 1.3em;
 	}
 `;
 
