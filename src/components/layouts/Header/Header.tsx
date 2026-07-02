@@ -6,8 +6,8 @@
  */
 
 import { useEffect, useState } from 'react';
+import { animated, useSpring } from 'react-spring';
 import WHeader from '../../widgets/Header'
-import Trail from '../../components/util/Trail';
 import { styled } from 'styled-components';
 
 const HeaderContainer = styled.div`
@@ -18,43 +18,70 @@ const HeaderContainer = styled.div`
 `;
 
 type HeaderProps = {
-	visible: {
-		min: {
-			phone: number,
-			tablet: number,
-			desktop: number,
-			oversize: number
-		},
-		max: {
-			phone: number,
-			tablet: number,
-			desktop: number,
-			oversize: number
-		}
-	},
+	/**
+	 * Id of the element the header should wait for. Once that element has
+	 * scrolled above the viewport, the header reveals itself. Omit to show
+	 * the header immediately (used on pages without a hero section).
+	 */
+	revealAfterId?: string,
 	animationDirection?: 'top' | 'right' | 'bottom' | 'left'
 }
 
+/**
+ * Header layout component. Fixed to the top of the page, it either shows
+ * immediately or reveals itself once a given hero element has scrolled out
+ * of view, using IntersectionObserver so it works consistently regardless
+ * of document height or viewport size.
+ * @param {HeaderProps} props - The props for the Header component.
+ * @returns {JSX.Element} Header JSX element.
+ */
+export const Header = ({ revealAfterId, animationDirection = 'right' }: HeaderProps) => {
 
-export const Header = ({ visible, animationDirection = 'right' }: HeaderProps) => {
-
-	const [scrollY, setScrollY] = useState(0);
+	const [isVisible, setIsVisible] = useState(!revealAfterId);
 
 	useEffect(() => {
-		window.addEventListener('scroll', () => setScrollY(document.body.scrollTop), true);
+		if (!revealAfterId) return;
+
+		const target = document.getElementById(revealAfterId);
+		if (!target) {
+			setIsVisible(true);
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setIsVisible(entry.boundingClientRect.top < 0);
+			},
+			{
+				threshold: 0
+			}
+		);
+
+		observer.observe(target);
+		return () => observer.disconnect();
+	}, [revealAfterId]);
+
+	const style = useSpring({
+		config: {
+			mass: 5,
+			tension: 4000,
+			friction: 800
+		},
+		opacity: isVisible ? 1 : 0,
+		x: animationDirection !== 'top' && animationDirection !== 'bottom'
+			? isVisible
+				? 0
+				: animationDirection === 'right'
+					? 55
+					: -55
+			: 0
 	});
 
 	return (
 		<HeaderContainer>
-			<Trail
-				scrollY={ scrollY }
-				visible={ visible }
-				animationSpeed={ 55 }
-				animationDirection={ animationDirection }
-			>
+			<animated.div style={ style }>
 				<WHeader/>
-			</Trail>
+			</animated.div>
 		</HeaderContainer>
-
 	);
 };

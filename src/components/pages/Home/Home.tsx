@@ -10,6 +10,7 @@ import Header from '../../layouts/Header';
 import Me from '../../layouts/Me';
 import About from '../../layouts/About';
 import Projects from '../../layouts/Projects';
+import Skills from '../../layouts/Skills';
 import Footer from '../../layouts/Footer';
 import { projects } from '../../../data/projects.ts';
 
@@ -42,6 +43,20 @@ const AboutSection = styled.section`
 `;
 
 const ProjectSection = styled.section`
+	margin: 0 auto;
+	z-index: 3;
+	padding: 3.6vw 0;
+	position: relative;
+
+	max-width: 2000px;
+
+	@media (min-width: 2000px) {
+		padding: 72px 0;
+	}
+
+`;
+
+const SkillSection = styled.section`
 	margin: 0 auto;
 	z-index: 3;
 	padding: 3.6vw 0;
@@ -181,22 +196,7 @@ export default function Home() {
 		<>
 			<Section background={ 'transparent' }>
 				<HeaderSection>
-					<Header
-						visible={ {
-							min: {
-								phone: 275,
-								tablet: 425,
-								desktop: 400,
-								oversize: 400
-							},
-							max: {
-								phone: Infinity,
-								tablet: Infinity,
-								desktop: Infinity,
-								oversize: Infinity
-							}
-						} }
-					/>
+					<Header revealAfterId={ 'hero-heading' } />
 				</HeaderSection>
 			</Section>
 			<Section background={ '#050404' }>
@@ -208,6 +208,11 @@ export default function Home() {
 				<AboutSection>
 					<About />
 				</AboutSection>
+			</Section>
+			<Section background={ '#141414' }>
+				<SkillSection>
+					<Skills />
+				</SkillSection>
 			</Section>
 			<Section background={ '#141414' }>
 				<ProjectSection>

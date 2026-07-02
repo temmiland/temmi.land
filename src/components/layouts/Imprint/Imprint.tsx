@@ -6,7 +6,6 @@
  */
 
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '../../components/util/Typography';
 import ImprintContent from '../../widgets/ImprintContent';
@@ -29,68 +28,29 @@ const ImprintContentContainer = styled.div`
 	margin: 3vw 7vw;
 `;
 
-export const Imprint = () => {
-
-	const [scrollY, setScrollY] = useState(0);
-
-	useEffect(() => {
-		window.addEventListener('scroll', () => setScrollY(document.body.scrollTop), true);
-	});
-
-	return (
-		<ImprintContainer>
-			<Trail
-				scrollY={ scrollY }
-				visible={ {
-					min: {
-						phone: 0,
-						tablet: 0,
-						desktop: 0,
-						oversize: 0
-					},
-					max: {
-						phone: Infinity,
-						tablet: Infinity,
-						desktop: Infinity,
-						oversize: Infinity
-					}
-				} }
-				animationDirection={ 'left' }
-				animationSpeed={ 50 }
-			>
-				<div className={ 'imprint-header' }>
-					<Typography variant={ 'h1' }>
-						{ 'Imprint' }
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'gavel'] }/>
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'scale-balanced'] }/>
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'section'] }/>
-					</Typography>
-				</div>
-			</Trail>
-			<Trail
-				scrollY={ scrollY }
-				visible={ {
-					min: {
-						phone: 0,
-						tablet: 0,
-						desktop: 0,
-						oversize: 0
-					},
-					max: {
-						phone: Infinity,
-						tablet: Infinity,
-						desktop: Infinity,
-						oversize: Infinity
-					}
-				} }
-				animationDirection={ 'left' }
-				animationSpeed={ 50 }
-				animationDelay={ 175 }
-			>
-				<ImprintContentContainer>
-					<ImprintContent />
-				</ImprintContentContainer>
-			</Trail>
-		</ImprintContainer>
-	);
-}
+export const Imprint = () => (
+	<ImprintContainer>
+		<Trail
+			animationDirection={ 'left' }
+			animationSpeed={ 50 }
+		>
+			<div className={ 'imprint-header' }>
+				<Typography variant={ 'h1' }>
+					{ 'Imprint' }
+					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'gavel'] }/>
+					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'scale-balanced'] }/>
+					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'section'] }/>
+				</Typography>
+			</div>
+		</Trail>
+		<Trail
+			animationDirection={ 'left' }
+			animationSpeed={ 50 }
+			animationDelay={ 175 }
+		>
+			<ImprintContentContainer>
+				<ImprintContent />
+			</ImprintContentContainer>
+		</Trail>
+	</ImprintContainer>
+);

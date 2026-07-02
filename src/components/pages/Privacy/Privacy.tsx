@@ -112,23 +112,7 @@ export default function Privacy() {
 	return (
 		<>
 			<HeaderSection>
-				<Header
-					visible={ {
-						min: {
-							phone: 0,
-							tablet: 0,
-							desktop: 0,
-							oversize: 0
-						},
-						max: {
-							phone: Infinity,
-							tablet: Infinity,
-							desktop: Infinity,
-							oversize: Infinity
-						}
-					} }
-					animationDirection={ 'left' }
-				/>
+				<Header animationDirection={ 'left' } />
 			</HeaderSection>
 			<PrivacySection>
 				<LPrivacy />
