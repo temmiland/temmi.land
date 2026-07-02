@@ -6,7 +6,6 @@
  */
 
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import MeImage from '../../components/me/MeImage';
 import MeInfo from '../../widgets/MeInfo';
 import Trail from '../../components/util/Trail';
@@ -27,13 +26,12 @@ const MeContainer = styled.div`
 		grid-template-rows: 1fr;
 		height: 1055px;
 	}
-
 `;
 
 const MeInfoContainer = styled.div`
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 	margin: 0 5vw;
 
 	@media (min-width: 320px) and (max-width: 1024px) {
@@ -49,12 +47,12 @@ const MeImageContainer = styled.div`
 	margin: 2.75vw auto;
 	width: 70%;
 	place-self: center;
-	transform: translateY(-1.5vw);
+	transform: translateY(calc(-1.5vw + 35px));
 
 	@media (min-width: 320px) and (max-width: 1024px) {
 		margin: auto;
 		width: 60%;
-		transform: translateY(-8.25vw);
+		transform: translateY(calc(-1vw + 20px));
 		z-index: 1;
 	}
 
@@ -65,74 +63,34 @@ const MeImageContainer = styled.div`
 	@media (min-width: 2000px) {
 		margin: 0 140px;
 	}
-
 `;
 
-export const Me = () => {
-
-	const [scrollY, setScrollY] = useState(0);
-
-	useEffect(() => {
-		window.addEventListener('scroll', () => setScrollY(document.body.scrollTop), true);
-	});
-
-	return (
-		<MeContainer>
-			<MeInfoContainer>
-				<Trail
-					scrollY={ scrollY }
-					visible={ {
-						min: {
-							phone: 0,
-							tablet: 0,
-							desktop: 0,
-							oversize: 0
-						},
-						max: {
-							phone: 250,
-							tablet: 500,
-							desktop: 400,
-							oversize: 400
-						}
-					} }
-					animationDirection={ 'left' }
-					animationConfig={ {
-						mass: 5,
-						tension: 4000,
-						friction: 2000
-					} }
-				>
-					<MeInfo />
-				</Trail>
-			</MeInfoContainer>
-
+export const Me = () => (
+	<MeContainer>
+		<MeInfoContainer>
 			<Trail
-				scrollY={ scrollY }
-				visible={ {
-					min: {
-						phone: 0,
-						tablet: 0,
-						desktop: 0,
-						oversize: 0
-					},
-					max: {
-						phone: 250,
-						tablet: 500,
-						desktop: 400,
-						oversize: 400
-					}
-				} }
-				animationDirection={ 'right' }
+				animationDirection={ 'left' }
 				animationConfig={ {
 					mass: 5,
 					tension: 4000,
 					friction: 2000
 				} }
 			>
-				<MeImageContainer>
-					<MeImage />
-				</MeImageContainer>
+				<MeInfo />
 			</Trail>
-		</MeContainer>
-	);
-};
+		</MeInfoContainer>
+
+		<Trail
+			animationDirection={ 'right' }
+			animationConfig={ {
+				mass: 5,
+				tension: 4000,
+				friction: 2000
+			} }
+		>
+			<MeImageContainer>
+				<MeImage />
+			</MeImageContainer>
+		</Trail>
+	</MeContainer>
+);

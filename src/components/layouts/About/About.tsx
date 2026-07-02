@@ -15,7 +15,8 @@ const AboutContainer = styled.div`
 	.about-header {
 		margin: 3.5vw 6.5vw;
 		display: grid;
-		grid-template-columns: 70% 30%;
+		grid-template-columns: 1fr auto;
+		column-gap: 2.5vw;
 
 		@media (min-width: 320px) and (max-width: 1024px) {
 			grid-template-columns: 100%;
@@ -23,6 +24,7 @@ const AboutContainer = styled.div`
 
 		@media (min-width: 2000px) {
 			margin: 70px 130px;
+			column-gap: 50px;
 		}
 	}
 
@@ -35,217 +37,165 @@ const AboutContainer = styled.div`
 	}
 
 	.about-card {
-		width: 21.5vw;
-		height: 13.5vw;
-		border: 0.1vw solid #252525;
-		background: #000000;
-		border-radius: 1.3vw;
-		float: right;
+		box-sizing: border-box;
+		width: 20vw;
+		height: 20vw;
+		align-self: start;
+		overflow: hidden;
+		padding: 1.6vw 2vw 1.3vw;
+		border: 0.07vw solid rgba(255, 255, 255, 0.1);
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0.03) 100%
+		);
+		backdrop-filter: blur(0.7vw);
+		--webkit-backdrop-filter: blur(0.7vw);
+		border-radius: 0.7vw;
 		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
-		transition: 100ms linear 50ms;
+		transition: 120ms ease;
 
 		@media (min-width: 320px) and (max-width: 600px) {
-			scale: 4;
-			position: relative;
-			top: 25vw;
-			left: -33vw;
-			margin-bottom: 50vw;
+			width: 100%;
+			height: auto;
+			margin: 6vw 0 8vw;
+			padding: 6vw 6vw 5vw;
+			border: 0.25vw solid rgba(255, 255, 255, 0.1);
+			border-radius: 3.5vw;
 		}
 
 		@media (min-width: 600px) and (max-width: 1024px) {
-			scale: 2.5;
-			position: relative;
-			top: 15vw;
-			left: -32vw;
-			margin-bottom: 30vw;
+			width: 45vw;
+			height: auto;
+			margin: 6vw auto 5vw;
+			padding: 3vw 3.5vw;
+			border: 0.125vw solid rgba(255, 255, 255, 0.1);
+			border-radius: 1.8vw;
 		}
 
 		@media (min-width: 2000px) {
-			width: 430px;
-			height: 270px;
-			border: 2px solid #252525;
-			border-radius: 26px;
+			width: 400px;
+			height: 400px;
+			padding: 32px 38px 26px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 14px;
 		}
 
 		&:hover {
-			scale: 1.01;
-
-			@media (min-width: 320px) and (max-width: 600px) {
-				scale: 4.1;
-			}
-			@media (min-width: 600px) and (max-width: 1024px) {
-				scale: 2.55;
-			}
+			border-color: rgba(255, 255, 255, 0.28);
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.13) 0%,
+				rgba(255, 255, 255, 0.05) 100%
+			);
+			transform: translateY(-0.15vw);
 		}
 
 		.card-name {
-			padding: 1.3vw 0 0 1.3vw;
-			font-size: 1.06vw;
+			font-size: 1.2vw;
 			font-family: 'Bogart Bold', system-ui, Avenir, Helvetica, Arial, sans-serif;
 
+			@media (min-width: 320px) and (max-width: 600px) {
+				font-size: 5vw;
+			}
+
+			@media (min-width: 600px) and (max-width: 1024px) {
+				font-size: 2.8vw;
+			}
+
 			@media (min-width: 2000px) {
-				padding: 26px 0 0 26px;
-				font-size: 21px;
+				font-size: 24px;
 			}
 		}
 
-		.card-pronouns {
-			ul {
-				padding: 1.75vw 0 0 1.3vw;
-				list-style: none;
-				font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
+		.card-handle {
+			margin: 0.2vw 0 0.9vw;
+			padding: 0 0 0.9vw;
+			font-size: 0.85vw;
+			color: #8b8b8b;
+			border-bottom: 0.1vw solid rgba(255, 255, 255, 0.1);
+			font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+			@media (min-width: 320px) and (max-width: 600px) {
+				margin: 1vw 0 3vw;
+				padding: 0 0 3vw;
+				font-size: 3.6vw;
+				border-bottom: 0.2vw solid rgba(255, 255, 255, 0.1);
+			}
+
+			@media (min-width: 600px) and (max-width: 1024px) {
+				margin: 0.5vw 0 1.5vw;
+				padding: 0 0 1.5vw;
+				font-size: 2vw;
+				border-bottom: 0.1vw solid rgba(255, 255, 255, 0.1);
+			}
+
+			@media (min-width: 2000px) {
+				margin: 4px 0 18px;
+				padding: 0 0 18px;
+				font-size: 17px;
+				border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+			}
+		}
+
+		.card-info {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li {
+				display: flex;
+				align-items: center;
+				gap: 0.66vw;
+				padding: 0.25vw 0;
 				font-size: 0.85vw;
+				font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+				@media (min-width: 320px) and (max-width: 600px) {
+					gap: 2.5vw;
+					padding: 1vw 0;
+					font-size: 3.6vw;
+				}
+
+				@media (min-width: 600px) and (max-width: 1024px) {
+					gap: 1.2vw;
+					padding: 0.5vw 0;
+					font-size: 2vw;
+				}
 
 				@media (min-width: 2000px) {
-					padding: 35px 0 0 26px;
+					gap: 13px;
+					padding: 5px 0;
 					font-size: 17px;
 				}
 
-				li {
-					.card-tooltip {
-						display: inline-block;
+				svg {
+					width: 0.9vw;
+					color: #8b8b8b;
+					flex-shrink: 0;
 
-						.ant-typography {
-							font-size: 0.8vw !important;
+					@media (min-width: 320px) and (max-width: 600px) {
+						width: 3.8vw;
+					}
 
-							@media (min-width: 2000px) {
-								font-size: 16px !important;
-							}
-						}
-						.card-questionmark {
-							margin: 0 0 0 0.33vw;
-							color: #8b8b8b;
-							cursor: pointer;
+					@media (min-width: 600px) and (max-width: 1024px) {
+						width: 2.1vw;
+					}
 
-							@media (min-width: 2000px) {
-								margin: 0 0 0 6.5px;
-							}
-						}
-						&:hover .card-tooltip-table {
-							visibility: visible;
-						}
-						.card-tooltip-table {
-							transition: 250ms linear 250ms;
-							visibility: hidden;
-							top: 102%;
-							left: 0%;
-							margin: 0 auto;
-							padding: 1vw 1.3vw;
-							background-color: #000000;
-							border: 0.1vw solid #252525;
-							color: #fff;
-							text-align: left;
-							border-radius: 1.3vw;
-							position: absolute;
-							width: calc(100% - 2.6vw);
-							font-size: 0.85vw;
-							z-index: 10000;
-
-							@media (min-width: 2000px) {
-								padding: 20px 26px;
-								border: 2px solid #252525;
-								border-radius: 26px;
-								width: calc(100% - 52px);
-								font-size: 17px;
-							}
-
-							table {
-								margin-bottom: 0.66vw;
-
-								@media (min-width: 320px) and (max-width: 600px) {
-									font-size: 0.7vw;
-									margin-left: -1vw;
-								}
-
-								@media (min-width: 600px) and (max-width: 1024px) {
-									font-size: 0.75vw;
-								}
-
-								@media (min-width: 2000px) {
-									margin-bottom: 13px;
-								}
-
-								thead td {
-									padding: 0 0.1vw;
-									font-family: 'Bogart Medium', system-ui, Avenir, Helvetica,
-										Arial, sans-serif;
-
-									@media (min-width: 2000px) {
-										padding: 0 2px;
-									}
-								}
-							}
-
-							p,
-							a p {
-								margin: 0.2vw 0;
-								color: #fff;
-
-								@media (min-width: 320px) and (max-width: 600px) {
-									font-size: 0.7vw;
-								}
-
-								@media (min-width: 600px) and (max-width: 1024px) {
-									font-size: 0.75vw;
-								}
-
-								@media (min-width: 2000px) {
-									margin: 4px 0;
-								}
-
-								span {
-									font-family: 'Bogart Medium', system-ui, Avenir, Helvetica,
-										Arial, sans-serif;
-								}
-							}
-
-							a p {
-								width: max-content;
-								font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial,
-									sans-serif;
-
-								&:hover {
-									color: #8b8b8b;
-								}
-							}
-						}
+					@media (min-width: 2000px) {
+						width: 18px;
 					}
 				}
-			}
-		}
 
-		.card-position {
-			padding: 0 0 0 1.3vw;
-			font-size: 0.9vw;
+				a {
+					color: #fff;
+					text-decoration: none;
+					transition: color 0.3s;
 
-			@media (min-width: 2000px) {
-				padding: 0 0 0 26px;
-				font-size: 18px;
-			}
-		}
-
-		.card-email {
-			padding: 0 0 0 1.3vw;
-			font-size: 0.9vw;
-
-			@media (min-width: 2000px) {
-				padding: 0 0 0 26px;
-				font-size: 18px;
-			}
-		}
-
-		.card-img {
-			width: 8vw;
-			float: right;
-			margin: -10.75vw 0.66vw 0 0;
-
-			@media (min-width: 320px) and (max-width: 600px) {
-				margin: -10.75vw 0.66vw 0 0;
-			}
-
-			@media (min-width: 2000px) {
-				width: 160px;
-				margin: -225px 13px 0 0;
+					&:hover {
+						color: #8b8b8b;
+					}
+				}
 			}
 		}
 	}
@@ -322,45 +272,50 @@ const AboutContainer = styled.div`
 		grid-template-rows: repeat(2, 1fr);
 		grid-column-gap: 0;
 		grid-row-gap: 0;
-		background: #000000;
-		border: 0.1vw solid #252525;
-		border-radius: 0.66vw;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0.03) 100%
+		);
+		border: 0.07vw solid rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(0.7vw);
+		--webkit-backdrop-filter: blur(0.7vw);
+		border-radius: 0.7vw;
 		justify-content: center;
 		align-items: center;
 		padding: 1vw;
-		margin: 0.33vw;
-		transition: 100ms linear 50ms;
+		margin: 0.55vw;
+		transition: 120ms ease;
 
 		@media (min-width: 320px) and (max-width: 600px) {
-			border-radius: 3vw;
+			border-radius: 3.5vw;
 			padding: 5vw;
-			border: 0.4vw solid #252525;
-			margin-bottom: 1.5vw;
+			border: 0.25vw solid rgba(255, 255, 255, 0.1);
+			margin-bottom: 2.2vw;
 		}
 
 		@media (min-width: 600px) and (max-width: 1024px) {
-			border-radius: 1.5vw;
+			border-radius: 1.8vw;
 			padding: 2vw;
-			border: 0.2vw solid #252525;
-			margin-bottom: 0.75vw;
+			border: 0.125vw solid rgba(255, 255, 255, 0.1);
+			margin-bottom: 1.1vw;
 		}
 
 		@media (min-width: 2000px) {
-			border: 2px solid #252525;
-			border-radius: 13px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 14px;
 			padding: 20px;
-			margin: 6.5px;
+			margin: 11px;
 		}
 
 		&:hover {
-			scale: 1.01;
-
-			@media (min-width: 320px) and (max-width: 600px) {
-				scale: 1.025;
-			}
-			@media (min-width: 600px) and (max-width: 1024px) {
-				scale: 1.02;
-			}
+			border-color: rgba(255, 255, 255, 0.28);
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.13) 0%,
+				rgba(255, 255, 255, 0.05) 100%
+			);
+			transform: translateY(-0.15vw);
 		}
 	}
 
@@ -446,38 +401,67 @@ const AboutContainer = styled.div`
 	}
 `;
 
+const HOME_TIME_ZONE = 'Europe/Berlin';
+
+/**
+ * Gets the UTC offset (in minutes, east-positive) of a timezone at a given date.
+ * Needed to compare Temmi's local time zone against the visitor's.
+ */
+const getTimezoneOffsetMinutes = (timeZone: string, date: Date): number => {
+	const parts = new Intl.DateTimeFormat('en-US', {
+		timeZone,
+		hourCycle: 'h23',
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit'
+	})
+		.formatToParts(date)
+		.reduce<Record<string, string>>((acc, part) => {
+			acc[part.type] = part.value;
+			return acc;
+		}, {});
+
+	const asUTC = Date.UTC(
+		Number(parts.year),
+		Number(parts.month) - 1,
+		Number(parts.day),
+		Number(parts.hour),
+		Number(parts.minute),
+		Number(parts.second)
+	);
+
+	return (asUTC - date.getTime()) / 60000;
+};
+
 export const About = () => {
-	const [scrollY, setScrollY] = useState(0);
+	const [now, setNow] = useState(new Date());
 
 	useEffect(() => {
-		window.addEventListener(
-			'scroll',
-			() =>
-				setScrollY(
-					document.body.scrollHeight - window.innerHeight - document.body.scrollTop
-				),
-			true
-		);
+		const interval = setInterval(() => setNow(new Date()), 30000);
+		return () => clearInterval(interval);
+	}, []);
+
+	const homeTime = now.toLocaleTimeString('de-DE', {
+		timeZone: HOME_TIME_ZONE,
+		hour: '2-digit',
+		minute: '2-digit'
 	});
+
+	const hourDiff = Math.round(
+		(getTimezoneOffsetMinutes(HOME_TIME_ZONE, now) + now.getTimezoneOffset()) / 60
+	);
+
+	const timeCompare =
+		hourDiff === 0
+			? 'same time'
+			: `${Math.abs(hourDiff)}h ${hourDiff > 0 ? 'ahead' : 'behind'}`;
 
 	return (
 		<AboutContainer id={ 'about-me' }>
 			<Trail
-				scrollY={ scrollY }
-				visible={ {
-					min: {
-						phone: 0,
-						tablet: 0,
-						desktop: 0,
-						oversize: 0
-					},
-					max: {
-						phone: 1225,
-						tablet: 1100,
-						desktop: 1000,
-						oversize: 1000
-					}
-				} }
 				animationDirection={ 'left' }
 				animationSpeed={ 50 }
 			>
@@ -492,21 +476,6 @@ export const About = () => {
 			</Trail>
 			<div className={ 'about-header' }>
 				<Trail
-					scrollY={ scrollY }
-					visible={ {
-						min: {
-							phone: 0,
-							tablet: 0,
-							desktop: 0,
-							oversize: 0
-						},
-						max: {
-							phone: 1200,
-							tablet: 1050,
-							desktop: 950,
-							oversize: 950
-						}
-					} }
 					animationDirection={ 'left' }
 					animationSpeed={ 50 }
 				>
@@ -523,64 +492,66 @@ export const About = () => {
 								'AI tooling strategically to ship faster without cutting corners.' }
 						</Typography>
 						<Typography variant={ 'p' }>
-							{ 'High standards and structured thinking — not as a motto, but as a habit.' }
+							{
+								'High standards and structured thinking — not as a motto, but as a habit.'
+							}
 						</Typography>
 						<Typography variant={ 'p' }>
 							{ '🌸 Open for new projects!' }
-							<br/>
+							<br />
 							{ ' Got something interesting? Let\'s talk!' }
 						</Typography>
 					</div>
 				</Trail>
 				<Trail
-					scrollY={ scrollY }
-					visible={ {
-						min: {
-							phone: 0,
-							tablet: 0,
-							desktop: 0,
-							oversize: 0
-						},
-						max: {
-							phone: 1025,
-							tablet: 900,
-							desktop: 950,
-							oversize: 950
-						}
-					} }
 					animationDirection={ 'right' }
 					animationSpeed={ 50 }
 				>
 					<div className={ 'about-card' }>
 						<div className={ 'card-name' }>{ 'Temmi Pietsch' }</div>
-						<div className={ 'card-position' }>{ 'Frontend Developer' }</div>
-						<div className={ 'card-email' }>{ 'welcome@temmi.land' }</div>
-						<div className={ 'card-pronouns' }>
-							<ul>
-								<li>{ '🇺🇸 she/her' }</li>
-								<li>{ '🇩🇪 sie/ihr' }</li>
-							</ul>
-						</div>
-						<img src={ './me.png' } alt={ 'me' } className={ 'card-img' } />
+						<div className={ 'card-handle' }>{ 'temmiland · she/her' }</div>
+						<ul className={ 'card-info' }>
+							<li>
+								<FontAwesomeIcon icon={ ['fas', 'briefcase'] } />
+								<span>{ 'adesso SE' }</span>
+							</li>
+							<li>
+								<FontAwesomeIcon icon={ ['fas', 'location-dot'] } />
+								<span>{ 'Leipzig, Germany' }</span>
+							</li>
+							<li>
+								<FontAwesomeIcon icon={ ['fas', 'clock'] } />
+								<span>{ `${homeTime} - ${timeCompare}` }</span>
+							</li>
+							<li>
+								<FontAwesomeIcon icon={ ['fas', 'envelope'] } />
+								<a href={ 'mailto:welcome@temmi.land' }>{ 'welcome@temmi.land' }</a>
+							</li>
+							<li>
+								<FontAwesomeIcon icon={ ['fab', 'linkedin'] } />
+								<a
+									href={ 'https://www.linkedin.com/in/temmi-pietsch/' }
+									target={ '_blank' }
+									rel={ 'noreferrer' }
+								>
+									{ 'in/temmi-pietsch' }
+								</a>
+							</li>
+							<li>
+								<FontAwesomeIcon icon={ ['fab', 'github'] } />
+								<a
+									href={ 'https://github.com/temmiland' }
+									target={ '_blank' }
+									rel={ 'noreferrer' }
+								>
+									{ 'temmiland' }
+								</a>
+							</li>
+						</ul>
 					</div>
 				</Trail>
 			</div>
 			<Trail
-				scrollY={ scrollY }
-				visible={ {
-					min: {
-						phone: 0,
-						tablet: 0,
-						desktop: 0,
-						oversize: 0
-					},
-					max: {
-						phone: 1025,
-						tablet: 850,
-						desktop: 775,
-						oversize: 775
-					}
-				} }
 				animationDirection={ 'bottom' }
 				animationSpeed={ 50 }
 			>
@@ -609,9 +580,9 @@ export const About = () => {
 									src={ './favicon/apple-touch-icon.png' }
 									className={ 'aw-company-image' }
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Senior Software Engineer' }</div>
+								<div className={ 'aw-jobtitle' }>{ 'Founder' }</div>
 								<div className={ 'aw-company' }>
-									{ 'Temmi Pietsch • Part-time self-employed' }
+									{ 'temmiland • Part-time self-employed' }
 								</div>
 								<div className={ 'aw-timerange' }>{ '2024 - Now' }</div>
 							</li>

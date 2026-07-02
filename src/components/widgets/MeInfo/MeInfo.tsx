@@ -77,7 +77,7 @@ const MeLinkIconContainer = styled.div`
 `;
 
 export const MeInfo = () => (
-	<MeTextContainer>
+	<MeTextContainer id={ 'hero-heading' }>
 		<Typography variant={ 'h0' }>
 			{ 'Hi, I\'m' }
 			<Signature />
