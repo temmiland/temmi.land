@@ -19,6 +19,8 @@ interface LinkProps {
 	href: string;
 	target?: string;
 	rel?: string;
+	className?: string;
+	onClick?: () => void;
 }
 
 const A = styled(Typo.Link)`
@@ -36,6 +38,6 @@ const A = styled(Typo.Link)`
 
 `;
 
-export const Link = ({ children = 'This is a link.', href = '#' }: LinkProps) => {
-	return <A href={ href }>{ children }</A>;
+export const Link = ({ children = 'This is a link.', href = '#', className, onClick }: LinkProps) => {
+	return <A href={ href } className={ className } onClick={ onClick }>{ children }</A>;
 };
