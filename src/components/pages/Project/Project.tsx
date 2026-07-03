@@ -140,6 +140,9 @@ const projectTechOptions = [
 		value: 'react-native', label: 'React-Native & Expo'
 	},
 	{
+		value: 'angular', label: 'Angular'
+	},
+	{
 		value: 'Java', label: 'Java'
 	},
 	{
