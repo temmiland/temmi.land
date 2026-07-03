@@ -9,7 +9,6 @@
  * Represents a project status.
  */
 export enum ProjectStatus {
-	/* eslint-disable no-unused-vars */
 	CONCEPT = 'Concept',
 	PLANNED = 'Planned',
 	PAUSED = 'Paused',

@@ -9,7 +9,6 @@
  * Represents a category a skill belongs to.
  */
 export enum SkillCategory {
-	/* eslint-disable no-unused-vars */
 	SECTORS = 'Sectors',
 	LANGUAGES = 'Languages',
 	PROGRAMMING_LANGUAGES = 'Programming Languages',
