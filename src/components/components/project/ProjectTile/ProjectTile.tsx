@@ -5,7 +5,7 @@
  * permission of the author.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { projects } from '../../../../data/projects';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
@@ -33,6 +33,7 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	width: 18vw;
     height: 18vw;
     border-radius: 1.75vw;
+	border: 1px solid rgba(255, 255, 255, 0.12);
     color: #fff;
 	transition: 100ms linear 50ms;
     cursor: ${ (props: { gridMode: boolean; }) => props.gridMode ? 'pointer' : '' };
@@ -63,6 +64,39 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 `;
 
 /**
+ * Frosted-glass surface for the description panel: translucent gradient
+ * fill, soft light border and a backdrop blur, scaled per breakpoint.
+ */
+const glassPanel = css`
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.32) 100%
+	);
+	border: 0.07vw solid rgba(255, 255, 255, 0.55);
+	backdrop-filter: blur(1vw);
+	-webkit-backdrop-filter: blur(1vw);
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		border-width: 0.25vw;
+		backdrop-filter: blur(3vw);
+		-webkit-backdrop-filter: blur(3vw);
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		border-width: 0.125vw;
+		backdrop-filter: blur(2vw);
+		-webkit-backdrop-filter: blur(2vw);
+	}
+
+	@media (min-width: 2000px) {
+		border-width: 1px;
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+	}
+`;
+
+/**
  * Container for the ProjectDescription.
  */
 const ProjectDescriptionContainer = styled.div`
@@ -71,7 +105,7 @@ const ProjectDescriptionContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
+	${glassPanel}
 	line-height: 1.15vw;
 	text-align: left;
 	z-index: 3;
@@ -98,13 +132,38 @@ const ProjectDescriptionContainer = styled.div`
 	}
 
 	a {
-		background: rgba(255,255,255,0.8);
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.75) 0%,
+			rgba(255, 255, 255, 0.55) 100%
+		) !important;
+		border: 0.07vw solid rgba(255, 255, 255, 0.8) !important;
+		backdrop-filter: blur(0.6vw);
+		-webkit-backdrop-filter: blur(0.6vw);
 		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
 		font-size: 0.9vw !important;
 		line-height: 1.5vw !important;
 		height: 1.5vw !important;
 		padding: 0 1vw !important;
 		color: #222222;
+
+		@media (min-width: 320px) and (max-width: 600px) {
+			border-width: 0.25vw !important;
+			backdrop-filter: blur(2vw);
+			-webkit-backdrop-filter: blur(2vw);
+		}
+
+		@media (min-width: 600px) and (max-width: 1024px) {
+			border-width: 0.125vw !important;
+			backdrop-filter: blur(1.2vw);
+			-webkit-backdrop-filter: blur(1.2vw);
+		}
+
+		@media (min-width: 2000px) {
+			border-width: 1px !important;
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+		}
 
 		@media (min-width: 320px) and (max-width: 600px) {
 			font-size: 3.75vw !important;
@@ -131,11 +190,21 @@ const ProjectDescriptionContainer = styled.div`
 		}
 
 		&:hover {
-				background: rgba(255,255,255,0.6) !important;
+				background: linear-gradient(
+					135deg,
+					rgba(255, 255, 255, 0.55) 0%,
+					rgba(255, 255, 255, 0.35) 100%
+				) !important;
+				border-color: rgba(255, 255, 255, 0.65) !important;
 				color: #222222 !important;
 		}
 		&:active {
-			background: rgba(255,255,255,0.6) !important;
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.55) 0%,
+				rgba(255, 255, 255, 0.35) 100%
+			) !important;
+			border-color: rgba(255, 255, 255, 0.65) !important;
 			outline: 0.17vw solid rgba(255,255,255,0.2) !important;
 			outline-offset: 0.06vw;
 			transition: outline-offset 0s,outline 0s;
@@ -147,7 +216,12 @@ const ProjectDescriptionContainer = styled.div`
 			}
 		}
 		&:focus {
-			background: rgba(255,255,255,0.6) !important;
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.55) 0%,
+				rgba(255, 255, 255, 0.35) 100%
+			) !important;
+			border-color: rgba(255, 255, 255, 0.65) !important;
 			outline: 0.17vw solid rgba(255,255,255,0.2) !important;
 			outline-offset: 0.06vw;
 			transition: outline-offset 0s,outline 0s;

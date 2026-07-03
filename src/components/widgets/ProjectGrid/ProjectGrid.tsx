@@ -5,14 +5,17 @@
  * permission of the author.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { IconName } from '@fortawesome/fontawesome-svg-core';
+import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import Typography from '../../components/util/Typography';
 import { ExpandableGrid } from '@temmiland/react-expandable-grid';
 import { projects } from '../../../data/projects';
+import { blogPosts } from '../../../data/blog';
 import ProjectTile from '../../components/project/ProjectTile';
+import SkillChip from '../../components/project/SkillChip';
 import { ProjectStatus } from '../../../models/projectstatus.d';
+import { formatBlogDate, formatReadingTime } from '../../../utils/blogFormat';
 import { useEffect, useState } from 'react';
 
 /**
@@ -28,6 +31,7 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
     background: ${(props: ProjectTileContainerProps) => props.gradient};
 	width: 100%;
     border-radius: 1.75vw;
+	border: 1px solid rgba(255, 255, 255, 0.12);
     color: #fff;
 	transition: 100ms linear 50ms;
 	margin-top: 2vw;
@@ -106,12 +110,46 @@ const Handles = styled.div`
 	}
 `;
 
+/**
+ * Shared frosted-glass surface for the small pill handles (license, status,
+ * links, close): translucent gradient fill, light border and backdrop blur,
+ * scaled per breakpoint.
+ */
+const glassChip = css`
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.75) 0%,
+		rgba(255, 255, 255, 0.55) 100%
+	);
+	border: 0.07vw solid rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(0.6vw);
+	-webkit-backdrop-filter: blur(0.6vw);
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		border-width: 0.25vw;
+		backdrop-filter: blur(2vw);
+		-webkit-backdrop-filter: blur(2vw);
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		border-width: 0.125vw;
+		backdrop-filter: blur(1.2vw);
+		-webkit-backdrop-filter: blur(1.2vw);
+	}
+
+	@media (min-width: 2000px) {
+		border-width: 1px;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+`;
+
 const LicenseHandle = styled.div`
-	height: 2.4vw;
+	min-height: 2.4vw;
 	border-radius: 1.5vw;
-	background: rgba(255, 255, 255, 0.8);
+	${glassChip}
 	cursor: pointer;
-	padding: 0 0 0 0.69vw;
+	padding: 0.2vw 0 0.2vw 0.69vw;
 	margin: 0 0.347vw;
 	font-size: 1.17vw;
 
@@ -120,25 +158,25 @@ const LicenseHandle = styled.div`
     justify-content:center;
 
 	@media (min-width: 320px) and (max-width: 600px) {
-		height: 5.75vw;
+		min-height: 5.75vw;
 		border-radius: 5vw;
-		padding: 0 1.25vw 0 2vw;
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
 		margin: 0 1vw;
 		font-size: 3vw;
 	}
 
 	@media (min-width: 600px) and (max-width: 1024px) {
-		height: 4.25vw;
+		min-height: 4.25vw;
 		border-radius: 2.5vw;
-		padding: 0 0.75vw 0 1.5vw;
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
 		margin: 0 1vw;
 		font-size: 2vw;
 	}
 
 	@media (min-width: 2000px) {
-		height: 48px;
+		min-height: 48px;
 		border-radius: 30px;
-		padding: 0 0 0 14px;
+		padding: 2px 0 2px 14px;
 		font-size: 24px;
 		margin: 0 7px;
 	}
@@ -151,7 +189,9 @@ const LicenseHandle = styled.div`
 		margin: 0.14vw 0.69vw 0 0.347vw;
 		display: inline-block;
 		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
-		color: #5E5E5E;
+		color: #1a1a1a;
+		overflow-wrap: break-word;
+		word-break: break-word;
 
 		@media (min-width: 320px) and (max-width: 600px) {
 			margin: 1vw 0.69vw 0 0.75vw;
@@ -168,11 +208,11 @@ const LicenseHandle = styled.div`
 `;
 
 const StatusHandle = styled.div`
-	height: 2.4vw;
+	min-height: 2.4vw;
 	border-radius: 1.5vw;
-	background: rgba(255, 255, 255, 0.8);
+	${glassChip}
 	text-align: center;
-	padding: 0 0 0 0.69vw;
+	padding: 0.2vw 0 0.2vw 0.69vw;
 	margin: 0 0.347vw;
 	font-size: 1.17vw;
 
@@ -181,25 +221,25 @@ const StatusHandle = styled.div`
     justify-content:center;
 
 	@media (min-width: 320px) and (max-width: 600px) {
-		height: 5.75vw;
+		min-height: 5.75vw;
 		border-radius: 5vw;
-		padding: 0 1.25vw 0 2vw;
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
 		margin: 0 1vw;
 		font-size: 3vw;
 	}
 
 	@media (min-width: 600px) and (max-width: 1024px) {
-		height: 4.25vw;
+		min-height: 4.25vw;
 		border-radius: 2.5vw;
-		padding: 0 0.75vw 0 1.5vw;
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
 		margin: 0 1vw;
 		font-size: 2vw;
 	}
 
 	@media (min-width: 2000px) {
-		height: 48px;
+		min-height: 48px;
 		border-radius: 30px;
-		padding: 0 0 0 14px;
+		padding: 2px 0 2px 14px;
 		font-size: 24px;
 		margin: 0 7px;
 	}
@@ -209,7 +249,9 @@ const StatusHandle = styled.div`
 		display: inline-block;
 		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
 		vertical-align: bottom;
-		color: #5E5E5E;
+		color: #1a1a1a;
+		overflow-wrap: break-word;
+		word-break: break-word;
 
 		@media (min-width: 320px) and (max-width: 600px) {
 			margin: 1vw 0.69vw 0 0.75vw;
@@ -229,7 +271,7 @@ const CloseHandle = styled.div`
 	width: 2.4vw;
 	height: 2.4vw;
 	border-radius: 1.5vw;
-	background: rgba(255, 255, 255, 0.8);
+	${glassChip}
 	text-align: center;
 	cursor: pointer;
 	margin: 0 0.833vw 0 0.347vw;
@@ -267,98 +309,44 @@ const CloseHandle = styled.div`
 	}
 `;
 
-const SkillHandle = styled.div`
-	height: 2.4vw;
-	border-radius: 1.5vw;
-	background: rgba(255, 255, 255, 0.7);
-	text-align: center;
-	padding: 0 0.69vw;
-	margin: 0.14vw 0.347vw 0.14vw 0;
-	font-size: 1.17vw;
-
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-
-	@media (min-width: 320px) and (max-width: 600px) {
-		height: 5.75vw;
-		border-radius: 5vw;
-		padding: 0 1.25vw 0 2vw;
-		margin: 1vw;
-		font-size: 3vw;
-	}
-
-	@media (min-width: 600px) and (max-width: 1024px) {
-		height: 4.25vw;
-		border-radius: 2.5vw;
-		padding: 0 0.75vw 0 0.75vw;
-		margin: 0.5vw;
-		font-size: 2vw;
-	}
-
-	@media (min-width: 2000px) {
-		border-radius: 30px;
-		padding: 0 14px;
-		margin: 3px 7px 3px 0;
-		height: 48px;
-		font-size: 24px;
-	}
-
-	p {
-		margin: 0.14vw 0.347vw;
-		display: inline-block;
-		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
-		color: #5E5E5E;
-
-		@media (min-width: 320px) and (max-width: 600px) {
-			margin: 1vw 0.69vw 0 0.75vw;
-		}
-
-		@media (min-width: 600px) and (max-width: 1024px) {
-			margin: 0.5vw 0.69vw 0 0.75vw;
-		}
-
-		@media (min-width: 2000px) {
-			margin: 3px 7px;
-		}
-	}
-`;
-
 const LinkHandle = styled.div`
-	height: 2.4vw;
+	min-height: 2.4vw;
+	width: fit-content;
+	max-width: 100%;
+	box-sizing: border-box;
 	border-radius: 1.5vw;
-	background: rgba(255, 255, 255, 0.8);
-	text-align: center;
-	padding: 0 0 0 0.69vw;
+	${glassChip}
+	text-align: left;
+	padding: 0.2vw 0.69vw 0.2vw 0.69vw;
 	cursor: pointer;
-	margin: 0.14vw 0.347vw 0.14vw 0;
+	margin: 0.347vw 0;
 	font-size: 1.17vw;
 
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 
 	@media (min-width: 320px) and (max-width: 600px) {
-		height: 5.75vw;
+		min-height: 5.75vw;
 		border-radius: 5vw;
-		padding: 0 1.25vw 0 2vw;
-		margin: 1vw;
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
+		margin: 1vw 0;
 		font-size: 3vw;
 	}
 
 	@media (min-width: 600px) and (max-width: 1024px) {
-		height: 4.25vw;
+		min-height: 4.25vw;
 		border-radius: 2.5vw;
-		padding: 0 0.75vw 0 1.5vw;
-		margin: 0.5vw 1vw;
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
+		margin: 0.5vw 0;
 		font-size: 2vw;
 	}
 
 	@media (min-width: 2000px) {
-		height: 48px;
+		min-height: 48px;
 		border-radius: 30px;
-		padding: 0 0 0 14px;
-		margin: 3px 7px 3px 0;
+		padding: 2px 14px 2px 14px;
+		margin: 7px 0;
 		font-size: 24px;
 	}
 
@@ -371,7 +359,9 @@ const LinkHandle = styled.div`
 		display: inline-block;
 		font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
 		vertical-align: bottom;
-		color: #5E5E5E;
+		color: #1a1a1a;
+		overflow-wrap: break-word;
+		word-break: break-word;
 
 		@media (min-width: 320px) and (max-width: 600px) {
 			margin: 1vw 0.69vw 0 0.75vw;
@@ -388,6 +378,40 @@ const LinkHandle = styled.div`
 `;
 
 /**
+ * Shared frosted-glass surface for the large content panels (description,
+ * links, tech stack, docs, blog): translucent gradient fill, soft light border
+ * and a stronger backdrop blur, scaled per breakpoint.
+ */
+const glassPanel = css`
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.32) 100%
+	);
+	border: 0.07vw solid rgba(255, 255, 255, 0.55);
+	backdrop-filter: blur(1vw);
+	-webkit-backdrop-filter: blur(1vw);
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		border-width: 0.25vw;
+		backdrop-filter: blur(3vw);
+		-webkit-backdrop-filter: blur(3vw);
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		border-width: 0.125vw;
+		backdrop-filter: blur(2vw);
+		-webkit-backdrop-filter: blur(2vw);
+	}
+
+	@media (min-width: 2000px) {
+		border-width: 1px;
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+	}
+`;
+
+/**
  * Container for the ProjectDescription.
  */
 const ProjectDescriptionContainer = styled.div`
@@ -397,7 +421,7 @@ const ProjectDescriptionContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
+	${glassPanel}
 	z-index: 6;
 
 	@media (min-width: 320px) and (max-width: 600px) {
@@ -430,8 +454,8 @@ const ProjectTechStackContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
-	z-index: 6;
+	${glassPanel}
+	z-index: 7;
 
 	@media (min-width: 320px) and (max-width: 600px) {
 		grid-area:  2 / 1 / 3 / 2;
@@ -464,7 +488,7 @@ const ProjectSidebarTopContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
+	${glassPanel}
 	z-index: 6;
 
 	@media (min-width: 320px) and (max-width: 600px) {
@@ -497,7 +521,7 @@ const ProjectDocsContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
+	${glassPanel}
 	z-index: 6;
 	min-width: 24.30vw;
 
@@ -532,7 +556,7 @@ const ProjectBlogContainer = styled.div`
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
-	background: rgba(255,255,255,0.45);
+	${glassPanel}
 	z-index: 6;
 
 	@media (min-width: 320px) and (max-width: 600px) {
@@ -553,6 +577,180 @@ const ProjectBlogContainer = styled.div`
 		padding: 18px;
 		border-radius: 18px;
 		min-width: 486px;
+	}
+`;
+
+const ProjectBlogPostList = styled.div`
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.7vw;
+	margin-top: 0.6vw;
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		grid-template-columns: repeat(1, 1fr);
+		gap: 2.5vw;
+		margin-top: 2.5vw;
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		gap: 1.4vw;
+		margin-top: 1.4vw;
+	}
+
+	@media (min-width: 2000px) {
+		gap: 14px;
+		margin-top: 12px;
+	}
+`;
+
+/**
+ * A single blog post entry within a project's expanded panel, styled after
+ * SkillCard: a small glass card with a gradient icon badge, title and
+ * date/reading-time meta line, linking to the full article.
+ */
+const ProjectBlogPostCard = styled.a`
+	display: flex;
+	align-items: center;
+	gap: 0.7vw;
+	min-width: 0;
+	text-decoration: none;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.55) 0%,
+		rgba(255, 255, 255, 0.32) 100%
+	);
+	border: 0.07vw solid rgba(255, 255, 255, 0.6);
+	border-radius: 0.7vw;
+	padding: 0.6vw 0.8vw;
+	transition: 120ms ease;
+
+	&:hover {
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.8) 0%,
+			rgba(255, 255, 255, 0.5) 100%
+		);
+		border-color: rgba(255, 255, 255, 0.9);
+		transform: translateY(-0.1vw);
+	}
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		gap: 3vw;
+		border-width: 0.25vw;
+		border-radius: 3vw;
+		padding: 2.5vw 3vw;
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		gap: 1.5vw;
+		border-width: 0.125vw;
+		border-radius: 1.5vw;
+		padding: 1.2vw 1.6vw;
+	}
+
+	@media (min-width: 2000px) {
+		gap: 14px;
+		border-width: 1px;
+		border-radius: 14px;
+		padding: 12px 16px;
+	}
+`;
+
+const ProjectBlogPostIcon = styled.div<{ gradient: string }>`
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.2vw;
+	height: 2.2vw;
+	border-radius: 50%;
+	background: ${(props: { gradient: string }) => props.gradient};
+	color: #ffffff;
+
+	svg {
+		font-size: 1vw;
+	}
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		width: 9vw;
+		height: 9vw;
+
+		svg {
+			font-size: 4vw;
+		}
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		width: 5vw;
+		height: 5vw;
+
+		svg {
+			font-size: 2.2vw;
+		}
+	}
+
+	@media (min-width: 2000px) {
+		width: 44px;
+		height: 44px;
+
+		svg {
+			font-size: 20px;
+		}
+	}
+`;
+
+const ProjectBlogPostInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 0.1vw;
+	min-width: 0;
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		gap: 0.6vw;
+	}
+
+	@media (min-width: 2000px) {
+		gap: 2px;
+	}
+`;
+
+const ProjectBlogPostTitle = styled.span`
+	font-family: 'Bogart Medium', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 0.95vw;
+	color: #1a1a1a;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		font-size: 3.8vw;
+		white-space: normal;
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		font-size: 2.1vw;
+	}
+
+	@media (min-width: 2000px) {
+		font-size: 19px;
+	}
+`;
+
+const ProjectBlogPostMeta = styled.span`
+	font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 0.75vw;
+	color: #5e5e5e;
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		font-size: 3.1vw;
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		font-size: 1.7vw;
+	}
+
+	@media (min-width: 2000px) {
+		font-size: 15px;
 	}
 `;
 
@@ -645,9 +843,11 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 			: 0
 	}
 
-	const regex = new RegExp(`\\b${techToMatch}\\b`);
+	const normalizeTech = (value: string) => value.toLowerCase().replace(/[\s-]+/g, '-');
 	const filteredProjects = techToMatch
-		? projects.filter(project => regex.test(project.techStack))
+		? projects.filter(project => project.techStack.some(
+			(tech: string) => normalizeTech(tech) === normalizeTech(techToMatch)
+		))
 		: projects
 
 	return (
@@ -688,7 +888,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 										>
 											<FontAwesomeIcon
 												style={ {
-													color: '#5e5e5e'
+													color: '#1a1a1a'
 												} }
 												icon={ 'scale-balanced' }
 											/>
@@ -703,7 +903,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 										<StatusHandle>
 											<FontAwesomeIcon
 												style={ {
-													color: '#5e5e5e'
+													color: '#1a1a1a'
 												} }
 												icon={ filteredProjects[currentIndex! - 1].status
 									=== ProjectStatus.CONCEPT ?
@@ -736,7 +936,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 									>
 										<FontAwesomeIcon
 											style={ {
-												color: '#5e5e5e'
+												color: '#1a1a1a'
 											} }
 											icon={ 'close' }
 										/>
@@ -760,7 +960,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 
 									{
 										filteredProjects[currentIndex! - 1].repoHref === ''
-									&& filteredProjects[currentIndex! - 1].demoHost === ''  ? (
+									&& filteredProjects[currentIndex! - 1].links.length === 0 ? (
 												<Typography variant={ 'project_desc' }>
 													{ 'No links available.' }
 												</Typography>
@@ -778,7 +978,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 											>
 												<FontAwesomeIcon
 													style={ {
-														color: '#5e5e5e'
+														color: '#1a1a1a'
 													} }
 													icon={ [
 														'fab',
@@ -792,25 +992,27 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 										) : ''
 									}
 									{
-										filteredProjects[currentIndex! - 1].demoHref !== '' ? (
-											<LinkHandle
-												onClick={ () => (
-													window.open(
-														filteredProjects[currentIndex! - 1].demoHref
-													)
-												) }
-											>
-												<FontAwesomeIcon
-													style={ {
-														color: '#5e5e5e'
-													} }
-													icon={ 'globe' }
-												/>
-												<Typography variant={ 'project_desc' }>
-													{ filteredProjects[currentIndex! - 1].demoHost }
-												</Typography>
-											</LinkHandle>
-										) : ''
+										filteredProjects[currentIndex! - 1].links.map(
+											(link, i: number) => (
+												<LinkHandle
+													key={ i }
+													onClick={ () => window.open(link.href) }
+												>
+													<FontAwesomeIcon
+														style={ {
+															color: '#1a1a1a'
+														} }
+														icon={ [
+															(link.iconPrefix ?? 'fas') as IconPrefix,
+															link.icon as IconName
+														] }
+													/>
+													<Typography variant={ 'project_desc' }>
+														{ link.host }
+													</Typography>
+												</LinkHandle>
+											)
+										)
 									}
 								</ProjectSidebarTopContainer>
 
@@ -821,11 +1023,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 									{
 										filteredProjects[currentIndex! - 1].techStack.map(
 											(tech: string, i: number) => (
-												<SkillHandle key={ i }>
-													<Typography variant={ 'project_desc' }>
-														{ tech }
-													</Typography>
-												</SkillHandle>
+												<SkillChip key={ i } tech={ tech } />
 											)
 										)
 									}
@@ -844,9 +1042,59 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 									<Typography variant={ 'project_desc_bold' }>
 										{ 'Blog Posts' }
 									</Typography>
-									<Typography variant={ 'project_desc' }>
-										{ 'No blog posts available.' }
-									</Typography>
+									{
+										(() => {
+											const relatedPosts = blogPosts.filter(
+												(post) => post.projectId
+													=== filteredProjects[currentIndex! - 1].id
+											);
+
+											if (relatedPosts.length === 0) {
+												return (
+													<Typography variant={ 'project_desc' }>
+														{ 'No blog posts available.' }
+													</Typography>
+												);
+											}
+
+											return (
+												<ProjectBlogPostList>
+													{ relatedPosts.map((post) => (
+														<ProjectBlogPostCard
+															key={ post.id }
+															href={ `/blog/${post.id}` }
+														>
+															<ProjectBlogPostIcon
+																gradient={ post.tileGradient }
+															>
+																<FontAwesomeIcon
+																	icon={ [
+																		(post.iconPrefix ?? 'fas') as
+																			IconPrefix,
+																		post.icon as IconName
+																	] }
+																/>
+															</ProjectBlogPostIcon>
+															<ProjectBlogPostInfo>
+																<ProjectBlogPostTitle>
+																	{ post.title }
+																</ProjectBlogPostTitle>
+																<ProjectBlogPostMeta>
+																	{ formatBlogDate(post.date) }
+																	{ ' · ' }
+																	{
+																		formatReadingTime(
+																			post.readingMinutes
+																		)
+																	}
+																</ProjectBlogPostMeta>
+															</ProjectBlogPostInfo>
+														</ProjectBlogPostCard>
+													)) }
+												</ProjectBlogPostList>
+											);
+										})()
+									}
 								</ProjectBlogContainer>
 							</ProjectGridAreaContainer>
 						</ExpandableContainer>

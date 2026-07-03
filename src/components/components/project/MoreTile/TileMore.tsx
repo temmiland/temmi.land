@@ -13,7 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
  * Container for a MoreTileContainer.
  */
 const MoreTileContainer = styled.div`
-    background: linear-gradient(90deg, #42275a 0%, #734b6d 100%);
+    background: linear-gradient(90deg, #241a2e 0%, #3a2740 100%);
+	border: 1px solid rgba(255, 255, 255, 0.12);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

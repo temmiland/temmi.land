@@ -230,6 +230,7 @@ const P_Project = styled.p`
 	font-size: 1vw;
 	font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
 	color: #222222;
+	white-space: pre-line;
 
 	@media (min-width: 320px) and (max-width: 600px) {
 		font-size: 4vw;

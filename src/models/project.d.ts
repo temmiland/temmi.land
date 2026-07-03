@@ -83,14 +83,29 @@ type Project = {
 	licenseHref: string;
 
 	/**
-	 * The host of the projects demo.
+	 * Additional reference links for the project (e.g. demo, articles, docs).
 	 */
-	demoHost: string;
+	links: {
+		/**
+		 * The FontAwesome icon name.
+		 */
+		icon: string;
 
-	/**
-	 * The hyperlink reference for a projects demo.
-	 */
-	demoHref: string;
+		/**
+		 * The FontAwesome icon prefix. Defaults to 'fas' (solid icons).
+		 */
+		iconPrefix?: string;
+
+		/**
+		 * The display label for the link.
+		 */
+		host: string;
+
+		/**
+		 * The hyperlink reference.
+		 */
+		href: string;
+	}[];
 
 	/**
 	 * The techstack used in the project.
