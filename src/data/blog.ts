@@ -162,6 +162,31 @@ export const blogPosts: BlogPost[] = [
 					+ ' offline and on-device, with no account and no sign-up required.'
 			},
 			{
+				type: 'gallery',
+				images: [
+					{
+						src: '/blog/screnn_1_en.png',
+						alt: 'The alimonia recipe list screen',
+						caption: 'All recipes always with you.'
+					},
+					{
+						src: '/blog/screnn_2_en.png',
+						alt: 'The alimonia meal plan screen',
+						caption: 'Plan meals instead of writing shopping lists.'
+					},
+					{
+						src: '/blog/screnn_3_en.png',
+						alt: 'The alimonia shopping list screen',
+						caption: 'An automatic shopping list.'
+					},
+					{
+						src: '/blog/screnn_4_en.png',
+						alt: 'A recipe imported into alimonia',
+						caption: 'Import recipes in seconds.'
+					}
+				]
+			},
+			{
 				type: 'heading',
 				text: 'What\'s under the hood'
 			},

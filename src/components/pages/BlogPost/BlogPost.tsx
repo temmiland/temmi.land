@@ -434,6 +434,78 @@ const ArticleImage = styled.figure`
 	}
 `;
 
+const ImageGallery = styled.div`
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1vw;
+	margin: 1.6vw 0 2vw 0;
+
+	@media (min-width: 320px) and (max-width: 600px) {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3vw;
+		margin: 6vw 0 8vw 0;
+	}
+
+	@media (min-width: 600px) and (max-width: 1024px) {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2vw;
+		margin: 3vw 0 4vw 0;
+	}
+
+	@media (min-width: 2000px) {
+		gap: 16px;
+		margin: 24px 0 40px 0;
+	}
+
+	figure {
+		margin: 0;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 0.9vw;
+
+		@media (min-width: 320px) and (max-width: 600px) {
+			border-radius: 3.5vw;
+		}
+
+		@media (min-width: 600px) and (max-width: 1024px) {
+			border-radius: 1.8vw;
+		}
+
+		@media (min-width: 2000px) {
+			border-radius: 18px;
+		}
+	}
+
+	figcaption {
+		margin: 0.8vw 0 0 0;
+		text-align: center;
+		font-family: 'Bogart Light', system-ui, Avenir, Helvetica, Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.55);
+		font-size: 0.9vw;
+		line-height: 1.5;
+
+		@media (min-width: 320px) and (max-width: 600px) {
+			margin: 3vw 0 0 0;
+			font-size: 3.4vw;
+		}
+
+		@media (min-width: 600px) and (max-width: 1024px) {
+			margin: 1.5vw 0 0 0;
+			font-size: 2vw;
+		}
+
+		@media (min-width: 2000px) {
+			margin: 12px 0 0 0;
+			font-size: 16px;
+		}
+	}
+`;
+
 const CtaButton = styled.a`
 	display: inline-flex;
 	align-items: center;
@@ -589,6 +661,17 @@ const renderBlock = (block: BlogBlock, index: number): JSX.Element => {
 				<img src={ block.src } alt={ block.alt } />
 				{ block.caption ? <figcaption>{ block.caption }</figcaption> : null }
 			</ArticleImage>
+		);
+	case 'gallery':
+		return (
+			<ImageGallery key={ index }>
+				{ block.images.map((image, i) => (
+					<figure key={ i }>
+						<img src={ image.src } alt={ image.alt } />
+						{ image.caption ? <figcaption>{ image.caption }</figcaption> : null }
+					</figure>
+				)) }
+			</ImageGallery>
 		);
 	case 'cta':
 		return (

@@ -37,6 +37,19 @@ type BlogBlock =
 		caption?: string;
 	}
 	| {
+		/** A row of smaller images shown side by side. */
+		type: 'gallery';
+		/** The images to display in the row. */
+		images: {
+			/** The image source (public path or URL). */
+			src: string;
+			/** The image's alternative text. */
+			alt: string;
+			/** An optional caption shown beneath the image. */
+			caption?: string;
+		}[];
+	}
+	| {
 		/** A call-to-action button link. */
 		type: 'cta';
 		/** The button label. */
