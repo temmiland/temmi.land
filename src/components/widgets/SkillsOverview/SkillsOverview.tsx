@@ -100,7 +100,7 @@ const MoreCard = styled.div`
 	@media (min-width: 2000px) {
 		border: 1px dashed rgba(255, 255, 255, 0.3);
 		border-radius: 14px;
-		padding-left: 22px;
+		padding-left: 0;
 	}
 
 	&:hover {
@@ -109,19 +109,22 @@ const MoreCard = styled.div`
 	}
 
 	svg {
-		color: #80cee1;
-		font-size: 3vw;
+		color: #ffffff;
+		font-size: 4.7vw;
 
 		@media (min-width: 320px) and (max-width: 600px) {
+			color: #80cee1;
 			font-size: 19.5vw;
 		}
 
 		@media (min-width: 600px) and (max-width: 1024px) {
+			color: #80cee1;
 			font-size: 10.5vw;
 		}
 
 		@media (min-width: 2000px) {
-			font-size: 60px;
+			font-size: 94px;
+			margin-left: 75px;
 		}
 	}
 `;

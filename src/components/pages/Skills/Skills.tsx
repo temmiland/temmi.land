@@ -7,6 +7,7 @@
 
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Footer from '../../layouts/Footer';
 import SkillGrid from '../../widgets/SkillGrid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -485,8 +486,9 @@ const DropdownPanel = styled.div`
 `;
 
 export default function Skills() {
-	const [categoryToMatch, setCategoryToMatch] = useState('');
-	const [searchQuery, setSearchQuery] = useState('');
+	const [searchParams] = useSearchParams();
+	const [categoryToMatch, setCategoryToMatch] = useState(searchParams.get('category') ?? '');
+	const [searchQuery, setSearchQuery] = useState(searchParams.get('search') ?? '');
 	const [sortBy, setSortBy] = useState<SkillSortOption>(DEFAULT_SKILL_SORT);
 	const [isSortOpen, setIsSortOpen] = useState(false);
 	const [isExportOpen, setIsExportOpen] = useState(false);

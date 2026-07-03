@@ -232,6 +232,15 @@ const frontendTech: Skill[] = [
 		icon: 'palette'
 	},
 	{
+		id: 'vite',
+		name: 'Vite',
+		category: SkillCategory.FRONTEND,
+		rating: 4,
+		years: 2,
+		lastUsed: 2026,
+		icon: 'palette'
+	},
+	{
 		id: 'deno',
 		name: 'Deno',
 		category: SkillCategory.FRONTEND,
@@ -354,6 +363,24 @@ const frontendTech: Skill[] = [
 		category: SkillCategory.FRONTEND,
 		rating: 4,
 		years: 1,
+		lastUsed: 2026,
+		icon: 'palette'
+	},
+	{
+		id: 'rxjs',
+		name: 'RxJS',
+		category: SkillCategory.FRONTEND,
+		rating: 3,
+		years: 2,
+		lastUsed: 2024,
+		icon: 'palette'
+	},
+	{
+		id: 'storybook',
+		name: 'Storybook',
+		category: SkillCategory.FRONTEND,
+		rating: 5,
+		years: 6,
 		lastUsed: 2026,
 		icon: 'palette'
 	}
@@ -499,6 +526,24 @@ const backendTech: Skill[] = [
 		years: 8,
 		lastUsed: 2026,
 		icon: 'file-code'
+	},
+	{
+		id: 'websocket',
+		name: 'WebSocket',
+		category: SkillCategory.BACKEND,
+		rating: 2,
+		years: 1,
+		lastUsed: 2026,
+		icon: 'tower-broadcast'
+	},
+	{
+		id: 'eclipse-dataspace-components',
+		name: 'Eclipse Dataspace Components',
+		category: SkillCategory.BACKEND,
+		rating: 2,
+		years: 1,
+		lastUsed: 2026,
+		icon: 'network-wired'
 	}
 ];
 
@@ -557,10 +602,48 @@ const databases: Skill[] = [
 		years: 10,
 		lastUsed: 2022,
 		icon: 'database'
+	},
+	{
+		id: 'couchbase',
+		name: 'Couchbase',
+		category: SkillCategory.DATABASES,
+		rating: 3,
+		years: 1,
+		lastUsed: 2018,
+		icon: 'database'
+	},
+	{
+		id: 'supabase',
+		name: 'Supabase',
+		category: SkillCategory.DATABASES,
+		rating: 3,
+		years: 2,
+		lastUsed: 2026,
+		icon: 'database'
 	}
 ];
 
 const appDevelopment: Skill[] = [
+	{
+		id: 'android-automotive-sdk',
+		name: 'Android Automotive SDK',
+		category: SkillCategory.APP_DEVELOPMENT,
+		rating: 2,
+		years: 1,
+		lastUsed: 2024,
+		icon: 'android',
+		iconPrefix: 'fab'
+	},
+	{
+		id: 'jetpack-compose',
+		name: 'Jetpack Compose',
+		category: SkillCategory.APP_DEVELOPMENT,
+		rating: 2,
+		years: 1,
+		lastUsed: 2024,
+		icon: 'android',
+		iconPrefix: 'fab'
+	},
 	{
 		id: 'android-studio',
 		name: 'Android Studio',
@@ -632,6 +715,15 @@ const iam: Skill[] = [
 		years: 6,
 		lastUsed: 2026,
 		icon: 'key'
+	},
+	{
+		id: 'jwt',
+		name: 'JWT',
+		category: SkillCategory.IAM,
+		rating: 4,
+		years: 6,
+		lastUsed: 2026,
+		icon: 'key'
 	}
 ];
 
@@ -680,6 +772,15 @@ const testing: Skill[] = [
 		years: 2,
 		lastUsed: 2025,
 		icon: 'vial-circle-check'
+	},
+	{
+		id: 'karma-jasmine',
+		name: 'Karma / Jasmine',
+		category: SkillCategory.TESTING,
+		rating: 3,
+		years: 2,
+		lastUsed: 2024,
+		icon: 'vial-circle-check'
 	}
 ];
 
@@ -689,7 +790,7 @@ const qualityAssurance: Skill[] = [
 		name: 'SonarQube',
 		category: SkillCategory.QUALITY_ASSURANCE,
 		rating: 3,
-		years: 1,
+		years: 2,
 		lastUsed: 2026,
 		icon: 'search'
 	},
@@ -931,6 +1032,24 @@ const cicd: Skill[] = [
 		lastUsed: 2026,
 		icon: 'github',
 		iconPrefix: 'fab'
+	},
+	{
+		id: 'nginx',
+		name: 'Nginx',
+		category: SkillCategory.CICD,
+		rating: 4,
+		years: 8,
+		lastUsed: 2026,
+		icon: 'wrench'
+	},
+	{
+		id: 'traefik',
+		name: 'Traefik',
+		category: SkillCategory.CICD,
+		rating: 4,
+		years: 3,
+		lastUsed: 2026,
+		icon: 'wrench'
 	}
 ];
 
@@ -1046,6 +1165,15 @@ const os: Skill[] = [
 
 const other: Skill[] = [
 	{
+		id: 'lwjgl-3',
+		name: 'LWJGL 3',
+		category: SkillCategory.OTHER,
+		rating: 2,
+		years: 2,
+		lastUsed: 2026,
+		icon: 'code'
+	},
+	{
 		id: 'wordpress',
 		name: 'WordPress',
 		category: SkillCategory.OTHER,
@@ -1090,6 +1218,24 @@ const other: Skill[] = [
 		years: 10,
 		lastUsed: 2026,
 		icon: 'code'
+	},
+	{
+		id: 'system-integration',
+		name: 'System Integration',
+		category: SkillCategory.OTHER,
+		rating: 4,
+		years: 8,
+		lastUsed: 2026,
+		icon: 'sitemap'
+	},
+	{
+		id: 'ux-design',
+		name: 'UX Design',
+		category: SkillCategory.OTHER,
+		rating: 4,
+		years: 6,
+		lastUsed: 2026,
+		icon: 'pen-ruler'
 	}
 ];
 
