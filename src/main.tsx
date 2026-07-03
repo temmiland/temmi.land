@@ -18,6 +18,8 @@ import Imprint from './routes/Imprint';
 import Privacy from './routes/Privacy';
 import Project from './routes/Project';
 import Skills from './routes/Skills';
+import Blog from './routes/Blog';
+import BlogPost from './routes/BlogPost';
 import './index.css';
 
 
@@ -57,6 +59,28 @@ const App = () => {
 						<title>{ 'Temmi Pietsch - Skills' }</title>
 					</Helmet>
 					<Skills />
+				</>
+			)
+		},
+		{
+			path: '/blog',
+			element: (
+				<>
+					<Helmet>
+						<title>{ 'Temmi Pietsch - Blog' }</title>
+					</Helmet>
+					<Blog />
+				</>
+			)
+		},
+		{
+			path: '/blog/:id',
+			element: (
+				<>
+					<Helmet>
+						<title>{ 'Temmi Pietsch - Blog' }</title>
+					</Helmet>
+					<BlogPost />
 				</>
 			)
 		},

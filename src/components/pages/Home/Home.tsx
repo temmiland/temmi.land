@@ -11,6 +11,7 @@ import Me from '../../layouts/Me';
 import About from '../../layouts/About';
 import Projects from '../../layouts/Projects';
 import Skills from '../../layouts/Skills';
+import Blog from '../../layouts/Blog';
 import Footer from '../../layouts/Footer';
 import { projects } from '../../../data/projects.ts';
 
@@ -57,6 +58,20 @@ const ProjectSection = styled.section`
 `;
 
 const SkillSection = styled.section`
+	margin: 0 auto;
+	z-index: 3;
+	padding: 2vw 0;
+	position: relative;
+
+	max-width: 2000px;
+
+	@media (min-width: 2000px) {
+		padding: 40px 0;
+	}
+
+`;
+
+const BlogSection = styled.section`
 	margin: 0 auto;
 	z-index: 3;
 	padding: 3.6vw 0;
@@ -208,6 +223,11 @@ export default function Home() {
 				<AboutSection>
 					<About />
 				</AboutSection>
+			</Section>
+			<Section background={ '#141414' }>
+				<BlogSection>
+					<Blog />
+				</BlogSection>
 			</Section>
 			<Section background={ '#141414' }>
 				<SkillSection>
