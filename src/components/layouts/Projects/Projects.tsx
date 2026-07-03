@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Trail from '../../components/util/Trail';
 
 const ProjectContainer = styled.div`
+	scroll-margin-top: var(--header-height);
+
 	.project-header {
 		margin: 3.5vw 6.5vw;
 

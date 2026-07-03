@@ -5,6 +5,28 @@
  * permission of the author.
  */
 
+:root {
+	--header-height: 3.82vw;
+}
+
+@media (min-width: 320px) and (max-width: 600px) {
+	:root {
+		--header-height: 20vw;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+	:root {
+		--header-height: 10vw;
+	}
+}
+
+@media (min-width: 2000px) {
+	:root {
+		--header-height: 75px;
+	}
+}
+
 html, body, :root {
 	font-family: Domine, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;

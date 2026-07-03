@@ -20,7 +20,7 @@ interface LinkProps {
 	target?: string;
 	rel?: string;
 	className?: string;
-	onClick?: () => void;
+	onClick?: (event: React.MouseEvent) => void;
 }
 
 const A = styled(Typo.Link)`

@@ -15,11 +15,18 @@ export const pages: Page[] = [
 		href: '/#about-me'
 	},
 	{
+		name: 'Blog',
+		href: '/blog',
+		sectionId: 'blog'
+	},
+	{
 		name: 'Skills',
-		href: '/#skills'
+		href: '/skills',
+		sectionId: 'skills'
 	},
 	{
 		name: 'Projects',
-		href: '/#projects'
+		href: '/project',
+		sectionId: 'projects'
 	}
 ];

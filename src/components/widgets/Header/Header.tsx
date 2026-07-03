@@ -22,16 +22,19 @@ const HeaderContainer = styled.div`
 	height: 3.82vw;
 	position: absolute;
 	display: grid;
-	grid-template-columns: 20% 30%;
+	grid-template-columns: max-content 1fr;
+	column-gap: 3.47vw;
 
 	@media (min-width: 320px) and (max-width: 600px) {
 		height: 20vw;
 		grid-template-columns: 40% 60%;
+		column-gap: 0;
 	}
 
 	@media (min-width: 600px) and (max-width: 1024px) {
 		height: 10vw;
 		grid-template-columns: 40% 65%;
+		column-gap: 0;
 	}
 
 	@media (min-width: 2000px) {
@@ -42,20 +45,44 @@ const HeaderContainer = styled.div`
 	}
 `;
 
+/*
+ * The signature is sized as a fraction of the header height at every
+ * breakpoint and vertically centred, so it stays balanced and can never be
+ * clipped. Left padding matches the horizontal margin used by section
+ * headings (6.5vw / 130px ≥2000px), so the header aligns with page content.
+ * (Header heights: 3.82vw desktop / 10vw tablet / 20vw phone / 75px ≥2000px.)
+ */
 const LinkContainer = styled.div`
-	transform: scale(0.5);
-	margin: -0.75vw -3.47vw 0 0;
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	overflow: hidden;
+	padding-left: 6.5vw;
+
+	.signature {
+		height: 2.2vw;
+		width: auto;
+		max-width: 100%;
+	}
 
 	@media (min-width: 320px) and (max-width: 600px) {
-		margin: 0.5vw 0 0 -10vw;
+		.signature {
+			height: 8vw;
+		}
 	}
-		
+
 	@media (min-width: 600px) and (max-width: 1024px) {
-		margin: -1vw 0 0 -5vw;
+		.signature {
+			height: 5vw;
+		}
 	}
 
 	@media (min-width: 2000px) {
-		margin: -15px -69px 0 0;
+		padding-left: 130px;
+
+		.signature {
+			height: 42px;
+		}
 	}
 `;
 

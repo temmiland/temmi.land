@@ -83,14 +83,9 @@ function Path({ toggle, d }: { toggle: boolean, d: string }) {
 	);
 }
 
-/** TODO: */
-type SvgProps = {
-	/** TODO: */
-}
-
-/** TODO: */
-const Svg = styled.svg<SvgProps>`
+const Svg = styled.svg`
     height: 5vw;
+    max-width: 100%;
     color: #fff;
     mix-blend-mode: difference;
     z-index: 3;

@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Trail from '../../components/util/Trail';
 
 const SkillContainer = styled.div`
+	scroll-margin-top: var(--header-height);
+
 	.skill-header {
 		margin: 3.5vw 6.5vw;
 

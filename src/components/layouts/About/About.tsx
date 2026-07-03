@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
 
 const AboutContainer = styled.div`
+	scroll-margin-top: var(--header-height);
+
 	.about-header {
 		margin: 3.5vw 6.5vw;
 		display: grid;

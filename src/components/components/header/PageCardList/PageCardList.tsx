@@ -7,18 +7,26 @@
 
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from '../../util/Link';
 import Typography from '../../util/Typography';
 
 const Nav = styled.nav`
 	position: relative;
+	min-width: 0;
 	height: inherit;
+	padding-right: 6.5vw;
 
 	@media (min-width: 320px) and (max-width: 600px) {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
+		padding-right: 0;
+	}
+
+	@media (min-width: 2000px) {
+		padding-right: 130px;
 	}
 `;
 
@@ -42,10 +50,21 @@ const MenuToggle = styled.button`
 const Ul = styled.ul`
 	list-style: none;
 	display: inline-flex;
+	flex-wrap: nowrap;
 	gap: 3.47vw;
 	margin: 0 0 0 0;
+	padding: 0;
 	height: inherit;
 	place-items: center;
+	white-space: nowrap;
+
+	> a {
+		flex-shrink: 0;
+	}
+
+	li {
+		white-space: nowrap;
+	}
 
 	.ant-typography {
 		margin-bottom: 0 !important;
@@ -104,6 +123,46 @@ type PageCardListProps = {
 export const PageCardList = ({ pages }: PageCardListProps): JSX.Element => {
 	const [isOpen, setIsOpen] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
+	const location = useLocation();
+	const isHome = location.pathname === '/';
+
+	/**
+	 * Handles a navigation click. On the home page, entries with a matching
+	 * section (derived from an `/#id` href, or from `sectionId` for pages that
+	 * also have their own route, like Blog) are intercepted and smooth-scrolled
+	 * there instead of navigating away. On every subpage the links are left
+	 * untouched so they navigate directly to their target page.
+	 * @param {React.MouseEvent} event - The originating click event.
+	 * @param {Page} page - The clicked navigation entry.
+	 */
+	const handleNavClick = (event: React.MouseEvent, page: Page) => {
+		setIsOpen(false);
+
+		if (!isHome) return;
+
+		const { href, sectionId } = page;
+		const isAnchor = href.startsWith('/#');
+		const targetId = sectionId ?? (isAnchor ? href.slice(2) : undefined);
+		if (href !== '/' && !targetId) return;
+
+		const target = targetId ? document.getElementById(targetId) : null;
+		if (targetId && !target) return;
+
+		event.preventDefault();
+
+		if (target) {
+			target.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		} else {
+			document.body.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+		window.history.replaceState(null, '', targetId ? `/#${targetId}` : '/');
+	};
 
 	useEffect(() => {
 		if (!isOpen) return;
@@ -129,7 +188,11 @@ export const PageCardList = ({ pages }: PageCardListProps): JSX.Element => {
 			<Ul className={ isOpen ? 'open' : '' }>
 				{
 					pages.map((page, i) => (
-						<Link key={ i } href={ page.href } onClick={ () => setIsOpen(false) }>
+						<Link
+							key={ i }
+							href={ page.href }
+							onClick={ (event) => handleNavClick(event, page) }
+						>
 							<Typography variant={ 'header' } >
 								<li style={ {
 									position: 'relative',
