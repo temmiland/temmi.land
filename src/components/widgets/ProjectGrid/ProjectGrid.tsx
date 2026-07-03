@@ -850,6 +850,38 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 		))
 		: projects
 
+	const selectedIndex = filteredProjects.findIndex(
+		(project) => project.id === selectedProjectId
+	);
+
+	// When a project is deep-linked (e.g. /project/<id>), the ExpandableGrid
+	// opens the matching panel via defaultSelectedIndex. Scroll that expanded
+	// panel into view once it is rendered. The delay lets the page entry
+	// (Trail) animation settle so we scroll to the panel's final position.
+	useEffect(() => {
+		if (selectedIndex < 0) {
+			return;
+		}
+
+		const timeout = window.setTimeout(() => {
+			const expanded = document.querySelector('.expanded') as HTMLElement | null;
+			if (!expanded) {
+				return;
+			}
+
+			// Align the panel's top near the viewport top, but leave some
+			// breathing room above (scroll-margin-top is honoured by
+			// scrollIntoView) so the header/top area stays readable.
+			expanded.style.scrollMarginTop = '18vh';
+			expanded.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		}, 300);
+
+		return () => window.clearTimeout(timeout);
+	}, [selectedIndex]);
+
 	return (
 		<ProjectGridContainer>
 			<ExpandableGrid
@@ -1102,11 +1134,7 @@ export const ProjectGrid = ({ selectedProjectId, techToMatch }: ProjectGridProps
 				})) }
 				expandableElementWidthInPx={ elementWidth }
 				fbJustifyContent={ 'space-between' }
-				defaultSelectedIndex={
-					filteredProjects.findIndex((project) => {
-						return project.id === selectedProjectId;
-					})
-				}
+				defaultSelectedIndex={ selectedIndex }
 			/>
 		</ProjectGridContainer>
 	);
