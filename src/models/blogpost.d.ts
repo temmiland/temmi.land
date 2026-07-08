@@ -65,7 +65,7 @@ type BlogBlock =
 		/** An official app store badge link. */
 		type: 'store-badge';
 		/** Which store's official badge artwork to render. */
-		store: 'google-play';
+		store: 'google-play' | 'app-store';
 		/** The store listing to link to. */
 		href: string;
 	};

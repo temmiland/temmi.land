@@ -6,11 +6,10 @@
  */
 
 export const blogPosts: BlogPost[] = [
-	/*
 	{
 		id: 'alimonia-on-the-app-store',
 		title: 'alimonia is now available on the App Store',
-		date: '2026-07-03',
+		date: '2026-07-08',
 		readingMinutes: 3,
 		excerpt: 'alimonia has arrived on iOS. My local-first app for recipes, meal plans and'
 			+ ' shopping lists is now a free download on the App Store - here is what iPhone users'
@@ -34,11 +33,9 @@ export const blogPosts: BlogPost[] = [
 					+ ' account, no waitlist, just a free download away.'
 			},
 			{
-				type: 'cta',
-				text: 'Download alimonia on the App Store',
-				href: 'https://apps.apple.com/app/alimonia',
-				icon: 'apple',
-				iconPrefix: 'fab'
+				type: 'store-badge',
+				store: 'app-store',
+				href: 'https://apps.apple.com/app/alimonia/id6781319686'
 			},
 			{
 				type: 'heading',
@@ -46,12 +43,12 @@ export const blogPosts: BlogPost[] = [
 			},
 			{
 				type: 'paragraph',
-				text: 'Most recipe and meal-planning apps assume you\'re always online and want you'
-					+ ' signed in before you\'ve even seen a recipe. alimonia takes the opposite'
-					+ ' approach: it\'s fully usable the moment you install it, without an account and'
-					+ ' without an internet connection. Your recipes, weekly plans and shopping lists'
-					+ ' live on your device first, so the app stays fast and works anywhere - including'
-					+ ' the corner of the supermarket where the signal drops out.'
+				text: 'alimonia flips the usual recipe-app formula on its head. There\'s no sign-up'
+					+ ' wall, no cloud you have to trust and no loading spinner between you and your'
+					+ ' next meal - the app is ready the instant it finishes installing. Everything you'
+					+ ' create, from a single recipe to a full week of meals and the shopping list that'
+					+ ' falls out of it, lives on your iPhone first, so alimonia stays quick and keeps'
+					+ ' working even when your connection doesn\'t.'
 			},
 			{
 				type: 'heading',
@@ -65,6 +62,31 @@ export const blogPosts: BlogPost[] = [
 					+ ' those recipes onto specific days in a weekly plan, and alimonia automatically'
 					+ ' compiles a shopping list from everything you\'ve scheduled. It all works'
 					+ ' offline and on-device, with no account and no sign-up required.'
+			},
+			{
+				type: 'gallery',
+				images: [
+					{
+						src: '/blog/ios_screnn_1_en.png',
+						alt: 'The alimonia recipe list screen on iPhone',
+						caption: 'Your whole recipe collection, right in your pocket.'
+					},
+					{
+						src: '/blog/ios_screnn_2_en.png',
+						alt: 'The alimonia meal plan screen on iPhone',
+						caption: 'Drag recipes onto the days you\'ll cook them.'
+					},
+					{
+						src: '/blog/ios_screnn_3_en.png',
+						alt: 'The alimonia shopping list screen on iPhone',
+						caption: 'The shopping list writes itself.'
+					},
+					{
+						src: '/blog/ios_screnn_4_en.png',
+						alt: 'A recipe imported into alimonia on iPhone',
+						caption: 'Pull in a recipe from a link in seconds.'
+					}
+				]
 			},
 			{
 				type: 'heading',
@@ -89,14 +111,12 @@ export const blogPosts: BlogPost[] = [
 					+ ' on the blog. If you give alimonia a try, I\'d love to hear what you think.'
 			},
 			{
-				type: 'cta',
-				text: 'Download alimonia on the App Store',
-				href: 'https://apps.apple.com/app/alimonia',
-				icon: 'apple',
-				iconPrefix: 'fab'
+				type: 'store-badge',
+				store: 'app-store',
+				href: 'https://apps.apple.com/app/alimonia/id6781319686'
 			}
 		]
-	},*/
+	},
 	{
 		id: 'alimonia-on-google-play',
 		title: 'alimonia is now available on Google Play',

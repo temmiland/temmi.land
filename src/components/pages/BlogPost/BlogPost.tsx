@@ -641,6 +641,10 @@ const storeBadges: Record<StoreBadgeName, { src: string, alt: string }> = {
 	'google-play': {
 		src: '/blog/badges/google-play-badge.png',
 		alt: 'Get it on Google Play'
+	},
+	'app-store': {
+		src: '/blog/badges/app-store-badge.svg',
+		alt: 'Download on the App Store'
 	}
 };
 
