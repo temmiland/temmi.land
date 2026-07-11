@@ -130,13 +130,31 @@ export const projects: Project[] = [
 				icon: 'android',
 				iconPrefix: 'fab',
 				host: 'Google Play Store',
-				href: 'https://play.google.com/store/search?q=alimonia&c=apps'
+				href: 'https://play.google.com/store/apps/details?id=land.temmi.alimonia'
 			},
 			{
 				icon: 'apple',
 				iconPrefix: 'fab',
 				host: 'App Store',
-				href: '#'
+				href: 'https://apps.apple.com/app/alimonia/id6781319686'
+			},
+			{
+				icon: 'github',
+				iconPrefix: 'fab',
+				host: 'GitHub (alimonia-expo)',
+				href: 'https://github.com/temmiland/alimonia-expo'
+			},
+			{
+				icon: 'github',
+				iconPrefix: 'fab',
+				host: 'GitHub (alimonia-expo-old)',
+				href: 'https://github.com/temmiland/alimonia-expo-old'
+			},
+			{
+				icon: 'github',
+				iconPrefix: 'fab',
+				host: 'GitHub (alimonia-ios)',
+				href: 'https://github.com/temmiland/alimonia-ios'
 			}
 		],
 		techStack: [

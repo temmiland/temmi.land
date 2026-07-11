@@ -147,7 +147,7 @@ export const blogPosts: BlogPost[] = [
 			{
 				type: 'store-badge',
 				store: 'google-play',
-				href: 'https://play.google.com/store/search?q=alimonia&c=apps'
+				href: 'https://play.google.com/store/apps/details?id=land.temmi.alimonia'
 			},
 			{
 				type: 'image',
@@ -231,7 +231,7 @@ export const blogPosts: BlogPost[] = [
 			{
 				type: 'store-badge',
 				store: 'google-play',
-				href: 'https://play.google.com/store/search?q=alimonia&c=apps'
+				href: 'https://play.google.com/store/apps/details?id=land.temmi.alimonia'
 			}
 		]
 	}
