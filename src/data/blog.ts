@@ -69,22 +69,22 @@ export const blogPosts: BlogPost[] = [
 				type: 'gallery',
 				images: [
 					{
-						src: '/blog/ios_screnn_1_en.png',
+						src: '/blog/ios_screen_1_en.webp',
 						alt: 'The alimonia recipe list screen on iPhone',
 						caption: 'Your whole recipe collection, right in your pocket.'
 					},
 					{
-						src: '/blog/ios_screnn_2_en.png',
+						src: '/blog/ios_screen_2_en.webp',
 						alt: 'The alimonia meal plan screen on iPhone',
 						caption: 'Drag recipes onto the days you\'ll cook them.'
 					},
 					{
-						src: '/blog/ios_screnn_3_en.png',
+						src: '/blog/ios_screen_3_en.webp',
 						alt: 'The alimonia shopping list screen on iPhone',
 						caption: 'The shopping list writes itself.'
 					},
 					{
-						src: '/blog/ios_screnn_4_en.png',
+						src: '/blog/ios_screen_4_en.webp',
 						alt: 'A recipe imported into alimonia on iPhone',
 						caption: 'Pull in a recipe from a link in seconds.'
 					}
@@ -153,7 +153,7 @@ export const blogPosts: BlogPost[] = [
 			},
 			{
 				type: 'image',
-				src: '/blog/google_presentation.png',
+				src: '/blog/google_presentation.webp',
 				alt: 'alimonia on the Google Play Store',
 				caption: 'alimonia is now live on the Google Play Store.'
 			},
@@ -187,22 +187,22 @@ export const blogPosts: BlogPost[] = [
 				type: 'gallery',
 				images: [
 					{
-						src: '/blog/screnn_1_en.png',
+						src: '/blog/screen_1_en.webp',
 						alt: 'The alimonia recipe list screen',
 						caption: 'All recipes always with you.'
 					},
 					{
-						src: '/blog/screnn_2_en.png',
+						src: '/blog/screen_2_en.webp',
 						alt: 'The alimonia meal plan screen',
 						caption: 'Plan meals instead of writing shopping lists.'
 					},
 					{
-						src: '/blog/screnn_3_en.png',
+						src: '/blog/screen_3_en.webp',
 						alt: 'The alimonia shopping list screen',
 						caption: 'An automatic shopping list.'
 					},
 					{
-						src: '/blog/screnn_4_en.png',
+						src: '/blog/screen_4_en.webp',
 						alt: 'A recipe imported into alimonia',
 						caption: 'Import recipes in seconds.'
 					}
