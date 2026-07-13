@@ -5,6 +5,8 @@
  * permission of the author.
  */
 
+import { Page } from '@/models/page';
+
 export const pages: Page[] = [
 	{
 		name: 'Home',

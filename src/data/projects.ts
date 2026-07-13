@@ -5,7 +5,8 @@
  * permission of the author.
  */
 
-import { ProjectStatus } from '../models/projectstatus.d';
+import { Project } from '@/models/project';
+import { ProjectStatus } from '@/models/projectstatus';
 
 export const projects: Project[] = [
 	{

@@ -5,7 +5,8 @@
  * permission of the author.
  */
 
-import { SkillCategory } from '../models/skillcategory.d';
+import { Skill } from '@/models/skill';
+import { SkillCategory } from '@/models/skillcategory';
 
 const CATEGORY_ORDER = Object.values(SkillCategory);
 

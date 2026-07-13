@@ -5,6 +5,8 @@
  * permission of the author.
  */
 
+import { BlogPost } from '@/models/blogpost';
+
 export const blogPosts: BlogPost[] = [
 	{
 		id: 'alimonia-on-the-app-store',

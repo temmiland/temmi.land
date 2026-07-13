@@ -7,118 +7,107 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	Navigate,
+	RouterProvider,
+	useParams
+} from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Home from './routes/Home';
-import Imprint from './routes/Imprint';
-import Privacy from './routes/Privacy';
-import Project from './routes/Project';
-import Skills from './routes/Skills';
-import Blog from './routes/Blog';
-import BlogPost from './routes/BlogPost';
+import Home from '@/pages/Home';
+import Imprint from '@/pages/Imprint';
+import Privacy from '@/pages/Privacy';
+import Project from '@/pages/Project';
+import Skills from '@/pages/Skills';
+import Blog from '@/pages/Blog';
+import BlogPost from '@/pages/BlogPost';
+import { projects } from './data/projects';
+import { blogPosts } from './data/blog';
 import './index.css';
 
+library.add(fas, fab, far);
 
-const App = () => {
+/**
+ * Validates the optional ':id' URL param and redirects to the projects
+ * overview when no project with that id exists.
+ */
+const ProjectRoute = () => {
 
-	library.add(fas, fab, far);
+	const { id } = useParams();
 
-	const router = createBrowserRouter([
-		{
-			path: '/',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Home' }</title>
-					</Helmet>
-					<Home />
-				</>
-			)
+	if (id !== undefined && !projects.some((project) => project.id === id))
+		return <Navigate to={ '/project' } replace />;
 
-		},
-		{
-			path: '/project/:id?',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Projects' }</title>
-					</Helmet>
-					<Project />
-				</>
-			)
-		},
-		{
-			path: '/skills',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Skills' }</title>
-					</Helmet>
-					<Skills />
-				</>
-			)
-		},
-		{
-			path: '/blog',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Blog' }</title>
-					</Helmet>
-					<Blog />
-				</>
-			)
-		},
-		{
-			path: '/blog/:id',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Blog' }</title>
-					</Helmet>
-					<BlogPost />
-				</>
-			)
-		},
-		{
-			path: '/privacy',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Privacy' }</title>
-					</Helmet>
-					<Privacy />
-				</>
-			)
-		},
-		{
-			path: '/imprint',
-			element: (
-				<>
-					<Helmet>
-						<title>{ 'Temmi Pietsch - Imprint' }</title>
-					</Helmet>
-					<Imprint />
-				</>
-			)
-		},
-		{
-			path: '*',
-			element: <Navigate to={ '/' } replace />
-		}
-	]);
+	return <Project selectedProjectId={ id } />;
+};
 
-	return (
-		<React.StrictMode>
-			<HelmetProvider>
-				<RouterProvider router={ router } />
-			</HelmetProvider>
-		</React.StrictMode>
-	);
-}
+/**
+ * Validates the ':id' URL param and redirects to the blog overview when no
+ * post with that id exists.
+ */
+const BlogPostRoute = () => {
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+	const { id } = useParams();
+
+	if (id === undefined || !blogPosts.some((post) => post.id === id))
+		return <Navigate to={ '/blog' } replace />;
+
+	return <BlogPost postId={ id } />;
+};
+
+/**
+ * All pages of the site: URL pattern, document title and page component.
+ */
+const pages = [
+	{
+		path: '/', title: 'Home', element: <Home />
+	},
+	{
+		path: '/project/:id?', title: 'Projects', element: <ProjectRoute />
+	},
+	{
+		path: '/skills', title: 'Skills', element: <Skills />
+	},
+	{
+		path: '/blog', title: 'Blog', element: <Blog />
+	},
+	{
+		path: '/blog/:id', title: 'Blog', element: <BlogPostRoute />
+	},
+	{
+		path: '/privacy', title: 'Privacy', element: <Privacy />
+	},
+	{
+		path: '/imprint', title: 'Imprint', element: <Imprint />
+	}
+];
+
+const router = createBrowserRouter([
+	...pages.map(({ path, title, element }) => ({
+		path,
+		element: (
+			<>
+				<Helmet>
+					<title>{ `Temmi Pietsch - ${title}` }</title>
+				</Helmet>
+				{ element }
+			</>
+		)
+	})),
+	{
+		path: '*',
+		element: <Navigate to={ '/' } replace />
+	}
+]);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+	<React.StrictMode>
+		<HelmetProvider>
+			<RouterProvider router={ router } />
+		</HelmetProvider>
+	</React.StrictMode>
+);
