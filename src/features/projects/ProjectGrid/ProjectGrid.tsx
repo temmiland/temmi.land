@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -151,6 +151,7 @@ const glassChip = css`
  * dark label typography, scaled per breakpoint.
  */
 const handleBase = css`
+	box-sizing: border-box;
 	min-height: 2.4vw;
 	border-radius: 1.5vw;
 	${glassChip}
@@ -287,7 +288,6 @@ const LinkHandle = styled.a`
 	${handleBase}
 	width: fit-content;
 	max-width: 100%;
-	box-sizing: border-box;
 	text-align: left;
 	text-decoration: none;
 	padding: 0.2vw 0.69vw 0.2vw 0.69vw;
