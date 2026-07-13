@@ -19,7 +19,7 @@ const meta = {
 		selectedProjectId: {
 			name: 'project',
 			description: 'Project',
-			options: projects.map(project => project.id),
+			options: projects.map((project) => project.id),
 			control: {
 				type: 'select'
 			}
@@ -41,4 +41,3 @@ export const Standard: Story = {
 		selectedProjectId: projects[0].id
 	}
 };
-

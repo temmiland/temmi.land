@@ -17,9 +17,7 @@ import { colors, fonts, media, whiteAlpha } from '@/styles';
  * Lookup of skills by their (lower-cased) name, so a tech-stack label on a
  * project can be resolved back to its full skill entry.
  */
-const skillsByName = new Map<string, Skill>(
-	skills.map((skill) => [skill.name.toLowerCase(), skill])
-);
+const skillsByName = new Map<string, Skill>(skills.map((skill) => [skill.name.toLowerCase(), skill]));
 
 const Wrapper = styled.div`
 	position: relative;
@@ -39,7 +37,9 @@ const Wrapper = styled.div`
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
-		transition: opacity 120ms ease, transform 120ms ease;
+		transition:
+			opacity 120ms ease,
+			transform 120ms ease;
 		isolation: isolate;
 		z-index: 30;
 
@@ -94,11 +94,7 @@ const chipStyles = css<{ $linked: boolean }>`
 	max-width: 100%;
 	box-sizing: border-box;
 	border-radius: 1.5vw;
-	background: linear-gradient(
-		135deg,
-		${whiteAlpha(0.75)} 0%,
-		${whiteAlpha(0.55)} 100%
-	);
+	background: linear-gradient(135deg, ${whiteAlpha(0.75)} 0%, ${whiteAlpha(0.55)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.7)};
 	backdrop-filter: blur(0.6vw);
 	-webkit-backdrop-filter: blur(0.6vw);
@@ -112,10 +108,14 @@ const chipStyles = css<{ $linked: boolean }>`
 	align-items: center;
 	justify-content: center;
 	cursor: ${(props: { $linked: boolean }) => (props.$linked ? 'pointer' : 'default')};
-	transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+	transition:
+		background 120ms ease,
+		border-color 120ms ease,
+		transform 120ms ease;
 
-	${(props: { $linked: boolean }) => (props.$linked
-		? `
+	${(props: { $linked: boolean }) =>
+		props.$linked
+			? `
 			&:hover {
 				background: linear-gradient(
 					135deg,
@@ -126,7 +126,7 @@ const chipStyles = css<{ $linked: boolean }>`
 				transform: translateY(-0.1vw);
 			}
 		`
-		: '')}
+			: ''}
 
 	${media.mobile} {
 		border-width: 0.25vw;
@@ -192,8 +192,12 @@ const chipStyles = css<{ $linked: boolean }>`
 	}
 `;
 
-const ChipAnchor = styled.a<{ $linked: boolean }>`${chipStyles}`;
-const ChipRouterLink = styled(Link)<{ $linked: boolean }>`${chipStyles}`;
+const ChipAnchor = styled.a<{ $linked: boolean }>`
+	${chipStyles}
+`;
+const ChipRouterLink = styled(Link)<{ $linked: boolean }>`
+	${chipStyles}
+`;
 
 /**
  * Props for a skill chip.
@@ -215,27 +219,20 @@ export const SkillChip = ({ tech }: SkillChipProps): JSX.Element => {
 
 	return (
 		<Wrapper>
-			{ skill ? (
-				<ChipRouterLink
-					$linked
-					to={ `/skills?search=${encodeURIComponent(skill.name)}` }
-				>
-					<Typography variant={ 'project_desc' }>
-						{ tech }
-					</Typography>
+			{skill ? (
+				<ChipRouterLink $linked to={`/skills?search=${encodeURIComponent(skill.name)}`}>
+					<Typography variant={'project_desc'}>{tech}</Typography>
 				</ChipRouterLink>
 			) : (
-				<ChipAnchor $linked={ false }>
-					<Typography variant={ 'project_desc' }>
-						{ tech }
-					</Typography>
+				<ChipAnchor $linked={false}>
+					<Typography variant={'project_desc'}>{tech}</Typography>
 				</ChipAnchor>
-			) }
-			{ skill ? (
-				<div className={ 'skill-card-tooltip' }>
-					<SkillCard skill={ skill } />
+			)}
+			{skill ? (
+				<div className={'skill-card-tooltip'}>
+					<SkillCard skill={skill} />
 				</div>
-			) : null }
+			) : null}
 		</Wrapper>
 	);
 };

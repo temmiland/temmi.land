@@ -14,17 +14,17 @@ import { colors, media, whiteAlpha } from '@/styles';
  * Container for a MoreTileContainer.
  */
 const MoreTileContainer = styled.div`
-    background: linear-gradient(90deg, #241a2e 0%, #3a2740 100%);
+	background: linear-gradient(90deg, #241a2e 0%, #3a2740 100%);
 	border: 1px solid ${whiteAlpha(0.12)};
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-start;
 	width: 18vw;
-    height: 18vw;
-    border-radius: 1.75vw;
-    color: ${colors.white};
-    font-size: 1.17vw;
+	height: 18vw;
+	border-radius: 1.75vw;
+	color: ${colors.white};
+	font-size: 1.17vw;
 	transition: 100ms linear 50ms;
 
 	${media.mobile} {
@@ -43,7 +43,7 @@ const MoreTileContainer = styled.div`
 
 	${media.wide} {
 		width: 360px;
-    	height: 360px;
+		height: 360px;
 		border-radius: 35px;
 		font-size: 23px;
 	}
@@ -70,7 +70,7 @@ const MoreTileContainer = styled.div`
 
 	&:hover {
 		transform: scale(1.025);
-		z-index: 4
+		z-index: 4;
 	}
 `;
 
@@ -79,11 +79,9 @@ const MoreTileContainer = styled.div`
  * @returns {JSX.Element} MoreTile JSX element.
  */
 export const MoreTile = (): JSX.Element => (
-	<Link href={ '/project' }>
+	<Link href={'/project'}>
 		<MoreTileContainer>
-			<FontAwesomeIcon
-				icon={ 'caret-right' }
-			/>
+			<FontAwesomeIcon icon={'caret-right'} />
 		</MoreTileContainer>
 	</Link>
 );

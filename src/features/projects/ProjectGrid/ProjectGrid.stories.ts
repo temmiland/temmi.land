@@ -21,7 +21,7 @@ const meta = {
 		selectedProjectId: {
 			name: 'project',
 			description: 'Project',
-			options: projects.map(project => project.id),
+			options: projects.map((project) => project.id),
 			control: {
 				type: 'select'
 			}
@@ -58,11 +58,14 @@ export const ExpandAndClose: Story = {
 		})[0];
 		await userEvent.click(tile);
 
-		await waitFor(async () => {
-			await expect(canvas.getByText('Description')).toBeVisible();
-		}, {
-			timeout: 3000
-		});
+		await waitFor(
+			async () => {
+				await expect(canvas.getByText('Description')).toBeVisible();
+			},
+			{
+				timeout: 3000
+			}
+		);
 		await expect(canvas.getByText('Links')).toBeVisible();
 
 		// The click handler sits on the styled handle inside the
@@ -73,12 +76,15 @@ export const ExpandAndClose: Story = {
 
 		// The grid keeps the panel content mounted while collapsing, so assert
 		// on the expanded marker class instead of the panel text.
-		await waitFor(() => {
-			if (canvasElement.querySelector('.expanded') !== null) {
-				throw new Error('detail panel is still expanded');
+		await waitFor(
+			() => {
+				if (canvasElement.querySelector('.expanded') !== null) {
+					throw new Error('detail panel is still expanded');
+				}
+			},
+			{
+				timeout: 3000
 			}
-		}, {
-			timeout: 3000
-		});
+		);
 	}
 };

@@ -28,4 +28,4 @@ export type ProjectDocs = {
 	 * The hyperlink reference of the document.
 	 */
 	fileHref: string;
-}
+};

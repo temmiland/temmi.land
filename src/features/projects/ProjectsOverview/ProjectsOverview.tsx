@@ -43,15 +43,13 @@ interface ProjectsProps {
 	projects?: Project[];
 }
 
-export const ProjectsOverview = ( { projects }: ProjectsProps) => (
-	<ProjectContainer id={ 'project-list' }>
-		{
-			projects
-				?.filter(project => project.isVisibleOnHome)
-				?.map((project) => (
-					<ProjectTile gridMode={ false } key={ project.id } project={ project } />
-				))
-		}
+export const ProjectsOverview = ({ projects }: ProjectsProps) => (
+	<ProjectContainer id={'project-list'}>
+		{projects
+			?.filter((project) => project.isVisibleOnHome)
+			?.map((project) => (
+				<ProjectTile gridMode={false} key={project.id} project={project} />
+			))}
 		<MoreTile />
 	</ProjectContainer>
 );

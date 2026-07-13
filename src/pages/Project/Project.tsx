@@ -47,25 +47,32 @@ const ProjectSection = styled.section`
 
 const projectTechOptions = [
 	{
-		value: 'typescript', label: 'Typescript'
+		value: 'typescript',
+		label: 'Typescript'
 	},
 	{
-		value: 'javascript', label: 'Javascript'
+		value: 'javascript',
+		label: 'Javascript'
 	},
 	{
-		value: 'react', label: 'React'
+		value: 'react',
+		label: 'React'
 	},
 	{
-		value: 'react-native', label: 'React-Native & Expo'
+		value: 'react-native',
+		label: 'React-Native & Expo'
 	},
 	{
-		value: 'angular', label: 'Angular'
+		value: 'angular',
+		label: 'Angular'
 	},
 	{
-		value: 'java', label: 'Java'
+		value: 'java',
+		label: 'Java'
 	},
 	{
-		value: 'kotlin', label: 'Kotlin'
+		value: 'kotlin',
+		label: 'Kotlin'
 	}
 ];
 
@@ -74,71 +81,48 @@ const projectTechOptions = [
  */
 type PProjectProps = {
 	/** The id of the selected project, if a project is deep-linked. */
-	selectedProjectId?: string
-}
+	selectedProjectId?: string;
+};
 
 export default function Project({ selectedProjectId }: PProjectProps) {
-
 	const [techToMatch, setTechToMatch] = useState('');
 	const selectedProject = projects.find((project) => project.id === selectedProjectId);
 
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
-			{ selectedProject ? (
+		<PageLayout header={<Header animationDirection={'left'} />}>
+			{selectedProject ? (
 				<Helmet>
-					<title>{ `Temmi Pietsch - ${selectedProject.name}` }</title>
-					<meta name={ 'description' } content={ selectedProject.description } />
-					<meta property={ 'og:title' } content={ `Temmi Pietsch - ${selectedProject.name}` } />
-					<meta property={ 'og:description' } content={ selectedProject.description } />
-					<meta
-						property={ 'og:url' }
-						content={ `https://temmi.land/project/${selectedProject.id}` }
-					/>
-					<link
-						rel={ 'canonical' }
-						href={ `https://temmi.land/project/${selectedProject.id}` }
-					/>
+					<title>{`Temmi Pietsch - ${selectedProject.name}`}</title>
+					<meta name={'description'} content={selectedProject.description} />
+					<meta property={'og:title'} content={`Temmi Pietsch - ${selectedProject.name}`} />
+					<meta property={'og:description'} content={selectedProject.description} />
+					<meta property={'og:url'} content={`https://temmi.land/project/${selectedProject.id}`} />
+					<link rel={'canonical'} href={`https://temmi.land/project/${selectedProject.id}`} />
 				</Helmet>
-			) : null }
+			) : null}
 			<ProjectSection>
-				<div className={ 'project-content' }>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-					>
-						<div className={ 'project-header' }>
-							<Typography variant={ 'h1' }>
-								{ 'Projects' }
-								<FontAwesomeIcon
-									className={ 'h-icon' }
-									icon={ ['fas', 'dragon'] }
-								/>
-								<FontAwesomeIcon
-									className={ 'h-icon' }
-									icon={ ['fas', 'carrot'] }
-								/>
-								<FontAwesomeIcon
-									className={ 'h-icon' }
-									icon={ ['fas', 'code'] }
-								/>
+				<div className={'project-content'}>
+					<Trail animationDirection={'left'} animationSpeed={50}>
+						<div className={'project-header'}>
+							<Typography variant={'h1'}>
+								{'Projects'}
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'dragon']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'carrot']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'code']} />
 							</Typography>
 						</div>
 					</Trail>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-						animationDelay={ 175 }
-					>
+					<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
 						<Filter
-							options={ projectTechOptions }
-							activeValue={ techToMatch }
-							onChange={ setTechToMatch }
+							options={projectTechOptions}
+							activeValue={techToMatch}
+							onChange={setTechToMatch}
 						/>
 						<ProjectGrid
-							projects={ projects }
-							blogPosts={ blogPosts }
-							selectedProjectId={ selectedProjectId }
-							techToMatch={ techToMatch }
+							projects={projects}
+							blogPosts={blogPosts}
+							selectedProjectId={selectedProjectId}
+							techToMatch={techToMatch}
 						/>
 					</Trail>
 				</div>

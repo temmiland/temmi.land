@@ -53,25 +53,19 @@ interface ProjectsProps {
 }
 
 export const ProjectsSection = ({ projects }: ProjectsProps) => (
-	<ProjectContainer id={ 'projects' }>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-		>
-			<div className={ 'project-header' }>
-				<Typography variant={ 'h1' }>
-					{ 'Projects' }
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'dragon'] } />
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'carrot'] } />
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'code'] } />
+	<ProjectContainer id={'projects'}>
+		<Trail animationDirection={'left'} animationSpeed={50}>
+			<div className={'project-header'}>
+				<Typography variant={'h1'}>
+					{'Projects'}
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'dragon']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'carrot']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'code']} />
 				</Typography>
 			</div>
 		</Trail>
-		<Trail
-			animationDirection={ 'right' }
-			animationSpeed={ 50 }
-		>
-			<ProjectsOverview projects={ projects } />
+		<Trail animationDirection={'right'} animationSpeed={50}>
+			<ProjectsOverview projects={projects} />
 		</Trail>
 	</ProjectContainer>
 );
