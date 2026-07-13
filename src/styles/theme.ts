@@ -63,6 +63,5 @@ export const fonts = {
 	light: withFallback('Fraunces Light'),
 	regular: withFallback('Fraunces Regular'),
 	medium: withFallback('Fraunces Medium'),
-	bold: withFallback('Fraunces Bold'),
-	body: 'Domine, system-ui, Avenir, Helvetica, Arial, sans-serif'
+	bold: withFallback('Fraunces Bold')
 } as const;
