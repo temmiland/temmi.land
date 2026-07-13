@@ -1,86 +1,86 @@
 name: Deploy via Webhook
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  verify:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+    verify:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
+            - name: Install dependencies
+              run: bun install --frozen-lockfile
 
-      - name: Lint
-        run: bun run lint
+            - name: Lint
+              run: bun run lint
 
-      - name: Type-check and build
-        run: bun run build
+            - name: Type-check and build
+              run: bun run build
 
-  deploy:
-    needs: verify
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+    deploy:
+        needs: verify
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-      # 1️⃣ Cloudflare Bypass
-      # Pinned to the commit for tag v1.1.1 (verified via GitHub API) instead
-      # of the mutable tag, so the author can't silently swap the code later.
-      - name: Bypass Cloudflare for GitHub Action
-        uses: xiaotianxt/bypass-cloudflare-for-github-action@a87c9ac0348806058904e62e5c8e70d8e37b4a65 # v1.1.1
-        with:
-          cf_zone_id: ${{ secrets.CF_ZONE_ID }}
-          cf_api_token: ${{ secrets.CF_API_TOKEN }}
+            # 1️⃣ Cloudflare Bypass
+            # Pinned to the commit for tag v1.1.1 (verified via GitHub API) instead
+            # of the mutable tag, so the author can't silently swap the code later.
+            - name: Bypass Cloudflare for GitHub Action
+              uses: xiaotianxt/bypass-cloudflare-for-github-action@a87c9ac0348806058904e62e5c8e70d8e37b4a65 # v1.1.1
+              with:
+                  cf_zone_id: ${{ secrets.CF_ZONE_ID }}
+                  cf_api_token: ${{ secrets.CF_API_TOKEN }}
 
-      # 2️⃣ Trigger Deployment
-      # Key is sent as a header, not a query param, so it doesn't end up in
-      # access/proxy logs. Requires the webhook server config to check the
-      # same header (e.g. adnanh/webhook `header` trigger rule) instead of
-      # the `key` query param.
-      - name: Trigger deployment
-        run: |
-          DEPLOY_RESPONSE=$(curl -s -X POST -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/deploy-project?repo=temmi.land")
-          echo "Deploy response: $DEPLOY_RESPONSE"
+            # 2️⃣ Trigger Deployment
+            # Key is sent as a header, not a query param, so it doesn't end up in
+            # access/proxy logs. Requires the webhook server config to check the
+            # same header (e.g. adnanh/webhook `header` trigger rule) instead of
+            # the `key` query param.
+            - name: Trigger deployment
+              run: |
+                  DEPLOY_RESPONSE=$(curl -s -X POST -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/deploy-project?repo=temmi.land")
+                  echo "Deploy response: $DEPLOY_RESPONSE"
 
-      # 3️⃣ Wait for Deployment Status
-      - name: Wait for deployment status
-        run: |
-          MAX_RETRIES=60
-          SLEEP=5
-          COUNT=0
+            # 3️⃣ Wait for Deployment Status
+            - name: Wait for deployment status
+              run: |
+                  MAX_RETRIES=60
+                  SLEEP=5
+                  COUNT=0
 
-          while true; do
-            STATUS_RESPONSE=$(curl -s -X POST -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/status-project?repo=temmi.land")
+                  while true; do
+                    STATUS_RESPONSE=$(curl -s -X POST -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/status-project?repo=temmi.land")
 
-            if echo "$STATUS_RESPONSE" | jq empty >/dev/null 2>&1; then
-              STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
-              echo "Status: $STATUS_RESPONSE"
-            else
-              echo "⚠️ $STATUS_RESPONSE"
-              STATUS="unknown"
-            fi
+                    if echo "$STATUS_RESPONSE" | jq empty >/dev/null 2>&1; then
+                      STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
+                      echo "Status: $STATUS_RESPONSE"
+                    else
+                      echo "⚠️ $STATUS_RESPONSE"
+                      STATUS="unknown"
+                    fi
 
-            if [[ "$STATUS" == "success" ]]; then
-              echo "✅ Deployment successful!"
-              exit 0
-            elif [[ "$STATUS" == "error" || "$STATUS" == "failed" ]]; then
-              echo "❌ Deployment failed!"
-              exit 1
-            fi
+                    if [[ "$STATUS" == "success" ]]; then
+                      echo "✅ Deployment successful!"
+                      exit 0
+                    elif [[ "$STATUS" == "error" || "$STATUS" == "failed" ]]; then
+                      echo "❌ Deployment failed!"
+                      exit 1
+                    fi
 
-            COUNT=$((COUNT+1))
-            if [[ $COUNT -ge $MAX_RETRIES ]]; then
-              echo "⏱ Timeout: Deployment took too long."
-              exit 1
-            fi
+                    COUNT=$((COUNT+1))
+                    if [[ $COUNT -ge $MAX_RETRIES ]]; then
+                      echo "⏱ Timeout: Deployment took too long."
+                      exit 1
+                    fi
 
-            sleep $SLEEP
-          done
+                    sleep $SLEEP
+                  done

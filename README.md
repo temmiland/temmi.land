@@ -5,8 +5,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Status](https://img.shields.io/badge/status-growing-6BAA75.svg)](#)
 
-> **temmi.land** — a personal website, digital garden, and playground for experiments. A home for
-> ideas, side projects, and everything that refuses to fit neatly anywhere else. 🪴
+> **temmi.land** — a personal website, digital garden, and playground for experiments. A home for ideas, side
+> projects, and everything that refuses to fit neatly anywhere else. 🪴
 
 ## 🚀 Getting Started
 
@@ -37,13 +37,13 @@ Visit [`http://localhost:5173`](http://localhost:5173) to see it in action.
 
 ## 🪴 Philosophy
 
-This website grows in public. Content changes, ideas morph, and half-baked thoughts occasionally
-mature. It’s not a portfolio — it’s an ongoing experiment in digital expression.
+This website grows in public. Content changes, ideas morph, and half-baked thoughts occasionally mature. It’s
+not a portfolio — it’s an ongoing experiment in digital expression.
 
 ## ⚠️ License
 
-No license granted. Use, reproduction, or distribution of this code **without explicit written
-permission** is not allowed.
+No license granted. Use, reproduction, or distribution of this code **without explicit written permission** is
+not allowed.
 
 ## 💚 Support
 
