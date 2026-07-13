@@ -5,7 +5,8 @@
  * permission of the author.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import Typography from '@/ui/Typography';
 import { Skill } from '@/models/skill';
 import SkillCard from '@/features/skills/SkillCard';
@@ -86,7 +87,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-const Chip = styled.a<{ $linked: boolean }>`
+const chipStyles = css<{ $linked: boolean }>`
 	position: relative;
 	isolation: isolate;
 	min-height: 2.4vw;
@@ -191,6 +192,9 @@ const Chip = styled.a<{ $linked: boolean }>`
 	}
 `;
 
+const ChipAnchor = styled.a<{ $linked: boolean }>`${chipStyles}`;
+const ChipRouterLink = styled(Link)<{ $linked: boolean }>`${chipStyles}`;
+
 /**
  * Props for a skill chip.
  */
@@ -211,14 +215,22 @@ export const SkillChip = ({ tech }: SkillChipProps): JSX.Element => {
 
 	return (
 		<Wrapper>
-			<Chip
-				$linked={ Boolean(skill) }
-				href={ skill ? `/skills?search=${encodeURIComponent(skill.name)}` : undefined }
-			>
-				<Typography variant={ 'project_desc' }>
-					{ tech }
-				</Typography>
-			</Chip>
+			{ skill ? (
+				<ChipRouterLink
+					$linked
+					to={ `/skills?search=${encodeURIComponent(skill.name)}` }
+				>
+					<Typography variant={ 'project_desc' }>
+						{ tech }
+					</Typography>
+				</ChipRouterLink>
+			) : (
+				<ChipAnchor $linked={ false }>
+					<Typography variant={ 'project_desc' }>
+						{ tech }
+					</Typography>
+				</ChipAnchor>
+			) }
 			{ skill ? (
 				<div className={ 'skill-card-tooltip' }>
 					<SkillCard skill={ skill } />

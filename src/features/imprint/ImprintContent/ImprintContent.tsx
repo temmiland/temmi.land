@@ -37,7 +37,7 @@ export const ImprintContent = () => (
 		<Typography variant={ 'p' }>
 			{ 'Wir wissen, dass Dir Datenschutz wichtig ist. Daher legen wir großen Wert auf' +
 				' den Schutz Deiner persönlichen Daten. Weitere Informationen findest Du in unserer ' }
-			<Link href={ './privacy' }>{ 'Datenschutzerklärung' }</Link>
+			<Link href={ '/privacy' }>{ 'Datenschutzerklärung' }</Link>
 			{ '.' }
 		</Typography>
 

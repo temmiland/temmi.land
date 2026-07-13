@@ -5,7 +5,8 @@
  * permission of the author.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface LinkProps {
 	/**
@@ -22,13 +23,29 @@ interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 }
 
-const A = styled.a`
+const linkStyles = css`
 	transition: color 0.5s;
 
 	&:hover {
 		color: #8B8B8B;
 	}
 `;
+
+const A = styled.a`
+	${linkStyles}
+`;
+
+const RouterA = styled(RouterLink)`
+	${linkStyles}
+`;
+
+/**
+ * Hrefs that point within this app (start with `/`) are navigated
+ * client-side via react-router, unless they target an in-page anchor
+ * (`/#section`) — those still need a real page load so the browser's native
+ * hash-scroll runs when arriving from a different route.
+ */
+const isInternalRoute = (href: string) => href.startsWith('/') && !href.includes('#');
 
 export const Link = ({
 	children = 'This is a link.',
@@ -38,6 +55,20 @@ export const Link = ({
 	className,
 	onClick
 }: LinkProps) => {
+	if (isInternalRoute(href)) {
+		return (
+			<RouterA
+				to={ href }
+				target={ target }
+				rel={ rel }
+				className={ className }
+				onClick={ onClick }
+			>
+				{ children }
+			</RouterA>
+		);
+	}
+
 	return (
 		<A
 			href={ href }

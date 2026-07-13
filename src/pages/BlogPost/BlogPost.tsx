@@ -7,6 +7,7 @@
 
 import { BlogBlock } from '@/models/blogpost';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
@@ -56,7 +57,7 @@ const BlogSection = styled.section`
 	}
 `;
 
-const BackLink = styled.a`
+const BackLink = styled(Link)`
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5vw;
@@ -513,7 +514,7 @@ const StoreBadgeLink = styled.a`
 	}
 `;
 
-const RelatedProject = styled.a`
+const RelatedProject = styled(Link)`
 	display: inline-flex;
 	align-items: center;
 	gap: 0.6vw;
@@ -582,7 +583,7 @@ const renderBlock = (block: BlogBlock, index: number): JSX.Element => {
 	case 'image':
 		return (
 			<ArticleImage key={ index }>
-				<img src={ block.src } alt={ block.alt } />
+				<img src={ block.src } alt={ block.alt } loading={ 'lazy' } />
 				{ block.caption ? <figcaption>{ block.caption }</figcaption> : null }
 			</ArticleImage>
 		);
@@ -591,7 +592,7 @@ const renderBlock = (block: BlogBlock, index: number): JSX.Element => {
 			<ImageGallery key={ index }>
 				{ block.images.map((image) => (
 					<figure key={ image.src }>
-						<img src={ image.src } alt={ image.alt } />
+						<img src={ image.src } alt={ image.alt } loading={ 'lazy' } />
 						{ image.caption ? <figcaption>{ image.caption }</figcaption> : null }
 					</figure>
 				)) }
@@ -672,7 +673,7 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 						animationDirection={ 'left' }
 						animationSpeed={ 50 }
 					>
-						<BackLink href={ '/blog' }>
+						<BackLink to={ '/blog' }>
 							<FontAwesomeIcon icon={ ['fas', 'arrow-left'] } />
 							{ 'Back to blog' }
 						</BackLink>
@@ -711,7 +712,7 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 							{ post.content.map((block, i) => renderBlock(block, i)) }
 						</ArticleBody>
 						{ relatedProject ? (
-							<RelatedProject href={ relatedProject.href }>
+							<RelatedProject to={ relatedProject.href }>
 								<FontAwesomeIcon icon={ ['fas', 'diagram-project'] } />
 								{ `See the ${relatedProject.name} project` }
 							</RelatedProject>

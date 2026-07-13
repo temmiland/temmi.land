@@ -7,6 +7,7 @@
 
 import { BlogPost } from '@/models/blogpost';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
@@ -17,10 +18,10 @@ import { colors, fonts, media, whiteAlpha } from '@/styles';
  */
 type BlogCardContainerProps = {
 	/** The background gradient of the card header strip. */
-	gradient: string;
+	$gradient: string;
 };
 
-const BlogCardContainer = styled.a<BlogCardContainerProps>`
+const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 	display: block;
 	text-decoration: none;
 	color: inherit;
@@ -62,7 +63,7 @@ const BlogCardContainer = styled.a<BlogCardContainerProps>`
 	}
 
 	.blog-card-banner {
-		background: ${(props: BlogCardContainerProps) => props.gradient};
+		background: ${(props: BlogCardContainerProps) => props.$gradient};
 		display: flex;
 		align-items: center;
 		gap: 1vw;
@@ -295,7 +296,7 @@ type BlogCardProps = {
  * @returns {JSX.Element} BlogCard JSX element.
  */
 export const BlogCard = ({ post }: BlogCardProps): JSX.Element => (
-	<BlogCardContainer href={ `/blog/${post.id}` } gradient={ post.tileGradient }>
+	<BlogCardContainer to={ `/blog/${post.id}` } $gradient={ post.tileGradient }>
 		<div className={ 'blog-card-banner' }>
 			<FontAwesomeIcon
 				icon={ [(post.iconPrefix ?? 'fas') as IconPrefix, post.icon as IconName] }

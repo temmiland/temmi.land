@@ -7,6 +7,7 @@
 
 import { Project } from '@/models/project';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '@/ui/Typography/Typography';
@@ -287,9 +288,9 @@ export const ProjectTile = ({
 			</Typography>
 			{
 				!gridMode ? (
-					<a href={ project.href }>
+					<Link to={ project.href }>
 						{ 'See more' }
-					</a>
+					</Link>
 				) : ''
 			}
 		</ProjectDescriptionContainer>
