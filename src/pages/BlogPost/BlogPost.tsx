@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -7,7 +7,7 @@
 
 import { BlogBlock } from '@/models/blogpost';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from '@/ui/Link/Link';
 import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
@@ -673,7 +673,7 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 						animationDirection={ 'left' }
 						animationSpeed={ 50 }
 					>
-						<BackLink to={ '/blog' }>
+						<BackLink href={ '/blog' }>
 							<FontAwesomeIcon icon={ ['fas', 'arrow-left'] } />
 							{ 'Back to blog' }
 						</BackLink>
@@ -712,7 +712,7 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 							{ post.content.map((block, i) => renderBlock(block, i)) }
 						</ArticleBody>
 						{ relatedProject ? (
-							<RelatedProject to={ relatedProject.href }>
+							<RelatedProject href={ relatedProject.href }>
 								<FontAwesomeIcon icon={ ['fas', 'diagram-project'] } />
 								{ `See the ${relatedProject.name} project` }
 							</RelatedProject>

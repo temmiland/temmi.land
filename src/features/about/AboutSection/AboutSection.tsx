@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import Trail from '@/ui/Trail';
 import Typography from '@/ui/Typography';
+import Link from '@/ui/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
 import { colors, fonts, media, whiteAlpha } from '@/styles';
@@ -468,7 +469,7 @@ export const AboutSection = () => {
 							}
 						</Typography>
 						<Typography variant={ 'p' }>
-							{ '🌸 Open for new projects!' }
+							<strong>{ '🌸 Open for new projects!' }</strong>
 							<br />
 							{ ' Got something interesting? Let\'s talk!' }
 						</Typography>
@@ -496,27 +497,27 @@ export const AboutSection = () => {
 							</li>
 							<li>
 								<FontAwesomeIcon icon={ ['fas', 'envelope'] } />
-								<a href={ 'mailto:welcome@temmi.land' }>{ 'welcome@temmi.land' }</a>
+								<Link href={ 'mailto:welcome@temmi.land' }>{ 'welcome@temmi.land' }</Link>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={ ['fab', 'linkedin'] } />
-								<a
+								<Link
 									href={ 'https://www.linkedin.com/in/temmi-pietsch/' }
 									target={ '_blank' }
 									rel={ 'noreferrer' }
 								>
 									{ 'in/temmi-pietsch' }
-								</a>
+								</Link>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={ ['fab', 'github'] } />
-								<a
+								<Link
 									href={ 'https://github.com/temmiland' }
 									target={ '_blank' }
 									rel={ 'noreferrer' }
 								>
 									{ 'temmiland' }
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</div>

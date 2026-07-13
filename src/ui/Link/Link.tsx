@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -7,6 +7,7 @@
 
 import styled, { css } from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
+import { colors } from '@/styles';
 
 interface LinkProps {
 	/**
@@ -23,11 +24,21 @@ interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 }
 
+/**
+ * Resets the browser's default link appearance (blue, underlined) so every
+ * consumer starts from a neutral state and decides its own look for the
+ * context it's used in (nav, footer, body text, ...) instead of the
+ * component forcing one. The hover snaps to gray on a short transition,
+ * matching the body-text link hover in Typography's `P` variant, rather
+ * than the previous 0.5s fade that read as barely-there.
+ */
 const linkStyles = css`
-	transition: color 0.5s;
+	color: inherit;
+	text-decoration: none;
+	transition: color 150ms ease;
 
 	&:hover {
-		color: #8B8B8B;
+		color: ${colors.gray};
 	}
 `;
 
@@ -48,8 +59,8 @@ const RouterA = styled(RouterLink)`
 const isInternalRoute = (href: string) => href.startsWith('/') && !href.includes('#');
 
 export const Link = ({
-	children = 'This is a link.',
-	href = '#',
+	children,
+	href,
 	target,
 	rel,
 	className,

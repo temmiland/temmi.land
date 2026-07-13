@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -7,7 +7,7 @@
 
 import { Project } from '@/models/project';
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from '@/ui/Link/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '@/ui/Typography/Typography';
@@ -288,7 +288,7 @@ export const ProjectTile = ({
 			</Typography>
 			{
 				!gridMode ? (
-					<Link to={ project.href }>
+					<Link href={ project.href }>
 						{ 'See more' }
 					</Link>
 				) : ''

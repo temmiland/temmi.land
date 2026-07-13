@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
@@ -225,6 +225,10 @@ const P = styled.p`
 			color: ${colors.gray};
 		}
 	}
+
+	strong {
+		font-family: ${fonts.medium};
+	}
 `;
 
 const P_Footer = styled.p`
@@ -253,7 +257,7 @@ const P_Header = styled.p`
 	font-family: ${fonts.bold};
 	text-align: center;
 	font-size: ${fluid(1)};
-	color: ${colors.white};
+	color: inherit;
 	z-index: 3;
 
 	${media.mobile} {
@@ -299,7 +303,7 @@ const P_Navigation = styled.p`
 	font-family: ${fonts.medium};
 	text-align: center;
 	font-size: ${fluid(0.9)};
-	color: ${colors.white};
+	color: inherit;
 	z-index: 3;
 
 	${media.mobile} {
