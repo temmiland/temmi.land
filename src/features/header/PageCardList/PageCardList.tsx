@@ -60,7 +60,7 @@ const Ul = styled.ul`
 	place-items: center;
 	white-space: nowrap;
 
-	> a {
+	> li {
 		flex-shrink: 0;
 	}
 
@@ -92,8 +92,12 @@ const Ul = styled.ul`
 		li {
 			width: 100%;
 			box-sizing: border-box;
-			padding: 3vw 2.5vw;
 			text-align: left;
+		}
+
+		a {
+			display: block;
+			padding: 3vw 2.5vw;
 		}
 	}
 
@@ -186,20 +190,22 @@ export const PageCardList = ({ pages }: PageCardListProps): JSX.Element => {
 			<Ul className={ isOpen ? 'open' : '' }>
 				{
 					pages.map((page) => (
-						<Link
+						<li
 							key={ page.name }
-							href={ page.href }
-							onClick={ (event) => handleNavClick(event, page) }
+							style={ {
+								position: 'relative',
+								cursor: 'pointer'
+							} }
 						>
-							<Typography variant={ 'header' } >
-								<li style={ {
-									position: 'relative',
-									cursor: 'pointer'
-								} }>
+							<Link
+								href={ page.href }
+								onClick={ (event) => handleNavClick(event, page) }
+							>
+								<Typography variant={ 'header' }>
 									{ page.name }
-								</li>
-							</Typography>
-						</Link>
+								</Typography>
+							</Link>
+						</li>
 					))
 				}
 			</Ul>

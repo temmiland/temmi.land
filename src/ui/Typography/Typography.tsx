@@ -127,7 +127,7 @@ const H4 = styled.h4`
 	}
 `;
 
-const H1_ProjectHeader = styled.h1`
+const H2_ProjectHeader = styled.h2`
 	font-family: ${fonts.medium};
 	color: ${colors.white};
 	margin: 1.47vw;
@@ -364,7 +364,7 @@ const variantComponents: Record<
 	h3: H3,
 	h4: H4,
 	p: P,
-	project_header: H1_ProjectHeader,
+	project_header: H2_ProjectHeader,
 	project_desc: P_Project,
 	project_desc_bold: P_Project_Bold,
 	header: P_Header,
@@ -382,10 +382,10 @@ interface TypographyProps {
 	/**
 	 * What variant to use
 	 */
-	variant?: TypographyVariant;
+	variant: TypographyVariant;
 }
 
-export const Typography = ({ variant = 'footer', children = '' }: TypographyProps) => {
+export const Typography = ({ variant, children = '' }: TypographyProps) => {
 	const Component = variantComponents[variant];
 	return <Component>{ children }</Component>;
 };
