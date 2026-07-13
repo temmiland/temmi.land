@@ -40,7 +40,6 @@ const AboutArea = styled.section`
 	${media.wide} {
 		padding: 72px 0;
 	}
-
 `;
 
 const ProjectSection = styled.section`
@@ -54,7 +53,6 @@ const ProjectSection = styled.section`
 	${media.wide} {
 		padding: 72px 0;
 	}
-
 `;
 
 const SkillSection = styled.section`
@@ -68,7 +66,6 @@ const SkillSection = styled.section`
 	${media.wide} {
 		padding: 40px 0;
 	}
-
 `;
 
 const BlogArea = styled.section`
@@ -82,7 +79,6 @@ const BlogArea = styled.section`
 	${media.wide} {
 		padding: 72px 0;
 	}
-
 `;
 
 const Section = styled.div<SectionProps>`
@@ -90,7 +86,7 @@ const Section = styled.div<SectionProps>`
 	max-width: 3000px;
 	margin: 0 auto;
 	position: relative;
-	background: ${props => props.background};
+	background: ${(props) => props.background};
 
 	&:before {
 		--pattern-size: 35px;
@@ -103,7 +99,8 @@ const Section = styled.div<SectionProps>`
 		display: block;
 		height: var(--pattern-size);
 		background-size: var(--pattern-size) 100%;
-		background-image: linear-gradient(135deg, ${colors.surface} 25%, transparent 25%),
+		background-image:
+			linear-gradient(135deg, ${colors.surface} 25%, transparent 25%),
 			linear-gradient(225deg, ${colors.surface} 25%, transparent 25%);
 		background-position: 0 0;
 		rotate: 180deg;
@@ -125,41 +122,40 @@ const Section = styled.div<SectionProps>`
 type SectionProps = {
 	background?: string;
 	children?: JSX.Element;
-}
-
+};
 
 export default function Home() {
 	return (
 		<PageLayout
 			header={
-				<Section background={ 'transparent' }>
-					<Header revealAfterId={ 'hero-heading' } />
+				<Section background={'transparent'}>
+					<Header revealAfterId={'hero-heading'} />
 				</Section>
 			}
 		>
-			<Section background={ colors.surfaceDark }>
+			<Section background={colors.surfaceDark}>
 				<MeArea>
 					<MeSection />
 				</MeArea>
 			</Section>
-			<Section background={ colors.surface }>
+			<Section background={colors.surface}>
 				<AboutArea>
 					<AboutSection />
 				</AboutArea>
 			</Section>
-			<Section background={ colors.surface }>
+			<Section background={colors.surface}>
 				<BlogArea>
-					<BlogSection posts={ blogPosts } />
+					<BlogSection posts={blogPosts} />
 				</BlogArea>
 			</Section>
-			<Section background={ colors.surface }>
+			<Section background={colors.surface}>
 				<SkillSection>
-					<SkillsSection skills={ skills } />
+					<SkillsSection skills={skills} />
 				</SkillSection>
 			</Section>
-			<Section background={ colors.surface }>
+			<Section background={colors.surface}>
 				<ProjectSection>
-					<ProjectsSection projects={ projects } />
+					<ProjectsSection projects={projects} />
 				</ProjectSection>
 			</Section>
 		</PageLayout>

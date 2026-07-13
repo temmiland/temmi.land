@@ -7,7 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
-import HeaderContent from '@/features/header/HeaderContent'
+import HeaderContent from '@/features/header/HeaderContent';
 import { styled } from 'styled-components';
 
 const HeaderContainer = styled.div`
@@ -24,9 +24,9 @@ type HeaderProps = {
 	 * scrolled above the viewport, the header reveals itself. Omit to show
 	 * the header immediately (used on pages without a hero section).
 	 */
-	revealAfterId?: string,
-	animationDirection?: 'top' | 'right' | 'bottom' | 'left'
-}
+	revealAfterId?: string;
+	animationDirection?: 'top' | 'right' | 'bottom' | 'left';
+};
 
 /**
  * Header layout component. Fixed to the top of the page, it either shows
@@ -37,7 +37,6 @@ type HeaderProps = {
  * @returns {JSX.Element} Header JSX element.
  */
 export const Header = ({ revealAfterId, animationDirection = 'right' }: HeaderProps) => {
-
 	const [isVisible, setIsVisible] = useState(!revealAfterId);
 
 	useEffect(() => {
@@ -69,19 +68,20 @@ export const Header = ({ revealAfterId, animationDirection = 'right' }: HeaderPr
 			friction: 800
 		},
 		opacity: isVisible ? 1 : 0,
-		x: animationDirection !== 'top' && animationDirection !== 'bottom'
-			? isVisible
-				? 0
-				: animationDirection === 'right'
-					? 55
-					: -55
-			: 0
+		x:
+			animationDirection !== 'top' && animationDirection !== 'bottom'
+				? isVisible
+					? 0
+					: animationDirection === 'right'
+						? 55
+						: -55
+				: 0
 	});
 
 	return (
 		<HeaderContainer>
-			<animated.div style={ style }>
-				<HeaderContent/>
+			<animated.div style={style}>
+				<HeaderContent />
 			</animated.div>
 		</HeaderContainer>
 	);

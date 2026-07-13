@@ -10,40 +10,39 @@ import Typography from '@/ui/Typography';
 
 export const ImprintContent = () => (
 	<>
-		<Typography variant={ 'p' }>
-			{ 'The legal information on my website is available only in German. ' }
-			{ 'Please feel free to contact me with any inquiries.' }
+		<Typography variant={'p'}>
+			{'The legal information on my website is available only in German. '}
+			{'Please feel free to contact me with any inquiries.'}
 		</Typography>
-		<Typography variant={ 'h2' }>{ 'Anbieter' }</Typography>
-		<Typography variant={ 'p' }>
-			{ 'Temmi Pietsch' }
+		<Typography variant={'h2'}>{'Anbieter'}</Typography>
+		<Typography variant={'p'}>
+			{'Temmi Pietsch'}
 			<br />
-			{ 'c/o Autorenglück #23155' }
+			{'c/o Autorenglück #23155'}
 			<br />
-			{ 'Albert-Einstein-Straße 47' }
+			{'Albert-Einstein-Straße 47'}
 			<br />
-			{ 'D-02977 Hoyerswerda' }
+			{'D-02977 Hoyerswerda'}
 		</Typography>
 
-		<Typography variant={ 'h2' }>{ 'Kontakt' }</Typography>
-		<Typography variant={ 'p' }>{ 'E-Mail: welcome@temmi.land' }</Typography>
+		<Typography variant={'h2'}>{'Kontakt'}</Typography>
+		<Typography variant={'p'}>{'E-Mail: welcome@temmi.land'}</Typography>
 		<br />
-		<Typography variant={ 'p' }>
-			{ 'Wir sind weder verpflichtet noch bereit, an einem' +
-				' Streitbeilegungsverfahren teilzunehmen.' }
+		<Typography variant={'p'}>
+			{'Wir sind weder verpflichtet noch bereit, an einem' + ' Streitbeilegungsverfahren teilzunehmen.'}
 		</Typography>
 		<br />
-		<Typography variant={ 'h2' }>{ 'Datenschutz' }</Typography>
-		<Typography variant={ 'p' }>
-			{ 'Wir wissen, dass Dir Datenschutz wichtig ist. Daher legen wir großen Wert auf' +
-				' den Schutz Deiner persönlichen Daten. Weitere Informationen findest Du in unserer ' }
-			<Link href={ '/privacy' }>{ 'Datenschutzerklärung' }</Link>
-			{ '.' }
+		<Typography variant={'h2'}>{'Datenschutz'}</Typography>
+		<Typography variant={'p'}>
+			{'Wir wissen, dass Dir Datenschutz wichtig ist. Daher legen wir großen Wert auf' +
+				' den Schutz Deiner persönlichen Daten. Weitere Informationen findest Du in unserer '}
+			<Link href={'/privacy'}>{'Datenschutzerklärung'}</Link>
+			{'.'}
 		</Typography>
 
-		<Typography variant={ 'h2' }>{ 'Haftung für Links' }</Typography>
-		<Typography variant={ 'p' }>
-			{ 'Unser Angebot enthält Links zu externen Webseiten Dritter, deren Inhalte wir' +
+		<Typography variant={'h2'}>{'Haftung für Links'}</Typography>
+		<Typography variant={'p'}>
+			{'Unser Angebot enthält Links zu externen Webseiten Dritter, deren Inhalte wir' +
 				' nicht beeinflussen können. Aus diesem Grund übernehmen wir keine Haftung für diese' +
 				' fremden Inhalte. Verantwortlich für die Inhalte der verlinkten Seiten sind' +
 				' ausschließlich deren jeweilige Anbieter oder Betreiber. Zum Zeitpunkt der' +
@@ -51,7 +50,7 @@ export const ImprintContent = () => (
 				' und konnten keine rechtswidrigen Inhalte feststellen. Eine ständige inhaltliche' +
 				' Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Hinweise auf' +
 				' Rechtsverletzungen nicht zumutbar. Sollten uns Rechtsverletzungen bekannt werden,' +
-				' werden wir derartige Links umgehend entfernen.' }
+				' werden wir derartige Links umgehend entfernen.'}
 		</Typography>
 	</>
 );

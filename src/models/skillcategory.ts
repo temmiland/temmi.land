@@ -24,5 +24,5 @@ export enum SkillCategory {
 	CICD = 'CI/CD',
 	GIS_GEODATA = 'GIS / Geodata',
 	OS = 'Operating Systems',
-	OTHER = 'Other',
+	OTHER = 'Other'
 }

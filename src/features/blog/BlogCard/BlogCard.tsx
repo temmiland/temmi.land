@@ -26,11 +26,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 	text-decoration: none;
 	color: inherit;
 	overflow: hidden;
-	background: linear-gradient(
-		135deg,
-		${whiteAlpha(0.08)} 0%,
-		${whiteAlpha(0.03)} 100%
-	);
+	background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.1)};
 	border-radius: 1.1vw;
 	backdrop-filter: blur(0.7vw);
@@ -54,11 +50,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 	&:hover {
 		border-color: ${whiteAlpha(0.28)};
-		background: linear-gradient(
-			135deg,
-			${whiteAlpha(0.13)} 0%,
-			${whiteAlpha(0.05)} 100%
-		);
+		background: linear-gradient(135deg, ${whiteAlpha(0.13)} 0%, ${whiteAlpha(0.05)} 100%);
 		transform: translateY(-0.2vw);
 	}
 
@@ -296,33 +288,33 @@ type BlogCardProps = {
  * @returns {JSX.Element} BlogCard JSX element.
  */
 export const BlogCard = ({ post }: BlogCardProps): JSX.Element => (
-	<BlogCardContainer to={ `/blog/${post.id}` } $gradient={ post.tileGradient }>
-		<div className={ 'blog-card-banner' }>
-			<FontAwesomeIcon
-				icon={ [(post.iconPrefix ?? 'fas') as IconPrefix, post.icon as IconName] }
-			/>
+	<BlogCardContainer to={`/blog/${post.id}`} $gradient={post.tileGradient}>
+		<div className={'blog-card-banner'}>
+			<FontAwesomeIcon icon={[(post.iconPrefix ?? 'fas') as IconPrefix, post.icon as IconName]} />
 		</div>
-		<div className={ 'blog-card-body' }>
-			<div className={ 'blog-card-meta' }>
+		<div className={'blog-card-body'}>
+			<div className={'blog-card-meta'}>
 				<span>
-					<FontAwesomeIcon icon={ ['fas', 'calendar'] } />
-					{ formatBlogDate(post.date) }
+					<FontAwesomeIcon icon={['fas', 'calendar']} />
+					{formatBlogDate(post.date)}
 				</span>
 				<span>
-					<FontAwesomeIcon icon={ ['fas', 'clock'] } />
-					{ formatReadingTime(post.readingMinutes) }
+					<FontAwesomeIcon icon={['fas', 'clock']} />
+					{formatReadingTime(post.readingMinutes)}
 				</span>
 			</div>
-			<h2 className={ 'blog-card-title' }>{ post.title }</h2>
-			<p className={ 'blog-card-excerpt' }>{ post.excerpt }</p>
-			<div className={ 'blog-card-tags' }>
-				{ post.tags.map((tag) => (
-					<span key={ tag } className={ 'blog-card-tag' }>{ tag }</span>
-				)) }
+			<h2 className={'blog-card-title'}>{post.title}</h2>
+			<p className={'blog-card-excerpt'}>{post.excerpt}</p>
+			<div className={'blog-card-tags'}>
+				{post.tags.map((tag) => (
+					<span key={tag} className={'blog-card-tag'}>
+						{tag}
+					</span>
+				))}
 			</div>
-			<span className={ 'blog-card-more' }>
-				{ 'Read article' }
-				<FontAwesomeIcon icon={ ['fas', 'arrow-right'] } />
+			<span className={'blog-card-more'}>
+				{'Read article'}
+				<FontAwesomeIcon icon={['fas', 'arrow-right']} />
 			</span>
 		</div>
 	</BlogCardContainer>

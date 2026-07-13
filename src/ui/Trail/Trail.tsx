@@ -9,15 +9,15 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { animated, useTrail } from 'react-spring';
 
 const Trail: React.FC<{
-	animationDirection?: 'top' | 'right' | 'bottom' | 'left',
-	animationSpeed?: number,
-	animationDelay?: number,
+	animationDirection?: 'top' | 'right' | 'bottom' | 'left';
+	animationSpeed?: number;
+	animationDelay?: number;
 	animationConfig?: {
-		mass: number,
-		tension: number,
-		friction: number
-	},
-	children: ReactNode | ReactNode[]
+		mass: number;
+		tension: number;
+		friction: number;
+	};
+	children: ReactNode | ReactNode[];
 }> = ({
 	animationDirection = 'right',
 	animationSpeed = 200,
@@ -29,7 +29,6 @@ const Trail: React.FC<{
 	},
 	children
 }) => {
-
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -63,43 +62,50 @@ const Trail: React.FC<{
 	const trail = useTrail(items.length, {
 		config: animationConfig,
 		opacity: isVisible ? 1 : 0,
-		x: animationDirection !== 'top' && animationDirection !== 'bottom'
-			? isVisible
-				? 0
-				: animationDirection === 'right'
-					? animationSpeed
-					: -animationSpeed
-			: 0,
-		y: animationDirection !== 'right' && animationDirection !== 'left'
-			? isVisible
-				? 0
-				: animationDirection === 'top'
-					? -animationSpeed
-					: animationSpeed
-			: 0,
+		x:
+			animationDirection !== 'top' && animationDirection !== 'bottom'
+				? isVisible
+					? 0
+					: animationDirection === 'right'
+						? animationSpeed
+						: -animationSpeed
+				: 0,
+		y:
+			animationDirection !== 'right' && animationDirection !== 'left'
+				? isVisible
+					? 0
+					: animationDirection === 'top'
+						? -animationSpeed
+						: animationSpeed
+				: 0,
 		delay: animationDelay,
 		from: {
 			opacity: 0,
-			x: animationDirection !== 'top' && animationDirection !== 'bottom'
-				? animationDirection === 'right'
-					? animationSpeed
-					: -animationSpeed
-				: 0,
+			x:
+				animationDirection !== 'top' && animationDirection !== 'bottom'
+					? animationDirection === 'right'
+						? animationSpeed
+						: -animationSpeed
+					: 0,
 			height: 0
 		}
 	});
 
 	return (
-		<div ref={ containerRef }>
-			{ trail.map(({ ...style }, index) => (
-				<animated.div key={ index } style={ {
-					...style, height: 'auto'
-				} }>
-					{ items[index] }
+		<div ref={containerRef}>
+			{trail.map(({ ...style }, index) => (
+				<animated.div
+					key={index}
+					style={{
+						...style,
+						height: 'auto'
+					}}
+				>
+					{items[index]}
 				</animated.div>
-			)) }
+			))}
 		</div>
 	);
-}
+};
 
 export default Trail;

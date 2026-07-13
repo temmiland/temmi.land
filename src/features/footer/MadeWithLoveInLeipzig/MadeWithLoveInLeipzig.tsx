@@ -18,10 +18,7 @@ export const MadeWithLoveInLeipzig = () => {
 		const svg = iconRef.current!.querySelector('svg');
 		if (svg) {
 			const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-			const linearGradient = document.createElementNS(
-				'http://www.w3.org/2000/svg',
-				'linearGradient'
-			);
+			const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
 			linearGradient.setAttribute('id', 'trans');
 			linearGradient.setAttribute('x1', '0%');
 			linearGradient.setAttribute('y1', '0%');
@@ -89,12 +86,12 @@ export const MadeWithLoveInLeipzig = () => {
 	}, []);
 
 	return (
-		<Typography variant={ 'footer' }>
-			{ 'Made with ' }
-			<span ref={ iconRef }>
-				<FontAwesomeIcon className={ 'heart-icon' } icon={ faHeart } />
+		<Typography variant={'footer'}>
+			{'Made with '}
+			<span ref={iconRef}>
+				<FontAwesomeIcon className={'heart-icon'} icon={faHeart} />
 			</span>
-			{ ' in Leipzig ' }
+			{' in Leipzig '}
 			<BattleOfNationsMonument />
 		</Typography>
 	);

@@ -28,7 +28,7 @@ const ImprintArea = styled.section`
 
 export default function Imprint() {
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+		<PageLayout header={<Header animationDirection={'left'} />}>
 			<ImprintArea>
 				<ImprintSection />
 			</ImprintArea>

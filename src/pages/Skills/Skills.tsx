@@ -299,37 +299,40 @@ export default function Skills() {
 	// input so the URL stays shareable and survives a reload. Replace (not push)
 	// so we don't add a history entry per keystroke.
 	useEffect(() => {
-		setSearchParams((prev) => {
-			const next = new URLSearchParams(prev);
-			if (categoryToMatch) {
-				next.set('category', categoryToMatch);
-			} else {
-				next.delete('category');
+		setSearchParams(
+			(prev) => {
+				const next = new URLSearchParams(prev);
+				if (categoryToMatch) {
+					next.set('category', categoryToMatch);
+				} else {
+					next.delete('category');
+				}
+				if (searchQuery) {
+					next.set('search', searchQuery);
+				} else {
+					next.delete('search');
+				}
+				return next.toString() === prev.toString() ? prev : next;
+			},
+			{
+				replace: true
 			}
-			if (searchQuery) {
-				next.set('search', searchQuery);
-			} else {
-				next.delete('search');
-			}
-			return next.toString() === prev.toString() ? prev : next;
-		}, {
-			replace: true
-		});
+		);
 	}, [categoryToMatch, searchQuery, setSearchParams]);
 
 	const normalizedSearchQuery = searchQuery.trim().toLowerCase();
 
 	const exportData = skills
 		.filter((skill) => !categoryToMatch || skill.category === categoryToMatch)
-		.filter((skill) => (
-			!normalizedSearchQuery || skill.name.toLowerCase().includes(normalizedSearchQuery)
-		));
+		.filter(
+			(skill) => !normalizedSearchQuery || skill.name.toLowerCase().includes(normalizedSearchQuery)
+		);
 
 	const fileSuffix = categoryToMatch
 		? `-${categoryToMatch
-			.toLowerCase()
-			.replace(/[^a-z0-9]+/g, '-')
-			.replace(/^-|-$/g, '')}`
+				.toLowerCase()
+				.replace(/[^a-z0-9]+/g, '-')
+				.replace(/^-|-$/g, '')}`
 		: '';
 
 	const handleExportJson = () => {
@@ -343,107 +346,91 @@ export default function Skills() {
 	};
 
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+		<PageLayout header={<Header animationDirection={'left'} />}>
 			<SkillSection>
-				<div className={ 'skill-content' }>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-					>
-						<div className={ 'skill-header' }>
-							<Typography variant={ 'h1' }>
-								{ 'Skills' }
-								<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'star'] } />
-								<FontAwesomeIcon
-									className={ 'h-icon' }
-									icon={ ['fas', 'wand-magic-sparkles'] }
-								/>
-								<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'code'] } />
+				<div className={'skill-content'}>
+					<Trail animationDirection={'left'} animationSpeed={50}>
+						<div className={'skill-header'}>
+							<Typography variant={'h1'}>
+								{'Skills'}
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'star']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'wand-magic-sparkles']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'code']} />
 							</Typography>
 						</div>
 					</Trail>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-						animationDelay={ 175 }
-					>
+					<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
 						<FilterExportRow>
 							<FilterCol>
 								<Filter
-									options={ skillCategoryOptions }
-									activeValue={ categoryToMatch }
-									onChange={ setCategoryToMatch }
+									options={skillCategoryOptions}
+									activeValue={categoryToMatch}
+									onChange={setCategoryToMatch}
 								/>
 							</FilterCol>
 							<ControlsCol>
-								<DropdownMenu ref={ exportDropdown.ref }>
+								<DropdownMenu ref={exportDropdown.ref}>
 									<DropdownTrigger
-										className={ exportDropdown.isOpen ? 'open' : '' }
-										onClick={ exportDropdown.toggle }
+										className={exportDropdown.isOpen ? 'open' : ''}
+										onClick={exportDropdown.toggle}
 									>
-										<FontAwesomeIcon icon={ ['fas', 'file-export'] } />
-										{ 'Export' }
-										<FontAwesomeIcon
-											className={ 'caret' }
-											icon={ ['fas', 'caret-down'] }
-										/>
+										<FontAwesomeIcon icon={['fas', 'file-export']} />
+										{'Export'}
+										<FontAwesomeIcon className={'caret'} icon={['fas', 'caret-down']} />
 									</DropdownTrigger>
-									{ exportDropdown.isOpen ? (
+									{exportDropdown.isOpen ? (
 										<DropdownPanel>
-											<button onClick={ handleExportJson }>
-												<FontAwesomeIcon icon={ ['fas', 'file-code'] } />
-												{ 'Export JSON' }
+											<button onClick={handleExportJson}>
+												<FontAwesomeIcon icon={['fas', 'file-code']} />
+												{'Export JSON'}
 											</button>
-											<button onClick={ handleExportCsv }>
-												<FontAwesomeIcon icon={ ['fas', 'file-csv'] } />
-												{ 'Export CSV' }
+											<button onClick={handleExportCsv}>
+												<FontAwesomeIcon icon={['fas', 'file-csv']} />
+												{'Export CSV'}
 											</button>
 										</DropdownPanel>
-									) : null }
+									) : null}
 								</DropdownMenu>
-								<DropdownMenu ref={ sortDropdown.ref }>
+								<DropdownMenu ref={sortDropdown.ref}>
 									<DropdownTrigger
-										className={ sortDropdown.isOpen ? 'open' : '' }
-										onClick={ sortDropdown.toggle }
+										className={sortDropdown.isOpen ? 'open' : ''}
+										onClick={sortDropdown.toggle}
 									>
-										<FontAwesomeIcon icon={ ['fas', 'arrow-down-wide-short'] } />
-										{ `Sort: ${SKILL_SORT_LABELS[sortBy]}` }
-										<FontAwesomeIcon
-											className={ 'caret' }
-											icon={ ['fas', 'caret-down'] }
-										/>
+										<FontAwesomeIcon icon={['fas', 'arrow-down-wide-short']} />
+										{`Sort: ${SKILL_SORT_LABELS[sortBy]}`}
+										<FontAwesomeIcon className={'caret'} icon={['fas', 'caret-down']} />
 									</DropdownTrigger>
-									{ sortDropdown.isOpen ? (
+									{sortDropdown.isOpen ? (
 										<DropdownPanel>
-											{ SKILL_SORT_OPTIONS.map((option) => (
+											{SKILL_SORT_OPTIONS.map((option) => (
 												<button
-													key={ option }
-													className={ option === sortBy ? 'active' : '' }
-													onClick={ () => {
+													key={option}
+													className={option === sortBy ? 'active' : ''}
+													onClick={() => {
 														setSortBy(option);
 														sortDropdown.close();
-													} }
+													}}
 												>
-													{ SKILL_SORT_LABELS[option] }
+													{SKILL_SORT_LABELS[option]}
 												</button>
-											)) }
+											))}
 										</DropdownPanel>
-									) : null }
+									) : null}
 								</DropdownMenu>
 							</ControlsCol>
 							<SearchRow>
 								<SearchInput
-									value={ searchQuery }
-									onChange={ setSearchQuery }
-									placeholder={ 'Search skills…' }
+									value={searchQuery}
+									onChange={setSearchQuery}
+									placeholder={'Search skills…'}
 								/>
 							</SearchRow>
 						</FilterExportRow>
 						<SkillGrid
-							skills={ skills }
-							categoryToMatch={ categoryToMatch }
-							sortBy={ sortBy }
-							searchQuery={ searchQuery }
+							skills={skills}
+							categoryToMatch={categoryToMatch}
+							sortBy={sortBy}
+							searchQuery={searchQuery}
 						/>
 					</Trail>
 				</div>

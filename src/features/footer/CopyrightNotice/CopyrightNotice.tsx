@@ -9,10 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopyright } from '@fortawesome/free-solid-svg-icons';
 import { Typography } from '@/ui/Typography/Typography.tsx';
 
-
 export const CopyrightNotice = () => (
-	<Typography variant={ 'copyright' }>
-		<FontAwesomeIcon className={ 'copyright-icon' } icon={ faCopyright } />
-		{ ' ' + new Date().getFullYear() + ' by Temmi Pietsch. All rights reserved.' }
+	<Typography variant={'copyright'}>
+		<FontAwesomeIcon className={'copyright-icon'} icon={faCopyright} />
+		{' ' + new Date().getFullYear() + ' by Temmi Pietsch. All rights reserved.'}
 	</Typography>
 );

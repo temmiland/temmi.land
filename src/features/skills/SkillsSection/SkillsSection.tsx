@@ -51,32 +51,23 @@ const SkillContainer = styled.div`
 type SkillsSectionProps = {
 	/** The skills shown in the overview. */
 	skills: Skill[];
-}
+};
 
 export const SkillsSection = ({ skills }: SkillsSectionProps) => (
-	<SkillContainer id={ 'skills' }>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-		>
-			<div className={ 'skill-header' }>
-				<Typography variant={ 'h1' }>
-					{ 'Skills' }
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'star'] } />
-					<FontAwesomeIcon
-						className={ 'h-icon' }
-						icon={ ['fas', 'wand-magic-sparkles'] }
-					/>
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'code'] } />
+	<SkillContainer id={'skills'}>
+		<Trail animationDirection={'left'} animationSpeed={50}>
+			<div className={'skill-header'}>
+				<Typography variant={'h1'}>
+					{'Skills'}
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'star']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'wand-magic-sparkles']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'code']} />
 				</Typography>
 			</div>
 		</Trail>
-		<Trail
-			animationDirection={ 'right' }
-			animationSpeed={ 50 }
-		>
-			<div id={ 'skill-list' }>
-				<SkillsOverview skills={ skills } />
+		<Trail animationDirection={'right'} animationSpeed={50}>
+			<div id={'skill-list'}>
+				<SkillsOverview skills={skills} />
 			</div>
 		</Trail>
 	</SkillContainer>

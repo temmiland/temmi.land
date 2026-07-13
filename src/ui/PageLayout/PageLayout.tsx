@@ -114,8 +114,8 @@ type PageLayoutProps = {
 export default function PageLayout({ header, children }: PageLayoutProps) {
 	return (
 		<>
-			<HeaderSection>{ header }</HeaderSection>
-			{ children }
+			<HeaderSection>{header}</HeaderSection>
+			{children}
 			<FooterSection>
 				<Footer />
 			</FooterSection>

@@ -358,10 +358,7 @@ export type TypographyVariant =
 /**
  * Maps each typography variant to the styled element rendering it.
  */
-const variantComponents: Record<
-	TypographyVariant,
-	React.ComponentType<{ children?: React.ReactNode }>
-> = {
+const variantComponents: Record<TypographyVariant, React.ComponentType<{ children?: React.ReactNode }>> = {
 	h0: H0,
 	h1: H1,
 	h2: H2,
@@ -391,5 +388,5 @@ interface TypographyProps {
 
 export const Typography = ({ variant, children = '' }: TypographyProps) => {
 	const Component = variantComponents[variant];
-	return <Component>{ children }</Component>;
+	return <Component>{children}</Component>;
 };

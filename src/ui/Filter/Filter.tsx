@@ -194,78 +194,69 @@ type FilterProps = {
  * @param {FilterProps} props - The props for the Filter component.
  * @returns {JSX.Element} Filter JSX element.
  */
-export const Filter = ({
-	options,
-	activeValue,
-	onChange,
-	allLabel = 'All'
-}: FilterProps): JSX.Element => {
+export const Filter = ({ options, activeValue, onChange, allLabel = 'All' }: FilterProps): JSX.Element => {
 	const { isOpen, toggle, close, ref: menuRef } = useDropdown();
 
 	const activeLabel = activeValue
-		? options.find((option) => option.value === activeValue)?.label ?? allLabel
+		? (options.find((option) => option.value === activeValue)?.label ?? allLabel)
 		: allLabel;
 
 	return (
 		<>
 			<FilterRow>
 				<Chip
-					type={ 'button' }
-					className={ activeValue === '' ? 'active' : '' }
-					onClick={ () => onChange('') }
+					type={'button'}
+					className={activeValue === '' ? 'active' : ''}
+					onClick={() => onChange('')}
 				>
-					{ allLabel }
+					{allLabel}
 				</Chip>
-				{ options.map((option) => (
+				{options.map((option) => (
 					<Chip
-						key={ option.value }
-						type={ 'button' }
-						className={ activeValue === option.value ? 'active' : '' }
-						onClick={ () => onChange(option.value) }
+						key={option.value}
+						type={'button'}
+						className={activeValue === option.value ? 'active' : ''}
+						onClick={() => onChange(option.value)}
 					>
-						{ option.label }
+						{option.label}
 					</Chip>
-				)) }
+				))}
 			</FilterRow>
-			<FilterDropdown ref={ menuRef }>
-				<DropdownTrigger
-					type={ 'button' }
-					className={ isOpen ? 'open' : '' }
-					onClick={ toggle }
-				>
+			<FilterDropdown ref={menuRef}>
+				<DropdownTrigger type={'button'} className={isOpen ? 'open' : ''} onClick={toggle}>
 					<span>
-						<FontAwesomeIcon icon={ ['fas', 'filter'] } />
-						{ activeLabel }
+						<FontAwesomeIcon icon={['fas', 'filter']} />
+						{activeLabel}
 					</span>
-					<FontAwesomeIcon className={ 'caret' } icon={ ['fas', 'caret-down'] } />
+					<FontAwesomeIcon className={'caret'} icon={['fas', 'caret-down']} />
 				</DropdownTrigger>
-				{ isOpen ? (
+				{isOpen ? (
 					<DropdownPanel>
 						<button
-							type={ 'button' }
-							className={ activeValue === '' ? 'active' : '' }
-							onClick={ () => {
+							type={'button'}
+							className={activeValue === '' ? 'active' : ''}
+							onClick={() => {
 								onChange('');
 								close();
-							} }
+							}}
 						>
-							{ allLabel }
+							{allLabel}
 						</button>
-						{ options.map((option) => (
+						{options.map((option) => (
 							<button
-								key={ option.value }
-								type={ 'button' }
-								className={ activeValue === option.value ? 'active' : '' }
-								onClick={ () => {
+								key={option.value}
+								type={'button'}
+								className={activeValue === option.value ? 'active' : ''}
+								onClick={() => {
 									onChange(option.value);
 									close();
-								} }
+								}}
 							>
-								{ option.label }
+								{option.label}
 							</button>
-						)) }
+						))}
 					</DropdownPanel>
-				) : null }
+				) : null}
 			</FilterDropdown>
 		</>
 	);

@@ -70,24 +70,24 @@ export const MeSection = () => (
 	<MeContainer>
 		<MeInfoContainer>
 			<Trail
-				animationDirection={ 'left' }
-				animationConfig={ {
+				animationDirection={'left'}
+				animationConfig={{
 					mass: 5,
 					tension: 4000,
 					friction: 2000
-				} }
+				}}
 			>
 				<MeInfo />
 			</Trail>
 		</MeInfoContainer>
 
 		<Trail
-			animationDirection={ 'right' }
-			animationConfig={ {
+			animationDirection={'right'}
+			animationConfig={{
 				mass: 5,
 				tension: 4000,
 				friction: 2000
-			} }
+			}}
 		>
 			<MeImageContainer>
 				<MeImage />

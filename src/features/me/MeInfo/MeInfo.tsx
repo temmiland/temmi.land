@@ -78,35 +78,35 @@ const MeLinkIconContainer = styled.div`
 `;
 
 export const MeInfo = () => (
-	<MeTextContainer id={ 'hero-heading' }>
-		<Typography variant={ 'h0' }>
-			{ 'Hi, I\'m' }
+	<MeTextContainer id={'hero-heading'}>
+		<Typography variant={'h0'}>
+			{"Hi, I'm"}
 			<Signature />
 		</Typography>
-		<Typography variant={ 'h2' }>
-			{ 'I\'m a ' }
-			<Chip color={ colors.accentBlue } iconName={ 'mug-hot' } text={ 'Senior Developer' } />
-			{ ' based in ' }
-			<Chip color={ colors.accentPink } iconName={ 'location-dot' } text={ 'Leipzig, Germany' } />
+		<Typography variant={'h2'}>
+			{"I'm a "}
+			<Chip color={colors.accentBlue} iconName={'mug-hot'} text={'Senior Developer'} />
+			{' based in '}
+			<Chip color={colors.accentPink} iconName={'location-dot'} text={'Leipzig, Germany'} />
 		</Typography>
 		<MeLinkIconContainer>
 			<LinkIcon
-				href={ 'https://www.linkedin.com/in/temmi-pietsch/' }
-				hoverColor={ colors.accentBlue }
-				icon={ {
+				href={'https://www.linkedin.com/in/temmi-pietsch/'}
+				hoverColor={colors.accentBlue}
+				icon={{
 					prefix: 'fab',
 					iconName: 'linkedin'
-				} }
-				size={ 3 }
+				}}
+				size={3}
 			/>
 			<LinkIcon
-				href={ 'https://github.com/temmiland' }
-				hoverColor={ colors.accentPink }
-				icon={ {
+				href={'https://github.com/temmiland'}
+				hoverColor={colors.accentPink}
+				icon={{
 					prefix: 'fab',
 					iconName: 'github'
-				} }
-				size={ 3 }
+				}}
+				size={3}
 			/>
 		</MeLinkIconContainer>
 	</MeTextContainer>

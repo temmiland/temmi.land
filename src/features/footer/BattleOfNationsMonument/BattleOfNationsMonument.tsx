@@ -16,8 +16,7 @@ const SImage = styled.img<BattleOfNationsMonumentProps>`
 	}
 
 	${media.wide} {
-		width: ${(props) =>
-		((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px;
+		width: ${(props) => ((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px;
 	}
 `;
 
@@ -30,14 +29,14 @@ type BattleOfNationsMonumentProps = {
 
 export const BattleOfNationsMonument = ({ size = 3 }: BattleOfNationsMonumentProps) => (
 	<SImage
-		size={ size }
-		src={ '/battle-of-nations-monument.png' }
-		alt={ '' }
-		style={ {
+		size={size}
+		src={'/battle-of-nations-monument.png'}
+		alt={''}
+		style={{
 			verticalAlign: 'bottom',
 			filter: 'invert(1)',
 			mixBlendMode: 'difference',
 			zIndex: '3'
-		} }
+		}}
 	/>
 );

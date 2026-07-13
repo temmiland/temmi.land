@@ -149,21 +149,17 @@ type SearchInputProps = {
  */
 export const SearchInput = ({ value, onChange, placeholder }: SearchInputProps) => (
 	<SearchInputWrapper>
-		<FontAwesomeIcon icon={ ['fas', 'magnifying-glass'] } />
+		<FontAwesomeIcon icon={['fas', 'magnifying-glass']} />
 		<input
-			type={ 'text' }
-			value={ value }
-			placeholder={ placeholder }
-			onChange={ (event) => onChange(event.target.value) }
+			type={'text'}
+			value={value}
+			placeholder={placeholder}
+			onChange={(event) => onChange(event.target.value)}
 		/>
-		{ value ? (
-			<button
-				type={ 'button' }
-				className={ 'clear-search' }
-				onClick={ () => onChange('') }
-			>
-				<FontAwesomeIcon icon={ ['fas', 'xmark'] } />
+		{value ? (
+			<button type={'button'} className={'clear-search'} onClick={() => onChange('')}>
+				<FontAwesomeIcon icon={['fas', 'xmark']} />
 			</button>
-		) : null }
+		) : null}
 	</SearchInputWrapper>
 );

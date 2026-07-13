@@ -7,13 +7,7 @@
 
 import React, { lazy, Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-	createBrowserRouter,
-	Navigate,
-	RouterProvider,
-	useLocation,
-	useParams
-} from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider, useLocation, useParams } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
 	faArrowDownWideShort,
@@ -242,13 +236,12 @@ const SITE_URL = 'https://temmi.land';
  * overview when no project with that id exists.
  */
 const ProjectRoute = () => {
-
 	const { id } = useParams();
 
 	if (id !== undefined && !projects.some((project) => project.id === id))
-		return <Navigate to={ '/project' } replace />;
+		return <Navigate to={'/project'} replace />;
 
-	return <Project selectedProjectId={ id } />;
+	return <Project selectedProjectId={id} />;
 };
 
 /**
@@ -256,13 +249,12 @@ const ProjectRoute = () => {
  * post with that id exists.
  */
 const BlogPostRoute = () => {
-
 	const { id } = useParams();
 
 	if (id === undefined || !blogPosts.some((post) => post.id === id))
-		return <Navigate to={ '/blog' } replace />;
+		return <Navigate to={'/blog'} replace />;
 
-	return <BlogPost postId={ id } />;
+	return <BlogPost postId={id} />;
 };
 
 type PageMetaProps = {
@@ -287,12 +279,12 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
 
 	return (
 		<Helmet>
-			<title>{ fullTitle }</title>
-			<meta name={ 'description' } content={ description } />
-			<meta property={ 'og:title' } content={ fullTitle } />
-			<meta property={ 'og:description' } content={ description } />
-			<meta property={ 'og:url' } content={ url } />
-			<link rel={ 'canonical' } href={ url } />
+			<title>{fullTitle}</title>
+			<meta name={'description'} content={description} />
+			<meta property={'og:title'} content={fullTitle} />
+			<meta property={'og:description'} content={description} />
+			<meta property={'og:url'} content={url} />
+			<link rel={'canonical'} href={url} />
 		</Helmet>
 	);
 };
@@ -320,35 +312,40 @@ const pages = [
 	{
 		path: '/',
 		title: 'Home',
-		description: 'Temmi Pietsch, Senior Software Developer based in Leipzig, Germany. ' +
+		description:
+			'Temmi Pietsch, Senior Software Developer based in Leipzig, Germany. ' +
 			'Portfolio with projects, skills and a blog about mobile and web development.',
 		element: <Home />
 	},
 	{
 		path: '/project/:id?',
 		title: 'Projects',
-		description: 'A selection of apps, tools and libraries built by Temmi Pietsch, ' +
+		description:
+			'A selection of apps, tools and libraries built by Temmi Pietsch, ' +
 			'spanning React Native, React, Kotlin and Java.',
 		element: <ProjectRoute />
 	},
 	{
 		path: '/skills',
 		title: 'Skills',
-		description: 'Technical skills, tools and experience of Temmi Pietsch, Senior ' +
+		description:
+			'Technical skills, tools and experience of Temmi Pietsch, Senior ' +
 			'Software Developer, across frontend, backend and mobile development.',
 		element: <Skills />
 	},
 	{
 		path: '/blog',
 		title: 'Blog',
-		description: 'Articles by Temmi Pietsch about building and shipping software, ' +
+		description:
+			'Articles by Temmi Pietsch about building and shipping software, ' +
 			'from mobile apps to backend services.',
 		element: <Blog />
 	},
 	{
 		path: '/blog/:id',
 		title: 'Blog',
-		description: 'Articles by Temmi Pietsch about building and shipping software, ' +
+		description:
+			'Articles by Temmi Pietsch about building and shipping software, ' +
 			'from mobile apps to backend services.',
 		element: <BlogPostRoute />
 	},
@@ -371,17 +368,15 @@ const router = createBrowserRouter([
 		path,
 		element: (
 			<>
-				<PageMeta title={ title } description={ description } />
+				<PageMeta title={title} description={description} />
 				<ScrollToTop />
-				<Suspense fallback={ <PageLoader /> }>
-					{ element }
-				</Suspense>
+				<Suspense fallback={<PageLoader />}>{element}</Suspense>
 			</>
 		)
 	})),
 	{
 		path: '*',
-		element: <Navigate to={ '/' } replace />
+		element: <Navigate to={'/'} replace />
 	}
 ]);
 
@@ -389,10 +384,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<HelmetProvider>
 			<Helmet>
-				<meta property={ 'og:type' } content={ 'website' } />
-				<meta property={ 'og:site_name' } content={ 'Temmi Pietsch' } />
+				<meta property={'og:type'} content={'website'} />
+				<meta property={'og:site_name'} content={'Temmi Pietsch'} />
 			</Helmet>
-			<RouterProvider router={ router } />
+			<RouterProvider router={router} />
 		</HelmetProvider>
 	</React.StrictMode>
 );

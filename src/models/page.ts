@@ -5,9 +5,6 @@
  * permission of the author.
  */
 
-
-
-
 /**
  * Represents a page for the header.
  */

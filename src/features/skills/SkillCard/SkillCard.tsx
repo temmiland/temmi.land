@@ -13,11 +13,7 @@ import { colors, fonts, media, whiteAlpha } from '@/styles';
 
 const SkillCardContainer = styled.div`
 	min-width: 0;
-	background: linear-gradient(
-		135deg,
-		${whiteAlpha(0.08)} 0%,
-		${whiteAlpha(0.03)} 100%
-	);
+	background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.1)};
 	border-radius: 0.7vw;
 	padding: 0.85vw 1.1vw;
@@ -45,11 +41,7 @@ const SkillCardContainer = styled.div`
 
 	&:hover {
 		border-color: ${whiteAlpha(0.28)};
-		background: linear-gradient(
-			135deg,
-			${whiteAlpha(0.13)} 0%,
-			${whiteAlpha(0.05)} 100%
-		);
+		background: linear-gradient(135deg, ${whiteAlpha(0.13)} 0%, ${whiteAlpha(0.05)} 100%);
 		transform: translateY(-0.15vw);
 	}
 
@@ -246,15 +238,11 @@ const Stars = styled.div`
  */
 const StarRating = ({ rating }: { rating: number }): JSX.Element => (
 	<Stars>
-		{ Array.from({
+		{Array.from({
 			length: 5
 		}).map((_, i) => (
-			<FontAwesomeIcon
-				key={ i }
-				className={ i < rating ? 'filled' : 'empty' }
-				icon={ ['fas', 'star'] }
-			/>
-		)) }
+			<FontAwesomeIcon key={i} className={i < rating ? 'filled' : 'empty'} icon={['fas', 'star']} />
+		))}
 	</Stars>
 );
 
@@ -291,31 +279,29 @@ const versionLine = (skill: Skill): string => {
  */
 export const SkillCard = ({ skill }: SkillCardProps): JSX.Element => (
 	<SkillCardContainer>
-		<div className={ 'skill-head' }>
-			<div className={ 'skill-name' }>
-				{ skill.icon ? (
+		<div className={'skill-head'}>
+			<div className={'skill-name'}>
+				{skill.icon ? (
 					<FontAwesomeIcon
-						icon={ [(skill.iconPrefix ?? 'fas') as IconPrefix, skill.icon as IconName] }
+						icon={[(skill.iconPrefix ?? 'fas') as IconPrefix, skill.icon as IconName]}
 					/>
-				) : null }
-				<span title={ skill.name }>{ skill.name }</span>
+				) : null}
+				<span title={skill.name}>{skill.name}</span>
 			</div>
-			{ skill.rating ? (
-				<div className={ 'rating-box' }>
-					<StarRating rating={ skill.rating } />
+			{skill.rating ? (
+				<div className={'rating-box'}>
+					<StarRating rating={skill.rating} />
 				</div>
-			) : null }
+			) : null}
 		</div>
-		<div className={ 'skill-details' }>
-			{
-				versionLine(skill) ? (
-					<span className={ 'detail detail-version' }>{ versionLine(skill) }</span>
-				) : null
-			}
-			<span className={ 'detail' }>
-				{ skill.years === 1 ? 'Experience: 1 year' : `Experience: ${skill.years} years` }
+		<div className={'skill-details'}>
+			{versionLine(skill) ? (
+				<span className={'detail detail-version'}>{versionLine(skill)}</span>
+			) : null}
+			<span className={'detail'}>
+				{skill.years === 1 ? 'Experience: 1 year' : `Experience: ${skill.years} years`}
 			</span>
-			<span className={ 'detail' }>{ `Last used: ${skill.lastUsed}` }</span>
+			<span className={'detail'}>{`Last used: ${skill.lastUsed}`}</span>
 		</div>
 	</SkillCardContainer>
 );

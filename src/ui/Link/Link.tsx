@@ -58,37 +58,18 @@ const RouterA = styled(RouterLink)`
  */
 const isInternalRoute = (href: string) => href.startsWith('/') && !href.includes('#');
 
-export const Link = ({
-	children,
-	href,
-	target,
-	rel,
-	className,
-	onClick
-}: LinkProps) => {
+export const Link = ({ children, href, target, rel, className, onClick }: LinkProps) => {
 	if (isInternalRoute(href)) {
 		return (
-			<RouterA
-				to={ href }
-				target={ target }
-				rel={ rel }
-				className={ className }
-				onClick={ onClick }
-			>
-				{ children }
+			<RouterA to={href} target={target} rel={rel} className={className} onClick={onClick}>
+				{children}
 			</RouterA>
 		);
 	}
 
 	return (
-		<A
-			href={ href }
-			target={ target }
-			rel={ rel }
-			className={ className }
-			onClick={ onClick }
-		>
-			{ children }
+		<A href={href} target={target} rel={rel} className={className} onClick={onClick}>
+			{children}
 		</A>
 	);
 };

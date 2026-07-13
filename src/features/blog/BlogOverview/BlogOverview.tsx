@@ -10,9 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlogCard from '@/features/blog/BlogCard';
 import { Link } from '@/ui/Link/Link';
 import { BlogPost } from '@/models/blogpost';
-import {
-	colors, fonts, fluid, media, whiteAlpha
-} from '@/styles';
+import { colors, fonts, fluid, media, whiteAlpha } from '@/styles';
 
 const BlogWrapper = styled.div`
 	display: grid;
@@ -109,25 +107,20 @@ const MAX_BLOG_CARDS = 2;
 type BlogOverviewProps = {
 	/** The blog posts to pick the latest articles from. */
 	posts: BlogPost[];
-}
+};
 
 export const BlogOverview = ({ posts }: BlogOverviewProps): JSX.Element => {
-
-	const shownPosts = [...posts]
-		.sort((a, b) => b.date.localeCompare(a.date))
-		.slice(0, MAX_BLOG_CARDS);
+	const shownPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, MAX_BLOG_CARDS);
 
 	return (
 		<BlogWrapper>
-			{
-				shownPosts.map((post) => (
-					<BlogCard key={ post.id } post={ post } />
-				))
-			}
-			<MoreLink href={ '/blog' }>
+			{shownPosts.map((post) => (
+				<BlogCard key={post.id} post={post} />
+			))}
+			<MoreLink href={'/blog'}>
 				<MoreCard>
-					{ 'All articles' }
-					<FontAwesomeIcon icon={ 'caret-right' } />
+					{'All articles'}
+					<FontAwesomeIcon icon={'caret-right'} />
 				</MoreCard>
 			</MoreLink>
 		</BlogWrapper>

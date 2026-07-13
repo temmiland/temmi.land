@@ -51,32 +51,23 @@ const BlogContainer = styled.div`
 type BlogSectionProps = {
 	/** The blog posts shown in the overview. */
 	posts: BlogPost[];
-}
+};
 
 export const BlogSection = ({ posts }: BlogSectionProps) => (
-	<BlogContainer id={ 'blog' }>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-		>
-			<div className={ 'blog-header' }>
-				<Typography variant={ 'h1' }>
-					{ 'Blog' }
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'feather'] } />
-					<FontAwesomeIcon
-						className={ 'h-icon' }
-						icon={ ['fas', 'wand-magic-sparkles'] }
-					/>
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'pen-nib'] } />
+	<BlogContainer id={'blog'}>
+		<Trail animationDirection={'left'} animationSpeed={50}>
+			<div className={'blog-header'}>
+				<Typography variant={'h1'}>
+					{'Blog'}
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'feather']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'wand-magic-sparkles']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'pen-nib']} />
 				</Typography>
 			</div>
 		</Trail>
-		<Trail
-			animationDirection={ 'right' }
-			animationSpeed={ 50 }
-		>
-			<div id={ 'blog-list' }>
-				<BlogOverview posts={ posts } />
+		<Trail animationDirection={'right'} animationSpeed={50}>
+			<div id={'blog-list'}>
+				<BlogOverview posts={posts} />
 			</div>
 		</Trail>
 	</BlogContainer>

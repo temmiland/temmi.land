@@ -31,24 +31,17 @@ const ImprintContentContainer = styled.div`
 
 export const ImprintSection = () => (
 	<ImprintContainer>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-		>
-			<div className={ 'imprint-header' }>
-				<Typography variant={ 'h1' }>
-					{ 'Imprint' }
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'gavel'] }/>
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'scale-balanced'] }/>
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'section'] }/>
+		<Trail animationDirection={'left'} animationSpeed={50}>
+			<div className={'imprint-header'}>
+				<Typography variant={'h1'}>
+					{'Imprint'}
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'gavel']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'scale-balanced']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'section']} />
 				</Typography>
 			</div>
 		</Trail>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-			animationDelay={ 175 }
-		>
+		<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
 			<ImprintContentContainer>
 				<ImprintContent />
 			</ImprintContentContainer>

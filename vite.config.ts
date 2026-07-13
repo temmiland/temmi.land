@@ -1,6 +1,6 @@
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react-swc'
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react-swc';
 import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
@@ -19,4 +19,4 @@ export default defineConfig({
 		environment: 'node',
 		include: ['src/**/*.test.ts']
 	}
-})
+});

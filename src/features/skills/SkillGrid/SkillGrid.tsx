@@ -73,12 +73,12 @@ type SkillGridProps = {
 	/** The skills to render. */
 	skills: Skill[];
 	/** The category to filter by, or '' for no filter. */
-	categoryToMatch?: string
+	categoryToMatch?: string;
 	/** The order skills are sorted in within each category. */
-	sortBy?: SkillSortOption
+	sortBy?: SkillSortOption;
 	/** The search query to filter skill names by, or '' for no filter. */
-	searchQuery?: string
-}
+	searchQuery?: string;
+};
 
 /**
  * SkillGrid component. Renders all skills grouped by their category, sorted
@@ -86,26 +86,27 @@ type SkillGridProps = {
  * @param {SkillGridProps} props - The props for the SkillGrid component.
  * @returns {JSX.Element} SkillGrid JSX element.
  */
-export const SkillGrid = (
-	{ skills, categoryToMatch = '', sortBy = DEFAULT_SKILL_SORT, searchQuery = '' }: SkillGridProps
-): JSX.Element => {
-
+export const SkillGrid = ({
+	skills,
+	categoryToMatch = '',
+	sortBy = DEFAULT_SKILL_SORT,
+	searchQuery = ''
+}: SkillGridProps): JSX.Element => {
 	const normalizedQuery = searchQuery.trim().toLowerCase();
 
 	const filteredSkills = skills
-		.filter(skill => !categoryToMatch || skill.category === categoryToMatch)
-		.filter(skill => !normalizedQuery || skill.name.toLowerCase().includes(normalizedQuery));
+		.filter((skill) => !categoryToMatch || skill.category === categoryToMatch)
+		.filter((skill) => !normalizedQuery || skill.name.toLowerCase().includes(normalizedQuery));
 
-	const categories = Object.values(SkillCategory)
-		.filter(category => filteredSkills.some(skill => skill.category === category));
+	const categories = Object.values(SkillCategory).filter((category) =>
+		filteredSkills.some((skill) => skill.category === category)
+	);
 
 	if (categories.length === 0) {
 		return (
 			<SkillGridContainer>
 				<NoResults>
-					<Typography variant={ 'p' }>
-						{ 'No skills found.' }
-					</Typography>
+					<Typography variant={'p'}>{'No skills found.'}</Typography>
 				</NoResults>
 			</SkillGridContainer>
 		);
@@ -113,25 +114,19 @@ export const SkillGrid = (
 
 	return (
 		<SkillGridContainer>
-			{
-				categories.map(category => (
-					<CategoryBlock key={ category }>
-						<Typography variant={ 'h4' }>
-							{ category }
-						</Typography>
-						<SkillCardGrid>
-							{
-								sortSkills(
-									filteredSkills.filter(skill => skill.category === category),
-									sortBy
-								).map(skill => (
-									<SkillCard key={ skill.id } skill={ skill } />
-								))
-							}
-						</SkillCardGrid>
-					</CategoryBlock>
-				))
-			}
+			{categories.map((category) => (
+				<CategoryBlock key={category}>
+					<Typography variant={'h4'}>{category}</Typography>
+					<SkillCardGrid>
+						{sortSkills(
+							filteredSkills.filter((skill) => skill.category === category),
+							sortBy
+						).map((skill) => (
+							<SkillCard key={skill.id} skill={skill} />
+						))}
+					</SkillCardGrid>
+				</CategoryBlock>
+			))}
 		</SkillGridContainer>
 	);
-}
+};

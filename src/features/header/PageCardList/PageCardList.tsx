@@ -112,8 +112,8 @@ const Ul = styled.ul`
 `;
 
 type PageCardListProps = {
-	pages: Array<Page>
-}
+	pages: Array<Page>;
+};
 
 /**
  * PageCardList component. Renders the site navigation links. On phone
@@ -180,34 +180,24 @@ export const PageCardList = ({ pages }: PageCardListProps): JSX.Element => {
 	}, [isOpen]);
 
 	return (
-		<Nav ref={ navRef }>
-			<MenuToggle
-				type={ 'button' }
-				onClick={ () => setIsOpen(!isOpen) }
-			>
-				<FontAwesomeIcon icon={ isOpen ? 'xmark' : 'bars' } />
+		<Nav ref={navRef}>
+			<MenuToggle type={'button'} onClick={() => setIsOpen(!isOpen)}>
+				<FontAwesomeIcon icon={isOpen ? 'xmark' : 'bars'} />
 			</MenuToggle>
-			<Ul className={ isOpen ? 'open' : '' }>
-				{
-					pages.map((page) => (
-						<li
-							key={ page.name }
-							style={ {
-								position: 'relative',
-								cursor: 'pointer'
-							} }
-						>
-							<Link
-								href={ page.href }
-								onClick={ (event) => handleNavClick(event, page) }
-							>
-								<Typography variant={ 'header' }>
-									{ page.name }
-								</Typography>
-							</Link>
-						</li>
-					))
-				}
+			<Ul className={isOpen ? 'open' : ''}>
+				{pages.map((page) => (
+					<li
+						key={page.name}
+						style={{
+							position: 'relative',
+							cursor: 'pointer'
+						}}
+					>
+						<Link href={page.href} onClick={(event) => handleNavClick(event, page)}>
+							<Typography variant={'header'}>{page.name}</Typography>
+						</Link>
+					</li>
+				))}
 			</Ul>
 		</Nav>
 	);

@@ -49,11 +49,7 @@ const AboutContainer = styled.div`
 		overflow: hidden;
 		padding: 1.6vw 2vw 1.3vw;
 		border: 0.07vw solid ${whiteAlpha(0.1)};
-		background: linear-gradient(
-			135deg,
-			${whiteAlpha(0.08)} 0%,
-			${whiteAlpha(0.03)} 100%
-		);
+		background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 		backdrop-filter: blur(0.7vw);
 		-webkit-backdrop-filter: blur(0.7vw);
 		border-radius: 0.7vw;
@@ -88,11 +84,7 @@ const AboutContainer = styled.div`
 
 		&:hover {
 			border-color: ${whiteAlpha(0.28)};
-			background: linear-gradient(
-				135deg,
-				${whiteAlpha(0.13)} 0%,
-				${whiteAlpha(0.05)} 100%
-			);
+			background: linear-gradient(135deg, ${whiteAlpha(0.13)} 0%, ${whiteAlpha(0.05)} 100%);
 			transform: translateY(-0.15vw);
 		}
 
@@ -277,11 +269,7 @@ const AboutContainer = styled.div`
 		grid-template-rows: repeat(2, 1fr);
 		grid-column-gap: 0;
 		grid-row-gap: 0;
-		background: linear-gradient(
-			135deg,
-			${whiteAlpha(0.08)} 0%,
-			${whiteAlpha(0.03)} 100%
-		);
+		background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 		border: 0.07vw solid ${whiteAlpha(0.1)};
 		backdrop-filter: blur(0.7vw);
 		-webkit-backdrop-filter: blur(0.7vw);
@@ -315,11 +303,7 @@ const AboutContainer = styled.div`
 
 		&:hover {
 			border-color: ${whiteAlpha(0.28)};
-			background: linear-gradient(
-				135deg,
-				${whiteAlpha(0.13)} 0%,
-				${whiteAlpha(0.05)} 100%
-			);
+			background: linear-gradient(135deg, ${whiteAlpha(0.13)} 0%, ${whiteAlpha(0.05)} 100%);
 			transform: translateY(-0.15vw);
 		}
 	}
@@ -427,256 +411,228 @@ export const AboutSection = () => {
 	);
 
 	const timeCompare =
-		hourDiff === 0
-			? 'same time'
-			: `${Math.abs(hourDiff)}h ${hourDiff > 0 ? 'ahead' : 'behind'}`;
+		hourDiff === 0 ? 'same time' : `${Math.abs(hourDiff)}h ${hourDiff > 0 ? 'ahead' : 'behind'}`;
 
 	return (
-		<AboutContainer id={ 'about-me' }>
-			<Trail
-				animationDirection={ 'left' }
-				animationSpeed={ 50 }
-			>
-				<div className={ 'about-header' }>
-					<Typography variant={ 'h1' }>
-						{ 'About Me' }
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'mountain-city'] } />
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'user-astronaut'] } />
-						<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'gamepad'] } />
+		<AboutContainer id={'about-me'}>
+			<Trail animationDirection={'left'} animationSpeed={50}>
+				<div className={'about-header'}>
+					<Typography variant={'h1'}>
+						{'About Me'}
+						<FontAwesomeIcon className={'h-icon'} icon={['fas', 'mountain-city']} />
+						<FontAwesomeIcon className={'h-icon'} icon={['fas', 'user-astronaut']} />
+						<FontAwesomeIcon className={'h-icon'} icon={['fas', 'gamepad']} />
 					</Typography>
 				</div>
 			</Trail>
-			<div className={ 'about-header' }>
-				<Trail
-					animationDirection={ 'left' }
-					animationSpeed={ 50 }
-				>
-					<div className={ 'ah-text' }>
-						<Typography variant={ 'p' }>
-							{ 'Hi, I\'m Temmi — a Senior Software Engineer based in Leipzig, Germany. ' +
+			<div className={'about-header'}>
+				<Trail animationDirection={'left'} animationSpeed={50}>
+					<div className={'ah-text'}>
+						<Typography variant={'p'}>
+							{"Hi, I'm Temmi — a Senior Software Engineer based in Leipzig, Germany. " +
 								'I build modern web and mobile applications with TypeScript, React, React ' +
 								'Native, Angular, and Spring (Java/Kotlin), turning complex requirements ' +
-								'into clean, intuitive interfaces.' }
+								'into clean, intuitive interfaces.'}
 						</Typography>
-						<Typography variant={ 'p' }>
-							{ 'With years of experience across web, mobile, and backend projects, I work ' +
+						<Typography variant={'p'}>
+							{'With years of experience across web, mobile, and backend projects, I work ' +
 								'confidently across the full stack — in teams and as a freelancer. I use ' +
-								'AI tooling strategically to ship faster without cutting corners.' }
+								'AI tooling strategically to ship faster without cutting corners.'}
 						</Typography>
-						<Typography variant={ 'p' }>
-							{
-								'High standards and structured thinking — not as a motto, but as a habit.'
-							}
+						<Typography variant={'p'}>
+							{'High standards and structured thinking — not as a motto, but as a habit.'}
 						</Typography>
-						<Typography variant={ 'p' }>
-							<strong>{ '🌸 Open for new projects!' }</strong>
+						<Typography variant={'p'}>
+							<strong>{'🌸 Open for new projects!'}</strong>
 							<br />
-							{ ' Got something interesting? Let\'s talk!' }
+							{" Got something interesting? Let's talk!"}
 						</Typography>
 					</div>
 				</Trail>
-				<Trail
-					animationDirection={ 'right' }
-					animationSpeed={ 50 }
-				>
-					<div className={ 'about-card' }>
-						<div className={ 'card-name' }>{ 'Temmi Pietsch' }</div>
-						<div className={ 'card-handle' }>{ 'temmiland · she/her' }</div>
-						<ul className={ 'card-info' }>
+				<Trail animationDirection={'right'} animationSpeed={50}>
+					<div className={'about-card'}>
+						<div className={'card-name'}>{'Temmi Pietsch'}</div>
+						<div className={'card-handle'}>{'temmiland · she/her'}</div>
+						<ul className={'card-info'}>
 							<li>
-								<FontAwesomeIcon icon={ ['fas', 'briefcase'] } />
-								<span>{ 'adesso SE' }</span>
+								<FontAwesomeIcon icon={['fas', 'briefcase']} />
+								<span>{'adesso SE'}</span>
 							</li>
 							<li>
-								<FontAwesomeIcon icon={ ['fas', 'location-dot'] } />
-								<span>{ 'Leipzig, Germany' }</span>
+								<FontAwesomeIcon icon={['fas', 'location-dot']} />
+								<span>{'Leipzig, Germany'}</span>
 							</li>
 							<li>
-								<FontAwesomeIcon icon={ ['fas', 'clock'] } />
-								<span>{ `${homeTime} - ${timeCompare}` }</span>
+								<FontAwesomeIcon icon={['fas', 'clock']} />
+								<span>{`${homeTime} - ${timeCompare}`}</span>
 							</li>
 							<li>
-								<FontAwesomeIcon icon={ ['fas', 'envelope'] } />
-								<Link href={ 'mailto:welcome@temmi.land' }>{ 'welcome@temmi.land' }</Link>
+								<FontAwesomeIcon icon={['fas', 'envelope']} />
+								<Link href={'mailto:welcome@temmi.land'}>{'welcome@temmi.land'}</Link>
 							</li>
 							<li>
-								<FontAwesomeIcon icon={ ['fab', 'linkedin'] } />
+								<FontAwesomeIcon icon={['fab', 'linkedin']} />
 								<Link
-									href={ 'https://www.linkedin.com/in/temmi-pietsch/' }
-									target={ '_blank' }
-									rel={ 'noreferrer' }
+									href={'https://www.linkedin.com/in/temmi-pietsch/'}
+									target={'_blank'}
+									rel={'noreferrer'}
 								>
-									{ 'in/temmi-pietsch' }
+									{'in/temmi-pietsch'}
 								</Link>
 							</li>
 							<li>
-								<FontAwesomeIcon icon={ ['fab', 'github'] } />
+								<FontAwesomeIcon icon={['fab', 'github']} />
 								<Link
-									href={ 'https://github.com/temmiland' }
-									target={ '_blank' }
-									rel={ 'noreferrer' }
+									href={'https://github.com/temmiland'}
+									target={'_blank'}
+									rel={'noreferrer'}
 								>
-									{ 'temmiland' }
+									{'temmiland'}
 								</Link>
 							</li>
 						</ul>
 					</div>
 				</Trail>
 			</div>
-			<Trail
-				animationDirection={ 'bottom' }
-				animationSpeed={ 50 }
-			>
-				<div className={ 'about-work' }>
-					<div id={ 'hwork' }>
-						<Typography variant={ 'h3' }>{ 'Work' }</Typography>
+			<Trail animationDirection={'bottom'} animationSpeed={50}>
+				<div className={'about-work'}>
+					<div id={'hwork'}>
+						<Typography variant={'h3'}>{'Work'}</Typography>
 					</div>
-					<div id={ 'hmember' }>
-						<Typography variant={ 'h3' }>{ 'Memberships & Volunteer work' }</Typography>
+					<div id={'hmember'}>
+						<Typography variant={'h3'}>{'Memberships & Volunteer work'}</Typography>
 					</div>
-					<div id={ 'ulwork' }>
+					<div id={'ulwork'}>
 						<ul>
 							<li>
 								<img
-									alt={ 'adesso logo' }
-									src={ '/logos/adesso_se_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'adesso logo'}
+									src={'/logos/adesso_se_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Senior Software Engineer' }</div>
-								<div className={ 'aw-company' }>{ 'adesso • Full-time' }</div>
-								<div className={ 'aw-timerange' }>{ '2025 - Now' }</div>
+								<div className={'aw-jobtitle'}>{'Senior Software Engineer'}</div>
+								<div className={'aw-company'}>{'adesso • Full-time'}</div>
+								<div className={'aw-timerange'}>{'2025 - Now'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'tp logo' }
-									src={ '/favicon/apple-touch-icon.png' }
-									className={ 'aw-company-image' }
+									alt={'tp logo'}
+									src={'/favicon/apple-touch-icon.png'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Founder' }</div>
-								<div className={ 'aw-company' }>
-									{ 'temmiland • Part-time self-employed' }
-								</div>
-								<div className={ 'aw-timerange' }>{ '2024 - Now' }</div>
+								<div className={'aw-jobtitle'}>{'Founder'}</div>
+								<div className={'aw-company'}>{'temmiland • Part-time self-employed'}</div>
+								<div className={'aw-timerange'}>{'2024 - Now'}</div>
 							</li>
 
 							<li>
 								<img
-									alt={ 'valtech mobility logo' }
-									src={ '/logos/valtech_mobility_gmbh_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'valtech mobility logo'}
+									src={'/logos/valtech_mobility_gmbh_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>
-									{ 'Frontend Developer & Consultant' }
-								</div>
-								<div className={ 'aw-company' }>{ 'Valtech Mobility • Full-time' }</div>
-								<div className={ 'aw-timerange' }>{ '2022 - 2024' }</div>
+								<div className={'aw-jobtitle'}>{'Frontend Developer & Consultant'}</div>
+								<div className={'aw-company'}>{'Valtech Mobility • Full-time'}</div>
+								<div className={'aw-timerange'}>{'2022 - 2024'}</div>
 							</li>
 
 							<li>
 								<img
-									alt={ 'hydrograv logo' }
-									src={ '/logos/hydrograv_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'hydrograv logo'}
+									src={'/logos/hydrograv_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Full Stack Developer' }</div>
-								<div className={ 'aw-company' }>{ 'hydrograv • Full-time' }</div>
-								<div className={ 'aw-timerange' }>{ '2019 - 2022' }</div>
+								<div className={'aw-jobtitle'}>{'Full Stack Developer'}</div>
+								<div className={'aw-company'}>{'hydrograv • Full-time'}</div>
+								<div className={'aw-timerange'}>{'2019 - 2022'}</div>
 							</li>
 
 							<li>
 								<img
-									alt={ 'hydrograv logo' }
-									src={ '/logos/hydrograv_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'hydrograv logo'}
+									src={'/logos/hydrograv_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>
-									{ 'Computer Science Expert - Developer' }
-								</div>
-								<div className={ 'aw-company' }>{ 'hydrograv • Apprenticeship' }</div>
-								<div className={ 'aw-timerange' }>{ '2016 - 2019' }</div>
+								<div className={'aw-jobtitle'}>{'Computer Science Expert - Developer'}</div>
+								<div className={'aw-company'}>{'hydrograv • Apprenticeship'}</div>
+								<div className={'aw-timerange'}>{'2016 - 2019'}</div>
 							</li>
 
 							<li>
 								<img
-									alt={ 'hydrograv logo' }
-									src={ '/logos/hydrograv_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'hydrograv logo'}
+									src={'/logos/hydrograv_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>
-									{ 'Computer Science Expert - Developer' }
-								</div>
-								<div className={ 'aw-company' }>{ 'hydrograv • Internship' }</div>
-								<div className={ 'aw-timerange' }>{ '2016' }</div>
+								<div className={'aw-jobtitle'}>{'Computer Science Expert - Developer'}</div>
+								<div className={'aw-company'}>{'hydrograv • Internship'}</div>
+								<div className={'aw-timerange'}>{'2016'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'tu freiberg logo' }
-									src={ '/logos/tu_freibergde_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'tu freiberg logo'}
+									src={'/logos/tu_freibergde_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>
-									{ 'School Internship - Software Development' }
+								<div className={'aw-jobtitle'}>
+									{'School Internship - Software Development'}
 								</div>
-								<div className={ 'aw-company' }>
-									{ 'TU Bergakademie Freiberg • Internship' }
-								</div>
-								<div className={ 'aw-timerange' }>{ '2013' }</div>
+								<div className={'aw-company'}>{'TU Bergakademie Freiberg • Internship'}</div>
+								<div className={'aw-timerange'}>{'2013'}</div>
 							</li>
 						</ul>
 					</div>
-					<div id={ 'ulmember' }>
+					<div id={'ulmember'}>
 						<ul>
 							<li>
 								<img
-									alt={ 'leipzig logo' }
-									src={ '/logos/stadt_leipzig_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'leipzig logo'}
+									src={'/logos/stadt_leipzig_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
-								<div className={ 'aw-company' }>{ 'Stadt Leipzig' }</div>
-								<div className={ 'aw-timerange' }>{ '2026 - Now' }</div>
+								<div className={'aw-jobtitle'}>{'Election worker'}</div>
+								<div className={'aw-company'}>{'Stadt Leipzig'}</div>
+								<div className={'aw-timerange'}>{'2026 - Now'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'gruene jugend logo' }
-									src={ '/logos/grne_jugend_sachsen_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'gruene jugend logo'}
+									src={'/logos/grne_jugend_sachsen_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
-								<div className={ 'aw-company' }>{ 'GRÜNE JUGEND' }</div>
-								<div className={ 'aw-timerange' }>{ '2024 - 2026' }</div>
+								<div className={'aw-jobtitle'}>{'Member'}</div>
+								<div className={'aw-company'}>{'GRÜNE JUGEND'}</div>
+								<div className={'aw-timerange'}>{'2024 - 2026'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'gruene jugend logo' }
-									src={ '/logos/grne_jugend_sachsen_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'gruene jugend logo'}
+									src={'/logos/grne_jugend_sachsen_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>
-									{ 'Member of the Executive Board' }
-								</div>
-								<div className={ 'aw-company' }>{ 'GRÜNE JUGEND Dresden' }</div>
-								<div className={ 'aw-timerange' }>{ '2024 - 2025' }</div>
+								<div className={'aw-jobtitle'}>{'Member of the Executive Board'}</div>
+								<div className={'aw-company'}>{'GRÜNE JUGEND Dresden'}</div>
+								<div className={'aw-timerange'}>{'2024 - 2025'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'gruenen logo' }
-									src={ '/logos/bndnis_90_die_grnen_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'gruenen logo'}
+									src={'/logos/bndnis_90_die_grnen_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
-								<div className={ 'aw-company' }>{ 'BÜNDNIS 90/DIE GRÜNEN ' }</div>
-								<div className={ 'aw-timerange' }>{ '2024 - 2025' }</div>
+								<div className={'aw-jobtitle'}>{'Member'}</div>
+								<div className={'aw-company'}>{'BÜNDNIS 90/DIE GRÜNEN '}</div>
+								<div className={'aw-timerange'}>{'2024 - 2025'}</div>
 							</li>
 							<li>
 								<img
-									alt={ 'dresden logo' }
-									src={ '/logos/landeshauptstadt_dresden_logo.jpeg' }
-									className={ 'aw-company-image' }
+									alt={'dresden logo'}
+									src={'/logos/landeshauptstadt_dresden_logo.jpeg'}
+									className={'aw-company-image'}
 								/>
-								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
-								<div className={ 'aw-company' }>{ 'Landeshauptstadt Dresden' }</div>
-								<div className={ 'aw-timerange' }>{ '2019 - 2026' }</div>
+								<div className={'aw-jobtitle'}>{'Election worker'}</div>
+								<div className={'aw-company'}>{'Landeshauptstadt Dresden'}</div>
+								<div className={'aw-timerange'}>{'2019 - 2026'}</div>
 							</li>
 						</ul>
 					</div>

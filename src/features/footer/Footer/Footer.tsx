@@ -9,10 +9,7 @@ import FooterContent from '@/features/footer/FooterContent';
 import Trail from '@/ui/Trail';
 
 export const Footer = () => (
-	<Trail
-		animationDirection={ 'bottom' }
-		animationSpeed={ 50 }
-	>
+	<Trail animationDirection={'bottom'} animationSpeed={50}>
 		<div>
 			<FooterContent />
 		</div>

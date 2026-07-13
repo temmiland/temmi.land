@@ -21,7 +21,9 @@ describe('skillsToCsv', () => {
 	it('writes a header row followed by one row per skill', () => {
 		const csv = skillsToCsv([
 			skill({
-				id: 'a', name: 'TypeScript', rating: 5
+				id: 'a',
+				name: 'TypeScript',
+				rating: 5
 			})
 		]);
 		const lines = csv.split('\n');
@@ -35,10 +37,14 @@ describe('skillsToCsv', () => {
 	it('inserts a blank line between category groups', () => {
 		const csv = skillsToCsv([
 			skill({
-				id: 'a', name: 'A', category: SkillCategory.TOOLS
+				id: 'a',
+				name: 'A',
+				category: SkillCategory.TOOLS
 			}),
 			skill({
-				id: 'b', name: 'B', category: SkillCategory.AI
+				id: 'b',
+				name: 'B',
+				category: SkillCategory.AI
 			})
 		]);
 
@@ -53,10 +59,12 @@ describe('skillsToCsv', () => {
 	it('does not insert a blank line between consecutive skills in the same category', () => {
 		const csv = skillsToCsv([
 			skill({
-				id: 'a', name: 'A'
+				id: 'a',
+				name: 'A'
 			}),
 			skill({
-				id: 'b', name: 'B'
+				id: 'b',
+				name: 'B'
 			})
 		]);
 
@@ -66,7 +74,9 @@ describe('skillsToCsv', () => {
 	it('quotes cells containing a comma', () => {
 		const csv = skillsToCsv([
 			skill({
-				id: 'a', name: 'A', description: 'Foo, Bar'
+				id: 'a',
+				name: 'A',
+				description: 'Foo, Bar'
 			})
 		]);
 
@@ -76,7 +86,9 @@ describe('skillsToCsv', () => {
 	it('escapes embedded quotes by doubling them', () => {
 		const csv = skillsToCsv([
 			skill({
-				id: 'a', name: 'A', description: 'Say "hi"'
+				id: 'a',
+				name: 'A',
+				description: 'Say "hi"'
 			})
 		]);
 
@@ -87,7 +99,9 @@ describe('skillsToCsv', () => {
 		for (const dangerous of ['=SUM(A1)', '+1', '-1', '@cmd']) {
 			const csv = skillsToCsv([
 				skill({
-					id: 'a', name: 'A', description: dangerous
+					id: 'a',
+					name: 'A',
+					description: dangerous
 				})
 			]);
 			const lastCell = csv.split('\n')[1].split(',').pop();
@@ -101,7 +115,11 @@ describe('skillsToJson', () => {
 	it('strips presentation-only fields', () => {
 		const json = skillsToJson([
 			skill({
-				id: 'a', name: 'A', icon: 'react', iconPrefix: 'fab', isVisibleOnHome: true
+				id: 'a',
+				name: 'A',
+				icon: 'react',
+				iconPrefix: 'fab',
+				isVisibleOnHome: true
 			})
 		]);
 		const parsed = JSON.parse(json);

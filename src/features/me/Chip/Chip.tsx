@@ -17,7 +17,7 @@ const ChipTag = styled.span<{ color: string }>`
 	padding: 0.8vw;
 	width: fit-content;
 	font-family: ${fonts.regular};
-	font-size: 2.0vw;
+	font-size: 2vw;
 	border-radius: 1vw;
 	line-height: 1.1vw;
 	border: 1px solid transparent;
@@ -70,7 +70,7 @@ type ChipProps = {
 	iconName: IconName;
 	/** The text content. */
 	text: string;
-}
+};
 
 /**
  * Chip component.
@@ -82,8 +82,8 @@ export const Chip = ({
 	iconName = 'mug-hot',
 	text = 'Frontend Developer'
 }: ChipProps): JSX.Element => (
-	<ChipTag color={ color }>
-		<FontAwesomeIcon icon={ iconName } />
-		<span>{ text }</span>
+	<ChipTag color={color}>
+		<FontAwesomeIcon icon={iconName} />
+		<span>{text}</span>
 	</ChipTag>
 );

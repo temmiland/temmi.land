@@ -31,24 +31,17 @@ const PrivacyContentContainer = styled.div`
 
 export const PrivacySection = () => (
 	<PrivacyContainer>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-		>
-			<div className={ 'privacy-header' }>
-				<Typography variant={ 'h1' }>
-					{ 'Privacy' }
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'fingerprint'] } />
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'shield-halved'] } />
-					<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'lock'] } />
+		<Trail animationDirection={'left'} animationSpeed={50}>
+			<div className={'privacy-header'}>
+				<Typography variant={'h1'}>
+					{'Privacy'}
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'fingerprint']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'shield-halved']} />
+					<FontAwesomeIcon className={'h-icon'} icon={['fas', 'lock']} />
 				</Typography>
 			</div>
 		</Trail>
-		<Trail
-			animationDirection={ 'left' }
-			animationSpeed={ 50 }
-			animationDelay={ 175 }
-		>
+		<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
 			<PrivacyContentContainer>
 				<PrivacyContent />
 			</PrivacyContentContainer>

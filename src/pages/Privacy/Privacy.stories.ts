@@ -28,4 +28,3 @@ export const Standard: Story = {
 	},
 	args: {}
 };
-

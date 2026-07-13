@@ -70,19 +70,20 @@ const escapeCsv = (value: string | number | undefined): string => {
  * @param {Skill[]} data - The skills to serialize.
  * @returns {string} The JSON representation.
  */
-export const skillsToJson = (data: Skill[]): string => JSON.stringify(
-	data.map((skill) => {
-		const exportSkill = {
-			...skill
-		};
-		delete exportSkill.icon;
-		delete exportSkill.iconPrefix;
-		delete exportSkill.isVisibleOnHome;
-		return exportSkill;
-	}),
-	null,
-	2
-);
+export const skillsToJson = (data: Skill[]): string =>
+	JSON.stringify(
+		data.map((skill) => {
+			const exportSkill = {
+				...skill
+			};
+			delete exportSkill.icon;
+			delete exportSkill.iconPrefix;
+			delete exportSkill.isVisibleOnHome;
+			return exportSkill;
+		}),
+		null,
+		2
+	);
 
 /**
  * Serializes the given skills into a CSV string (with a header row).
@@ -92,13 +93,13 @@ export const skillsToJson = (data: Skill[]): string => JSON.stringify(
  * @returns {string} The CSV representation.
  */
 export const skillsToCsv = (data: Skill[]): string => {
-	const header = CSV_COLUMNS.map(column => column.label).join(',');
+	const header = CSV_COLUMNS.map((column) => column.label).join(',');
 	const lines = [header];
 	data.forEach((skill, index) => {
 		if (index > 0 && skill.category !== data[index - 1].category) {
 			lines.push('');
 		}
-		lines.push(CSV_COLUMNS.map(column => escapeCsv(skill[column.key])).join(','));
+		lines.push(CSV_COLUMNS.map((column) => escapeCsv(skill[column.key])).join(','));
 	});
 	return lines.join('\n');
 };

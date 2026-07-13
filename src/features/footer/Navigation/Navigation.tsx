@@ -26,15 +26,11 @@ const Div_Navigation = styled.div`
 
 export const Navigation = () => (
 	<Div_Navigation>
-		<Link href={ '/privacy' }>
-			<Typography variant={ 'navigation' }>
-				{ 'Privacy' }
-			</Typography>
+		<Link href={'/privacy'}>
+			<Typography variant={'navigation'}>{'Privacy'}</Typography>
 		</Link>
-		<Link href={ '/imprint' }>
-			<Typography variant={ 'navigation' }>
-				{ 'Imprint' }
-			</Typography>
+		<Link href={'/imprint'}>
+			<Typography variant={'navigation'}>{'Imprint'}</Typography>
 		</Link>
 	</Div_Navigation>
 );

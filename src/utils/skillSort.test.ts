@@ -21,13 +21,22 @@ describe('sortSkills', () => {
 	it('sorts by rating descending, ties broken by years', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'A', rating: 3, years: 5
+				id: 'a',
+				name: 'A',
+				rating: 3,
+				years: 5
 			}),
 			skill({
-				id: 'b', name: 'B', rating: 5, years: 1
+				id: 'b',
+				name: 'B',
+				rating: 5,
+				years: 1
 			}),
 			skill({
-				id: 'c', name: 'C', rating: 3, years: 8
+				id: 'c',
+				name: 'C',
+				rating: 3,
+				years: 8
 			})
 		];
 
@@ -37,10 +46,13 @@ describe('sortSkills', () => {
 	it('treats a missing rating as 0', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'A', rating: 1
+				id: 'a',
+				name: 'A',
+				rating: 1
 			}),
 			skill({
-				id: 'b', name: 'B'
+				id: 'b',
+				name: 'B'
 			})
 		];
 
@@ -50,10 +62,14 @@ describe('sortSkills', () => {
 	it('sorts by years descending for "experience"', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'A', years: 2
+				id: 'a',
+				name: 'A',
+				years: 2
 			}),
 			skill({
-				id: 'b', name: 'B', years: 9
+				id: 'b',
+				name: 'B',
+				years: 9
 			})
 		];
 
@@ -63,10 +79,14 @@ describe('sortSkills', () => {
 	it('sorts by lastUsed descending for "lastUsed"', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'A', lastUsed: 2019
+				id: 'a',
+				name: 'A',
+				lastUsed: 2019
 			}),
 			skill({
-				id: 'b', name: 'B', lastUsed: 2026
+				id: 'b',
+				name: 'B',
+				lastUsed: 2026
 			})
 		];
 
@@ -76,10 +96,12 @@ describe('sortSkills', () => {
 	it('sorts alphabetically for "name"', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'Zig'
+				id: 'a',
+				name: 'Zig'
 			}),
 			skill({
-				id: 'b', name: 'Ada'
+				id: 'b',
+				name: 'Ada'
 			})
 		];
 
@@ -89,10 +111,14 @@ describe('sortSkills', () => {
 	it('does not mutate the input array', () => {
 		const skills = [
 			skill({
-				id: 'a', name: 'A', rating: 1
+				id: 'a',
+				name: 'A',
+				rating: 1
 			}),
 			skill({
-				id: 'b', name: 'B', rating: 5
+				id: 'b',
+				name: 'B',
+				rating: 5
 			})
 		];
 		const original = [...skills];
@@ -107,20 +133,31 @@ describe('sortSkillsForHome', () => {
 	it('groups by category in SkillCategory declaration order, then by rating within each group', () => {
 		const skills = [
 			skill({
-				id: 'backend-low', name: 'Backend Low', category: SkillCategory.BACKEND, rating: 2
+				id: 'backend-low',
+				name: 'Backend Low',
+				category: SkillCategory.BACKEND,
+				rating: 2
 			}),
 			skill({
-				id: 'lang-high', name: 'Lang High', category: SkillCategory.PROGRAMMING_LANGUAGES, rating: 3
+				id: 'lang-high',
+				name: 'Lang High',
+				category: SkillCategory.PROGRAMMING_LANGUAGES,
+				rating: 3
 			}),
 			skill({
-				id: 'backend-high', name: 'Backend High', category: SkillCategory.BACKEND, rating: 5
+				id: 'backend-high',
+				name: 'Backend High',
+				category: SkillCategory.BACKEND,
+				rating: 5
 			})
 		];
 
 		// PROGRAMMING_LANGUAGES comes before BACKEND in the enum's declaration
 		// order, and within BACKEND the higher rating should sort first.
 		expect(sortSkillsForHome(skills).map((s) => s.id)).toEqual([
-			'lang-high', 'backend-high', 'backend-low'
+			'lang-high',
+			'backend-high',
+			'backend-low'
 		]);
 	});
 });

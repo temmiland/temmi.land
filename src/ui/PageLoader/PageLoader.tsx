@@ -24,8 +24,8 @@ const Dot = styled.span`
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background: ${ colors.gray };
-	animation: ${ pulse } 1.2s ease-in-out infinite;
+	background: ${colors.gray};
+	animation: ${pulse} 1.2s ease-in-out infinite;
 `;
 
 /**

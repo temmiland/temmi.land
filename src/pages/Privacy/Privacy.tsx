@@ -28,7 +28,7 @@ const PrivacyArea = styled.section`
 
 export default function Privacy() {
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+		<PageLayout header={<Header animationDirection={'left'} />}>
 			<PrivacyArea>
 				<PrivacySection />
 			</PrivacyArea>

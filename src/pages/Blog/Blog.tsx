@@ -65,56 +65,49 @@ export default function Blog() {
 	// shareable and survives a reload. Replace (not push) so we don't add a
 	// history entry per keystroke.
 	useEffect(() => {
-		setSearchParams((prev) => {
-			const current = prev.get('search') ?? '';
-			if (current === searchQuery) {
-				return prev;
+		setSearchParams(
+			(prev) => {
+				const current = prev.get('search') ?? '';
+				if (current === searchQuery) {
+					return prev;
+				}
+				const next = new URLSearchParams(prev);
+				if (searchQuery) {
+					next.set('search', searchQuery);
+				} else {
+					next.delete('search');
+				}
+				return next;
+			},
+			{
+				replace: true
 			}
-			const next = new URLSearchParams(prev);
-			if (searchQuery) {
-				next.set('search', searchQuery);
-			} else {
-				next.delete('search');
-			}
-			return next;
-		}, {
-			replace: true
-		});
+		);
 	}, [searchQuery, setSearchParams]);
 
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+		<PageLayout header={<Header animationDirection={'left'} />}>
 			<BlogSection>
-				<div className={ 'blog-content' }>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-					>
-						<div className={ 'blog-header' }>
-							<Typography variant={ 'h1' }>
-								{ 'Blog' }
-								<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'feather'] } />
-								<FontAwesomeIcon
-									className={ 'h-icon' }
-									icon={ ['fas', 'wand-magic-sparkles'] }
-								/>
-								<FontAwesomeIcon className={ 'h-icon' } icon={ ['fas', 'pen-nib'] } />
+				<div className={'blog-content'}>
+					<Trail animationDirection={'left'} animationSpeed={50}>
+						<div className={'blog-header'}>
+							<Typography variant={'h1'}>
+								{'Blog'}
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'feather']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'wand-magic-sparkles']} />
+								<FontAwesomeIcon className={'h-icon'} icon={['fas', 'pen-nib']} />
 							</Typography>
 						</div>
 					</Trail>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-						animationDelay={ 175 }
-					>
+					<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
 						<SearchRow>
 							<SearchInput
-								value={ searchQuery }
-								onChange={ setSearchQuery }
-								placeholder={ 'Search articles…' }
+								value={searchQuery}
+								onChange={setSearchQuery}
+								placeholder={'Search articles…'}
 							/>
 						</SearchRow>
-						<BlogGrid posts={ blogPosts } searchQuery={ searchQuery } />
+						<BlogGrid posts={blogPosts} searchQuery={searchQuery} />
 					</Trail>
 				</div>
 			</BlogSection>

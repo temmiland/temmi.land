@@ -433,25 +433,19 @@ const CtaButton = styled.a`
 	gap: 0.6vw;
 	margin: 0.8vw 0 1.6vw 0;
 	text-decoration: none;
-	background: linear-gradient(
-		135deg,
-		${whiteAlpha(0.9)} 0%,
-		${whiteAlpha(0.72)} 100%
-	);
+	background: linear-gradient(135deg, ${whiteAlpha(0.9)} 0%, ${whiteAlpha(0.72)} 100%);
 	color: ${colors.surface};
 	font-family: ${fonts.medium};
 	font-size: 1.05vw;
 	border-radius: 2vw;
 	padding: 0.8vw 1.6vw;
-	transition: transform 120ms ease, background 120ms ease;
+	transition:
+		transform 120ms ease,
+		background 120ms ease;
 
 	&:hover {
 		transform: translateY(-0.15vw);
-		background: linear-gradient(
-			135deg,
-			${whiteAlpha(1)} 0%,
-			${whiteAlpha(0.85)} 100%
-		);
+		background: linear-gradient(135deg, ${whiteAlpha(1)} 0%, ${whiteAlpha(0.85)} 100%);
 	}
 
 	${media.mobile} {
@@ -553,12 +547,12 @@ const RelatedProject = styled(Link)`
  */
 type PBlogPostProps = {
 	/** The id (slug) of the post to render. */
-	postId: string
+	postId: string;
 };
 
 type StoreBadgeName = Extract<BlogBlock, { type: 'store-badge' }>['store'];
 
-const storeBadges: Record<StoreBadgeName, { src: string, alt: string }> = {
+const storeBadges: Record<StoreBadgeName, { src: string; alt: string }> = {
 	'google-play': {
 		src: '/blog/badges/google-play-badge.png',
 		alt: 'Get it on Google Play'
@@ -578,72 +572,58 @@ const storeBadges: Record<StoreBadgeName, { src: string, alt: string }> = {
  */
 const renderBlock = (block: BlogBlock, index: number): JSX.Element => {
 	switch (block.type) {
-	case 'heading':
-		return <h2 key={ index }>{ block.text }</h2>;
-	case 'image':
-		return (
-			<ArticleImage key={ index }>
-				<img src={ block.src } alt={ block.alt } loading={ 'lazy' } />
-				{ block.caption ? <figcaption>{ block.caption }</figcaption> : null }
-			</ArticleImage>
-		);
-	case 'gallery':
-		return (
-			<ImageGallery key={ index }>
-				{ block.images.map((image) => (
-					<figure key={ image.src }>
-						<img src={ image.src } alt={ image.alt } loading={ 'lazy' } />
-						{ image.caption ? <figcaption>{ image.caption }</figcaption> : null }
-					</figure>
-				)) }
-			</ImageGallery>
-		);
-	case 'cta':
-		return (
-			<CtaButton
-				key={ index }
-				href={ block.href }
-				target={ '_blank' }
-				rel={ 'noopener noreferrer' }
-			>
-				{ block.icon ? (
-					<FontAwesomeIcon
-						icon={ [
-							(block.iconPrefix ?? 'fas') as IconPrefix,
-							block.icon as IconName
-						] }
-					/>
-				) : null }
-				{ block.text }
-			</CtaButton>
-		);
-	case 'store-badge': {
-		const badge = storeBadges[block.store];
-		return (
-			<StoreBadgeLink
-				key={ index }
-				href={ block.href }
-				target={ '_blank' }
-				rel={ 'noopener noreferrer' }
-			>
-				<img src={ badge.src } alt={ badge.alt } />
-			</StoreBadgeLink>
-		);
-	}
-	case 'paragraph':
-		return <p key={ index }>{ block.text }</p>;
-	default: {
-		// Exhaustiveness guard: if a new BlogBlock type is added without a
-		// case above, this assignment fails to compile instead of silently
-		// rendering nothing at runtime.
-		const exhaustive: never = block;
-		return exhaustive;
-	}
+		case 'heading':
+			return <h2 key={index}>{block.text}</h2>;
+		case 'image':
+			return (
+				<ArticleImage key={index}>
+					<img src={block.src} alt={block.alt} loading={'lazy'} />
+					{block.caption ? <figcaption>{block.caption}</figcaption> : null}
+				</ArticleImage>
+			);
+		case 'gallery':
+			return (
+				<ImageGallery key={index}>
+					{block.images.map((image) => (
+						<figure key={image.src}>
+							<img src={image.src} alt={image.alt} loading={'lazy'} />
+							{image.caption ? <figcaption>{image.caption}</figcaption> : null}
+						</figure>
+					))}
+				</ImageGallery>
+			);
+		case 'cta':
+			return (
+				<CtaButton key={index} href={block.href} target={'_blank'} rel={'noopener noreferrer'}>
+					{block.icon ? (
+						<FontAwesomeIcon
+							icon={[(block.iconPrefix ?? 'fas') as IconPrefix, block.icon as IconName]}
+						/>
+					) : null}
+					{block.text}
+				</CtaButton>
+			);
+		case 'store-badge': {
+			const badge = storeBadges[block.store];
+			return (
+				<StoreBadgeLink key={index} href={block.href} target={'_blank'} rel={'noopener noreferrer'}>
+					<img src={badge.src} alt={badge.alt} />
+				</StoreBadgeLink>
+			);
+		}
+		case 'paragraph':
+			return <p key={index}>{block.text}</p>;
+		default: {
+			// Exhaustiveness guard: if a new BlogBlock type is added without a
+			// case above, this assignment fails to compile instead of silently
+			// rendering nothing at runtime.
+			const exhaustive: never = block;
+			return exhaustive;
+		}
 	}
 };
 
 export default function BlogPost({ postId }: PBlogPostProps) {
-
 	const post = blogPosts.find((entry) => entry.id === postId);
 	if (!post) {
 		return null;
@@ -657,66 +637,56 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 	const url = `https://temmi.land/blog/${post.id}`;
 
 	return (
-		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+		<PageLayout header={<Header animationDirection={'left'} />}>
 			<Helmet>
-				<title>{ title }</title>
-				<meta name={ 'description' } content={ post.excerpt } />
-				<meta property={ 'og:title' } content={ title } />
-				<meta property={ 'og:description' } content={ post.excerpt } />
-				<meta property={ 'og:url' } content={ url } />
-				<meta property={ 'og:type' } content={ 'article' } />
-				<link rel={ 'canonical' } href={ url } />
+				<title>{title}</title>
+				<meta name={'description'} content={post.excerpt} />
+				<meta property={'og:title'} content={title} />
+				<meta property={'og:description'} content={post.excerpt} />
+				<meta property={'og:url'} content={url} />
+				<meta property={'og:type'} content={'article'} />
+				<link rel={'canonical'} href={url} />
 			</Helmet>
 			<BlogSection>
-				<div className={ 'blog-content' }>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-					>
-						<BackLink href={ '/blog' }>
-							<FontAwesomeIcon icon={ ['fas', 'arrow-left'] } />
-							{ 'Back to blog' }
+				<div className={'blog-content'}>
+					<Trail animationDirection={'left'} animationSpeed={50}>
+						<BackLink href={'/blog'}>
+							<FontAwesomeIcon icon={['fas', 'arrow-left']} />
+							{'Back to blog'}
 						</BackLink>
-						<ArticleBanner gradient={ post.tileGradient }>
+						<ArticleBanner gradient={post.tileGradient}>
 							<FontAwesomeIcon
-								className={ 'banner-icon' }
-								icon={ [
-									(post.iconPrefix ?? 'fas') as IconPrefix,
-									post.icon as IconName
-								] }
+								className={'banner-icon'}
+								icon={[(post.iconPrefix ?? 'fas') as IconPrefix, post.icon as IconName]}
 							/>
-							<h1 className={ 'banner-title' }>{ post.title }</h1>
-							<div className={ 'banner-meta' }>
+							<h1 className={'banner-title'}>{post.title}</h1>
+							<div className={'banner-meta'}>
 								<span>
-									<FontAwesomeIcon icon={ ['fas', 'calendar'] } />
-									{ formatBlogDate(post.date) }
+									<FontAwesomeIcon icon={['fas', 'calendar']} />
+									{formatBlogDate(post.date)}
 								</span>
 								<span>
-									<FontAwesomeIcon icon={ ['fas', 'clock'] } />
-									{ formatReadingTime(post.readingMinutes) }
+									<FontAwesomeIcon icon={['fas', 'clock']} />
+									{formatReadingTime(post.readingMinutes)}
 								</span>
 							</div>
-							<div className={ 'banner-tags' }>
-								{ post.tags.map((tag) => (
-									<span key={ tag } className={ 'banner-tag' }>{ tag }</span>
-								)) }
+							<div className={'banner-tags'}>
+								{post.tags.map((tag) => (
+									<span key={tag} className={'banner-tag'}>
+										{tag}
+									</span>
+								))}
 							</div>
 						</ArticleBanner>
 					</Trail>
-					<Trail
-						animationDirection={ 'left' }
-						animationSpeed={ 50 }
-						animationDelay={ 175 }
-					>
-						<ArticleBody>
-							{ post.content.map((block, i) => renderBlock(block, i)) }
-						</ArticleBody>
-						{ relatedProject ? (
-							<RelatedProject href={ relatedProject.href }>
-								<FontAwesomeIcon icon={ ['fas', 'diagram-project'] } />
-								{ `See the ${relatedProject.name} project` }
+					<Trail animationDirection={'left'} animationSpeed={50} animationDelay={175}>
+						<ArticleBody>{post.content.map((block, i) => renderBlock(block, i))}</ArticleBody>
+						{relatedProject ? (
+							<RelatedProject href={relatedProject.href}>
+								<FontAwesomeIcon icon={['fas', 'diagram-project']} />
+								{`See the ${relatedProject.name} project`}
 							</RelatedProject>
-						) : null }
+						) : null}
 					</Trail>
 				</div>
 			</BlogSection>

@@ -21,22 +21,17 @@ const Div_Trademark = styled.div`
 
 export const Trademark = () => (
 	<Div_Trademark>
-		<Typography variant={ 'trademark' }>
-			{
-				'The logos and trademarks used on this website are the'
-				+ ' property of their respective owners. I do not claim'
-				+ ' any rights to these images and use them solely for'
-				+ ' reference purposes.'
-			}
+		<Typography variant={'trademark'}>
+			{'The logos and trademarks used on this website are the' +
+				' property of their respective owners. I do not claim' +
+				' any rights to these images and use them solely for' +
+				' reference purposes.'}
 		</Typography>
-		<Typography variant={ 'trademark' }>
-			{
-				'All rights to the logos belong'
-				+ ' to their respective brand owners. If there are any'
-				+ ' concerns or questions regarding the use of these logos'
-				+ ', please contact me directly.'
-			}
+		<Typography variant={'trademark'}>
+			{'All rights to the logos belong' +
+				' to their respective brand owners. If there are any' +
+				' concerns or questions regarding the use of these logos' +
+				', please contact me directly.'}
 		</Typography>
-
 	</Div_Trademark>
 );

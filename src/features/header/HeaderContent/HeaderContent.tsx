@@ -12,7 +12,6 @@ import Signature from '@/features/me/Signature';
 import Link from '@/ui/Link';
 import { media } from '@/styles';
 
-
 const HeaderContainer = styled.div`
 	background-color: rgba(0, 0, 0, 0.8);
 	box-shadow: 0 0.28vw 2.08vw rgba(0, 0, 0, 0.2);
@@ -91,11 +90,11 @@ export const HeaderContent = () => {
 	return (
 		<HeaderContainer>
 			<LinkContainer>
-				<Link href={ '/' }>
-					<Signature disableAnimation={ true } />
+				<Link href={'/'}>
+					<Signature disableAnimation={true} />
 				</Link>
 			</LinkContainer>
-			<PageCardList pages={ pages } />
+			<PageCardList pages={pages} />
 		</HeaderContainer>
-	)
+	);
 };

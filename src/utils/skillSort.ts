@@ -40,15 +40,15 @@ export const SKILL_SORT_LABELS: Record<SkillSortOption, string> = {
  */
 const compareSkills = (option: SkillSortOption, a: Skill, b: Skill): number => {
 	switch (option) {
-	case 'experience':
-		return (b.years - a.years) || ((b.rating ?? 0) - (a.rating ?? 0));
-	case 'lastUsed':
-		return (b.lastUsed - a.lastUsed) || ((b.rating ?? 0) - (a.rating ?? 0));
-	case 'name':
-		return a.name.localeCompare(b.name);
-	case 'rating':
-	default:
-		return ((b.rating ?? 0) - (a.rating ?? 0)) || (b.years - a.years);
+		case 'experience':
+			return b.years - a.years || (b.rating ?? 0) - (a.rating ?? 0);
+		case 'lastUsed':
+			return b.lastUsed - a.lastUsed || (b.rating ?? 0) - (a.rating ?? 0);
+		case 'name':
+			return a.name.localeCompare(b.name);
+		case 'rating':
+		default:
+			return (b.rating ?? 0) - (a.rating ?? 0) || b.years - a.years;
 	}
 };
 
@@ -58,9 +58,8 @@ const compareSkills = (option: SkillSortOption, a: Skill, b: Skill): number => {
  * @param {SkillSortOption} option - The sort option to apply.
  * @returns {Skill[]} The sorted skills (does not mutate the input).
  */
-export const sortSkills = (
-	skillList: Skill[], option: SkillSortOption = DEFAULT_SKILL_SORT
-): Skill[] => [...skillList].sort((a, b) => compareSkills(option, a, b));
+export const sortSkills = (skillList: Skill[], option: SkillSortOption = DEFAULT_SKILL_SORT): Skill[] =>
+	[...skillList].sort((a, b) => compareSkills(option, a, b));
 
 /**
  * Sorts skills the way the Home page overview shows them: by category (in
@@ -69,6 +68,9 @@ export const sortSkills = (
  * @param {Skill[]} skillList - The skills to sort.
  * @returns {Skill[]} The sorted skills (does not mutate the input).
  */
-export const sortSkillsForHome = (skillList: Skill[]): Skill[] => [...skillList].sort((a, b) =>
-	(CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category))
-	|| compareSkills('rating', a, b));
+export const sortSkillsForHome = (skillList: Skill[]): Skill[] =>
+	[...skillList].sort(
+		(a, b) =>
+			CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category) ||
+			compareSkills('rating', a, b)
+	);

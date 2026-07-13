@@ -25,13 +25,16 @@ type Story = StoryObj<typeof meta>;
 
 const options = [
 	{
-		value: 'typescript', label: 'Typescript'
+		value: 'typescript',
+		label: 'Typescript'
 	},
 	{
-		value: 'react', label: 'React'
+		value: 'react',
+		label: 'React'
 	},
 	{
-		value: 'kotlin', label: 'Kotlin'
+		value: 'kotlin',
+		label: 'Kotlin'
 	}
 ];
 
@@ -98,4 +101,3 @@ export const HighlightsActiveOption: Story = {
 		await expect(allChip).not.toHaveClass('active');
 	}
 };
-

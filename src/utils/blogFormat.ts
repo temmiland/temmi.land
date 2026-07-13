@@ -30,5 +30,4 @@ export const formatBlogDate = (isoDate: string): string => {
  * @param {number} minutes - The estimated reading time in minutes.
  * @returns {string} The reading-time label.
  */
-export const formatReadingTime = (minutes: number): string =>
-	`${minutes} min read`;
+export const formatReadingTime = (minutes: number): string => `${minutes} min read`;

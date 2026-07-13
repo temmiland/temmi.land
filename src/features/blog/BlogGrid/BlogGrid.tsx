@@ -62,7 +62,7 @@ type BlogGridProps = {
 	/** The blog posts to render. */
 	posts: BlogPost[];
 	/** The search query to filter posts by, or '' for no filter. */
-	searchQuery?: string
+	searchQuery?: string;
 };
 
 /**
@@ -73,25 +73,23 @@ type BlogGridProps = {
  * @returns {JSX.Element} BlogGrid JSX element.
  */
 export const BlogGrid = ({ posts, searchQuery = '' }: BlogGridProps): JSX.Element => {
-
 	const normalizedQuery = searchQuery.trim().toLowerCase();
 
 	const filteredPosts = [...posts]
 		.sort((a, b) => b.date.localeCompare(a.date))
-		.filter(post =>
-			!normalizedQuery
-			|| post.title.toLowerCase().includes(normalizedQuery)
-			|| post.excerpt.toLowerCase().includes(normalizedQuery)
-			|| post.tags.some(tag => tag.toLowerCase().includes(normalizedQuery))
+		.filter(
+			(post) =>
+				!normalizedQuery ||
+				post.title.toLowerCase().includes(normalizedQuery) ||
+				post.excerpt.toLowerCase().includes(normalizedQuery) ||
+				post.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery))
 		);
 
 	if (filteredPosts.length === 0) {
 		return (
 			<BlogGridContainer>
 				<NoResults>
-					<Typography variant={ 'p' }>
-						{ 'No blog posts found.' }
-					</Typography>
+					<Typography variant={'p'}>{'No blog posts found.'}</Typography>
 				</NoResults>
 			</BlogGridContainer>
 		);
@@ -100,10 +98,10 @@ export const BlogGrid = ({ posts, searchQuery = '' }: BlogGridProps): JSX.Elemen
 	return (
 		<BlogGridContainer>
 			<BlogCardGrid>
-				{ filteredPosts.map(post => (
-					<BlogCard key={ post.id } post={ post } />
-				)) }
+				{filteredPosts.map((post) => (
+					<BlogCard key={post.id} post={post} />
+				))}
 			</BlogCardGrid>
 		</BlogGridContainer>
 	);
-}
+};

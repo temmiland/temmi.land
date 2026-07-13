@@ -5,9 +5,6 @@
  * permission of the author.
  */
 
-
-
-
 /**
  * A single content block of a blog post. Posts are authored as an ordered
  * list of blocks so an article can mix headings, paragraphs and call-to-action
@@ -15,60 +12,60 @@
  */
 export type BlogBlock =
 	| {
-		/** A section heading. */
-		type: 'heading';
-		/** The heading text. */
-		text: string;
-	}
+			/** A section heading. */
+			type: 'heading';
+			/** The heading text. */
+			text: string;
+	  }
 	| {
-		/** A body paragraph. */
-		type: 'paragraph';
-		/** The paragraph text. */
-		text: string;
-	}
+			/** A body paragraph. */
+			type: 'paragraph';
+			/** The paragraph text. */
+			text: string;
+	  }
 	| {
-		/** An inline image. */
-		type: 'image';
-		/** The image source (public path or URL). */
-		src: string;
-		/** The image's alternative text. */
-		alt: string;
-		/** An optional caption shown beneath the image. */
-		caption?: string;
-	}
-	| {
-		/** A row of smaller images shown side by side. */
-		type: 'gallery';
-		/** The images to display in the row. */
-		images: {
+			/** An inline image. */
+			type: 'image';
 			/** The image source (public path or URL). */
 			src: string;
 			/** The image's alternative text. */
 			alt: string;
 			/** An optional caption shown beneath the image. */
 			caption?: string;
-		}[];
-	}
+	  }
 	| {
-		/** A call-to-action button link. */
-		type: 'cta';
-		/** The button label. */
-		text: string;
-		/** The hyperlink reference. */
-		href: string;
-		/** The FontAwesome icon name. */
-		icon?: string;
-		/** The FontAwesome icon prefix. Defaults to 'fas' (solid icons). */
-		iconPrefix?: string;
-	}
+			/** A row of smaller images shown side by side. */
+			type: 'gallery';
+			/** The images to display in the row. */
+			images: {
+				/** The image source (public path or URL). */
+				src: string;
+				/** The image's alternative text. */
+				alt: string;
+				/** An optional caption shown beneath the image. */
+				caption?: string;
+			}[];
+	  }
 	| {
-		/** An official app store badge link. */
-		type: 'store-badge';
-		/** Which store's official badge artwork to render. */
-		store: 'google-play' | 'app-store';
-		/** The store listing to link to. */
-		href: string;
-	};
+			/** A call-to-action button link. */
+			type: 'cta';
+			/** The button label. */
+			text: string;
+			/** The hyperlink reference. */
+			href: string;
+			/** The FontAwesome icon name. */
+			icon?: string;
+			/** The FontAwesome icon prefix. Defaults to 'fas' (solid icons). */
+			iconPrefix?: string;
+	  }
+	| {
+			/** An official app store badge link. */
+			type: 'store-badge';
+			/** Which store's official badge artwork to render. */
+			store: 'google-play' | 'app-store';
+			/** The store listing to link to. */
+			href: string;
+	  };
 
 /**
  * Represents a blog post / article.

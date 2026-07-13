@@ -143,23 +143,22 @@ const MAX_SKILL_CARDS = 12;
 type SkillsOverviewProps = {
 	/** The skills to pick the home page selection from. */
 	skills: Skill[];
-}
+};
 
 export const SkillsOverview = ({ skills }: SkillsOverviewProps): JSX.Element => {
-
-	const shownSkills = sortSkillsForHome(skills.filter((skill) => skill.isVisibleOnHome))
-		.slice(0, MAX_SKILL_CARDS);
+	const shownSkills = sortSkillsForHome(skills.filter((skill) => skill.isVisibleOnHome)).slice(
+		0,
+		MAX_SKILL_CARDS
+	);
 
 	return (
 		<SkillsWrapper>
-			{
-				shownSkills.map((skill) => (
-					<SkillCard key={ skill.id } skill={ skill } />
-				))
-			}
-			<MoreLink href={ '/skills' }>
+			{shownSkills.map((skill) => (
+				<SkillCard key={skill.id} skill={skill} />
+			))}
+			<MoreLink href={'/skills'}>
 				<MoreCard>
-					<FontAwesomeIcon icon={ 'caret-right' } />
+					<FontAwesomeIcon icon={'caret-right'} />
 				</MoreCard>
 			</MoreLink>
 		</SkillsWrapper>
