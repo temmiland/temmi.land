@@ -16,6 +16,8 @@ export const formatBlogDate = (isoDate: string): string => {
 	if (Number.isNaN(date.getTime())) {
 		return isoDate;
 	}
+	// 'en-GB' for the day-month-year order, not the locale itself — the blog's
+	// UI language is English regardless of the visitor's browser locale.
 	return date.toLocaleDateString('en-GB', {
 		day: 'numeric',
 		month: 'long',

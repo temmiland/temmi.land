@@ -62,7 +62,7 @@ const projectTechOptions = [
 		value: 'angular', label: 'Angular'
 	},
 	{
-		value: 'Java', label: 'Java'
+		value: 'java', label: 'Java'
 	},
 	{
 		value: 'kotlin', label: 'Kotlin'

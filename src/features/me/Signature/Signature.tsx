@@ -22,7 +22,7 @@ function useInterval(callback: () => void, delay: number | null) {
 	// Set up the interval.
 	useEffect(() => {
 		function tick() {
-            savedCallback.current!();
+			savedCallback.current!();
 		}
 		if (delay !== null) {
 			const id = setInterval(tick, delay);

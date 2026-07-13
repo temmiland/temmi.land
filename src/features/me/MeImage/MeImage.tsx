@@ -14,7 +14,7 @@
 export const MeImage = (): JSX.Element => (
 	<img
 		width={ '100%' }
-		src={ './me.png' }
+		src={ '/me.png' }
 		alt={ 'me' }
 	/>
 );
