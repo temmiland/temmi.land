@@ -131,6 +131,12 @@ Disallow: me.png
 robots.txt ist **kein** Zugriffsschutz — `https://temmi.land/me.png` bleibt für jeden abrufbar
 (siehe S8). Außerdem fehlt der `Sitemap:`-Eintrag.
 
+**Nachtrag (13.07.2026, im Rahmen von P5):** Der obige Fix hat nie etwas bewirkt — die Datei lag
+unter `src/robots.txt`, und Vite kopiert nur `public/` unverändert nach `dist/`; ein Build-Check
+(`find dist -iname "robots*"`) zeigte, dass weder `robots.txt` noch `sitemap.xml` je im
+Produktions-Output existierten. `https://temmi.land/robots.txt` hat also durchgehend 404
+geliefert. Nach `public/robots.txt` verschoben — siehe P5 für Details und den Sitemap-Fix.
+
 ### 🟡 B9: `renderBlock` ist nicht exhaustiv — ✅ GEFIXT
 
 `BlogPost.tsx:660-717`: Der `default`-Fall rendert `<p>{ block.text }</p>`. Kommt ein neuer
@@ -307,10 +313,16 @@ im Projekt.
 
 > **Pfad-Hinweis (13.07.2026):** Die Struktur wurde inzwischen von `components/layouts|widgets`
 > nach `pages/` + `features/<feature>/<Komponente>` + `ui/` umgebaut. Alle Fundstellen unten sind
-> gegen den aktuellen Working Tree neu verifiziert — die Befunde selbst sind **alle noch offen**,
-> nur die Pfade haben sich verschoben.
+> gegen den aktuellen Working Tree neu verifiziert.
+>
+> **Status 13.07.2026 (zweite Runde):** A1, A2, A5, A6, A10 (teilweise) sind gefixt und mit
+> Playwright verifiziert (Details in den jeweiligen Einträgen). **A3, A4, A7, A8, A9, A11, A12
+> bleiben offen** — das ist bewusst: A3/A4 sind laufende Refactoring-Arbeit (siehe Memory
+> „Styles-Token-Migration"), A7–A9/A11/A12 waren nicht Teil des beauftragten Umfangs
+> („Großer Rundumschlag": Quick-Wins + A1/A2 + A5/A6/P4/P5) und wurden bewusst nicht mit
+> angefasst, um den Umfang nicht eigenmächtig zu sprengen.
 
-### 🔴 A1: Seiten-Chrome ist 7-fach copy-gepastet
+### 🔴 A1: Seiten-Chrome ist 7-fach copy-gepastet — ✅ GEFIXT
 
 `HeaderSection`, `FooterSection`, `PageGradient`, `PageMountains` (~130 Zeilen styled-components)
 existieren nahezu identisch in [`pages/Home/Home.tsx`](src/pages/Home/Home.tsx),
@@ -327,7 +339,17 @@ existieren nahezu identisch in [`pages/Home/Home.tsx`](src/pages/Home/Home.tsx),
 **Fix:** Eine `PageLayout`-Komponente (`<PageLayout><Header/>{children}<Footer/></PageLayout>`),
 die Gradient + Mountains einmal definiert. Reduziert jede Page um ~150 Zeilen.
 
-### 🔴 A2: Identische Such-/Dropdown-Styles doppelt und dreifach
+**Gefixt (13.07.2026):** [`ui/PageLayout/PageLayout.tsx`](src/ui/PageLayout/PageLayout.tsx) erstellt
+(`<PageLayout header={...}>{children}</PageLayout>`, Footer/Gradient/Mountains einmal definiert);
+alle 7 Pages migriert, `z-index` auf `300` und `url(/footer.svg)` (absolut) vereinheitlicht. Das war
+kein reiner Stilfehler: Da styled-components ein `<style>`-Tag ins Dokument injiziert, löst der
+Browser eine relative `url(./footer.svg)` gegen die **aktuelle Route** auf, nicht gegen eine
+Stylesheet-Datei. Auf `/project/:id` (zwei Pfadsegmente) ergab das `/project/footer.svg` → 404 →
+das Bergpanorama fehlte auf jeder Projekt-Detailseite, unbemerkt. Mit Playwright verifiziert (alle
+7 Seiten + `/project/:id` + `/blog/:id`): `footer.svg` liefert jetzt überall 200/304 statt 404 auf
+den Projektseiten; Screenshot von `/project/alimonia` zeigt das Panorama korrekt.
+
+### 🔴 A2: Identische Such-/Dropdown-Styles doppelt und dreifach — ✅ GEFIXT
 
 - `SearchRow` + `SearchInputWrapper` (~130 Zeilen) sind **byte-identisch** in
   [`pages/Blog/Blog.tsx`](src/pages/Blog/Blog.tsx) und
@@ -338,6 +360,19 @@ die Gradient + Mountains einmal definiert. Reduziert jede Page um ~150 Zeilen.
 
 Das gehört als `ui/SearchInput` und `ui/Dropdown` neben `Filter` — genau dafür gibt es den
 `ui/`-Ordner bereits.
+
+**Gefixt (13.07.2026):** `ui/SearchInput` extrahiert (Blog + Skills nutzen es jetzt identisch).
+Für Dropdown: statt die beiden *visuell* unterschiedlichen Dropdown-Patterns (Filter's
+Mobile-Vollbreite-Menü vs. Skills' kompakte Ecken-Menüs für Sort/Export) in eine gemeinsame
+visuelle Komponente zu zwingen — das hätte eine der beiden Ansichten verschlechtert —, wurde nur
+die **Verhaltenslogik** (Open-State + Klick-außerhalb-schließt) als `ui/Dropdown`-Hook
+(`useDropdown()`) extrahiert und in `Filter.tsx` sowie zweimal unabhängig in `Skills.tsx` (Sort,
+Export) verwendet; Skills.tsx hatte zuvor einen einzigen kombinierten Effekt, der beide Refs
+gleichzeitig prüfte. Nebenbei beim Konsolidieren gefunden: Der Clear-Button (das „×" im Suchfeld)
+hatte eine 0×0-Box (Shrink-to-fit griff im echten Layout-Kontext nicht, reproduziert auch am
+Alt-Code) — das Icon wurde nur durch Overflow sichtbar gemalt, der Button selbst war nicht
+zuverlässig klickbar/fokussierbar. Fix: explizite `width/height: 1em`. Mit Playwright verifiziert
+(Suche + Clear auf Blog/Skills, beide Skills-Dropdowns unabhängig, Mobile-Filter-Dropdown).
 
 ### 🔴 A3: `ProjectGrid.tsx` — jetzt 1.075 Zeilen (war 1.062), davon ~700 Zeilen fast identisches CSS
 
@@ -379,7 +414,7 @@ Die konsequente Migration auf `fluid()` (+ ggf. `clamp()` mit Untergrenze statt 
 mobile/tablet-Blöcke) würde das CSS-Volumen grob halbieren und Drift zwischen den vier Varianten
 unmöglich machen. Das ist die wirksamste Antwort auf „lange styled-components-Funktionen".
 
-### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button
+### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 
 `antd` (eine der größten UI-Libraries überhaupt) wird nur für `Typography.Paragraph`
 ([`ui/Typography/Typography.tsx`](src/ui/Typography/Typography.tsx)), `Typography.Link`
@@ -392,7 +427,17 @@ importiert — und dann per styled-components ohnehin komplett überstylt (inkl.
 (`<p>`, `<a>`, `<button>`) ersetzen das vollständig und entfernen eine schwere Dependency samt
 ihrer CSS-Runtime aus dem Bundle.
 
-### 🟠 A6: FontAwesome: alle drei kompletten Icon-Packs registriert
+**Gefixt (13.07.2026):** Alle fünf Stellen auf native Elemente umgestellt. Nebenbefund beim
+Umbau: `Typography.Paragraph` rendert (trotz des Namens) tatsächlich ein `<div>`, kein `<p>` —
+der komplette Fließtext auf Privacy/Imprint war die ganze Zeit semantisch ein `<div>`. Jetzt ein
+echtes `<p>`. Margins wurden vor dem Fix per `getComputedStyle` gemessen und danach exakt
+reproduziert (`p`/`footer`/`copyright` behalten ihr `1em`-Bottom-Margin, `header`/`navigation`/
+`trademark` bekommen `margin:0`, deckungsgleich mit den `!important`-Overrides, die ihre
+Consumer ohnehin schon hatten). Mit Playwright verifiziert: Computed Styles vor/nach identisch
+auf jedem betroffenen Element (Link-Hover-Farbe, Privacy-Absatzabstände, Footer/Nav/Trademark-
+Abstände, Monument-Bild, Projekt-Tile-Button, Skill-Chip) plus Screenshots. Bundle: −113 KB gzip.
+
+### 🟠 A6: FontAwesome: alle drei kompletten Icon-Packs registriert — ✅ GEFIXT
 
 [`main.tsx:32`](src/main.tsx#L32): `library.add(fas, fab, far)` lädt **jedes** Solid-, Brand- und
 Regular-Icon ins Bundle (mehrere hundert KB), weil Icons als Strings (`icon={'scale-balanced'}`)
@@ -400,15 +445,27 @@ referenziert werden. Best Practice: benannte Icon-Importe (`import { faScaleBala
 dann tree-shaked der Bundler alles Ungenutzte. Nebeneffekt der String-Variante: überall
 `as IconName`-Casts, die Tippfehler erst zur Laufzeit (leeres Icon) zeigen.
 
+**Gefixt (13.07.2026):** Alle tatsächlich referenzierten Icon-Namen extrahiert (JSX-Usages +
+`icon`/`tileIcon`/`repoIcon`-Felder in `data/*.ts`, 91 Stück), gegen die installierten Pakete
+verifiziert und nur diese per benanntem Import registriert. `free-regular-svg-icons` war
+**komplett ungenutzt** (0 `far:`-Referenzen) und wurde als Dependency entfernt. Die
+Callsites selbst (`icon={['fas', 'dragon']}`) bleiben unverändert — der String-Lookup
+funktioniert unabhängig davon, ob die Library aus einem benannten Import oder einem
+Komplett-Pack befüllt wurde. Bundle: 755 KB → 209 KB gzip (größter Einzel-Fix im ganzen
+Rundumschlag). Mit Playwright verifiziert (Icon-Anzahl pro Seite, Screenshots inkl. Brand-Logos).
+
 ### 🟠 A7: Interne Navigation per `<a href>` statt Router-`<Link>`
 
 [`BlogCard.tsx:298`](src/features/blog/BlogCard/BlogCard.tsx#L298),
 [`SkillChip.tsx:216`](src/features/projects/SkillChip/SkillChip.tsx#L216), `BackLink` in
-[`BlogPost.tsx:141,748,787`](src/pages/BlogPost/BlogPost.tsx#L141) und der antd-`Button` in
-[`ProjectTile.tsx:285`](src/features/projects/ProjectTile/ProjectTile.tsx#L285) navigieren intern
+[`BlogPost.tsx:141,748,787`](src/pages/BlogPost/BlogPost.tsx#L141) und der (seit A5 native)
+`<a>`-Button in
+[`ProjectTile.tsx`](src/features/projects/ProjectTile/ProjectTile.tsx) navigieren intern
 mit rohen `<a href>` — jede Navigation ist ein **Full Page Reload**: React bootet neu,
 Fonts/Daten werden neu geparst, der SPA-Vorteil ist weg. `react-router-dom` ist installiert und
-liefert `<Link to>`. (Danach muss B6 gefixt sein, sonst bricht die Suchparam-Übergabe.)
+liefert `<Link to>`. (Danach muss B6 gefixt sein, sonst bricht die Suchparam-Übergabe.) B6 ist
+seit A10 verifiziert robust (funktionale `setSearchParams`-Updater-Form) — dieser Punkt selbst
+ist unverändert offen, war nicht Teil des beauftragten Umfangs.
 
 ### 🟠 A8: Klickbare `<div>`s + gezielt deaktivierte A11y-Regeln
 
@@ -423,14 +480,15 @@ Kopf schütteln — zumal die Seite mit Storybook-a11y-Addon ausgestattet ist.
 ### 🟠 A9: Invalides HTML in der Navigation
 
 [`PageCardList.tsx:193-208`](src/features/header/PageCardList/PageCardList.tsx#L193) rendert
-`<Ul>` → `<Link>` (`<a>`) → `<Typography>` (antd-`<p>`!) → `<li>`. Erlaubte Kinder von `<ul>` sind
+`<Ul>` → `<Link>` (`<a>`) → `<Typography>` (seit A5 ein echtes `<p>`, vorher antd-`<div>` — die
+falsche Verschachtelung ändert das nicht) → `<li>`. Erlaubte Kinder von `<ul>` sind
 nur `<li>`; ein `<li>` in einem `<p>` in einem `<a>` ist doppelt invalide. Browser reparieren das
 still, aber Screenreader-Semantik („Liste mit 5 Einträgen") geht kaputt. Richtig:
 `<ul><li><Link>…</Link></li></ul>`.
 Verwandt: Mehrere `<h1>` pro Seite (Seitentitel-H1 + `project_header`-H1 je Panel in
 `Typography.tsx:133`) — Überschriften-Hierarchie für SEO/A11y aufräumen.
 
-### 🟠 A10: ESLint-Konfiguration mit toten Enden
+### 🟠 A10: ESLint-Konfiguration mit toten Enden — teilweise ✅ GEFIXT
 
 - `eslint-plugin-react-hooks` ist installiert, aber **nicht in** [`eslint.config.js`](eslint.config.js)
   **registriert** — weder `rules-of-hooks` noch `exhaustive-deps` laufen. Genau die Fehlerklasse,
@@ -439,6 +497,16 @@ Verwandt: Mehrere `<h1>` pro Seite (Seitentitel-H1 + `project_header`-H1 je Pane
   aktiviert — Prettier prüft effektiv nichts.
 - Diverse Airbnb-Altlasten (`no-plusplus`, `class-methods-use-this`, `func-names`) werden
   deaktiviert, obwohl sie in keinem der geerbten Configs aktiv sind — totes Gewicht.
+
+**Gefixt (13.07.2026, Punkt 1):** `react-hooks/rules-of-hooks` (error) und `exhaustive-deps`
+(warn) aktiviert. `eslint-plugin-react-hooks` musste dafür von 4.6.0 auf 7.1.1 angehoben werden —
+4.x ruft intern `context.getSource()` auf, das in ESLint 9 entfernt wurde und `exhaustive-deps`
+mit einem Crash statt Ergebnissen quittierte. Deckte zwei echte Verstöße auf (Blog.tsx, Skills.tsx:
+der `?search=`/`?category=`-URL-Sync-Effekt schloss über das äußere `searchParams`-Objekt statt
+es über `setSearchParams(prev => …)` aus dem Updater zu lesen) — auf die funktionale Setter-Form
+umgestellt, dadurch hängt der Effekt jetzt nur noch von lokalem State ab. **Offen:** Punkt 2
+(`prettier/prettier` aktivieren) und Punkt 3 (tote Airbnb-Regeln aufräumen) — beides klein, aber
+nicht Teil des beauftragten Umfangs.
 
 ### 🟡 A11: Keine Tests
 
@@ -483,16 +551,22 @@ trotzdem können.)
 nginx-Image mit `ngx_brotli`-Modul, nicht in `nginxinc/nginx-unprivileged:stable-alpine`
 enthalten).
 
-### 🔴 P2: Fonts — 🟠 TEILWEISE GEFIXT durch Fraunces-Wechsel (S10)
+### 🔴 P2: Fonts — ✅ GEFIXT
 
 - ~~Es werden 4 Schnitte als **TTF** geladen — als WOFF2 wären es ~30 % der Größe.~~ Erledigt:
   [`public/fonts/Fraunces-Variable.woff2`](public/fonts/Fraunces-Variable.woff2) ist eine einzige
   ~118-KB-WOFF2-Datei statt 26 TTF-Dateien (~9 MB).
-- `@font-face` in [`src/index.css`](src/index.css) hat weiterhin **kein** `font-display: swap` ⇒
-  unsichtbarer Text bis zum Font-Load (FOIT) — offen.
-- Kein `<link rel="preload">` für die Fraunces-Datei in [`index.html`](index.html) — offen.
-- Der `body`-Font `Domine` ist weiterhin in `fonts.body` (`theme.ts`) deklariert, aber nirgends
-  per `@font-face`/Import geladen — offen, unverändert.
+- ~~`@font-face` in [`src/index.css`](src/index.css) hat weiterhin **kein** `font-display: swap`~~
+  Ergänzt an allen vier `@font-face`-Regeln.
+- ~~Kein `<link rel="preload">` für die Fraunces-Datei in [`index.html`](index.html)~~ Ergänzt.
+- ~~Der `body`-Font `Domine` ist weiterhin in `fonts.body` (`theme.ts`) deklariert, aber nirgends
+  per `@font-face`/Import geladen~~ Rückfrage an den User: Domine als echten Webfont laden
+  (sichtbare Design-Änderung) oder toten Verweis entfernen? Antwort: entfernen — `fonts.body`
+  wurde nirgends referenziert (keine Typography-Variante nutzte es), Root-`font-family` fällt
+  jetzt explizit auf `system-ui, …` zurück (= exakt das, was durch den fehlenden Font-Load
+  ohnehin schon gerendert wurde). Keine visuelle Änderung, nur eine ehrliche Deklaration.
+
+**Gefixt (13.07.2026).**
 
 ### 🟠 P3: Blog-Bilder bis 2,1 MB PNG
 
@@ -502,14 +576,22 @@ geladen, kein `loading="lazy"` im Blog-Code gefunden. Screenshots als WebP/AVIF 
 Auflösung wären je ~100–200 KB; dazu `loading="lazy"` und `srcset`. Aktuell lädt ein
 Blog-Artikel ~7 MB Bilder. Offen, unverändert.
 
-### 🟠 P4: Kein Code-Splitting
+### 🟠 P4: Kein Code-Splitting — ✅ GEFIXT
 
 Alle Routen, alle Daten (`skills.ts` 1.260 Zeilen, `projects.ts` 758, `blog.ts` 240) und antd +
 FontAwesome-Komplettpacks landen in einem Bundle. Kein `React.lazy`/`lazy(` in
 [`src/main.tsx`](src/main.tsx) gefunden. `React.lazy()` pro Route plus A5/A6 würden den
-Initial-Load drastisch senken. Offen, unverändert.
+Initial-Load drastisch senken.
 
-### 🟠 P5: SEO-Basics fehlen
+**Gefixt (13.07.2026):** Alle sieben Pages auf `lazy(() => import(...))` umgestellt, geroutetes
+Element in `<Suspense fallback={null}>` (Fallback bewusst leer — nach A5/A6 sind die Chunks klein
+genug, dass ein Ladezustand nicht nötig ist). Mit Playwright verifiziert: Direktaufruf jeder
+Route lädt nur ihren eigenen Chunk plus tatsächliche Abhängigkeiten (z. B. `/privacy` lädt
+nichts außer dem eigenen Mini-Chunk + dem geteilten `PageLayout`-Chunk, kein `ProjectTile`/
+`Filter`); ein Client-seitiger Wechsel zwischen zwei bereits gemounteten Routen (Blog → Skills)
+lädt den neuen Chunk korrekt nach.
+
+### 🟠 P5: SEO-Basics fehlen — ✅ GEFIXT
 
 - [`index.html:11-22`](index.html#L11): `og:title`/`og:type` sind statisch gesetzt, aber
   weiterhin keine `meta description`, kein `og:description`/`og:image`/`og:url`, kein canonical.
@@ -521,8 +603,31 @@ Initial-Load drastisch senken. Offen, unverändert.
   Sitemap im Build generieren.
 - SPA ohne Prerendering: Crawler ohne JS sehen eine leere Seite. Für ein Portfolio wäre
   Prerendering (z. B. `vite-plugin-ssr`/statisches Snapshotting) oder mittelfristig ein
-  SSG-Framework die robustere Basis.
-- Alle Punkte offen, unverändert.
+  SSG-Framework die robustere Basis. **Bleibt offen** — größerer Architektur-Umbau, kein
+  Quick-Fix, explizit außerhalb des beauftragten Umfangs.
+
+**Gefixt (13.07.2026):** `index.html` auf minimale statische Tags reduziert (Charset, Viewport,
+Theme-Color, Font-Preload, Favicons — Dinge, die sich nie pro Seite ändern); `og:title`/`og:type`
+raus, da sie sonst mit den Helmet-injizierten Tags dupliziert hätten (Helmet ersetzt nur Tags,
+die es selbst vorher gerendert hat, nicht beliebige statische HTML-Tags — zwei `<meta
+property="og:title">` im finalen DOM wären die Folge gewesen). Stattdessen: ein Root-`<Helmet>`
+in `main.tsx` für Tags, die nicht variieren (`og:type`, `og:image`, `twitter:card`), plus eine
+`PageMeta`-Komponente, die pro Route `title`/`description`/`og:title`/`og:description`/
+`og:url`/`canonical` setzt — die URL kommt aus `useLocation()`, nicht aus dem Route-Pattern,
+damit `/project/:id` als `canonical` die echte URL (`/project/alimonia`) bekommt statt des
+rohen Patterns. `BlogPost.tsx` und `Project.tsx` (bei Deep-Link auf ein Projekt) überschreiben
+das zusätzlich mit dem spezifischen Post-/Projekt-Titel und der jeweiligen Beschreibung
+(`post.excerpt` bzw. `project.description`), `og:type` wird für Posts zu `article`.
+
+Sitemap: `src/sitemap.xml` lag nie in `public/`, sondern in `src/` — Vite kopiert aber nur
+`public/` unverändert nach `dist/`. Ein Build-Check zeigte: **weder `robots.txt` noch
+`sitemap.xml` existierten je im Produktions-Output**, beide 404en live durchgehend (siehe
+Nachtrag zu B8). `robots.txt` nach `public/` verschoben; `sitemap.xml` durch
+[`scripts/generate-sitemap.ts`](scripts/generate-sitemap.ts) ersetzt, das vor jedem
+`vite build` aus `data/projects.ts` + `data/blog.ts` frisch generiert (21 URLs statt der alten
+15, inkl. beider Blog-Posts, mit aktuellen statt längst gelöschter Projekt-IDs). Verifiziert:
+Build-Output enthält jetzt beide Dateien mit korrektem Inhalt; jede Seite zeigt per Playwright
+genau ein Exemplar jedes Meta-Tags (keine Duplikate durch die Root+Page-Helmet-Aufteilung).
 
 ---
 
@@ -551,18 +656,24 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 
 | # | Aufwand | Wirkung | Maßnahme |
 |---|---------|---------|----------|
-| 1 | Minuten | Rechtsrisiko weg | Trial-Fonts durch Fraunces ersetzt (S10 ✅); `me.afphoto` entfernt (S8 ✅); WOFF2/`font-display`/Preload für Fraunces noch offen (P2) |
+| 1 | Minuten | Rechtsrisiko weg | Trial-Fonts durch Fraunces ersetzt (S10 ✅); `me.afphoto` entfernt (S8 ✅); WOFF2/`font-display`/Preload für Fraunces (P2) — ✅ |
 | 2 | Minuten | Bugfix sichtbar | `--webkit-` → `-webkit-backdrop-filter` an 8 Stellen (B1) — ✅ |
 | 3 | Minuten | Security | `window.open(href, '_blank', 'noopener,noreferrer')` (S4) — ✅ |
 | 4 | Minuten | Security | Deploy-Key aus der URL in einen Header; Actions auf SHA gepinnt (S1, S2) — ✅ komplett (Client + Server + Restart) |
 | 5 | ~1 h | Security + Speed | nginx: Security-Header, gzip, Cache-Control (S3, P1 gzip-Teil) — ✅; `.dockerignore` + `--frozen-lockfile` (S5) — ✅ |
-| 6 | ~1 h | Qualität dauerhaft | CI-Job `tsc && lint && build` vor Deploy (S6) — ✅; `react-hooks`-Plugin in ESLint aktivieren (A10) — offen |
-| 7 | ~2 h | −50 % Page-Code | `PageLayout`-Komponente extrahieren (A1); `SearchInput`/`Dropdown` nach `ui/` (A2) |
-| 8 | ~2 h | Bundle ↓↓ | antd durch native Elemente ersetzen (A5); FontAwesome auf benannte Imports (A6); `React.lazy` pro Route (P4) |
-| 9 | laufend | CSS ↓ ~50 % | `fluid()`-Migration fortsetzen, `ProjectGrid` in Teilkomponenten splitten (A3, A4) |
-| 10 | ~1 h | SEO | meta/OG-Tags via Helmet pro Seite, Sitemap aus `data/` generieren (P5) — `robots.txt` bereits gefixt (B8 ✅) |
+| 6 | ~1 h | Qualität dauerhaft | CI-Job `tsc && lint && build` vor Deploy (S6) — ✅; `react-hooks`-Plugin in ESLint aktivieren (A10) — ✅ |
+| 7 | ~2 h | −50 % Page-Code | `PageLayout`-Komponente extrahieren (A1) — ✅; `SearchInput`/`Dropdown` nach `ui/` (A2) — ✅ |
+| 8 | ~2 h | Bundle ↓↓ | antd durch native Elemente ersetzen (A5) — ✅; FontAwesome auf benannte Imports (A6) — ✅; `React.lazy` pro Route (P4) — ✅ |
+| 9 | laufend | CSS ↓ ~50 % | `fluid()`-Migration fortsetzen, `ProjectGrid` in Teilkomponenten splitten (A3, A4) — offen, laufende Arbeit (siehe Memory „Styles-Token-Migration") |
+| 10 | ~1 h | SEO | meta/OG-Tags via Helmet pro Seite, Sitemap aus `data/` generieren (P5) — ✅; dabei entdeckt: `robots.txt`/`sitemap.xml` lagen in `src/` statt `public/` und wurden **nie deployed** (B8-Nachtrag) — ✅ mitgefixt |
+
+**Noch offen nach diesem Rundumschlag:** A3, A4 (laufendes Refactoring), A7–A9, A11, A12, P3
+(Blog-Bild-Optimierung), Prerendering/SSG (Teil von P5). Diese waren nicht Teil des beauftragten
+Umfangs („Großer Rundumschlag": Quick-Wins + A1/A2 + A5/A6/P4/P5) und wurden bewusst nicht mit
+angefasst.
 
 ---
 
-*Erstellt am 13.07.2026 durch automatisierte Code-Analyse (Claude Code). Alle Zeilenangaben
-beziehen sich auf den Working Tree zum Analysezeitpunkt.*
+*Erstellt am 13.07.2026 durch automatisierte Code-Analyse (Claude Code), fortgeschrieben am
+13.07.2026 nach einem zweiten Durchlauf (A1, A2, A5, A6, A10, P2, P4, P5). Alle Zeilenangaben
+beziehen sich auf den Working Tree zum jeweiligen Analysezeitpunkt.*
