@@ -192,8 +192,19 @@ library.add(
 );
 
 import './styles.css';
+import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 const preview: Preview = {
+	decorators: [
+		(Story) => (
+			<HelmetProvider>
+				<MemoryRouter initialEntries={['/']}>
+					<Story />
+				</MemoryRouter>
+			</HelmetProvider>
+		)
+	],
 	parameters: {
 		options: {
 			storySort: {
@@ -211,13 +222,16 @@ const preview: Preview = {
 			default: 'light',
 			values: [
 				{
-					name: 'light', value: '#fff'
+					name: 'light',
+					value: '#fff'
 				},
 				{
-					name: 'page', value: '#141414'
+					name: 'page',
+					value: '#141414'
 				},
 				{
-					name: 'dark', value: '#060606'
+					name: 'dark',
+					value: '#060606'
 				}
 			]
 		}

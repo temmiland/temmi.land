@@ -2,7 +2,8 @@
 	NOTE: This serves as a quick fix to transmit the current background properties to the story
 	content, ensuring that CSS properties such as "mix-blend-mode" function as expected.
 */
-html, body {
+html,
+body {
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -20,20 +21,28 @@ html, body {
 
 @font-face {
 	font-family: 'Bogart Light';
-	src: local('Bogart Light'), url(/bogart/BOGARTLIGHTTRIAL.TTF) format('truetype');
+	src:
+		local('Bogart Light'),
+		url(/bogart/BOGARTLIGHTTRIAL.TTF) format('truetype');
 }
 
 @font-face {
 	font-family: 'Bogart Regular';
-	src: local('Bogart Regular'), url(/bogart/BOGARTREGULARTRIAL.TTF) format('truetype');
+	src:
+		local('Bogart Regular'),
+		url(/bogart/BOGARTREGULARTRIAL.TTF) format('truetype');
 }
 
 @font-face {
 	font-family: 'Bogart Medium';
-	src: local('Bogart Medium'), url(/bogart/BOGARTMEDIUMTRIAL.TTF) format('truetype');
+	src:
+		local('Bogart Medium'),
+		url(/bogart/BOGARTMEDIUMTRIAL.TTF) format('truetype');
 }
 
 @font-face {
 	font-family: 'Bogart Bold';
-	src: local('Bogart Bold'), url(/bogart/BOGARTBOLDTRIAL.TTF) format('truetype');
+	src:
+		local('Bogart Bold'),
+		url(/bogart/BOGARTBOLDTRIAL.TTF) format('truetype');
 }
