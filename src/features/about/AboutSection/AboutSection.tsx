@@ -11,6 +11,7 @@ import Typography from '@/ui/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
 import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { getTimezoneOffsetMinutes } from '@/utils/timezone';
 
 const AboutContainer = styled.div`
 	scroll-margin-top: var(--header-height);
@@ -406,39 +407,6 @@ const AboutContainer = styled.div`
 
 const HOME_TIME_ZONE = 'Europe/Berlin';
 
-/**
- * Gets the UTC offset (in minutes, east-positive) of a timezone at a given date.
- * Needed to compare Temmi's local time zone against the visitor's.
- */
-const getTimezoneOffsetMinutes = (timeZone: string, date: Date): number => {
-	const parts = new Intl.DateTimeFormat('en-US', {
-		timeZone,
-		hourCycle: 'h23',
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit'
-	})
-		.formatToParts(date)
-		.reduce<Record<string, string>>((acc, part) => {
-			acc[part.type] = part.value;
-			return acc;
-		}, {});
-
-	const asUTC = Date.UTC(
-		Number(parts.year),
-		Number(parts.month) - 1,
-		Number(parts.day),
-		Number(parts.hour),
-		Number(parts.minute),
-		Number(parts.second)
-	);
-
-	return (asUTC - date.getTime()) / 60000;
-};
-
 export const AboutSection = () => {
 	const [now, setNow] = useState(new Date());
 
@@ -570,7 +538,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'adesso logo' }
-									src={ './logos/adesso_se_logo.jpeg' }
+									src={ '/logos/adesso_se_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Senior Software Engineer' }</div>
@@ -580,7 +548,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'tp logo' }
-									src={ './favicon/apple-touch-icon.png' }
+									src={ '/favicon/apple-touch-icon.png' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Founder' }</div>
@@ -593,7 +561,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'valtech mobility logo' }
-									src={ './logos/valtech_mobility_gmbh_logo.jpeg' }
+									src={ '/logos/valtech_mobility_gmbh_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>
@@ -606,7 +574,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'hydrograv logo' }
-									src={ './logos/hydrograv_logo.jpeg' }
+									src={ '/logos/hydrograv_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Full Stack Developer' }</div>
@@ -617,7 +585,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'hydrograv logo' }
-									src={ './logos/hydrograv_logo.jpeg' }
+									src={ '/logos/hydrograv_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>
@@ -630,7 +598,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'hydrograv logo' }
-									src={ './logos/hydrograv_logo.jpeg' }
+									src={ '/logos/hydrograv_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>
@@ -642,7 +610,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'tu freiberg logo' }
-									src={ './logos/tu_freibergde_logo.jpeg' }
+									src={ '/logos/tu_freibergde_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>
@@ -660,7 +628,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'leipzig logo' }
-									src={ './logos/stadt_leipzig_logo.jpeg' }
+									src={ '/logos/stadt_leipzig_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>
@@ -670,7 +638,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'gruene jugend logo' }
-									src={ './logos/grne_jugend_sachsen_logo.jpeg' }
+									src={ '/logos/grne_jugend_sachsen_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
@@ -680,7 +648,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'gruene jugend logo' }
-									src={ './logos/grne_jugend_sachsen_logo.jpeg' }
+									src={ '/logos/grne_jugend_sachsen_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>
@@ -692,7 +660,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'gruenen logo' }
-									src={ './logos/bndnis_90_die_grnen_logo.jpeg' }
+									src={ '/logos/bndnis_90_die_grnen_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Member' }</div>
@@ -702,7 +670,7 @@ export const AboutSection = () => {
 							<li>
 								<img
 									alt={ 'dresden logo' }
-									src={ './logos/landeshauptstadt_dresden_logo.jpeg' }
+									src={ '/logos/landeshauptstadt_dresden_logo.jpeg' }
 									className={ 'aw-company-image' }
 								/>
 								<div className={ 'aw-jobtitle' }>{ 'Election worker' }</div>

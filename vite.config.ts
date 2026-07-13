@@ -6,7 +6,7 @@
  */
 
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react-swc'
 import eslint from 'vite-plugin-eslint';
 
@@ -21,5 +21,9 @@ export default defineConfig({
 			'@': fileURLToPath(new URL('./src', import.meta.url))
 		}
 	},
-	plugins: [react(), eslint()]
+	plugins: [react(), eslint()],
+	test: {
+		environment: 'node',
+		include: ['src/**/*.test.ts']
+	}
 })
