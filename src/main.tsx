@@ -5,7 +5,7 @@
  * permission of the author.
  */
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
 	createBrowserRouter,
@@ -110,16 +110,17 @@ import {
 	faWordpress
 } from '@fortawesome/free-brands-svg-icons';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Home from '@/pages/Home';
-import Imprint from '@/pages/Imprint';
-import Privacy from '@/pages/Privacy';
-import Project from '@/pages/Project';
-import Skills from '@/pages/Skills';
-import Blog from '@/pages/Blog';
-import BlogPost from '@/pages/BlogPost';
 import { projects } from './data/projects';
 import { blogPosts } from './data/blog';
 import './index.css';
+
+const Home = lazy(() => import('@/pages/Home'));
+const Imprint = lazy(() => import('@/pages/Imprint'));
+const Privacy = lazy(() => import('@/pages/Privacy'));
+const Project = lazy(() => import('@/pages/Project'));
+const Skills = lazy(() => import('@/pages/Skills'));
+const Blog = lazy(() => import('@/pages/Blog'));
+const BlogPost = lazy(() => import('@/pages/BlogPost'));
 
 library.add(
 	faArrowDownWideShort,
@@ -278,7 +279,9 @@ const router = createBrowserRouter([
 				<Helmet>
 					<title>{ `Temmi Pietsch - ${title}` }</title>
 				</Helmet>
-				{ element }
+				<Suspense fallback={ null }>
+					{ element }
+				</Suspense>
 			</>
 		)
 	})),
