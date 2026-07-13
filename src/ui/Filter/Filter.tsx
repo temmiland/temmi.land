@@ -6,8 +6,8 @@
  */
 
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useDropdown from '@/ui/Dropdown';
 import { colors, fonts, media, whiteAlpha } from '@/styles';
 
 const FilterRow = styled.div`
@@ -200,21 +200,7 @@ export const Filter = ({
 	onChange,
 	allLabel = 'All'
 }: FilterProps): JSX.Element => {
-	const [isOpen, setIsOpen] = useState(false);
-	const menuRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		if (!isOpen) return;
-
-		const handleClickOutside = (event: MouseEvent) => {
-			if (!menuRef.current?.contains(event.target as Node)) {
-				setIsOpen(false);
-			}
-		};
-
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
-	}, [isOpen]);
+	const { isOpen, toggle, close, ref: menuRef } = useDropdown();
 
 	const activeLabel = activeValue
 		? options.find((option) => option.value === activeValue)?.label ?? allLabel
@@ -245,7 +231,7 @@ export const Filter = ({
 				<DropdownTrigger
 					type={ 'button' }
 					className={ isOpen ? 'open' : '' }
-					onClick={ () => setIsOpen(!isOpen) }
+					onClick={ toggle }
 				>
 					<span>
 						<FontAwesomeIcon icon={ ['fas', 'filter'] } />
@@ -260,7 +246,7 @@ export const Filter = ({
 							className={ activeValue === '' ? 'active' : '' }
 							onClick={ () => {
 								onChange('');
-								setIsOpen(false);
+								close();
 							} }
 						>
 							{ allLabel }
@@ -272,7 +258,7 @@ export const Filter = ({
 								className={ activeValue === option.value ? 'active' : '' }
 								onClick={ () => {
 									onChange(option.value);
-									setIsOpen(false);
+									close();
 								} }
 							>
 								{ option.label }

@@ -15,7 +15,8 @@ import Typography from '@/ui/Typography';
 import Header from '@/features/header/Header';
 import Trail from '@/ui/Trail';
 import PageLayout from '@/ui/PageLayout';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import SearchInput from '@/ui/SearchInput';
+import { colors, media } from '@/styles';
 
 const BlogSection = styled.section`
 	margin: 0;
@@ -53,124 +54,6 @@ const SearchRow = styled.div`
 
 	${media.tablet} {
 		margin: 3vw 0 0 0;
-	}
-`;
-
-const SearchInputWrapper = styled.div`
-	position: relative;
-	max-width: 39vw;
-
-	svg {
-		position: absolute;
-		top: 50%;
-		left: 1vw;
-		transform: translateY(-50%);
-		color: ${whiteAlpha(0.5)};
-		font-size: 0.9vw;
-		pointer-events: none;
-	}
-
-	input {
-		box-sizing: border-box;
-		width: 100%;
-		padding: 1.1vw 2.6vw;
-		border: 0.075vw solid ${whiteAlpha(0.35)};
-		border-radius: 2.6vw;
-		background: ${whiteAlpha(0.06)};
-		color: ${colors.white};
-		font-family: ${fonts.medium};
-		font-size: 0.9vw;
-		transition: 100ms linear;
-
-		&::placeholder {
-			color: ${whiteAlpha(0.45)};
-		}
-
-		&:focus {
-			outline: none;
-			border-color: ${whiteAlpha(0.6)};
-			background: ${whiteAlpha(0.1)};
-		}
-	}
-
-	.clear-search {
-		position: absolute;
-		top: 50%;
-		right: 0.9vw;
-		transform: translateY(-50%);
-		color: ${whiteAlpha(0.5)};
-		font-size: 0.9vw;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-
-		&:hover {
-			color: ${colors.white};
-		}
-	}
-
-	${media.mobile} {
-		max-width: 100%;
-
-		svg {
-			left: 3.5vw;
-			font-size: 3.5vw;
-		}
-
-		input {
-			padding: 4vw 9vw;
-			border: 0.25vw solid ${whiteAlpha(0.35)};
-			border-radius: 8vw;
-			font-size: 3.25vw;
-		}
-
-		.clear-search {
-			right: 3vw;
-			font-size: 3.25vw;
-		}
-	}
-
-	${media.tablet} {
-		max-width: 100%;
-
-		svg {
-			left: 1.5vw;
-			font-size: 2vw;
-		}
-
-		input {
-			padding: 1.8vw 4vw;
-			border: 0.125vw solid ${whiteAlpha(0.35)};
-			border-radius: 4vw;
-			font-size: 2vw;
-		}
-
-		.clear-search {
-			right: 1.5vw;
-			font-size: 2vw;
-		}
-	}
-
-	${media.wide} {
-		max-width: 780px;
-
-		svg {
-			left: 14px;
-			font-size: 18px;
-		}
-
-		input {
-			padding: 20px 38px;
-			border: 1px solid ${whiteAlpha(0.35)};
-			border-radius: 52px;
-			font-size: 18px;
-		}
-
-		.clear-search {
-			right: 12px;
-			font-size: 16px;
-		}
 	}
 `;
 
@@ -225,24 +108,11 @@ export default function Blog() {
 						animationDelay={ 175 }
 					>
 						<SearchRow>
-							<SearchInputWrapper>
-								<FontAwesomeIcon icon={ ['fas', 'magnifying-glass'] } />
-								<input
-									type={ 'text' }
-									value={ searchQuery }
-									placeholder={ 'Search articles…' }
-									onChange={ (event) => setSearchQuery(event.target.value) }
-								/>
-								{ searchQuery ? (
-									<button
-										type={ 'button' }
-										className={ 'clear-search' }
-										onClick={ () => setSearchQuery('') }
-									>
-										<FontAwesomeIcon icon={ ['fas', 'xmark'] } />
-									</button>
-								) : null }
-							</SearchInputWrapper>
+							<SearchInput
+								value={ searchQuery }
+								onChange={ setSearchQuery }
+								placeholder={ 'Search articles…' }
+							/>
 						</SearchRow>
 						<BlogGrid posts={ blogPosts } searchQuery={ searchQuery } />
 					</Trail>
