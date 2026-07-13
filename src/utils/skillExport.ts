@@ -5,11 +5,19 @@
  * permission of the author.
  */
 
+import { Skill } from '@/models/skill';
+
+/**
+ * The skill fields included in the CSV export. Presentation-only fields
+ * (icons, home page visibility) are deliberately not part of this union.
+ */
+type CsvKey = 'name' | 'category' | 'rating' | 'years' | 'lastUsed' | 'version' | 'description';
+
 /**
  * The order in which skill fields are written to the CSV export, along
  * with the human-readable column header used for each field.
  */
-const CSV_COLUMNS: { key: keyof Skill; label: string }[] = [
+const CSV_COLUMNS: { key: CsvKey; label: string }[] = [
 	{
 		key: 'name',
 		label: 'Skill'
@@ -41,12 +49,17 @@ const CSV_COLUMNS: { key: keyof Skill; label: string }[] = [
 ];
 
 /**
- * Escapes a single value for safe inclusion in a CSV cell.
+ * Escapes a single value for safe inclusion in a CSV cell. Cells starting
+ * with `=`, `+`, `-` or `@` are prefixed with a `'` to prevent spreadsheet
+ * apps (Excel, Google Sheets) from interpreting them as formulas.
  * @param {string | number | undefined} value - The value to escape.
  * @returns {string} The escaped value.
  */
 const escapeCsv = (value: string | number | undefined): string => {
-	const str = value === undefined ? '' : String(value);
+	let str = value === undefined ? '' : String(value);
+	if (/^[=+\-@]/.test(str)) {
+		str = `'${str}`;
+	}
 	return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
 };
 
