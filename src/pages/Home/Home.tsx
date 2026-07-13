@@ -12,7 +12,7 @@ import AboutSection from '@/features/about/AboutSection';
 import ProjectsSection from '@/features/projects/ProjectsSection';
 import SkillsSection from '@/features/skills/SkillsSection';
 import BlogSection from '@/features/blog/BlogSection';
-import Footer from '@/features/footer/Footer';
+import PageLayout from '@/ui/PageLayout';
 import { projects } from '@/data/projects.ts';
 import { skills } from '@/data/skills';
 import { blogPosts } from '@/data/blog';
@@ -27,9 +27,6 @@ const MeArea = styled.section`
 	${media.wide} {
 		padding: 20px 0 0 0;
 	}
-`;
-
-const HeaderSection = styled.section`
 `;
 
 const AboutArea = styled.section`
@@ -88,84 +85,6 @@ const BlogArea = styled.section`
 
 `;
 
-const FooterSection = styled.section`
-	padding: 2.4vw 0;
-
-	${media.mobile} {
-		padding: 12vw 0;
-	}
-
-	${media.tablet} {
-		padding: 5vw 0;
-	}
-
-	${media.wide} {
-		padding: 48px 0;
-	}
-`;
-
-const PageGradient = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: 400;
-	bottom: 0;
-	pointer-events: none;
-
-	${media.wide} {
-		background: linear-gradient(
-			90deg,
-			rgba(0,0,0,1) 250px,
-			rgba(0,0,0,0) 750px,
-			rgba(0,0,0,0) 2750px,
-			rgba(0,0,0,1) 3250px
-		) no-repeat;
-		background-attachment: fixed;
-		background-size: 3500px 100%;
-		background-position: center;
-		min-height: 100%;
-		min-width: 3250px;
-		margin: 0;
-	}
-
-`;
-
-const PageMountains = styled.div`
-	position: relative;
-	max-width: 3000px;
-	height: 34vw;
-	margin-left: auto;
-	margin-right: auto;
-    z-index: 3;
-    background: url(./footer.svg);
-    background-repeat: no-repeat;
-    pointer-events: none;
-	margin-top: -46.25vw;
-
-	${media.mobile} {
-		background-size: 265vw;
-		height: 100vw;
-		background-position: right;
-		margin-top: -147.5vw;
-		margin-right: -20vw;
-	}
-
-	${media.tablet} {
-		background-size: 265vw;
-		height: 100vw;
-		background-position: right;
-		margin-top: -120vw;
-		margin-right: -20vw;
-	}
-
-	${media.wide} {
-    	background-size: cover;
-		height: 1000px;
-		margin-top: -1230px;
-		background-position: center;
-	}
-`;
-
 const Section = styled.div<SectionProps>`
 	width: 100%;
 	max-width: 3000px;
@@ -211,12 +130,13 @@ type SectionProps = {
 
 export default function Home() {
 	return (
-		<>
-			<Section background={ 'transparent' }>
-				<HeaderSection>
+		<PageLayout
+			header={
+				<Section background={ 'transparent' }>
 					<Header revealAfterId={ 'hero-heading' } />
-				</HeaderSection>
-			</Section>
+				</Section>
+			}
+		>
 			<Section background={ colors.surfaceDark }>
 				<MeArea>
 					<MeSection />
@@ -242,11 +162,6 @@ export default function Home() {
 					<ProjectsSection projects={ projects } />
 				</ProjectSection>
 			</Section>
-			<FooterSection>
-				<Footer />
-			</FooterSection>
-			<PageGradient />
-			<PageMountains />
-		</>
+		</PageLayout>
 	);
 }
