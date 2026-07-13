@@ -9,13 +9,13 @@
 	--header-height: 3.82vw;
 }
 
-@media (min-width: 320px) and (max-width: 600px) {
+@media (max-width: 599.98px) {
 	:root {
 		--header-height: 20vw;
 	}
 }
 
-@media (min-width: 600px) and (max-width: 1024px) {
+@media (min-width: 600px) and (max-width: 1023.98px) {
 	:root {
 		--header-height: 10vw;
 	}
@@ -31,6 +31,11 @@ html, body, :root {
 	font-family: Domine, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
+
+	/* Rounded, warm terminals (SOFT) without the eccentric "wonky" letterforms
+	   (WONK) — closest match to Bogart's controlled rounded-slab look.
+	   Inherited by every descendant, including the Fraunces faces below. */
+	font-variation-settings: 'SOFT' 100, 'WONK' 0;
 
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #000;
@@ -51,22 +56,32 @@ html, body, :root {
 	overscroll-behavior: none;
 }
 
+/*
+ * Fraunces (SIL OFL, self-hosted) replaces the Bogart TRIAL faces, which
+ * were never licensed for commercial/self-hosted use (see PROJEKT-ANALYSE.md
+ * S10). One variable file covers every weight; each @font-face below pins
+ * it to the wght instance closest to the Bogart cut it replaces.
+ */
 @font-face {
-	font-family: 'Bogart Light';
-	src: local('Bogart Light'), url(/bogart/BOGARTLIGHTTRIAL.TTF) format('truetype');
+	font-family: 'Fraunces Light';
+	src: url(/fonts/Fraunces-Variable.woff2) format('woff2');
+	font-weight: 300;
 }
 
 @font-face {
-	font-family: 'Bogart Regular';
-	src: local('Bogart Regular'), url(/bogart/BOGARTREGULARTRIAL.TTF) format('truetype');
+	font-family: 'Fraunces Regular';
+	src: url(/fonts/Fraunces-Variable.woff2) format('woff2');
+	font-weight: 400;
 }
 
 @font-face {
-	font-family: 'Bogart Medium';
-	src: local('Bogart Medium'), url(/bogart/BOGARTMEDIUMTRIAL.TTF) format('truetype');
+	font-family: 'Fraunces Medium';
+	src: url(/fonts/Fraunces-Variable.woff2) format('woff2');
+	font-weight: 500;
 }
 
 @font-face {
-	font-family: 'Bogart Bold';
-	src: local('Bogart Bold'), url(/bogart/BOGARTBOLDTRIAL.TTF) format('truetype');
+	font-family: 'Fraunces Bold';
+	src: url(/fonts/Fraunces-Variable.woff2) format('woff2');
+	font-weight: 700;
 }
