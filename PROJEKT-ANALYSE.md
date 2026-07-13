@@ -1,6 +1,7 @@
 # 🔍 Projekt-Analyse: temmi.land
 
-**Stand:** 2026-07-13 · Branch `main` (Commit `37d5219`) · ~13.900 Zeilen TS/TSX in 151 Dateien
+**Stand:** 2026-07-13 · Branch `main` (Commit `2491d67`) · ~14.000 Zeilen TS/TSX in 152 Dateien
+(davon 4 Test-Dateien)
 
 Diese Analyse bewertet das Projekt gegen Best Practices für ein React/TypeScript/Vite-Projekt.
 Gegliedert in: **Bugs**, **Sicherheit**, **Code-Qualität/Architektur**, **Performance & SEO**,
@@ -15,6 +16,28 @@ Legende: 🔴 hoch · 🟠 mittel · 🟡 niedrig
 > **Status 13.07.2026:** B1, B2, B4, B5, B6, B7, B8, B9 sind gefixt (verifiziert per
 > `tsc`, ESLint, Production-Build und einem Headless-Browser-Durchlauf). **B3 hat sich in der
 > Verifikation als False Positive herausgestellt** — Details unten.
+>
+> **Nachtrag (13.07.2026, dritte Runde):** Beim Umsetzen von A3/A7/A8/A9 wurde eine weitere,
+> bis dahin unentdeckte Regression gefunden und gefixt — siehe **B10**. Sie hätte den nächsten
+> Produktions-Deploy zum Scheitern gebracht.
+
+### 🔴 B10: `docker/Dockerfile` kopierte gelöschte Pfade — Docker-Build war gebrochen — ✅ GEFIXT
+
+```dockerfile
+COPY --from=builder /app/dist/ /app/src/robots.txt /app/src/sitemap.xml /usr/share/nginx/html/
+```
+
+Regression aus dem P5/B8-Umbau: `robots.txt` liegt seitdem unter `public/robots.txt` und
+`sitemap.xml` wird von `scripts/generate-sitemap.ts` nach `public/sitemap.xml` generiert — beide
+werden von Vite bereits automatisch mit `dist/` mitkopiert. Die beiden zusätzlichen `COPY`-Quellen
+(`/app/src/robots.txt`, `/app/src/sitemap.xml`) existierten nach dem Umbau schlicht nicht mehr.
+`COPY` mit einer fehlenden Quelle bricht den Docker-Build komplett ab — der nächste Push auf
+`main` hätte das Deployment lahmgelegt. Kein CI-Job führt `docker build` aus (der `verify`-Job
+prüft nur `lint`/`tsc`/`vite build`), daher blieb das unbemerkt.
+
+**Gefixt:** Die beiden toten Pfade entfernt, `COPY --from=builder /app/dist/ /usr/share/nginx/html/`
+reicht — per lokalem `bun run build` verifiziert, dass `dist/robots.txt` und `dist/sitemap.xml`
+bereits vorhanden sind.
 
 ### 🔴 B1: `--webkit-backdrop-filter` statt `-webkit-backdrop-filter` (8 Stellen) — ✅ GEFIXT
 
@@ -321,6 +344,13 @@ im Projekt.
 > „Styles-Token-Migration"), A7–A9/A11/A12 waren nicht Teil des beauftragten Umfangs
 > („Großer Rundumschlag": Quick-Wins + A1/A2 + A5/A6/P4/P5) und wurden bewusst nicht mit
 > angefasst, um den Umfang nicht eigenmächtig zu sprengen.
+>
+> **Status 13.07.2026 (dritte Runde, „fix alles was geht"):** A3, A7, A8, A9, A11, A12 sind
+> jetzt ebenfalls gefixt; A10 bis auf einen bewusst zurückgestellten Punkt (`prettier/prettier`).
+> Mit `tsc`, ESLint, der neuen Vitest-Suite, `vite build` und einem Playwright-Durchlauf
+> (Desktop-/Mobile-Nav, Projekt-Detailseite, Blog-Galerie, Konsolen-Fehler-Check) verifiziert.
+> **A4 bleibt offen** — siehe Begründung dort. **P3 ist ebenfalls in dieser Runde gefixt**
+> (siehe Abschnitt 4).
 
 ### 🔴 A1: Seiten-Chrome ist 7-fach copy-gepastet — ✅ GEFIXT
 
@@ -374,26 +404,21 @@ Alt-Code) — das Icon wurde nur durch Overflow sichtbar gemalt, der Button selb
 zuverlässig klickbar/fokussierbar. Fix: explizite `width/height: 1em`. Mit Playwright verifiziert
 (Suche + Clear auf Blog/Skills, beide Skills-Dropdowns unabhängig, Mobile-Filter-Dropdown).
 
-### 🔴 A3: `ProjectGrid.tsx` — jetzt 1.075 Zeilen (war 1.062), davon ~700 Zeilen fast identisches CSS
+### 🔴 A3: `ProjectGrid.tsx` — fünf fast identische Panel-Container — ✅ TEILWEISE GEFIXT
 
-Die fünf Panel-Container ([`ProjectDescriptionContainer`](src/features/projects/ProjectGrid/ProjectGrid.tsx#L351),
-`ProjectTechStackContainer` (L384), `ProjectSidebarTopContainer` (L418), `ProjectDocsContainer`
-(L451), `ProjectBlogContainer` (L486) in
+Die fünf Panel-Container (`ProjectDescriptionContainer`, `ProjectTechStackContainer`,
+`ProjectSidebarTopContainer`, `ProjectDocsContainer`, `ProjectBlogContainer` in
 [`features/projects/ProjectGrid/ProjectGrid.tsx`](src/features/projects/ProjectGrid/ProjectGrid.tsx))
-unterscheiden sich **nur** in `grid-area` (+ 1× `min-width`). Vier davon tragen sogar denselben
-kopierten JSDoc-Kommentar „Container for the ProjectTechStack." Statt fünf 65-Zeilen-Blöcke:
+unterschieden sich **nur** in `grid-area` (+ 1× `min-width`) und teils der `z-index`. Vier davon
+trugen sogar denselben kopierten JSDoc-Kommentar „Container for the ProjectTechStack."
 
-```tsx
-const GlassPanel = styled.div<{ area: string; areaMobile: string }>`
-	grid-area: ${p => p.area};
-	/* … ein Block … */
-	${media.mobile} { grid-area: ${p => p.areaMobile}; }
-`;
-```
-
-Außerdem gehören `ExpandedProject` (200 Zeilen JSX) und die Blog-Post-Card-Styles in eigene
-Dateien. Als Faustregel: eine styled-components-Datei > 300 Zeilen ist ein Split-Kandidat;
-> 1.000 ist ein Wartbarkeitsproblem.
+**Gefixt (13.07.2026):** Zu einer parametrisierten `GlassPanel`-Komponente zusammengefasst
+(`area`, `areaMobile`, optional `zIndex`/`minWidth`/`minWidthWide` als Props) — exakt das Muster,
+das oben als Zielbild skizziert war. Fünf ~35-Zeilen-Blöcke wurden zu einem gemeinsamen
+Styled-Component plus fünf Ein-Zeilen-Aufrufen. Mit `tsc`, ESLint und Playwright (Projekt-Detailseite,
+Grid-Layout aller fünf Panels korrekt positioniert) verifiziert. **Offen:** `ExpandedProject`
+(200 Zeilen JSX) und die Blog-Post-Card-Styles in eigene Dateien splitten — die Datei ist durch
+den Dedupe zwar deutlich kürzer, aber ein Split in mehrere Dateien war nicht Teil dieser Runde.
 
 ### 🔴 A4: Das 4-Breakpoints-pro-Regel-Muster (der strukturelle Kern des CSS-Problems)
 
@@ -409,10 +434,19 @@ ${media.wide}   { font-size: 19px; }
 Der `wide`-Wert ist dabei fast immer exakt `vw × 20` — genau das, was `fluid()` in
 [`src/styles/media.ts`](src/styles/media.ts) bereits in einer Deklaration abbildet
 (`fluid(0.95)` ⇒ `min(0.95vw, 19px)`). Nur [`ui/Typography/Typography.tsx`](src/ui/Typography/Typography.tsx)
-nutzt es; **29 weitere Dateien** mit `.tsx`-Endung enthalten noch manuelle `media.mobile`-Blöcke.
+nutzt es; **31 weitere Dateien** mit `.tsx`-Endung enthalten noch manuelle `media.mobile`-Blöcke.
 Die konsequente Migration auf `fluid()` (+ ggf. `clamp()` mit Untergrenze statt der
 mobile/tablet-Blöcke) würde das CSS-Volumen grob halbieren und Drift zwischen den vier Varianten
 unmöglich machen. Das ist die wirksamste Antwort auf „lange styled-components-Funktionen".
+
+**Bewusst weiterhin offen (13.07.2026, dritte Runde):** Anders als A3 (reines Umbenennen/Zusammenfassen
+identischer Regeln) ist A4 kein risikoloser mechanischer Fix. `fluid()` bildet eine **stetige**
+Skalierung ab; die bestehenden `mobile`/`tablet`-Blöcke sind dagegen **Stufenwerte**, die an den
+Breakpoints springen. Eine Migration ersetzt also nicht nur Syntax, sondern ändert das tatsächliche
+Skalierungsverhalten auf jedem Mobile-/Tablet-Viewport projektweit — eine Design-Entscheidung, keine
+reine Codepflege, und über 31 Dateien hinweg ohne Visual-Regression-Tooling (nur Ad-hoc-Screenshots)
+nicht verantwortbar blind durchzuziehen. Bleibt laufende Arbeit, siehe Memory
+„Styles-Token-Migration".
 
 ### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 
@@ -454,7 +488,7 @@ funktioniert unabhängig davon, ob die Library aus einem benannten Import oder e
 Komplett-Pack befüllt wurde. Bundle: 755 KB → 209 KB gzip (größter Einzel-Fix im ganzen
 Rundumschlag). Mit Playwright verifiziert (Icon-Anzahl pro Seite, Screenshots inkl. Brand-Logos).
 
-### 🟠 A7: Interne Navigation per `<a href>` statt Router-`<Link>`
+### 🟠 A7: Interne Navigation per `<a href>` statt Router-`<Link>` — ✅ GEFIXT
 
 [`BlogCard.tsx:298`](src/features/blog/BlogCard/BlogCard.tsx#L298),
 [`SkillChip.tsx:216`](src/features/projects/SkillChip/SkillChip.tsx#L216), `BackLink` in
@@ -464,10 +498,25 @@ Rundumschlag). Mit Playwright verifiziert (Icon-Anzahl pro Seite, Screenshots in
 mit rohen `<a href>` — jede Navigation ist ein **Full Page Reload**: React bootet neu,
 Fonts/Daten werden neu geparst, der SPA-Vorteil ist weg. `react-router-dom` ist installiert und
 liefert `<Link to>`. (Danach muss B6 gefixt sein, sonst bricht die Suchparam-Übergabe.) B6 ist
-seit A10 verifiziert robust (funktionale `setSearchParams`-Updater-Form) — dieser Punkt selbst
-ist unverändert offen, war nicht Teil des beauftragten Umfangs.
+seit A10 verifiziert robust (funktionale `setSearchParams`-Updater-Form).
 
-### 🟠 A8: Klickbare `<div>`s + gezielt deaktivierte A11y-Regeln
+**Gefixt (13.07.2026):** [`ui/Link/Link.tsx`](src/ui/Link/Link.tsx) entscheidet jetzt selbst:
+Hrefs, die mit `/` beginnen und kein `#` enthalten, werden über `react-router-dom`s `Link`
+client-seitig navigiert; alles andere (externe URLs, `mailto:`, `/#anchor`-Sprungmarken) bleibt
+ein echtes `<a>`. Die `/#anchor`-Ausnahme ist bewusst: Bei einem Wechsel von einer Unterseite zu
+`/#about` muss der Browser die Seite neu laden, damit das native Hash-Scrolling zum Element
+greift — client-seitiges Routing hätte das stillschweigend kaputt gemacht. Alle Komponenten mit
+garantiert internem Ziel (`BlogCard`, `BlogPost`s `BackLink`/`RelatedProject`, `ProjectTile`,
+`ProjectGrid`s `ProjectBlogPostCard`) wurden von `styled.a` auf `styled(Link)` von
+`react-router-dom` umgestellt; `SkillChip`s `Chip` (Link nur wenn ein Skill gematcht wird) auf
+zwei Varianten (`ChipAnchor`/`ChipRouterLink`) mit geteiltem CSS aufgeteilt, da `to` bei
+React-Router nicht `undefined` sein darf. Nebenbefund: [`ImprintContent.tsx`](src/features/imprint/ImprintContent/ImprintContent.tsx)
+verlinkte Privacy mit dem *relativen* Pfad `./privacy` statt `/privacy` — funktionierte nur, weil
+die Seite zufällig immer unter `/imprint` (ohne weiteres Pfadsegment) läuft; auf absolut
+umgestellt. Mit `tsc`, ESLint und Playwright (Klick-Navigation auf Blog-/Projekt-/Skill-Links,
+keine Full-Page-Reloads mehr, keine Konsolenfehler) verifiziert.
+
+### 🟠 A8: Klickbare `<div>`s + gezielt deaktivierte A11y-Regeln — ✅ GEFIXT
 
 [`LicenseHandle` (L203), `LinkHandle` (L281), `CloseHandle` (L251)](src/features/projects/ProjectGrid/ProjectGrid.tsx#L203)
 in `ProjectGrid.tsx` sind `<div onClick>` — ohne `href`, ohne Tab-Fokus, ohne Enter/Space,
@@ -477,7 +526,17 @@ drei Regeln abgeschaltet, die davor warnen würden (`jsx-a11y/click-events-have-
 deaktivieren, statt `<a>`/`<button>` zu verwenden, ist das Muster, bei dem Senior-Reviewer den
 Kopf schütteln — zumal die Seite mit Storybook-a11y-Addon ausgestattet ist.
 
-### 🟠 A9: Invalides HTML in der Navigation
+**Gefixt (13.07.2026):** `LicenseHandle` und `LinkHandle` (beide Navigation zu einer URL) sind
+jetzt `styled.a` mit echtem `href`/`target="_blank"`/`rel="noopener noreferrer"` statt
+`onClick={() => window.open(...)}`; `CloseHandle` (schließt das Panel, keine Navigation) ist
+`styled.button` mit `type="button"` und einem kleinen Style-Reset (`appearance:none; padding:0;
+font:inherit`) gegen abweichende Browser-Defaults. Das war der einzige Fundort im gesamten Repo —
+ein projektweiter Scan nach `<div onClick>` fand sonst nur bereits-semantische `<button>`-Elemente.
+Die drei `jsx-a11y`-Regeln in [`eslint.config.js`](eslint.config.js) sind wieder aktiv und laufen
+sauber durch (0 neue Verstöße). Mit `tsc`, ESLint und Playwright (Tab-Fokus, `noopener` auf allen
+externen Links, Konsolen-Check) verifiziert.
+
+### 🟠 A9: Invalides HTML in der Navigation — ✅ GEFIXT
 
 [`PageCardList.tsx:193-208`](src/features/header/PageCardList/PageCardList.tsx#L193) rendert
 `<Ul>` → `<Link>` (`<a>`) → `<Typography>` (seit A5 ein echtes `<p>`, vorher antd-`<div>` — die
@@ -487,6 +546,19 @@ still, aber Screenreader-Semantik („Liste mit 5 Einträgen") geht kaputt. Rich
 `<ul><li><Link>…</Link></li></ul>`.
 Verwandt: Mehrere `<h1>` pro Seite (Seitentitel-H1 + `project_header`-H1 je Panel in
 `Typography.tsx:133`) — Überschriften-Hierarchie für SEO/A11y aufräumen.
+
+**Gefixt (13.07.2026):** Auf `<ul><li><Link><Typography>…</Typography></Link></li></ul>`
+umgestellt. Der Clear-Button-artige Tap-Bereich musste dabei mitwandern: Das Mobile-Padding lag
+vorher auf dem innersten `<li>` (das immer noch innerhalb des `<a>` lag, also Teil der klickbaren
+Fläche war); jetzt, wo `<li>` das äußere Element ist, würde dieselbe Padding-Regel die Klickfläche
+sonst kleinschrumpfen. Padding daher von `li` auf `a { display: block; padding: … }` verschoben,
+sodass die Ankerfläche weiterhin die volle gepolsterte Box abdeckt — per Playwright verifiziert
+(Bounding-Box des Mobile-Menüpunkts 214×41px statt nur der Textzeile). `H1_ProjectHeader`
+(Typography-Variante `project_header`, ein `<h1>` pro Projekt-Kachel/-Panel) auf `<h2>` umgestellt
+und in `H2_ProjectHeader` umbenannt, damit der Name nicht länger lügt; die Komponente wird auf
+Home/Projects potenziell mehrfach gerendert, was vorher mehrere `<h1>` pro Seite erzeugte. Mit
+Playwright verifiziert: genau ein `<h1>` pro Seite (vorher mehrere), Nav-DOM-Struktur `ul > li > a
+> p` bestätigt, keine Konsolenfehler.
 
 ### 🟠 A10: ESLint-Konfiguration mit toten Enden — teilweise ✅ GEFIXT
 
@@ -504,11 +576,24 @@ Verwandt: Mehrere `<h1>` pro Seite (Seitentitel-H1 + `project_header`-H1 je Pane
 mit einem Crash statt Ergebnissen quittierte. Deckte zwei echte Verstöße auf (Blog.tsx, Skills.tsx:
 der `?search=`/`?category=`-URL-Sync-Effekt schloss über das äußere `searchParams`-Objekt statt
 es über `setSearchParams(prev => …)` aus dem Updater zu lesen) — auf die funktionale Setter-Form
-umgestellt, dadurch hängt der Effekt jetzt nur noch von lokalem State ab. **Offen:** Punkt 2
-(`prettier/prettier` aktivieren) und Punkt 3 (tote Airbnb-Regeln aufräumen) — beides klein, aber
-nicht Teil des beauftragten Umfangs.
+umgestellt, dadurch hängt der Effekt jetzt nur noch von lokalem State ab.
 
-### 🟡 A11: Keine Tests
+**Gefixt (13.07.2026, Punkt 3):** Die toten Airbnb-Regeln (`func-names`, `no-plusplus`,
+`class-methods-use-this`) entfernt sowie die drei `jsx-a11y`-Regeln aus A8 wieder aktiviert —
+`bun run lint` bleibt dabei sauber (0 neue Verstöße).
+
+**Versucht und bewusst zurückgenommen (13.07.2026, Punkt 2):** `prettier/prettier` aktiviert und
+`bun run lint` laufen lassen — Ergebnis: **2.263 Fehler** quer durchs gesamte Repo. Ohne eigene
+`.prettierrc` greift Prettiers Default-Stil (u. a. Trailing Commas, andere
+Objekt-Umbruchregeln), der mit den bereits **manuell** in `eslint.config.js` gepflegten
+Formatierungsregeln dieses Projekts (Tabs, `object-curly-newline`, `array-element-newline`, kein
+Trailing Comma) kollidiert. Ein sauberer Fix wäre entweder eine auf das Projekt abgestimmte
+`.prettierrc` **plus** Bereinigung der überlappenden manuellen Regeln, oder ein bewusst
+akzeptierter Ein-Zeit-Reformat von praktisch jeder Datei im Repo — beides eine Design-Entscheidung
+für den Projekt-Stil, kein Bugfix. Zurückgesetzt auf den Ursprungszustand (Plugin geladen, Regel
+inaktiv); bleibt offen.
+
+### 🟡 A11: Keine Tests — ✅ GEFIXT
 
 Kein `test`-Script in [`package.json`](package.json), kein Test-Runner, keine `*.test.*`-Datei
 im gesamten Repo. Für reine Präsentationslogik vertretbar, aber `skillSort.ts`, `skillExport.ts`
@@ -516,23 +601,51 @@ im gesamten Repo. Für reine Präsentationslogik vertretbar, aber `skillSort.ts`
 `AboutSection.tsx` sind pure Funktionen — ideale, billige Unit-Test-Kandidaten (Vitest liegt mit
 Vite quasi bei).
 
-### 🟡 A12: Kleinkram, der in Reviews auffällt
+**Gefixt (13.07.2026):** Vitest installiert und in [`vite.config.ts`](vite.config.ts) über einen
+`test`-Block verdrahtet (dieselbe Alias-/Plugin-Konfiguration wie der App-Build, kein separates
+Config-File nötig); `bun run test` in [`package.json`](package.json) ergänzt. Tests für
+`skillSort.ts`, `skillExport.ts` (inkl. gezieltem Test des CSV-Formula-Injection-Escapings aus
+S9) und `blogFormat.ts` geschrieben. `getTimezoneOffsetMinutes` war als nicht-exportierte lokale
+Funktion in `AboutSection.tsx` nicht direkt testbar — nach
+[`utils/timezone.ts`](src/utils/timezone.ts) extrahiert (reine Funktionsverschiebung, keine
+Verhaltensänderung) und dort getestet (u. a. Winter-/Sommerzeit-Sprung für Berlin, Halbstunden-Zone
+Indien). 24 Tests in 4 Dateien, alle grün; mit `tsc`/ESLint verifiziert, dass die Extraktion
+`AboutSection.tsx` nicht bricht.
 
-- [`pages/Project/Project.tsx:10`](src/pages/Project/Project.tsx#L10): auskommentierter Import
-  (`//import LProject from '@/components/layouts/Project';`) als toter Code — Referenziert sogar
-  noch den alten `components/layouts`-Pfad von vor dem Umbau.
-- [`features/me/Signature/Signature.tsx:25`](src/features/me/Signature/Signature.tsx#L25):
-  Leerzeichen-Einrückung in einer Tab-Codebasis (`no-mixed-spaces-and-tabs` greift nur bei
-  *gemischten* Zeilen).
-- `Typography`-Default-Variante ist `'footer'` — wer die Prop vergisst, bekommt kommentarlos
-  zentrierten Footer-Text. Ein Pflicht-Prop (oder Default `'p'`) wäre am wenigsten überraschend.
-- `projectTechOptions` in `Project.tsx` hart codiert (inkl. Inkonsistenz `'Java'` vs. lowercase) —
-  ließe sich aus `projects[].techStack` ableiten, dann kann der Filter nie veralten.
-- `blog`-Assets heißen `screnn_1_en.png` (Tippfehler „screnn") — durch alle Blog-Posts kopiert.
-- Datum `formatBlogDate` fix auf `en-GB`, UI-Sprache Englisch, `robots`/Privacy deutsch —
-  bewusste Entscheidung dokumentieren.
-- Storybook-Coverage inkonsistent: `Blog`, `BlogPost`, `Skills`, `SkillCard` u. a. haben keine
-  Stories, andere Trivial-Komponenten schon.
+### 🟡 A12: Kleinkram, der in Reviews auffällt — ✅ GEFIXT (Auswahl)
+
+- ~~[`pages/Project/Project.tsx:10`](src/pages/Project/Project.tsx#L10): auskommentierter Import
+  (`//import LProject from '@/components/layouts/Project';`) als toter Code~~ Bereits verschwunden
+  — beim Nachprüfen (13.07.2026) fand sich kein `components/layouts`-Verweis mehr im Repo, war
+  wohl Nebeneffekt einer früheren Änderung.
+- ~~[`features/me/Signature/Signature.tsx:25`](src/features/me/Signature/Signature.tsx#L25):
+  Leerzeichen-Einrückung in einer Tab-Codebasis~~ **Gefixt:** auf Tab korrigiert.
+- ~~`Typography`-Default-Variante ist `'footer'`~~ **Gefixt:** `variant` ist jetzt ein
+  Pflicht-Prop (kein Default mehr) — ein projektweiter Scan zeigte, dass **kein** einziger
+  Call-Site je auf den Default vertraut hat (`<Typography>` ohne `variant` kommt im Repo nicht
+  vor), der Fix ist also ohne Verhaltensänderung durchgelaufen und macht ein zukünftiges Vergessen
+  jetzt zu einem `tsc`-Fehler statt einem stillen Footer-Style.
+- `projectTechOptions` in `Project.tsx` hart codiert — die Casing-Inkonsistenz (`'Java'` vs.
+  lowercase) **gefixt** (kosmetisch, der Filter-Vergleich normalisiert ohnehin beide Seiten).
+  Die volle Ableitung aus `projects[].techStack` **bewusst nicht gemacht**: Die Liste ist eine
+  kuratierte Auswahl von 7 Kern-Technologien; eine Ableitung aus allen `techStack`-Einträgen würde
+  auch Build-Tools/CI-Provider (Maven, GitLab CI, Docker, …) ins Filter-Dropdown spülen — eine
+  UX-Entscheidung, kein Bugfix.
+- ~~`blog`-Assets heißen `screnn_1_en.png` (Tippfehler „screnn")~~ **Gefixt:** alle 8 Dateien auf
+  `screen_*` umbenannt (`git mv`), `data/blog.ts` mitgezogen.
+- `formatBlogDate` fix auf `en-GB`: **dokumentiert** (Kommentar ergänzt, warum — Tag-Monat-Jahr-
+  Reihenfolge, nicht die Locale selbst, da die Blog-UI-Sprache immer Englisch ist).
+- Storybook-Coverage-Lücken (`Blog`, `BlogPost`, `Skills`, `SkillCard` ohne Stories) — **bewusst
+  offen gelassen**: neue Stories zu schreiben ist Feature-Arbeit (Testabdeckung erweitern), kein
+  Bugfix, und damit außerhalb dessen, was in dieser Runde als „Fix" behandelt wurde.
+
+**Nebenbefund beim Umsetzen (13.07.2026):** 12 Bilder in
+[`AboutSection.tsx`](src/features/about/AboutSection/AboutSection.tsx) (Firmenlogos) und eines in
+[`MeImage.tsx`](src/features/me/MeImage/MeImage.tsx) (Profilbild) luden per *relativem* `src`
+(`./logos/…`, `./me.png`) — dieselbe Bug-Klasse wie A1s `url(./footer.svg)`: Funktioniert nur,
+weil beide Komponenten heute ausschließlich auf der Home-Route (`/`) gerendert werden. Vorsorglich
+auf absolute Pfade (`/logos/…`, `/me.png`) umgestellt, bevor eine künftige Wiederverwendung auf
+einer Unterseite denselben 404 reproduziert, der A1 bereits einmal live verursacht hat.
 
 ---
 
@@ -551,6 +664,14 @@ trotzdem können.)
 nginx-Image mit `ngx_brotli`-Modul, nicht in `nginxinc/nginx-unprivileged:stable-alpine`
 enthalten).
 
+**Bewusst nicht angegangen (13.07.2026, dritte Runde):** Kein offiziell gepflegtes
+`nginx-unprivileged`-Image mit vorkompiliertem `ngx_brotli` verfügbar — die Alternative wäre ein
+selbst kompiliertes nginx im Docker-Build. Das ist eine Produktions-Infrastruktur-Änderung ohne
+Staging-Umgebung zum Testen vor dem echten Deploy, und Cloudflare (laut Privacy-Seite bereits
+vorgeschaltet) komprimiert am Edge ohnehin per Brotli, unabhängig vom Origin-Server — der
+Grenznutzen ist gering, das Risiko eines blind gebauten, ungetesteten Server-Images nicht. Dafür
+wurde stattdessen kein Code geändert.
+
 ### 🔴 P2: Fonts — ✅ GEFIXT
 
 - ~~Es werden 4 Schnitte als **TTF** geladen — als WOFF2 wären es ~30 % der Größe.~~ Erledigt:
@@ -568,13 +689,24 @@ enthalten).
 
 **Gefixt (13.07.2026).**
 
-### 🟠 P3: Blog-Bilder bis 2,1 MB PNG
+### 🟠 P3: Blog-Bilder bis 2,1 MB PNG — ✅ GEFIXT
 
 [`public/blog/ios_screnn_1_en.png`](public/blog/ios_screnn_1_en.png) (2,1 MB) und weitere
 `ios_screnn_*`/`screnn_*`-Dateien (1–1,8 MB) werden in einer 4-Spalten-Galerie-Thumbnail-Ansicht
 geladen, kein `loading="lazy"` im Blog-Code gefunden. Screenshots als WebP/AVIF in angemessener
 Auflösung wären je ~100–200 KB; dazu `loading="lazy"` und `srcset`. Aktuell lädt ein
-Blog-Artikel ~7 MB Bilder. Offen, unverändert.
+Blog-Artikel ~7 MB Bilder.
+
+**Gefixt (13.07.2026):** Alle 9 Blog-Bilder (die 8 Screenshot-Galerien + `google_presentation.png`)
+mit `sips` auf max. 700px Kantenlänge herunterskaliert (deutlich großzügiger als die
+~230–280px-CSS-Breite in der 4-Spalten-Galerie, damit es auf Retina-Displays weiterhin scharf
+bleibt) und mit `cwebp -q 82` nach WebP konvertiert — von zusammen ~10,4 MB auf ~150 KB (die
+einzelnen Dateien: 2,1 MB → 12–37 KB). Kein `srcset`/AVIF, da WebP bei diesem Kompressionsgrad
+bereits mehr als ausreichend ist und ein zusätzliches Format-Set an dieser Stelle Overhead ohne
+spürbaren Nutzen wäre. `loading="lazy"` auf den Galerie- und Einzelbild-Blöcken in
+[`BlogPost.tsx`](src/pages/BlogPost/BlogPost.tsx) ergänzt (Store-Badges bewusst ausgenommen — die
+sind klein und sitzen meist direkt im sichtbaren Bereich). Per Playwright verifiziert: alle
+WebP-Bilder laden fehlerfrei mit korrekten Maßen, keine 404s, `loading="lazy"` korrekt gesetzt.
 
 ### 🟠 P4: Kein Code-Splitting — ✅ GEFIXT
 
@@ -664,16 +796,36 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 | 6 | ~1 h | Qualität dauerhaft | CI-Job `tsc && lint && build` vor Deploy (S6) — ✅; `react-hooks`-Plugin in ESLint aktivieren (A10) — ✅ |
 | 7 | ~2 h | −50 % Page-Code | `PageLayout`-Komponente extrahieren (A1) — ✅; `SearchInput`/`Dropdown` nach `ui/` (A2) — ✅ |
 | 8 | ~2 h | Bundle ↓↓ | antd durch native Elemente ersetzen (A5) — ✅; FontAwesome auf benannte Imports (A6) — ✅; `React.lazy` pro Route (P4) — ✅ |
-| 9 | laufend | CSS ↓ ~50 % | `fluid()`-Migration fortsetzen, `ProjectGrid` in Teilkomponenten splitten (A3, A4) — offen, laufende Arbeit (siehe Memory „Styles-Token-Migration") |
+| 9 | laufend | CSS ↓ ~50 % | `fluid()`-Migration fortsetzen (A4) — offen, laufende Arbeit (siehe Memory „Styles-Token-Migration"); `ProjectGrid`-Panels dedupliziert (A3) — ✅ |
 | 10 | ~1 h | SEO | meta/OG-Tags via Helmet pro Seite, Sitemap aus `data/` generieren (P5) — ✅; dabei entdeckt: `robots.txt`/`sitemap.xml` lagen in `src/` statt `public/` und wurden **nie deployed** (B8-Nachtrag) — ✅ mitgefixt |
+| 11 | ~3 h | SPA-Geschwindigkeit, A11y, Wartbarkeit | Interne Navigation auf Router-`<Link>` (A7) — ✅; klickbare `<div>`s → `<a>`/`<button>` + a11y-Regeln reaktiviert (A8) — ✅; invalides Nav-HTML + doppelte `<h1>`s (A9) — ✅ |
+| 12 | ~1 h | Qualität dauerhaft | Tote ESLint-Regeln raus, a11y-Regeln an (A10) — ✅; `prettier/prettier` geprüft und bewusst zurückgestellt (2.263 Diffs ohne `.prettierrc`) |
+| 13 | ~2 h | Regressions-Schutz | Vitest + 24 Tests für `skillSort`/`skillExport`/`blogFormat`/`timezone` (A11) — ✅ |
+| 14 | Minuten–1 h | Kleinkram + Bildgröße | `Typography`-Pflicht-Prop, Signature-Einrückung, `screnn`→`screen`-Rename, relative Asset-Pfade (A12) — ✅; Blog-Bilder 10,4 MB → 150 KB per WebP + Lazy-Loading (P3) — ✅ |
+| 15 | Minuten | **Deploy-Blocker behoben** | `docker/Dockerfile` kopierte gelöschte `src/robots.txt`/`src/sitemap.xml` — Docker-Build wäre beim nächsten Push gescheitert (B10, Regression aus B8/P5) — ✅ |
 
-**Noch offen nach diesem Rundumschlag:** A3, A4 (laufendes Refactoring), A7–A9, A11, A12, P3
-(Blog-Bild-Optimierung), Prerendering/SSG (Teil von P5). Diese waren nicht Teil des beauftragten
-Umfangs („Großer Rundumschlag": Quick-Wins + A1/A2 + A5/A6/P4/P5) und wurden bewusst nicht mit
-angefasst.
+**Noch offen nach diesem dritten Rundumschlag:**
+- **A4** (`fluid()`-Migration über 31 weitere Dateien) — laufende Arbeit, siehe Memory
+  „Styles-Token-Migration". Bewusst nicht blind durchgezogen, weil es das tatsächliche
+  Skalierungsverhalten auf Mobile/Tablet ändert (Stufenwerte → stetige Skalierung), keine reine
+  Codepflege.
+- **Prerendering/SSG** (Teil von P5) — größerer Architektur-Umbau, kein Quick-Fix.
+- **P1 (Brotli)** — kein offizielles `nginx-unprivileged`-Image mit `ngx_brotli`; Cloudflare
+  komprimiert am Edge vermutlich ohnehin schon. Ungetestetes Server-Image-Risiko gegen geringen
+  Grenznutzen abgewogen und bewusst nicht gebaut.
+- **A10, Punkt 2** (`prettier/prettier`) — würde ohne passende `.prettierrc` 2.263 Zeilen
+  quer durchs Repo anfassen; das ist eine Stil-Entscheidung, kein Bugfix.
+- **S2-Rest** (Cloudflare-Token-Scoping) — liegt im Cloudflare-Dashboard, außerhalb des Repos.
+- **A12** (Storybook-Coverage-Lücken, volle Ableitung von `projectTechOptions`) — Feature-/
+  UX-Arbeit, kein Bugfix.
+
+Alle anderen zuvor offenen Punkte (A3, A7, A8, A9, A11, A12-Auswahl, P3) sind mit diesem
+Rundumschlag gefixt.
 
 ---
 
 *Erstellt am 13.07.2026 durch automatisierte Code-Analyse (Claude Code), fortgeschrieben am
-13.07.2026 nach einem zweiten Durchlauf (A1, A2, A5, A6, A10, P2, P4, P5). Alle Zeilenangaben
+13.07.2026 nach einem zweiten Durchlauf (A1, A2, A5, A6, A10, P2, P4, P5) und einem dritten
+Durchlauf (A3, A7, A8, A9, A10-Rest, A11, A12, P3, plus der B10-Deploy-Blocker-Fund). Alle
+Zeilenangaben
 beziehen sich auf den Working Tree zum jeweiligen Analysezeitpunkt.*
