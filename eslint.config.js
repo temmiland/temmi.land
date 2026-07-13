@@ -10,6 +10,7 @@ import globals from 'globals';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
@@ -47,7 +48,8 @@ export default [
 			}
 		},
 		plugins: {
-			prettier
+			prettier,
+			'react-hooks': reactHooks
 		},
 		settings: {
 			'import/resolver': {
@@ -154,7 +156,9 @@ export default [
 					children: true
 				}
 			],
-			'import/no-named-as-default': 'off'
+			'import/no-named-as-default': 'off',
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': 'warn'
 		}
 	}
 ];

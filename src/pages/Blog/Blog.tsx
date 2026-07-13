@@ -265,20 +265,22 @@ export default function Blog() {
 	// shareable and survives a reload. Replace (not push) so we don't add a
 	// history entry per keystroke.
 	useEffect(() => {
-		const current = searchParams.get('search') ?? '';
-		if (current === searchQuery) {
-			return;
-		}
-		const next = new URLSearchParams(searchParams);
-		if (searchQuery) {
-			next.set('search', searchQuery);
-		} else {
-			next.delete('search');
-		}
-		setSearchParams(next, {
+		setSearchParams((prev) => {
+			const current = prev.get('search') ?? '';
+			if (current === searchQuery) {
+				return prev;
+			}
+			const next = new URLSearchParams(prev);
+			if (searchQuery) {
+				next.set('search', searchQuery);
+			} else {
+				next.delete('search');
+			}
+			return next;
+		}, {
 			replace: true
 		});
-	}, [searchQuery]);
+	}, [searchQuery, setSearchParams]);
 
 	return (
 		<>

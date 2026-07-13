@@ -500,24 +500,23 @@ export default function Skills() {
 	// input so the URL stays shareable and survives a reload. Replace (not push)
 	// so we don't add a history entry per keystroke.
 	useEffect(() => {
-		const next = new URLSearchParams(searchParams);
-		if (categoryToMatch) {
-			next.set('category', categoryToMatch);
-		} else {
-			next.delete('category');
-		}
-		if (searchQuery) {
-			next.set('search', searchQuery);
-		} else {
-			next.delete('search');
-		}
-		if (next.toString() === searchParams.toString()) {
-			return;
-		}
-		setSearchParams(next, {
+		setSearchParams((prev) => {
+			const next = new URLSearchParams(prev);
+			if (categoryToMatch) {
+				next.set('category', categoryToMatch);
+			} else {
+				next.delete('category');
+			}
+			if (searchQuery) {
+				next.set('search', searchQuery);
+			} else {
+				next.delete('search');
+			}
+			return next.toString() === prev.toString() ? prev : next;
+		}, {
 			replace: true
 		});
-	}, [categoryToMatch, searchQuery]);
+	}, [categoryToMatch, searchQuery, setSearchParams]);
 
 	useEffect(() => {
 		if (!isSortOpen && !isExportOpen) return;
