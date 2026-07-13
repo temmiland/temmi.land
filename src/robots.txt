@@ -11,4 +11,6 @@ User-agent: psbot
 Disallow: /
 
 User-agent: *
-Disallow: me.png
+Disallow: /me.png
+
+Sitemap: https://temmi.land/sitemap.xml
