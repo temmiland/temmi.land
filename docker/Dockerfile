@@ -1,11 +1,6 @@
-#
-# Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
-#
-# You may not use, distribute or modify this code without the explicitly
-# permission of the author.
-#
-
-FROM oven/bun AS builder
+# Pinned so every server build uses the same Bun version as local dev/CI
+# instead of whatever "latest" resolves to on a given day.
+FROM oven/bun:1.3.14 AS builder
 
 LABEL MAINTAINER="Temmi Pietsch <welcome@temmi.land>"
 
@@ -24,6 +19,7 @@ LABEL maintainer="Temmi Pietsch <welcome@temmi.land>"
 COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/security-headers.conf /etc/nginx/security-headers.conf
 
 CMD ["nginx", "-g", "daemon off;"]
 
