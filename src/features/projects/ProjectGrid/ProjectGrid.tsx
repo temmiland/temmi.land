@@ -6,6 +6,7 @@
  */
 
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import Typography from '@/ui/Typography';
@@ -200,9 +201,10 @@ const handleBase = css`
 	}
 `;
 
-const LicenseHandle = styled.div`
+const LicenseHandle = styled.a`
 	${handleBase}
 	cursor: pointer;
+	text-decoration: none;
 	padding: 0.2vw 0 0.2vw 0.69vw;
 	margin: 0 0.347vw;
 
@@ -248,8 +250,11 @@ const StatusHandle = styled.div`
 	}
 `;
 
-const CloseHandle = styled.div`
+const CloseHandle = styled.button`
 	${handleBase}
+	appearance: none;
+	font: inherit;
+	padding: 0;
 	width: 2.4vw;
 	height: 2.4vw;
 	text-align: center;
@@ -278,12 +283,13 @@ const CloseHandle = styled.div`
 	}
 `;
 
-const LinkHandle = styled.div`
+const LinkHandle = styled.a`
 	${handleBase}
 	width: fit-content;
 	max-width: 100%;
 	box-sizing: border-box;
 	text-align: left;
+	text-decoration: none;
 	padding: 0.2vw 0.69vw 0.2vw 0.69vw;
 	cursor: pointer;
 	margin: 0.347vw 0;
@@ -346,53 +352,39 @@ const glassPanel = css`
 `;
 
 /**
- * Container for the ProjectDescription.
+ * Props for a GlassPanel: each of the five content panels in a project's
+ * expanded view (description, links, tech stack, docs, blog) differ only in
+ * where they sit in the grid, their stacking order and (for two of them) a
+ * minimum width, so they share a single parameterized component instead of
+ * five near-identical ~35-line styled-components.
  */
-const ProjectDescriptionContainer = styled.div`
-	grid-area: 1 / 1 / 2 / 4;
-	--project-desc-margin: 0.90vw;
-	margin: var(--project-desc-margin);
-	padding: 0.90vw;
-	width: calc(100% - calc(var(--project-desc-margin) * 4));
-	border-radius: 0.90vw;
-	${glassPanel}
-	z-index: 6;
-
-	${media.mobile} {
-		grid-area: 1 / 1 / 2 / 2;
-		padding: 1.75vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 4vw;
-	}
-
-	${media.tablet} {
-		padding: 1.5vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 2vw;
-	}
-
-	${media.wide} {
-		--project-desc-margin: 18px;
-		padding: 18px;
-		border-radius: 18px;
-	}
-`;
+type GlassPanelProps = {
+	/** `grid-area` on desktop/tablet/wide. */
+	area: string;
+	/** `grid-area` on mobile, where the layout collapses to a single column. */
+	areaMobile: string;
+	zIndex?: number;
+	minWidth?: string;
+	minWidthWide?: string;
+};
 
 /**
- * Container for the ProjectTechStack.
+ * Shared container for the five large content panels in a project's expanded
+ * view (description, links, tech stack, docs, blog posts).
  */
-const ProjectTechStackContainer = styled.div`
-	grid-area: 2 / 1 / 3 / 4;
+const GlassPanel = styled.div<GlassPanelProps>`
+	grid-area: ${(props: GlassPanelProps) => props.area};
 	--project-desc-margin: 0.90vw;
 	margin: var(--project-desc-margin);
 	padding: 0.90vw;
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
 	border-radius: 0.90vw;
 	${glassPanel}
-	z-index: 7;
+	z-index: ${(props: GlassPanelProps) => props.zIndex ?? 6};
+	${(props: GlassPanelProps) => (props.minWidth ? `min-width: ${props.minWidth};` : '')}
 
 	${media.mobile} {
-		grid-area:  2 / 1 / 3 / 2;
+		grid-area: ${(props: GlassPanelProps) => props.areaMobile};
 		padding: 1.75vw;
 		--project-desc-margin: 1.5vw;
 		border-radius: 4vw;
@@ -408,109 +400,7 @@ const ProjectTechStackContainer = styled.div`
 		--project-desc-margin: 18px;
 		padding: 18px;
 		border-radius: 18px;
-	}
-`;
-
-
-/**
- * Container for the ProjectTechStack.
- */
-const ProjectSidebarTopContainer = styled.div`
-	grid-area: 1 / 4 / 2 / 6;
-	--project-desc-margin: 0.90vw;
-	margin: var(--project-desc-margin);
-	padding: 0.90vw;
-	width: calc(100% - calc(var(--project-desc-margin) * 4));
-	border-radius: 0.90vw;
-	${glassPanel}
-	z-index: 6;
-
-	${media.mobile} {
-		grid-area: 3 / 1 / 4 / 2;
-		padding: 1.75vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 4vw;
-	}
-
-	${media.tablet} {
-		padding: 1.5vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 2vw;
-	}
-
-	${media.wide} {
-		--project-desc-margin: 18px;
-		padding: 18px;
-		border-radius: 18px;
-	}
-`;
-
-/**
- * Container for the ProjectTechStack.
- */
-const ProjectDocsContainer = styled.div`
-	grid-area: 2 / 4 / 3 / 6;
-	--project-desc-margin: 0.90vw;
-	margin: var(--project-desc-margin);
-	padding: 0.90vw;
-	width: calc(100% - calc(var(--project-desc-margin) * 4));
-	border-radius: 0.90vw;
-	${glassPanel}
-	z-index: 6;
-	min-width: 24.30vw;
-
-	${media.mobile} {
-		grid-area: 4 / 1 / 5 / 2;
-		padding: 1.75vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 4vw;
-	}
-
-	${media.tablet} {
-		padding: 1.5vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 2vw;
-	}
-
-	${media.wide} {
-		--project-desc-margin: 18px;
-		padding: 18px;
-		border-radius: 18px;
-		min-width: 486px;
-	}
-`;
-
-/**
- * Container for the ProjectTechStack.
- */
-const ProjectBlogContainer = styled.div`
-	grid-area: 3 / 1 / 4 / 6;
-	--project-desc-margin: 0.90vw;
-	margin: var(--project-desc-margin);
-	padding: 0.90vw;
-	width: calc(100% - calc(var(--project-desc-margin) * 4));
-	border-radius: 0.90vw;
-	${glassPanel}
-	z-index: 6;
-
-	${media.mobile} {
-		grid-area: 5 / 1 / 6 / 2;
-		padding: 1.75vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 4vw;
-	}
-
-	${media.tablet} {
-		padding: 1.5vw;
-		--project-desc-margin: 1.5vw;
-		border-radius: 2vw;
-	}
-
-	${media.wide} {
-		--project-desc-margin: 18px;
-		padding: 18px;
-		border-radius: 18px;
-		min-width: 486px;
+		${(props: GlassPanelProps) => (props.minWidthWide ? `min-width: ${props.minWidthWide};` : '')}
 	}
 `;
 
@@ -542,7 +432,7 @@ const ProjectBlogPostList = styled.div`
  * SkillCard: a small glass card with a gradient icon badge, title and
  * date/reading-time meta line, linking to the full article.
  */
-const ProjectBlogPostCard = styled.a`
+const ProjectBlogPostCard = styled(Link)`
 	display: flex;
 	align-items: center;
 	gap: 0.7vw;
@@ -770,8 +660,9 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 				{
 					project.licenseHref !== '' ? (
 						<LicenseHandle
-							onClick={ () =>
-								window.open(project.licenseHref, '_blank', 'noopener,noreferrer') }
+							href={ project.licenseHref }
+							target={ '_blank' }
+							rel={ 'noopener noreferrer' }
 						>
 							<FontAwesomeIcon
 								style={ {
@@ -799,7 +690,7 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 				<div className={ 'close-handle' } style={ {
 					margin: 0, padding: 0
 				} }>
-					<CloseHandle onClick={ close }>
+					<CloseHandle type={ 'button' } onClick={ close }>
 						<FontAwesomeIcon
 							style={ {
 								color: colors.ink
@@ -810,16 +701,16 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 				</div>
 			</Handles>
 			<ProjectGridAreaContainer>
-				<ProjectDescriptionContainer>
+				<GlassPanel area={ '1 / 1 / 2 / 4' } areaMobile={ '1 / 1 / 2 / 2' }>
 					<Typography variant={ 'project_desc_bold' }>
 						{ 'Description' }
 					</Typography>
 					<Typography variant={ 'project_desc' }>
 						{ project.longDescription }
 					</Typography>
-				</ProjectDescriptionContainer>
+				</GlassPanel>
 
-				<ProjectSidebarTopContainer>
+				<GlassPanel area={ '1 / 4 / 2 / 6' } areaMobile={ '3 / 1 / 4 / 2' }>
 					<Typography variant={ 'project_desc_bold' }>
 						{ 'Links' }
 					</Typography>
@@ -835,8 +726,9 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 					{
 						project.repoHref !== '' ? (
 							<LinkHandle
-								onClick={ () =>
-									window.open(project.repoHref, '_blank', 'noopener,noreferrer') }
+								href={ project.repoHref }
+								target={ '_blank' }
+								rel={ 'noopener noreferrer' }
 							>
 								<FontAwesomeIcon
 									style={ {
@@ -854,7 +746,9 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 						project.links.map((link) => (
 							<LinkHandle
 								key={ link.href }
-								onClick={ () => window.open(link.href, '_blank', 'noopener,noreferrer') }
+								href={ link.href }
+								target={ '_blank' }
+								rel={ 'noopener noreferrer' }
 							>
 								<FontAwesomeIcon
 									style={ {
@@ -871,9 +765,9 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 							</LinkHandle>
 						))
 					}
-				</ProjectSidebarTopContainer>
+				</GlassPanel>
 
-				<ProjectTechStackContainer>
+				<GlassPanel area={ '2 / 1 / 3 / 4' } areaMobile={ '2 / 1 / 3 / 2' } zIndex={ 7 }>
 					<Typography variant={ 'project_desc_bold' }>
 						{ 'Skills / TechStack / Used technologies' }
 					</Typography>
@@ -882,18 +776,28 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 							<SkillChip key={ tech } tech={ tech } />
 						))
 					}
-				</ProjectTechStackContainer>
+				</GlassPanel>
 
-				<ProjectDocsContainer>
+				<GlassPanel
+					area={ '2 / 4 / 3 / 6' }
+					areaMobile={ '4 / 1 / 5 / 2' }
+					minWidth={ '24.30vw' }
+					minWidthWide={ '486px' }
+				>
 					<Typography variant={ 'project_desc_bold' }>
 						{ 'Documents' }
 					</Typography>
 					<Typography variant={ 'project_desc' }>
 						{ 'No documents available.' }
 					</Typography>
-				</ProjectDocsContainer>
+				</GlassPanel>
 
-				<ProjectBlogContainer>
+				<GlassPanel
+					area={ '3 / 1 / 4 / 6' }
+					areaMobile={ '5 / 1 / 6 / 2' }
+					minWidth={ '24.30vw' }
+					minWidthWide={ '486px' }
+				>
 					<Typography variant={ 'project_desc_bold' }>
 						{ 'Blog Posts' }
 					</Typography>
@@ -907,7 +811,7 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 								{ relatedPosts.map((post) => (
 									<ProjectBlogPostCard
 										key={ post.id }
-										href={ `/blog/${post.id}` }
+										to={ `/blog/${post.id}` }
 									>
 										<ProjectBlogPostIcon gradient={ post.tileGradient }>
 											<FontAwesomeIcon
@@ -932,7 +836,7 @@ const ExpandedProject = ({ project, relatedPosts, close }: ExpandedProjectProps)
 							</ProjectBlogPostList>
 						)
 					}
-				</ProjectBlogContainer>
+				</GlassPanel>
 			</ProjectGridAreaContainer>
 		</ExpandableContainer>
 	);
