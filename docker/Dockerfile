@@ -14,11 +14,10 @@ COPY . /app
 WORKDIR /app
 
 RUN bun --version && \
-	bun pm cache rm && \
-	bun i && \
+	bun install --frozen-lockfile && \
 	bun run build
 
-FROM nginx:stable-alpine
+FROM nginxinc/nginx-unprivileged:stable-alpine
 
 LABEL maintainer="Temmi Pietsch <welcome@temmi.land>"
 

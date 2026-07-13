@@ -26,6 +26,10 @@ services:
       - "traefik.http.routers.temmiland-web-secure.tls=true"
       - "traefik.http.routers.temmiland-web-secure.tls.certresolver=letsencrypt"
       - "traefik.http.routers.temmiland-web-secure.service=temmiland-web"
+      - "traefik.http.middlewares.temmiland-web-hsts.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.temmiland-web-hsts.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.temmiland-web-hsts.headers.stsPreload=true"
+      - "traefik.http.routers.temmiland-web-secure.middlewares=temmiland-web-hsts"
       - "traefik.http.services.temmiland-web.loadbalancer.server.port=93"
       - "traefik.docker.network=proxy"
     networks:
