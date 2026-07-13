@@ -6,6 +6,21 @@
  */
 
 /**
+ * The site's breakpoints in px, single source of truth for both the CSS
+ * `media` queries below and JS layout math (e.g. `ProjectGrid`'s column
+ * count) that needs to react to the same viewport boundaries — see
+ * `columnsForWidth`.
+ */
+export const breakpoints = {
+	/** Below this width: mobile (1 column). */
+	mobile: 600,
+	/** Below this width: tablet (2 columns); at/above: desktop (4 columns). */
+	tablet: 1024,
+	/** At/above this width: the layout cap where fluid() stops scaling. */
+	wide: 2000
+} as const;
+
+/**
  * The site's breakpoints. Use these instead of repeating raw
  * `@media (min-width: …)` queries in every styled-component:
  *
@@ -21,20 +36,35 @@
  */
 export const media = {
 	/** Phones: up to 600px (also covers very small screens below 320px). */
-	mobile: '@media (max-width: 599.98px)',
+	mobile: `@media (max-width: ${breakpoints.mobile - 0.02}px)`,
 
 	/** Tablets: 600px – 1024px. */
-	tablet: '@media (min-width: 600px) and (max-width: 1023.98px)',
+	tablet: `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 0.02}px)`,
 
 	/** Phones and tablets combined: up to 1024px. */
-	belowDesktop: '@media (max-width: 1023.98px)',
+	belowDesktop: `@media (max-width: ${breakpoints.tablet - 0.02}px)`,
 
 	/** Desktop: 1024px – 2000px. */
-	desktop: '@media (min-width: 1024px) and (max-width: 1999.98px)',
+	desktop: `@media (min-width: ${breakpoints.tablet}px) and (max-width: ${breakpoints.wide - 0.02}px)`,
 
 	/** Very wide screens: at and above the 2000px layout cap. */
-	wide: '@media (min-width: 2000px)'
+	wide: `@media (min-width: ${breakpoints.wide}px)`
 } as const;
+
+/**
+ * Number of `ExpandableGrid` columns at a given viewport width, mirroring the
+ * `mobile`/`tablet`/`wide` breakpoints above so JS layout math can't drift
+ * from the CSS breakpoints the way it used to (each hard-coded its own copy).
+ */
+export const columnsForWidth = (width: number): number => {
+	if (width < breakpoints.mobile) {
+		return 1;
+	}
+	if (width < breakpoints.tablet) {
+		return 2;
+	}
+	return 4;
+};
 
 /**
  * A viewport-relative size that stops growing at the 2000px layout cap.

@@ -27,7 +27,9 @@
 	}
 }
 
-html, body, :root {
+html,
+body,
+:root {
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
@@ -35,7 +37,9 @@ html, body, :root {
 	/* Rounded, warm terminals (SOFT) without the eccentric "wonky" letterforms
 	   (WONK) — closest match to Bogart's controlled rounded-slab look.
 	   Inherited by every descendant, including the Fraunces faces below. */
-	font-variation-settings: 'SOFT' 100, 'WONK' 0;
+	font-variation-settings:
+		'SOFT' 100,
+		'WONK' 0;
 
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #000;

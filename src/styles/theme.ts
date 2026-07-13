@@ -49,11 +49,9 @@ export const colors = {
  * @param alpha The opacity between 0 and 1.
  * @returns An rgba() color string.
  */
-export const whiteAlpha = (alpha: number): string =>
-	`rgba(255, 255, 255, ${alpha})`;
+export const whiteAlpha = (alpha: number): string => `rgba(255, 255, 255, ${alpha})`;
 
-const withFallback = (name: string): string =>
-	`'${name}', system-ui, Avenir, Helvetica, Arial, sans-serif`;
+const withFallback = (name: string): string => `'${name}', system-ui, Avenir, Helvetica, Arial, sans-serif`;
 
 /**
  * Font stacks including fallbacks. The Fraunces faces are registered via
