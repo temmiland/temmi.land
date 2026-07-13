@@ -1,11 +1,11 @@
 /**
- * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
+ * Copyright (C) 2026 Temmi Pietsch - All Rights Reserved
  *
  * You may not use, distribute or modify this code without the explicitly
  * permission of the author.
  */
 
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
 	createBrowserRouter,
@@ -19,8 +19,13 @@ import {
 	faArrowDownWideShort,
 	faArrowLeft,
 	faArrowRight,
+	faBars,
 	faBolt,
 	faBowlRice,
+	faBox,
+	faBoxesPacking,
+	faBoxesStacked,
+	faBoxOpen,
 	faBriefcase,
 	faBriefcaseMedical,
 	faCalendar,
@@ -60,6 +65,7 @@ import {
 	faMagnifyingGlass,
 	faMap,
 	faMountainCity,
+	faMugHot,
 	faNetworkWired,
 	faPalette,
 	faPenNib,
@@ -75,6 +81,7 @@ import {
 	faStar,
 	faTabletScreenButton,
 	faTowerBroadcast,
+	faTruckRampBox,
 	faUserAstronaut,
 	faVialCircleCheck,
 	faWandMagicSparkles,
@@ -111,6 +118,7 @@ import {
 	faWordpress
 } from '@fortawesome/free-brands-svg-icons';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { PageLoader } from '@/ui/PageLoader';
 import { projects } from './data/projects';
 import { blogPosts } from './data/blog';
 import './index.css';
@@ -127,8 +135,13 @@ library.add(
 	faArrowDownWideShort,
 	faArrowLeft,
 	faArrowRight,
+	faBars,
 	faBolt,
 	faBowlRice,
+	faBox,
+	faBoxesPacking,
+	faBoxesStacked,
+	faBoxOpen,
 	faBriefcase,
 	faBriefcaseMedical,
 	faCalendar,
@@ -168,6 +181,7 @@ library.add(
 	faMagnifyingGlass,
 	faMap,
 	faMountainCity,
+	faMugHot,
 	faNetworkWired,
 	faPalette,
 	faPenNib,
@@ -183,6 +197,7 @@ library.add(
 	faStar,
 	faTabletScreenButton,
 	faTowerBroadcast,
+	faTruckRampBox,
 	faUserAstronaut,
 	faVialCircleCheck,
 	faWandMagicSparkles,
@@ -218,7 +233,9 @@ library.add(
 );
 
 const SITE_URL = 'https://temmi.land';
-const SITE_IMAGE = `${SITE_URL}/me.png`;
+// No og:image yet: /me.png is intentionally blocked in robots.txt (see S8),
+// and social crawlers respect that, so it can't be reused as a preview
+// image. Set this to a dedicated 1200x630 image once one exists.
 
 /**
  * Validates the optional ':id' URL param and redirects to the projects
@@ -281,6 +298,21 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
 };
 
 /**
+ * Resets scroll to the top on every route change. React Router's built-in
+ * <ScrollRestoration /> works on `window`, but this site scrolls the
+ * `<body>` itself (see `html, body { overflow-y: auto }` in index.css), so
+ * that component is a no-op here — this scrolls the element that actually
+ * scrolls.
+ */
+const ScrollToTop = () => {
+	const { pathname } = useLocation();
+	useEffect(() => {
+		document.body.scrollTo(0, 0);
+	}, [pathname]);
+	return null;
+};
+
+/**
  * All pages of the site: URL pattern, document title, meta description and
  * page component.
  */
@@ -340,7 +372,8 @@ const router = createBrowserRouter([
 		element: (
 			<>
 				<PageMeta title={ title } description={ description } />
-				<Suspense fallback={ null }>
+				<ScrollToTop />
+				<Suspense fallback={ <PageLoader /> }>
 					{ element }
 				</Suspense>
 			</>
@@ -358,8 +391,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 			<Helmet>
 				<meta property={ 'og:type' } content={ 'website' } />
 				<meta property={ 'og:site_name' } content={ 'Temmi Pietsch' } />
-				<meta property={ 'og:image' } content={ SITE_IMAGE } />
-				<meta name={ 'twitter:card' } content={ 'summary_large_image' } />
 			</Helmet>
 			<RouterProvider router={ router } />
 		</HelmetProvider>
