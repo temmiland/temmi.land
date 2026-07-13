@@ -11,12 +11,7 @@ import prettierConfig from 'eslint-config-prettier';
 
 export default [
 	{
-		ignores: [
-			'node_modules/',
-			'dist/',
-			'storybook-static/',
-			'public/'
-		]
+		ignores: ['node_modules/', 'dist/', 'storybook-static/', 'public/']
 	},
 	js.configs.recommended,
 	...tsPlugin.configs['flat/recommended'],
@@ -65,9 +60,7 @@ export default [
 			]
 		},
 		rules: {
-			'comma-dangle': [2, 'never'],
 			'no-console': 1,
-			'max-len': [2, 110],
 			'import/no-extraneous-dependencies': 0,
 			'no-param-reassign': 0,
 			'no-unneeded-ternary': 0,
@@ -76,56 +69,11 @@ export default [
 			'no-lonely-if': 0,
 			'react/jsx-filename-extension': 0,
 			'no-nested-ternary': 0,
-			'no-mixed-spaces-and-tabs': 2,
-			indent: ['error', 'tab'],
 			'no-irregular-whitespace': 'error',
-			'no-trailing-spaces': 'error',
-			'object-curly-newline': [
-				'error',
-				{
-					ObjectExpression: {
-						minProperties: 1
-					},
-					ObjectPattern: {
-						multiline: true
-					},
-					ImportDeclaration: {
-						multiline: true,
-						minProperties: 5
-					},
-					ExportDeclaration: {
-						multiline: true,
-						minProperties: 5
-					}
-				}
-			],
-			'array-element-newline': ['error', 'consistent'],
-			'object-curly-spacing': ['error', 'always'],
-			'brace-style': [
-				'error',
-				'1tbs',
-				{
-					allowSingleLine: true
-				}
-			],
 			'no-unused-expressions': 'off',
 			'no-unused-vars': 'off',
 			'@typescript-eslint/no-unused-vars': 1,
-			'react/jsx-curly-newline': [
-				'error',
-				{
-					multiline: 'consistent',
-					singleline: 'consistent'
-				}
-			],
 			'react/prop-types': 'off',
-			'react/jsx-one-expression-per-line': [
-				2,
-				{
-					allow: 'single-child'
-				}
-			],
-			quotes: ['error', 'single'],
 			'react/display-name': 0,
 			'react/jsx-curly-brace-presence': [
 				'error',
@@ -136,16 +84,10 @@ export default [
 				}
 			],
 			'react/react-in-jsx-scope': 'off',
-			'react/jsx-curly-spacing': [
-				'error',
-				{
-					when: 'always',
-					children: true
-				}
-			],
 			'import/no-named-as-default': 'off',
 			'react-hooks/rules-of-hooks': 'error',
-			'react-hooks/exhaustive-deps': 'warn'
+			'react-hooks/exhaustive-deps': 'warn',
+			'prettier/prettier': 'error'
 		}
 	}
 ];
