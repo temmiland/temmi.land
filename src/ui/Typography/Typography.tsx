@@ -5,11 +5,8 @@
  * permission of the author.
  */
 
-import { Typography as Typo } from 'antd';
 import styled from 'styled-components';
 import { colors, fonts, fluid, media } from '@/styles';
-
-const { Paragraph } = Typo;
 
 const H0 = styled.h1`
 	font-family: ${fonts.medium};
@@ -192,7 +189,8 @@ const P_Project_Bold = styled.p`
 	}
 `;
 
-const P = styled(Paragraph)`
+const P = styled.p`
+	margin: 0 0 1em 0;
 	font-family: ${fonts.light};
 	text-align: left;
 	font-size: ${fluid(1.125)};
@@ -229,7 +227,8 @@ const P = styled(Paragraph)`
 	}
 `;
 
-const P_Footer = styled(Paragraph)`
+const P_Footer = styled.p`
+	margin: 0 0 1em 0;
 	font-family: ${fonts.medium};
 	text-align: center;
 	font-size: ${fluid(1.35)};
@@ -249,7 +248,8 @@ const P_Footer = styled(Paragraph)`
 	}
 `;
 
-const P_Header = styled(Paragraph)`
+const P_Header = styled.p`
+	margin: 0;
 	font-family: ${fonts.bold};
 	text-align: center;
 	font-size: ${fluid(1)};
@@ -265,7 +265,8 @@ const P_Header = styled(Paragraph)`
 	}
 `;
 
-const P_Copyright = styled(Paragraph)`
+const P_Copyright = styled.p`
+	margin: 0 0 1em 0;
 	font-family: ${fonts.regular};
 	text-align: center;
 	font-size: ${fluid(1.125)};
@@ -293,7 +294,8 @@ const P_Copyright = styled(Paragraph)`
 	}
 `;
 
-const P_Navigation = styled(Paragraph)`
+const P_Navigation = styled.p`
+	margin: 0;
 	font-family: ${fonts.medium};
 	text-align: center;
 	font-size: ${fluid(0.9)};
@@ -309,7 +311,8 @@ const P_Navigation = styled(Paragraph)`
 	}
 `;
 
-const P_Trademark = styled(Paragraph)`
+const P_Trademark = styled.p`
+	margin: 0;
 	font-family: ${fonts.medium};
 	text-align: center;
 	font-size: 0.45vw;

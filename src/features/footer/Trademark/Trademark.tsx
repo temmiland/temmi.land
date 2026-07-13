@@ -10,7 +10,7 @@ import { Typography } from '@/ui/Typography/Typography.tsx';
 import { media } from '@/styles';
 
 const Div_Trademark = styled.div`
-	.ant-typography {
+	p {
 		margin: 0.5vw 0.6vw;
 
 		${media.wide} {

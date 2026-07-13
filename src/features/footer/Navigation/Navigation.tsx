@@ -16,9 +16,6 @@ const Div_Navigation = styled.div`
 
 	p {
 		font-size: 10px;
-	}
-
-	.ant-typography {
 		margin: 0.3vw 0.6vw;
 
 		${media.wide} {

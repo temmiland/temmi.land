@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 /**
  * Copyright (C) 2024 Temmi Pietsch - All Rights Reserved
  *
@@ -6,22 +5,19 @@ import styled from 'styled-components';
  * permission of the author.
  */
 
-import { Image } from 'antd';
+import styled from 'styled-components';
 import { media } from '@/styles';
 
-/**
- * Custom styles for antd Image component.
- */
-const SImage = styled(Image)<BattleOfNationsMonumentProps>`
-	width: ${(props) => props.size}vw !important;
+const SImage = styled.img<BattleOfNationsMonumentProps>`
+	width: ${(props) => props.size}vw;
 
 	${media.belowDesktop} {
-		width: 8vw !important;
+		width: 8vw;
 	}
 
 	${media.wide} {
 		width: ${(props) =>
-		((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px !important;
+		((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px;
 	}
 `;
 
@@ -36,7 +32,7 @@ export const BattleOfNationsMonument = ({ size = 3 }: BattleOfNationsMonumentPro
 	<SImage
 		size={ size }
 		src={ '/battle-of-nations-monument.png' }
-		preview={ false }
+		alt={ '' }
 		style={ {
 			verticalAlign: 'bottom',
 			filter: 'invert(1)',

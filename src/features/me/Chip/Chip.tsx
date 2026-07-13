@@ -8,34 +8,36 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
-import { Tag } from 'antd';
 import { colors, fonts, media } from '@/styles';
 
-/**
- * Custom styles for antd Tag component.
- */
-const ChipTag = styled(Tag)`
+const ChipTag = styled.span<{ color: string }>`
+	display: inline-block;
+	box-sizing: border-box;
 	margin: 0;
-	padding: 0.8vw !important;
+	padding: 0.8vw;
 	width: fit-content;
 	font-family: ${fonts.regular};
-	font-size: 2.0vw !important;
+	font-size: 2.0vw;
 	border-radius: 1vw;
 	line-height: 1.1vw;
+	border: 1px solid transparent;
+	color: ${colors.white};
+	white-space: nowrap;
+	background-color: ${(props) => props.color};
 
 	${media.belowDesktop} {
-		font-size: 5vw !important;
+		font-size: 5vw;
 		border-radius: 2vw;
-		padding: 1.5vw !important;
+		padding: 1.5vw;
 		margin: 0 0 1.5vw 0;
 		line-height: 4vw;
 	}
 
 	${media.wide} {
-		padding: 16px !important;
-		font-size: 40px !important;
+		padding: 16px;
+		font-size: 40px;
 		border-radius: 20px;
-		line-height: 22px !important;
+		line-height: 22px;
 	}
 
 	svg {
@@ -54,8 +56,7 @@ const ChipTag = styled(Tag)`
 	}
 
 	span {
-		background-color: ${props => props.color} !important;
-		line-height: 0.78vw !important;
+		line-height: 0.78vw;
 	}
 `;
 
@@ -81,13 +82,8 @@ export const Chip = ({
 	iconName = 'mug-hot',
 	text = 'Frontend Developer'
 }: ChipProps): JSX.Element => (
-	<ChipTag
-		icon={
-			<FontAwesomeIcon icon={ iconName } />
-		}
-		bordered={ false }
-		color={ color }
-	>
-		{ text }
+	<ChipTag color={ color }>
+		<FontAwesomeIcon icon={ iconName } />
+		<span>{ text }</span>
 	</ChipTag>
 );

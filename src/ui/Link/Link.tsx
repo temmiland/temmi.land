@@ -6,7 +6,6 @@
  */
 
 import styled from 'styled-components';
-import { Typography as Typo } from 'antd';
 
 interface LinkProps {
 	/**
@@ -23,19 +22,12 @@ interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 }
 
-const A = styled(Typo.Link)`
-	.ant-typography {
-		transition: color 0.5s;
-	}
+const A = styled.a`
+	transition: color 0.5s;
 
 	&:hover {
-		.ant-typography {
-			color: #8B8B8B;
-			mix-blend-mode: difference;
-			z-index: 3;
-		}
+		color: #8B8B8B;
 	}
-
 `;
 
 export const Link = ({

@@ -20,7 +20,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-spring/parallax": "^9.7.3",
     "@temmiland/react-expandable-grid": "^1.1.6",
-    "antd": "^5.13.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",

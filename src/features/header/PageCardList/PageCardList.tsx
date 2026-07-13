@@ -68,10 +68,6 @@ const Ul = styled.ul`
 		white-space: nowrap;
 	}
 
-	.ant-typography {
-		margin-bottom: 0 !important;
-	}
-
 	${media.mobile} {
 		display: none;
 		position: absolute;

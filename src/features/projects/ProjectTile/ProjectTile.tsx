@@ -10,7 +10,6 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '@/ui/Typography/Typography';
-import { Button } from 'antd';
 import { colors, fonts, media, whiteAlpha } from '@/styles';
 
 /**
@@ -133,6 +132,12 @@ const ProjectDescriptionContainer = styled.div`
 	}
 
 	a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 4px;
+		text-decoration: none;
+		cursor: pointer;
 		background: linear-gradient(
 			135deg,
 			${whiteAlpha(0.75)} 0%,
@@ -282,9 +287,9 @@ export const ProjectTile = ({
 			</Typography>
 			{
 				!gridMode ? (
-					<Button type={ 'primary' } size={ 'small' } href={ project.href }>
+					<a href={ project.href }>
 						{ 'See more' }
-					</Button>
+					</a>
 				) : ''
 			}
 		</ProjectDescriptionContainer>
