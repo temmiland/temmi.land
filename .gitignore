@@ -25,3 +25,6 @@ dist
 
 # Local History for Visual Studio Code
 .history/
+
+# Storybook build output
+storybook-static

@@ -5,7 +5,7 @@
  * permission of the author.
  */
 
-import type { Preview } from "@storybook/react";
+import type { Preview } from '@storybook/react';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -17,28 +17,34 @@ library.add(fas, fab, far);
 import './styles.css';
 
 const preview: Preview = {
-  parameters: {
-    options: {
-      storySort: {
-        order: ['Welcome', 'Components', 'Widgets', 'Layouts', 'Pages'],
-      }
-    },
-    //actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#fff' },
-        { name: 'page', value: '#141414' },
-        { name: 'dark', value: '#060606' },
-      ],
-    },
-  },
+	parameters: {
+		options: {
+			storySort: {
+				order: ['Welcome', 'Components', 'Widgets', 'Layouts', 'Pages']
+			}
+		},
+		//actions: { argTypesRegex: "^on[A-Z].*" },
+		controls: {
+			matchers: {
+				color: /(background|color)$/i,
+				date: /Date$/i
+			}
+		},
+		backgrounds: {
+			default: 'light',
+			values: [
+				{
+					name: 'light', value: '#fff'
+				},
+				{
+					name: 'page', value: '#141414'
+				},
+				{
+					name: 'dark', value: '#060606'
+				}
+			]
+		}
+	}
 };
 
 export default preview;
