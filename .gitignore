@@ -28,3 +28,6 @@ dist
 
 # Storybook build output
 storybook-static
+
+# Generated at build time by scripts/generate-sitemap.ts
+public/sitemap.xml

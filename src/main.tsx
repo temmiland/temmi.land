@@ -11,6 +11,7 @@ import {
 	createBrowserRouter,
 	Navigate,
 	RouterProvider,
+	useLocation,
 	useParams
 } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -216,6 +217,9 @@ library.add(
 	faWordpress
 );
 
+const SITE_URL = 'https://temmi.land';
+const SITE_IMAGE = `${SITE_URL}/me.png`;
+
 /**
  * Validates the optional ':id' URL param and redirects to the projects
  * overview when no project with that id exists.
@@ -244,41 +248,98 @@ const BlogPostRoute = () => {
 	return <BlogPost postId={ id } />;
 };
 
+type PageMetaProps = {
+	/** Page title, rendered as "Temmi Pietsch - {title}". */
+	title: string;
+	/** Meta/OG description for this page. */
+	description: string;
+};
+
 /**
- * All pages of the site: URL pattern, document title and page component.
+ * Per-page title, description, Open Graph and canonical-url tags. Reads the
+ * actual current path via useLocation() rather than the route's pattern, so
+ * parameterized routes (e.g. /project/:id) get a canonical URL that reflects
+ * the specific project or post being viewed, not the raw route pattern.
+ * @param {PageMetaProps} props - The props for the PageMeta component.
+ * @returns {JSX.Element} PageMeta JSX element.
+ */
+const PageMeta = ({ title, description }: PageMetaProps) => {
+	const { pathname } = useLocation();
+	const url = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
+	const fullTitle = `Temmi Pietsch - ${title}`;
+
+	return (
+		<Helmet>
+			<title>{ fullTitle }</title>
+			<meta name={ 'description' } content={ description } />
+			<meta property={ 'og:title' } content={ fullTitle } />
+			<meta property={ 'og:description' } content={ description } />
+			<meta property={ 'og:url' } content={ url } />
+			<link rel={ 'canonical' } href={ url } />
+		</Helmet>
+	);
+};
+
+/**
+ * All pages of the site: URL pattern, document title, meta description and
+ * page component.
  */
 const pages = [
 	{
-		path: '/', title: 'Home', element: <Home />
+		path: '/',
+		title: 'Home',
+		description: 'Temmi Pietsch, Senior Software Developer based in Leipzig, Germany. ' +
+			'Portfolio with projects, skills and a blog about mobile and web development.',
+		element: <Home />
 	},
 	{
-		path: '/project/:id?', title: 'Projects', element: <ProjectRoute />
+		path: '/project/:id?',
+		title: 'Projects',
+		description: 'A selection of apps, tools and libraries built by Temmi Pietsch, ' +
+			'spanning React Native, React, Kotlin and Java.',
+		element: <ProjectRoute />
 	},
 	{
-		path: '/skills', title: 'Skills', element: <Skills />
+		path: '/skills',
+		title: 'Skills',
+		description: 'Technical skills, tools and experience of Temmi Pietsch, Senior ' +
+			'Software Developer, across frontend, backend and mobile development.',
+		element: <Skills />
 	},
 	{
-		path: '/blog', title: 'Blog', element: <Blog />
+		path: '/blog',
+		title: 'Blog',
+		description: 'Articles by Temmi Pietsch about building and shipping software, ' +
+			'from mobile apps to backend services.',
+		element: <Blog />
 	},
 	{
-		path: '/blog/:id', title: 'Blog', element: <BlogPostRoute />
+		path: '/blog/:id',
+		title: 'Blog',
+		description: 'Articles by Temmi Pietsch about building and shipping software, ' +
+			'from mobile apps to backend services.',
+		element: <BlogPostRoute />
 	},
 	{
-		path: '/privacy', title: 'Privacy', element: <Privacy />
+		path: '/privacy',
+		title: 'Privacy',
+		description: 'Privacy policy for temmi.land, describing what data is collected and how it is used.',
+		element: <Privacy />
 	},
 	{
-		path: '/imprint', title: 'Imprint', element: <Imprint />
+		path: '/imprint',
+		title: 'Imprint',
+		description: 'Legal notice (Impressum) for temmi.land.',
+		element: <Imprint />
 	}
 ];
 
 const router = createBrowserRouter([
-	...pages.map(({ path, title, element }) => ({
+	...pages.map(({ path, title, description, element }) => ({
 		path,
 		element: (
 			<>
-				<Helmet>
-					<title>{ `Temmi Pietsch - ${title}` }</title>
-				</Helmet>
+				<PageMeta title={ title } description={ description } />
 				<Suspense fallback={ null }>
 					{ element }
 				</Suspense>
@@ -294,6 +355,12 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<HelmetProvider>
+			<Helmet>
+				<meta property={ 'og:type' } content={ 'website' } />
+				<meta property={ 'og:site_name' } content={ 'Temmi Pietsch' } />
+				<meta property={ 'og:image' } content={ SITE_IMAGE } />
+				<meta name={ 'twitter:card' } content={ 'summary_large_image' } />
+			</Helmet>
 			<RouterProvider router={ router } />
 		</HelmetProvider>
 	</React.StrictMode>

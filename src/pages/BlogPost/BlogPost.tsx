@@ -7,6 +7,7 @@
 
 import { BlogBlock } from '@/models/blogpost';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import Header from '@/features/header/Header';
@@ -651,8 +652,20 @@ export default function BlogPost({ postId }: PBlogPostProps) {
 		? projects.find((project) => project.id === post.projectId)
 		: undefined;
 
+	const title = `Temmi Pietsch - ${post.title}`;
+	const url = `https://temmi.land/blog/${post.id}`;
+
 	return (
 		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+			<Helmet>
+				<title>{ title }</title>
+				<meta name={ 'description' } content={ post.excerpt } />
+				<meta property={ 'og:title' } content={ title } />
+				<meta property={ 'og:description' } content={ post.excerpt } />
+				<meta property={ 'og:url' } content={ url } />
+				<meta property={ 'og:type' } content={ 'article' } />
+				<link rel={ 'canonical' } href={ url } />
+			</Helmet>
 			<BlogSection>
 				<div className={ 'blog-content' }>
 					<Trail

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bunx --bun vite",
-    "build": "tsc && bunx --bun vite build",
+    "build": "tsc && bun run scripts/generate-sitemap.ts && bunx --bun vite build",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

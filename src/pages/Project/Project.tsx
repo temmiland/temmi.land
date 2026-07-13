@@ -7,6 +7,7 @@
 
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ProjectGrid from '@/features/projects/ProjectGrid';
 import { projects } from '@/data/projects';
 import { blogPosts } from '@/data/blog';
@@ -79,9 +80,26 @@ type PProjectProps = {
 export default function Project({ selectedProjectId }: PProjectProps) {
 
 	const [techToMatch, setTechToMatch] = useState('');
+	const selectedProject = projects.find((project) => project.id === selectedProjectId);
 
 	return (
 		<PageLayout header={ <Header animationDirection={ 'left' } /> }>
+			{ selectedProject ? (
+				<Helmet>
+					<title>{ `Temmi Pietsch - ${selectedProject.name}` }</title>
+					<meta name={ 'description' } content={ selectedProject.description } />
+					<meta property={ 'og:title' } content={ `Temmi Pietsch - ${selectedProject.name}` } />
+					<meta property={ 'og:description' } content={ selectedProject.description } />
+					<meta
+						property={ 'og:url' }
+						content={ `https://temmi.land/project/${selectedProject.id}` }
+					/>
+					<link
+						rel={ 'canonical' }
+						href={ `https://temmi.land/project/${selectedProject.id}` }
+					/>
+				</Helmet>
+			) : null }
 			<ProjectSection>
 				<div className={ 'project-content' }>
 					<Trail
