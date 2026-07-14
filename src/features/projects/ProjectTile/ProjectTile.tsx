@@ -47,9 +47,14 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	}
 
 	${media.tablet} {
-		width: 45vw;
-		height: 45vw;
-		border-radius: 3.5vw;
+		width: 30vw;
+		height: 30vw;
+		border-radius: 2.33vw;
+
+		h2 {
+			font-size: 2vw;
+			margin: 2vw 2.33vw;
+		}
 	}
 
 	&:hover {
@@ -109,10 +114,14 @@ const ProjectDescriptionContainer = styled.div`
 	}
 
 	${media.tablet} {
-		--project-desc-margin: 2vw;
-		padding: 2vw;
-		border-radius: 2vw;
-		line-height: 3vw;
+		--project-desc-margin: 1.33vw;
+		padding: 1.33vw;
+		border-radius: 1.33vw;
+		line-height: 2vw;
+
+		p {
+			font-size: 1.5vw !important;
+		}
 	}
 
 	a {
@@ -160,11 +169,11 @@ const ProjectDescriptionContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 2.25vw !important;
-			line-height: 4vw !important;
-			height: 4vw !important;
-			padding: 0 3vw !important;
-			margin: 1vw 0 0 0;
+			font-size: 1.5vw !important;
+			line-height: 2.67vw !important;
+			height: 2.67vw !important;
+			padding: 0 2vw !important;
+			margin: 0.67vw 0 0 0;
 		}
 
 		${media.wide} {

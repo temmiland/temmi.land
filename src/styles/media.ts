@@ -15,7 +15,7 @@ export const breakpoints = {
 	/** Below this width: mobile (1 column). */
 	mobile: 600,
 	/**
-	 * At/below this width: tablet (2 columns); above: desktop (4 columns).
+	 * At/below this width: tablet (3 columns); above: desktop (4 columns).
 	 * Inclusive because an iPad Pro 12.9" in portrait is exactly 1024px wide
 	 * and must still get the tablet layout, not the desktop one.
 	 */
@@ -65,7 +65,7 @@ export const columnsForWidth = (width: number): number => {
 		return 1;
 	}
 	if (width <= breakpoints.tablet) {
-		return 2;
+		return 3;
 	}
 	return 4;
 };

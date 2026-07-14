@@ -19,13 +19,12 @@ const ProjectContainer = styled.div`
 	grid-template-columns: repeat(5, 1fr);
 
 	${media.mobile} {
-		gap: 0;
+		gap: 10vw;
 		grid-template-columns: 1fr;
-		grid-template-rows: repeat(5, 1fr);
 	}
 
 	${media.tablet} {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5vw;
 		width: auto;
 	}

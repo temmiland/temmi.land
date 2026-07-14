@@ -31,14 +31,16 @@ const MoreTileContainer = styled.div`
 		width: 87vw;
 		height: 87vw;
 		border-radius: 8.16vw;
-		margin: 0 0 10vw 0;
+		justify-content: center;
+		align-items: center;
 	}
 
 	${media.tablet} {
-		width: 45vw;
-		height: 45vw;
-		border-radius: 3.5vw;
-		margin: 0 0 10vw 0;
+		width: 30vw;
+		height: 30vw;
+		border-radius: 2.33vw;
+		justify-content: center;
+		align-items: center;
 	}
 
 	${media.wide} {
@@ -46,21 +48,17 @@ const MoreTileContainer = styled.div`
 	}
 
 	svg {
-		margin: 1vw 1.5vw;
+		margin: 6.5vw 2.5vw;
 		font-size: ${fluid(4.7)};
 
 		${media.mobile} {
-			margin: 27.5vw 20vw;
+			margin: 0;
 			font-size: 25vw;
 		}
 
 		${media.tablet} {
-			margin: 15vw 10vw;
-			font-size: 15vw;
-		}
-
-		${media.wide} {
-			margin: 133px 75px;
+			margin: 0;
+			font-size: 10vw;
 		}
 	}
 
