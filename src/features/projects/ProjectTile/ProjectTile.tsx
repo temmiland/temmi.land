@@ -49,7 +49,7 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	${media.tablet} {
 		width: 45vw;
 		height: 45vw;
-		border-radius: 2.625vw;
+		border-radius: 3.5vw;
 	}
 
 	&:hover {
@@ -75,9 +75,9 @@ const glassPanel = css`
 	}
 
 	${media.tablet} {
-		border-width: 0.094vw;
-		backdrop-filter: blur(1.5vw);
-		-webkit-backdrop-filter: blur(1.5vw);
+		border-width: 0.125vw;
+		backdrop-filter: blur(2vw);
+		-webkit-backdrop-filter: blur(2vw);
 	}
 
 	${media.wide} {
@@ -109,10 +109,10 @@ const ProjectDescriptionContainer = styled.div`
 	}
 
 	${media.tablet} {
-		--project-desc-margin: 1.5vw;
-		padding: 1.5vw;
-		border-radius: 1.5vw;
-		line-height: 2.25vw;
+		--project-desc-margin: 2vw;
+		padding: 2vw;
+		border-radius: 2vw;
+		line-height: 3vw;
 	}
 
 	a {
@@ -140,9 +140,9 @@ const ProjectDescriptionContainer = styled.div`
 		}
 
 		${media.tablet} {
-			border-width: 0.094vw !important;
-			backdrop-filter: blur(0.9vw);
-			-webkit-backdrop-filter: blur(0.9vw);
+			border-width: 0.125vw !important;
+			backdrop-filter: blur(1.2vw);
+			-webkit-backdrop-filter: blur(1.2vw);
 		}
 
 		${media.wide} {
@@ -160,11 +160,11 @@ const ProjectDescriptionContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 1.688vw !important;
-			line-height: 3vw !important;
+			font-size: 2.25vw !important;
+			line-height: 4vw !important;
 			height: 4vw !important;
-			padding: 0 2.25vw !important;
-			margin: 0.75vw 0 0 0;
+			padding: 0 3vw !important;
+			margin: 1vw 0 0 0;
 		}
 
 		${media.wide} {

@@ -139,8 +139,8 @@ const H2_ProjectHeader = styled.h2`
 	}
 
 	${media.tablet} {
-		font-size: 2.25vw;
-		margin: 2.25vw 2.625vw;
+		font-size: 3vw;
+		margin: 3vw 3.5vw;
 	}
 
 	${media.wide} {
@@ -169,7 +169,7 @@ const P_Project = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 1.688vw;
+		font-size: 2.25vw;
 	}
 `;
 
@@ -185,7 +185,7 @@ const P_Project_Bold = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 1.688vw;
+		font-size: 2.25vw;
 	}
 `;
 
