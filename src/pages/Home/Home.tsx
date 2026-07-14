@@ -88,39 +88,45 @@ const Section = styled.div<SectionProps>`
 	position: relative;
 	background: ${(props) => props.background};
 
-	&:before {
-		--pattern-size: 35px;
-		content: '';
-		position: absolute;
-		right: 0;
-		left: -0%;
-		bottom: 100%;
-		z-index: 10;
-		display: block;
-		height: var(--pattern-size);
-		background-size: var(--pattern-size) 100%;
-		background-image:
-			linear-gradient(135deg, ${colors.surface} 25%, transparent 25%),
-			linear-gradient(225deg, ${colors.surface} 25%, transparent 25%);
-		background-position: 0 0;
-		rotate: 180deg;
+	${(props) =>
+		props.divider !== false &&
+		`
+		&:before {
+			--pattern-size: 35px;
+			content: '';
+			position: absolute;
+			right: 0;
+			left: -0%;
+			bottom: 100%;
+			z-index: 10;
+			display: block;
+			height: var(--pattern-size);
+			background-size: var(--pattern-size) 100%;
+			background-image:
+				linear-gradient(135deg, ${colors.surface} 25%, transparent 25%),
+				linear-gradient(225deg, ${colors.surface} 25%, transparent 25%);
+			background-position: 0 0;
+			rotate: 180deg;
 
-		${media.mobile} {
-			--pattern-size: 28px;
-		}
+			${media.mobile} {
+				--pattern-size: 28px;
+			}
 
-		${media.tablet} {
-			--pattern-size: 28px;
-		}
+			${media.tablet} {
+				--pattern-size: 28px;
+			}
 
-		${media.desktop} {
-			--pattern-size: 1.75vw;
+			${media.desktop} {
+				--pattern-size: 1.75vw;
+			}
 		}
-	}
+	`}
 `;
 
 type SectionProps = {
 	background?: string;
+	/** Whether to render the zigzag divider above this section. Defaults to true; set false when the previous section shares the same background. */
+	divider?: boolean;
 	children?: JSX.Element;
 };
 
@@ -143,17 +149,17 @@ export default function Home() {
 					<AboutSection />
 				</AboutArea>
 			</Section>
-			<Section background={colors.surface}>
+			<Section background={colors.surface} divider={false}>
 				<BlogArea>
 					<BlogSection posts={blogPosts} />
 				</BlogArea>
 			</Section>
-			<Section background={colors.surface}>
+			<Section background={colors.surface} divider={false}>
 				<SkillSection>
 					<SkillsSection skills={skills} />
 				</SkillSection>
 			</Section>
-			<Section background={colors.surface}>
+			<Section background={colors.surface} divider={false}>
 				<ProjectSection>
 					<ProjectsSection projects={projects} />
 				</ProjectSection>
