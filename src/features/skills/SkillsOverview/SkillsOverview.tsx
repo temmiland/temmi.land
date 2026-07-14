@@ -11,7 +11,7 @@ import SkillCard from '@/features/skills/SkillCard';
 import { Link } from '@/ui/Link/Link';
 import { Skill } from '@/models/skill';
 import { sortSkillsForHome } from '@/utils/skillSort';
-import { colors, fluid, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const SkillsWrapper = styled.div`
 	display: grid;
@@ -45,8 +45,9 @@ const SkillsWrapper = styled.div`
  * skill rows) and is exactly one grid column wide (i.e. (content width -
  * 3 gaps) / 4, the width of a skill card) — without affecting the
  * in-flow skill cards. On tablet and phone there is no margin space, so
- * it falls back into the grid as a slim full-width row spanning all
- * columns below the skill cards.
+ * it falls back into the grid as a slim full-width row (with an "All
+ * skills" label) spanning all columns below the skill cards - matching
+ * the more-tile row used in the Blog overview exactly.
  */
 const MoreLink = styled(Link)`
 	display: block;
@@ -85,17 +86,21 @@ const MoreCard = styled.div`
 	${media.mobile} {
 		justify-content: center;
 		height: auto;
-		padding: 2vw 0;
+		gap: 3vw;
+		padding: 5vw 0;
 		border: 0.25vw dashed ${whiteAlpha(0.3)};
-		border-radius: 3.5vw;
+		border-radius: 5vw;
+		font-size: 4.5vw;
 	}
 
 	${media.tablet} {
 		justify-content: center;
 		height: auto;
-		padding: 0.75vw 0;
+		gap: 1.5vw;
+		padding: 2.25vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
-		border-radius: 1.35vw;
+		border-radius: 1.95vw;
+		font-size: 1.95vw;
 	}
 
 	${media.wide} {
@@ -108,18 +113,27 @@ const MoreCard = styled.div`
 		background: ${whiteAlpha(0.05)};
 	}
 
+	.more-label {
+		display: none;
+		font-family: ${fonts.medium};
+
+		${media.belowDesktop} {
+			display: inline;
+		}
+	}
+
 	svg {
 		color: ${colors.white};
 		font-size: ${fluid(4.7)};
 
 		${media.mobile} {
 			color: ${colors.accentBlue};
-			font-size: 19.5vw;
+			font-size: 6vw;
 		}
 
 		${media.tablet} {
 			color: ${colors.accentBlue};
-			font-size: 7.875vw;
+			font-size: 2.55vw;
 		}
 
 		${media.wide} {
@@ -156,6 +170,7 @@ export const SkillsOverview = ({ skills }: SkillsOverviewProps): JSX.Element => 
 			))}
 			<MoreLink href={'/skills'}>
 				<MoreCard>
+					<span className={'more-label'}>{'All skills'}</span>
 					<FontAwesomeIcon icon={'caret-right'} />
 				</MoreCard>
 			</MoreLink>

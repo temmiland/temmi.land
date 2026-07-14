@@ -32,28 +32,54 @@ const BlogWrapper = styled.div`
 `;
 
 /*
- * The "more" card sits as a slim full-width row below the two latest
- * articles, spanning both columns - mirroring the dashed more-tile used in
- * the Skills and Projects overviews.
+ * On desktop the more card sits beside the two latest articles as a tall
+ * side column - matching the more-tile used in the Skills overview exactly,
+ * so both "more" buttons read as one shared design. Below desktop there's
+ * no room for a side column, so it falls back to the slim full-width row
+ * (with a text label) that this page used everywhere before.
  */
 const MoreLink = styled(Link)`
 	display: block;
-	grid-column: 1 / -1;
+	position: absolute;
+	grid-column: 3;
+	top: 0;
+	bottom: 0;
+	left: ${fluid(1.6)};
+	width: 38.2vw;
+
+	${media.belowDesktop} {
+		position: static;
+		grid-column: 1 / -1;
+		width: auto;
+	}
+
+	${media.wide} {
+		left: 32px;
+		width: 744px;
+	}
 `;
 
 const MoreCard = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: ${fluid(1)};
+	justify-content: flex-start;
 	width: 100%;
-	padding: ${fluid(1.4)} 0;
+	height: 100%;
+	padding-left: 1.5vw;
 	border: 0.07vw dashed ${whiteAlpha(0.3)};
-	border-radius: ${fluid(1.1)};
+	border-radius: ${fluid(0.7)};
 	color: ${colors.white};
-	font-family: ${fonts.medium};
-	font-size: ${fluid(1.1)};
 	transition: 120ms ease;
+
+	${media.belowDesktop} {
+		justify-content: center;
+		height: auto;
+		gap: ${fluid(1)};
+		padding: ${fluid(1.4)} 0;
+		border-radius: ${fluid(1.1)};
+		font-family: ${fonts.medium};
+		font-size: ${fluid(1.1)};
+	}
 
 	${media.mobile} {
 		gap: 3vw;
@@ -73,6 +99,7 @@ const MoreCard = styled.div`
 
 	${media.wide} {
 		border-width: 1px;
+		padding-left: 0;
 	}
 
 	&:hover {
@@ -80,9 +107,22 @@ const MoreCard = styled.div`
 		background: ${whiteAlpha(0.05)};
 	}
 
+	.more-label {
+		display: none;
+
+		${media.belowDesktop} {
+			display: inline;
+		}
+	}
+
 	svg {
-		color: ${colors.accentBlue};
-		font-size: ${fluid(1.4)};
+		color: ${colors.white};
+		font-size: ${fluid(4.7)};
+
+		${media.belowDesktop} {
+			color: ${colors.accentBlue};
+			font-size: ${fluid(1.4)};
+		}
 
 		${media.mobile} {
 			font-size: 6vw;
@@ -90,6 +130,10 @@ const MoreCard = styled.div`
 
 		${media.tablet} {
 			font-size: 2.55vw;
+		}
+
+		${media.wide} {
+			margin-left: 75px;
 		}
 	}
 `;
@@ -119,7 +163,7 @@ export const BlogOverview = ({ posts }: BlogOverviewProps): JSX.Element => {
 			))}
 			<MoreLink href={'/blog'}>
 				<MoreCard>
-					{'All articles'}
+					<span className={'more-label'}>{'All articles'}</span>
 					<FontAwesomeIcon icon={'caret-right'} />
 				</MoreCard>
 			</MoreLink>
