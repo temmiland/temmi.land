@@ -28,9 +28,9 @@ const MoreTileContainer = styled.div`
 	transition: 100ms linear 50ms;
 
 	${media.mobile} {
-		width: 80vw;
-		height: 80vw;
-		border-radius: 7.5vw;
+		width: 87vw;
+		height: 87vw;
+		border-radius: 8.16vw;
 		margin: 0 0 10vw 0;
 	}
 

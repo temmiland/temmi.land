@@ -41,9 +41,9 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	overflow: hidden;
 
 	${media.mobile} {
-		width: 80vw;
-		height: 80vw;
-		border-radius: 7.5vw;
+		width: 87vw;
+		height: 87vw;
+		border-radius: 8.16vw;
 	}
 
 	${media.tablet} {

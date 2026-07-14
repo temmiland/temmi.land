@@ -19,7 +19,7 @@ const ProjectGridContainer = styled.div`
 	max-width: 1545px;
 
 	${media.mobile} {
-		padding: 0 10vw;
+		padding: 0 6.5vw;
 	}
 
 	${media.tablet} {
