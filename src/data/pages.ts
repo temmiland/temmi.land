@@ -28,7 +28,7 @@ export const pages: Page[] = [
 	},
 	{
 		name: 'Projects',
-		href: '/project',
+		href: '/projects',
 		sectionId: 'projects'
 	}
 ];

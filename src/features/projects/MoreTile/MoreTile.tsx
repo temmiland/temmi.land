@@ -73,7 +73,7 @@ const MoreTileContainer = styled.div`
  * @returns {JSX.Element} MoreTile JSX element.
  */
 export const MoreTile = (): JSX.Element => (
-	<Link href={'/project'}>
+	<Link href={'/projects'}>
 		<MoreTileContainer>
 			<FontAwesomeIcon icon={'caret-right'} />
 		</MoreTileContainer>

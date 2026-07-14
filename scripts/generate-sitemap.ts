@@ -27,12 +27,12 @@ const entries: SitemapEntry[] = [
 		priority: '1.0'
 	},
 	{
-		loc: `${BASE_URL}/project`,
+		loc: `${BASE_URL}/projects`,
 		changefreq: 'weekly',
 		priority: '0.8'
 	},
 	...projects.map((project): SitemapEntry => ({
-		loc: `${BASE_URL}/project/${project.id}`,
+		loc: `${BASE_URL}/projects/${project.id}`,
 		changefreq: 'weekly',
 		priority: '0.8'
 	})),

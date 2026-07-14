@@ -239,9 +239,20 @@ const ProjectRoute = () => {
 	const { id } = useParams();
 
 	if (id !== undefined && !projects.some((project) => project.id === id))
-		return <Navigate to={'/project'} replace />;
+		return <Navigate to={'/projects'} replace />;
 
 	return <Project selectedProjectId={id} />;
+};
+
+/**
+ * Redirects the old '/project' path (former canonical URL) to '/projects',
+ * preserving the optional ':id'.
+ *
+ * TODO: remove once external links to /project have migrated to /projects.
+ */
+const LegacyProjectRedirect = () => {
+	const { id } = useParams();
+	return <Navigate to={id !== undefined ? `/projects/${id}` : '/projects'} replace />;
 };
 
 /**
@@ -318,12 +329,20 @@ const pages = [
 		element: <Home />
 	},
 	{
-		path: '/project/:id?',
+		path: '/projects/:id?',
 		title: 'Projects',
 		description:
 			'A selection of apps, tools and libraries built by Temmi Pietsch, ' +
 			'spanning React Native, React, Kotlin and Java.',
 		element: <ProjectRoute />
+	},
+	{
+		path: '/project/:id?',
+		title: 'Projects',
+		description:
+			'A selection of apps, tools and libraries built by Temmi Pietsch, ' +
+			'spanning React Native, React, Kotlin and Java.',
+		element: <LegacyProjectRedirect />
 	},
 	{
 		path: '/skills',

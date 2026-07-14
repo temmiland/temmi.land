@@ -40,7 +40,7 @@ export const projects: Project[] = [
 			' prompt engineering and context orchestration helped optimize the quality,' +
 			' consistency, and predictability of the AI outputs, and this coordinated use of AI' +
 			' across the team helped the project reach its goal ahead of schedule.',
-		href: '/project/healthtrack-x',
+		href: '/projects/healthtrack-x',
 		isVisibleOnHome: true,
 		tileGradient: 'linear-gradient(135deg, #082a2c 0%, #145f56 100%)',
 		tileIcon: 'heart-pulse',
@@ -121,7 +121,7 @@ export const projects: Project[] = [
 			' authentication, storage, household and social features, and real-time updates over' +
 			' WebSocket - keeping the account-based side of the app just as carefully engineered as' +
 			' its offline-first core.',
-		href: '/project/alimonia',
+		href: '/projects/alimonia',
 		isVisibleOnHome: true,
 		tileGradient: 'linear-gradient(90deg, #0a2e1c 0%, #226b3e 100%)',
 		tileIcon: 'bowl-rice',
@@ -197,7 +197,7 @@ export const projects: Project[] = [
 			" and game physics. Through this prototype, I've gained valuable insights into game" +
 			' development and showcased my ability to implement complex features using Java and' +
 			' LWJGL.',
-		href: '/project/pxworlds',
+		href: '/projects/pxworlds',
 		isVisibleOnHome: false,
 		tileGradient: 'linear-gradient(135deg, #150a2e 0%, #3d1266 45%, #0a2a66 100%)',
 		tileIcon: 'gamepad',
@@ -220,7 +220,7 @@ export const projects: Project[] = [
 			' applications — it handles configuration, GLFW/OpenGL windowing, input' +
 			' and the main loop, so games and editors only need to implement their own' +
 			' Game. Used as the base of pxWorlds.',
-		href: '/project/rollercoaster',
+		href: '/projects/rollercoaster',
 		isVisibleOnHome: false,
 		tileGradient: 'linear-gradient(135deg, #2e0a12 0%, #8f1a4a 45%, #5b1a6f 100%)',
 		tileIcon: 'gamepad',
@@ -245,7 +245,7 @@ export const projects: Project[] = [
 			' programmatically change the app icons in an Expo app. This includes support for' +
 			" Android's monochrome icon variant and iOS 18's dark and tinted icon styles," +
 			' providing a flexible solution for dynamic icon customization across platforms.',
-		href: '/project/expo-extra-app-icons',
+		href: '/projects/expo-extra-app-icons',
 		isVisibleOnHome: false,
 		tileGradient: 'linear-gradient(135deg, #084438 0%, #0c5c48 100%)',
 		tileIcon: 'comments',
@@ -268,7 +268,7 @@ export const projects: Project[] = [
 			+ ' their plants, such as watering schedules, fertilizer needs, and more. The app will'
 			+ ' provide notifications and allow users to document photos and details in a timeline'
 			+ ' format for easy reference and sharing.',
-		href: '/project/vokse',
+		href: '/projects/vokse',
 		tileGradient: 'linear-gradient(45deg, #0a2e1c 0%, #1a5c34 100%)',
 		tileIcon: 'seedling',
 		repoHost: '',
@@ -315,7 +315,7 @@ export const projects: Project[] = [
 			' assets, and Docker to containerize the app. Beyond the code, I set up and maintained' +
 			" the CI/CD pipeline, as well as the project's domain, Cloudflare CDN, and server" +
 			' hosting.',
-		href: '/project/gj-sharepic-creator',
+		href: '/projects/gj-sharepic-creator',
 		isVisibleOnHome: true,
 		tileGradient:
 			'linear-gradient(45deg, rgb(20, 45, 15), rgb(32, 24, 48),' + ' rgb(48, 22, 40), rgb(48, 20, 15))',
@@ -383,7 +383,7 @@ export const projects: Project[] = [
 			'Beyond feature development, I set up a cloud machine for debugging on remote' +
 			' emulators, maintained the demo device, and worked on accessible, barrier-free web' +
 			' development.',
-		href: '/project/cariad-ppe-infotainment',
+		href: '/projects/cariad-ppe-infotainment',
 		tileGradient: 'linear-gradient(135deg, #0f1b2d 0%, #1f3a5f 100%)',
 		tileIcon: 'car-side',
 		repoHost: '',
@@ -449,7 +449,7 @@ export const projects: Project[] = [
 			"I was also responsible for the app's unit and integration test coverage, using Jest" +
 			' and Cypress within an agile Scrum setup to keep quality high through frequent' +
 			' iterations.',
-		href: '/project/audi-a3-e-drive-app',
+		href: '/projects/audi-a3-e-drive-app',
 		tileGradient: 'linear-gradient(135deg, #062a33 0%, #0e7490 100%)',
 		tileIcon: 'bolt',
 		repoHost: '',
@@ -511,7 +511,7 @@ export const projects: Project[] = [
 			'I also worked with Karma and Jasmine for unit testing, and used' +
 			' Jenkins pipelines to keep continuous integration and delivery reliable across' +
 			' releases.',
-		href: '/project/mib3-infotainment',
+		href: '/projects/mib3-infotainment',
 		tileGradient: 'linear-gradient(135deg, #0a1f3d 0%, #1a56b0 100%)',
 		tileIcon: 'tablet-screen-button',
 		repoHost: '',
@@ -578,7 +578,7 @@ export const projects: Project[] = [
 			'\n\n' +
 			"Beyond development, I administered and configured the team's Atlassian tooling (Jira" +
 			' and Confluence) to support the wider development process.',
-		href: '/project/hydrograv-lifecycle-platform',
+		href: '/projects/hydrograv-lifecycle-platform',
 		tileGradient: 'linear-gradient(135deg, #1c2b2b 0%, #35504f 100%)',
 		tileIcon: 'gauge-high',
 		repoHost: '',
@@ -652,7 +652,7 @@ export const projects: Project[] = [
 			' component-based frontend architecture and state management, to backend service' +
 			' design, to setting up the CI/CD pipeline that built and deployed the tool with' +
 			' Docker.',
-		href: '/project/liquidium',
+		href: '/projects/liquidium',
 		isVisibleOnHome: false,
 		tileGradient: 'linear-gradient(135deg, #24384a 0%, #16232f 100%)',
 		tileIcon: 'water',
@@ -698,7 +698,7 @@ export const projects: Project[] = [
 			' by utilizing various color schemes and icon styles. With the ability to use custom' +
 			' color configurations and adjust the size of icons variably, react-fileicons' +
 			' provides a flexible solution for displaying file icons in React applications.',
-		href: '/project/react-fileicons',
+		href: '/projects/react-fileicons',
 		tileGradient: 'linear-gradient(45deg, #4a1f12 0%, #5c1428 100%)',
 		tileIcon: 'file-code',
 		repoHost: 'GitHub',
@@ -731,7 +731,7 @@ export const projects: Project[] = [
 			' up, displaying a larger (or smaller, depending on the settings) area where you can' +
 			' customize and showcase your content as desired. This grid, for example, is using' +
 			' it.',
-		href: '/project/react-expandable-grid',
+		href: '/projects/react-expandable-grid',
 		tileGradient: 'linear-gradient(135deg, rgba(8, 28, 40, 0.95) 0%, rgba(18, 64, 88, 0.95)' + '100%)',
 		tileIcon: 'wand-magic-sparkles',
 		repoHost: 'GitHub',
