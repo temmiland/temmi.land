@@ -21,7 +21,7 @@ import { SkillCategory } from '@/models/skillcategory';
 import { skills } from '@/data/skills';
 import { downloadFile, skillsToCsv, skillsToJson } from '@/utils/skillExport';
 import { DEFAULT_SKILL_SORT, SKILL_SORT_LABELS, SkillSortOption } from '@/utils/skillSort';
-import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const SKILL_SORT_OPTIONS = Object.keys(SKILL_SORT_LABELS) as SkillSortOption[];
 
@@ -90,8 +90,12 @@ const SearchRow = styled.div`
 	padding: 0 6.5vw;
 	margin: 0 0 1vw 0;
 
-	${media.belowDesktop} {
-		margin: 0 0 ${fluidRange(10.91, 18.81)} 0;
+	${media.mobile} {
+		margin: 0 0 3vw 0;
+	}
+
+	${media.tablet} {
+		margin: 0 0 2vw 0;
 	}
 `;
 
@@ -104,11 +108,18 @@ const ControlsCol = styled.div`
 	padding: 0 6.5vw 0 0;
 	margin: 1.5vw 0 3vw 0;
 
-	${media.belowDesktop} {
+	${media.mobile} {
 		align-items: flex-start;
-		gap: ${fluidRange(7.71, 8.57)};
+		gap: 2vw;
 		padding: 0 6.5vw;
-		margin: ${fluidRange(0.57, 34.06)} 0 ${fluidRange(18.63, 27.38)} 0;
+		margin: 1vw 0 5vw;
+	}
+
+	${media.tablet} {
+		align-items: flex-start;
+		gap: 1vw;
+		padding: 0 6.5vw;
+		margin: 3vw 0;
 	}
 
 	${media.wide} {
@@ -143,8 +154,12 @@ const DropdownTrigger = styled.button`
 	svg {
 		font-size: 0.95vw;
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(13.17, 17.98)};
+		${media.mobile} {
+			font-size: 3.5vw;
+		}
+
+		${media.tablet} {
+			font-size: 2vw;
 		}
 
 		${media.wide} {
@@ -161,19 +176,19 @@ const DropdownTrigger = styled.button`
 	}
 
 	${media.mobile} {
-		gap: ${fluidRange(5.46, 9.41)};
-		padding: ${fluidRange(5.79, 6.43)} ${fluidRange(13.83, 12.02)};
+		gap: 1.5vw;
+		padding: 1.5vw 3.5vw;
 		border: 0.25vw solid ${whiteAlpha(0.35)};
-		border-radius: ${fluidRange(15.43, 17.14)};
-		font-size: ${fluidRange(12.04, 18.39)};
+		border-radius: 4vw;
+		font-size: 3.25vw;
 	}
 
 	${media.tablet} {
-		gap: ${fluidRange(5.46, 9.41)};
-		padding: ${fluidRange(5.79, 6.43)} ${fluidRange(13.83, 12.02)};
+		gap: 1vw;
+		padding: 0.75vw 1.5vw;
 		border: 0.125vw solid ${whiteAlpha(0.35)};
-		border-radius: ${fluidRange(15.43, 17.14)};
-		font-size: ${fluidRange(12.04, 18.39)};
+		border-radius: 2vw;
+		font-size: 2vw;
 	}
 
 	${media.wide} {
@@ -227,9 +242,9 @@ const DropdownPanel = styled.div`
 	${media.mobile} {
 		left: 0;
 		right: auto;
-		min-width: ${fluidRange(174.24, 186.89)};
-		padding: ${fluidRange(5.72, 7.02)};
-		border-radius: ${fluidRange(13.7, 13.21)};
+		min-width: 45vw;
+		padding: 1.5vw;
+		border-radius: 3.5vw;
 		gap: 1vw;
 
 		button {
@@ -243,9 +258,9 @@ const DropdownPanel = styled.div`
 	${media.tablet} {
 		left: 0;
 		right: auto;
-		min-width: ${fluidRange(174.24, 186.89)};
-		padding: ${fluidRange(5.72, 7.02)};
-		border-radius: ${fluidRange(13.7, 13.21)};
+		min-width: 22vw;
+		padding: 0.8vw;
+		border-radius: 1.6vw;
 
 		button {
 			padding: 0.9vw 1.2vw;

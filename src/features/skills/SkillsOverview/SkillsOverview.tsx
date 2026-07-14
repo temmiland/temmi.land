@@ -11,7 +11,7 @@ import SkillCard from '@/features/skills/SkillCard';
 import { Link } from '@/ui/Link/Link';
 import { Skill } from '@/models/skill';
 import { sortSkillsForHome } from '@/utils/skillSort';
-import { colors, fluid, fluidRange, media, whiteAlpha } from '@/styles';
+import { colors, fluid, media, whiteAlpha } from '@/styles';
 
 const SkillsWrapper = styled.div`
 	display: grid;
@@ -22,14 +22,14 @@ const SkillsWrapper = styled.div`
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
-		grid-column-gap: ${fluidRange(11.57, 12.86)};
-		grid-row-gap: ${fluidRange(11.57, 12.86)};
+		grid-column-gap: 3vw;
+		grid-row-gap: 3vw;
 	}
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: ${fluidRange(11.57, 12.86)};
-		grid-row-gap: ${fluidRange(11.57, 12.86)};
+		grid-column-gap: 1.5vw;
+		grid-row-gap: 1.5vw;
 	}
 
 	${media.wide} {
@@ -85,17 +85,17 @@ const MoreCard = styled.div`
 	${media.mobile} {
 		justify-content: center;
 		height: auto;
-		padding: ${fluidRange(7.71, 8.57)} 0;
+		padding: 2vw 0;
 		border: 0.25vw dashed ${whiteAlpha(0.3)};
-		border-radius: ${fluidRange(13.44, 15.59)};
+		border-radius: 3.5vw;
 	}
 
 	${media.tablet} {
 		justify-content: center;
 		height: auto;
-		padding: ${fluidRange(7.71, 8.57)} 0;
+		padding: 1vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
-		border-radius: ${fluidRange(13.44, 15.59)};
+		border-radius: 1.8vw;
 	}
 
 	${media.wide} {
@@ -112,9 +112,14 @@ const MoreCard = styled.div`
 		color: ${colors.white};
 		font-size: ${fluid(4.7)};
 
-		${media.belowDesktop} {
+		${media.mobile} {
 			color: ${colors.accentBlue};
-			font-size: ${fluidRange(74.23, 92.5)};
+			font-size: 19.5vw;
+		}
+
+		${media.tablet} {
+			color: ${colors.accentBlue};
+			font-size: 10.5vw;
 		}
 
 		${media.wide} {

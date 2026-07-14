@@ -17,7 +17,7 @@ import PageLayout from '@/ui/PageLayout';
 import { blogPosts } from '@/data/blog';
 import { projects } from '@/data/projects';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
-import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const BlogSection = styled.section`
 	margin: 0;
@@ -72,10 +72,16 @@ const BackLink = styled(Link)`
 		color: ${colors.white};
 	}
 
-	${media.belowDesktop} {
-		gap: ${fluidRange(7.71, 8.57)};
+	${media.mobile} {
+		gap: 2vw;
 		margin: 10vw 0 0 0;
-		font-size: ${fluidRange(13.49, 19)};
+		font-size: 3.6vw;
+	}
+
+	${media.tablet} {
+		gap: 1vw;
+		margin: 10vw 0 0 0;
+		font-size: 2.1vw;
 	}
 
 	${media.wide} {
@@ -95,10 +101,16 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 	padding: ${fluid(2.4)};
 	margin: 1.5vw 0 2vw 0;
 
-	${media.belowDesktop} {
-		border-radius: ${fluidRange(29.26, 29.16)};
-		padding: ${fluidRange(26.34, 35.95)};
-		margin: ${fluidRange(23.14, 25.71)} 0 ${fluidRange(30.86, 34.28)} 0;
+	${media.mobile} {
+		border-radius: 7.5vw;
+		padding: 7vw;
+		margin: 6vw 0 8vw 0;
+	}
+
+	${media.tablet} {
+		border-radius: 3.5vw;
+		padding: 4vw;
+		margin: 3vw 0 4vw 0;
 	}
 
 	${media.wide} {
@@ -108,8 +120,12 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 	.banner-icon {
 		font-size: ${fluid(3)};
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(41.77, 53.1)};
+		${media.mobile} {
+			font-size: 11vw;
+		}
+
+		${media.tablet} {
+			font-size: 6vw;
 		}
 	}
 
@@ -122,10 +138,16 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		font-size: ${fluid(0.9)};
 		color: ${whiteAlpha(0.8)};
 
-		${media.belowDesktop} {
-			gap: ${fluidRange(13.17, 17.98)};
-			margin: ${fluidRange(15.43, 17.14)} 0 0 0;
-			font-size: ${fluidRange(13.62, 17.81)};
+		${media.mobile} {
+			gap: 3.5vw;
+			margin: 4vw 0 0 0;
+			font-size: 3.6vw;
+		}
+
+		${media.tablet} {
+			gap: 2vw;
+			margin: 2vw 0 0 0;
+			font-size: 2vw;
 		}
 
 		${media.wide} {
@@ -147,9 +169,14 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		font-size: ${fluid(2.4)};
 		line-height: 1.2;
 
-		${media.belowDesktop} {
-			margin: ${fluidRange(11.57, 12.86)} 0 0 0;
-			font-size: ${fluidRange(30.2, 40.24)};
+		${media.mobile} {
+			margin: 3vw 0 0 0;
+			font-size: 8vw;
+		}
+
+		${media.tablet} {
+			margin: 1.5vw 0 0 0;
+			font-size: 4.5vw;
 		}
 
 		${media.wide} {
@@ -163,9 +190,14 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		gap: ${fluid(0.6)};
 		margin: 1.4vw 0 0 0;
 
-		${media.belowDesktop} {
-			gap: ${fluidRange(9.71, 10.12)};
-			margin: ${fluidRange(19.29, 21.43)} 0 0 0;
+		${media.mobile} {
+			gap: 2.5vw;
+			margin: 5vw 0 0 0;
+		}
+
+		${media.tablet} {
+			gap: 1.2vw;
+			margin: 2.5vw 0 0 0;
 		}
 
 		${media.wide} {
@@ -180,10 +212,16 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		border-radius: ${fluid(1)};
 		padding: 0.25vw 0.7vw;
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(12.08, 16.1)};
-			border-radius: ${fluidRange(15.43, 17.14)};
-			padding: ${fluidRange(3.86, 4.29)} ${fluidRange(9.9, 12.33)};
+		${media.mobile} {
+			font-size: 3.2vw;
+			border-radius: 4vw;
+			padding: 1vw 2.6vw;
+		}
+
+		${media.tablet} {
+			font-size: 1.8vw;
+			border-radius: 2vw;
+			padding: 0.5vw 1.4vw;
 		}
 
 		${media.wide} {
@@ -199,9 +237,14 @@ const ArticleBody = styled.article`
 		font-size: ${fluid(1.6)};
 		margin: 2.2vw 0 0.8vw 0;
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(22.62, 30.48)};
-			margin: ${fluidRange(30.86, 34.28)} 0 ${fluidRange(11.57, 12.86)} 0;
+		${media.mobile} {
+			font-size: 6vw;
+			margin: 8vw 0 3vw 0;
+		}
+
+		${media.tablet} {
+			font-size: 3.4vw;
+			margin: 4vw 0 1.5vw 0;
 		}
 
 		${media.wide} {
@@ -216,9 +259,14 @@ const ArticleBody = styled.article`
 		line-height: 1.7;
 		margin: 0 0 1vw 0;
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(15.68, 22.76)};
-			margin: 0 0 ${fluidRange(15.43, 17.14)} 0;
+		${media.mobile} {
+			font-size: 4.2vw;
+			margin: 0 0 4vw 0;
+		}
+
+		${media.tablet} {
+			font-size: 2.5vw;
+			margin: 0 0 2vw 0;
 		}
 
 		${media.wide} {
@@ -230,8 +278,12 @@ const ArticleBody = styled.article`
 const ArticleImage = styled.figure`
 	margin: 1.6vw 0 2vw 0;
 
-	${media.belowDesktop} {
-		margin: ${fluidRange(23.14, 25.71)} 0 ${fluidRange(30.86, 34.28)} 0;
+	${media.mobile} {
+		margin: 6vw 0 8vw 0;
+	}
+
+	${media.tablet} {
+		margin: 3vw 0 4vw 0;
 	}
 
 	${media.wide} {
@@ -245,8 +297,12 @@ const ArticleImage = styled.figure`
 		border: 1px solid ${whiteAlpha(0.12)};
 		border-radius: ${fluid(1.75)};
 
-		${media.belowDesktop} {
-			border-radius: ${fluidRange(29.26, 29.16)};
+		${media.mobile} {
+			border-radius: 7.5vw;
+		}
+
+		${media.tablet} {
+			border-radius: 3.5vw;
 		}
 	}
 
@@ -258,9 +314,14 @@ const ArticleImage = styled.figure`
 		font-size: 0.9vw;
 		line-height: 1.5;
 
-		${media.belowDesktop} {
-			margin: ${fluidRange(11.57, 12.86)} 0 0 0;
-			font-size: ${fluidRange(12.72, 18.14)};
+		${media.mobile} {
+			margin: 3vw 0 0 0;
+			font-size: 3.4vw;
+		}
+
+		${media.tablet} {
+			margin: 1.5vw 0 0 0;
+			font-size: 2vw;
 		}
 
 		${media.wide} {
@@ -276,10 +337,16 @@ const ImageGallery = styled.div`
 	gap: 1vw;
 	margin: 1.6vw 0 2vw 0;
 
-	${media.belowDesktop} {
+	${media.mobile} {
 		grid-template-columns: repeat(2, 1fr);
-		gap: ${fluidRange(10.91, 18.81)};
-		margin: ${fluidRange(23.14, 25.71)} 0 ${fluidRange(30.86, 34.28)} 0;
+		gap: 3vw;
+		margin: 6vw 0 8vw 0;
+	}
+
+	${media.tablet} {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2vw;
+		margin: 3vw 0 4vw 0;
 	}
 
 	${media.wide} {
@@ -298,8 +365,12 @@ const ImageGallery = styled.div`
 		border: 1px solid ${whiteAlpha(0.12)};
 		border-radius: ${fluid(0.9)};
 
-		${media.belowDesktop} {
-			border-radius: ${fluidRange(13.44, 15.59)};
+		${media.mobile} {
+			border-radius: 3.5vw;
+		}
+
+		${media.tablet} {
+			border-radius: 1.8vw;
 		}
 	}
 
@@ -311,9 +382,14 @@ const ImageGallery = styled.div`
 		font-size: 0.9vw;
 		line-height: 1.5;
 
-		${media.belowDesktop} {
-			margin: ${fluidRange(11.57, 12.86)} 0 0 0;
-			font-size: ${fluidRange(12.72, 18.14)};
+		${media.mobile} {
+			margin: 3vw 0 0 0;
+			font-size: 3.4vw;
+		}
+
+		${media.tablet} {
+			margin: 1.5vw 0 0 0;
+			font-size: 2vw;
 		}
 
 		${media.wide} {
@@ -344,12 +420,20 @@ const CtaButton = styled.a`
 		background: linear-gradient(135deg, ${whiteAlpha(1)} 0%, ${whiteAlpha(0.85)} 100%);
 	}
 
-	${media.belowDesktop} {
-		gap: ${fluidRange(9.71, 10.12)};
-		margin: ${fluidRange(10.91, 18.81)} 0 ${fluidRange(23.14, 25.71)} 0;
-		font-size: ${fluidRange(15.04, 20.71)};
-		border-radius: ${fluidRange(30.86, 34.28)};
-		padding: ${fluidRange(11.44, 14.05)} ${fluidRange(23.14, 25.71)};
+	${media.mobile} {
+		gap: 2.5vw;
+		margin: 3vw 0 6vw 0;
+		font-size: 4vw;
+		border-radius: 8vw;
+		padding: 3vw 6vw;
+	}
+
+	${media.tablet} {
+		gap: 1.2vw;
+		margin: 2vw 0 3vw 0;
+		font-size: 2.3vw;
+		border-radius: 4vw;
+		padding: 1.6vw 3vw;
 	}
 
 	${media.wide} {
@@ -369,7 +453,7 @@ const StoreBadgeLink = styled.a`
 	}
 
 	${media.mobile} {
-		margin: ${fluidRange(10.91, 18.81)} 0 ${fluidRange(23.14, 25.71)} 0;
+		margin: 3vw 0 6vw 0;
 
 		img {
 			height: 16.5vw;
@@ -377,7 +461,7 @@ const StoreBadgeLink = styled.a`
 	}
 
 	${media.tablet} {
-		margin: ${fluidRange(10.91, 18.81)} 0 ${fluidRange(23.14, 25.71)} 0;
+		margin: 2vw 0 3vw 0;
 
 		img {
 			height: 9.75vw;
@@ -408,10 +492,16 @@ const RelatedProject = styled(Link)`
 		color: ${colors.white};
 	}
 
-	${media.belowDesktop} {
-		gap: ${fluidRange(9.71, 10.12)};
-		margin: ${fluidRange(30.86, 34.28)} 0 0 0;
-		font-size: ${fluidRange(15.04, 20.71)};
+	${media.mobile} {
+		gap: 2.5vw;
+		margin: 8vw 0 0 0;
+		font-size: 4vw;
+	}
+
+	${media.tablet} {
+		gap: 1.2vw;
+		margin: 4vw 0 0 0;
+		font-size: 2.3vw;
 	}
 
 	${media.wide} {

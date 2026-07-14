@@ -15,7 +15,7 @@ import { ProjectStatus } from '@/models/projectstatus';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
 import { Project } from '@/models/project';
 import { BlogPost } from '@/models/blogpost';
-import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a project tile.
@@ -37,15 +37,15 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 	padding-bottom: 0.07vw;
 
 	${media.mobile} {
-		padding: ${fluidRange(12.23, 6.9)};
+		padding: 3vw;
 		margin-top: 10vw;
-		border-radius: ${fluidRange(29.26, 29.16)};
+		border-radius: 7.5vw;
 		width: calc(100% - 6vw);
 	}
 
 	${media.tablet} {
-		padding: ${fluidRange(12.23, 6.9)};
-		border-radius: ${fluidRange(29.26, 29.16)};
+		padding: 1vw;
+		border-radius: 3.5vw;
 		width: calc(100% - 2vw);
 	}
 
@@ -62,9 +62,12 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 		margin: 0;
 		padding: ${fluid(1.5)};
 
-		${media.belowDesktop} {
-			padding: ${fluidRange(10.91, 18.81)} ${fluidRange(10.26, 24.77)} ${fluidRange(10.91, 18.81)}
-				${fluidRange(10.26, 24.77)};
+		${media.mobile} {
+			padding: 3vw;
+		}
+
+		${media.tablet} {
+			padding: 2vw 2.5vw;
 		}
 	}
 `;
@@ -77,7 +80,7 @@ const Handles = styled.div`
 	right: 0.347vw;
 
 	${media.mobile} {
-		top: ${fluidRange(-0.48, -74.07)};
+		top: -2vw;
 		left: 0vw;
 		float: left;
 		width: calc(100% - 2vw);
@@ -90,7 +93,7 @@ const Handles = styled.div`
 	}
 
 	${media.tablet} {
-		top: ${fluidRange(-0.48, -74.07)};
+		top: -6.5vw;
 		right: 0.75vw;
 	}
 
@@ -111,13 +114,13 @@ const glassChip = css`
 	-webkit-backdrop-filter: blur(0.6vw);
 
 	${media.mobile} {
-		border-width: ${fluidRange(0.96, 1.07)};
+		border-width: 0.25vw;
 		backdrop-filter: blur(2vw);
 		-webkit-backdrop-filter: blur(2vw);
 	}
 
 	${media.tablet} {
-		border-width: ${fluidRange(0.96, 1.07)};
+		border-width: 0.125vw;
 		backdrop-filter: blur(1.2vw);
 		-webkit-backdrop-filter: blur(1.2vw);
 	}
@@ -144,10 +147,16 @@ const handleBase = css`
 	align-items: center;
 	justify-content: center;
 
-	${media.belowDesktop} {
-		min-height: ${fluidRange(20.37, 41.02)};
-		border-radius: ${fluidRange(19.29, 21.43)};
-		font-size: ${fluidRange(10.91, 18.81)};
+	${media.mobile} {
+		min-height: 5.75vw;
+		border-radius: 5vw;
+		font-size: 3vw;
+	}
+
+	${media.tablet} {
+		min-height: 4.25vw;
+		border-radius: 2.5vw;
+		font-size: 2vw;
 	}
 
 	${media.wide} {
@@ -163,8 +172,12 @@ const handleBase = css`
 		overflow-wrap: break-word;
 		word-break: break-word;
 
-		${media.belowDesktop} {
-			margin: ${fluidRange(3.86, 4.29)} ${fluidRange(2.21, 7.07)} 0 ${fluidRange(2.4, 7.68)};
+		${media.mobile} {
+			margin: 1vw 0.69vw 0 0.75vw;
+		}
+
+		${media.tablet} {
+			margin: 0.5vw 0.69vw 0 0.75vw;
 		}
 
 		${media.wide} {
@@ -180,9 +193,13 @@ const LicenseHandle = styled.a`
 	padding: 0.2vw 0 0.2vw 0.69vw;
 	margin: 0 0.347vw;
 
-	${media.belowDesktop} {
-		padding: ${fluidRange(1.73, 3.93)} ${fluidRange(4.66, 6.85)} ${fluidRange(1.73, 3.93)}
-			${fluidRange(7.06, 14.53)};
+	${media.mobile} {
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
+		margin: 0 1vw;
+	}
+
+	${media.tablet} {
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
 		margin: 0 1vw;
 	}
 
@@ -202,9 +219,13 @@ const StatusHandle = styled.div`
 	padding: 0.2vw 0 0.2vw 0.69vw;
 	margin: 0 0.347vw;
 
-	${media.belowDesktop} {
-		padding: ${fluidRange(1.73, 3.93)} ${fluidRange(4.66, 6.85)} ${fluidRange(1.73, 3.93)}
-			${fluidRange(7.06, 14.53)};
+	${media.mobile} {
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
+		margin: 0 1vw;
+	}
+
+	${media.tablet} {
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
 		margin: 0 1vw;
 	}
 
@@ -226,13 +247,13 @@ const CloseHandle = styled.button`
 	margin: 0 0.833vw 0 0.347vw;
 
 	${media.mobile} {
-		width: ${fluidRange(20.37, 41.02)};
-		height: ${fluidRange(20.37, 41.02)};
+		width: 5.75vw;
+		height: 5.75vw;
 	}
 
 	${media.tablet} {
-		width: ${fluidRange(20.37, 41.02)};
-		height: ${fluidRange(20.37, 41.02)};
+		width: 4.25vw;
+		height: 4.25vw;
 		margin: 0 1vw;
 	}
 
@@ -258,10 +279,14 @@ const LinkHandle = styled.a`
 	display: flex;
 	justify-content: flex-start;
 
-	${media.belowDesktop} {
-		padding: ${fluidRange(1.73, 3.93)} ${fluidRange(4.66, 6.85)} ${fluidRange(1.73, 3.93)}
-			${fluidRange(7.06, 14.53)};
-		margin: ${fluidRange(3.86, 4.29)} 0;
+	${media.mobile} {
+		padding: 0.5vw 1.25vw 0.5vw 2vw;
+		margin: 1vw 0;
+	}
+
+	${media.tablet} {
+		padding: 0.4vw 0.75vw 0.4vw 1.5vw;
+		margin: 0.5vw 0;
 	}
 
 	${media.wide} {
@@ -286,13 +311,13 @@ const glassPanel = css`
 	-webkit-backdrop-filter: blur(1vw);
 
 	${media.mobile} {
-		border-width: ${fluidRange(0.96, 1.07)};
+		border-width: 0.25vw;
 		backdrop-filter: blur(3vw);
 		-webkit-backdrop-filter: blur(3vw);
 	}
 
 	${media.tablet} {
-		border-width: ${fluidRange(0.96, 1.07)};
+		border-width: 0.125vw;
 		backdrop-filter: blur(2vw);
 		-webkit-backdrop-filter: blur(2vw);
 	}
@@ -338,15 +363,15 @@ const GlassPanel = styled.div<GlassPanelProps>`
 
 	${media.mobile} {
 		grid-area: ${(props: GlassPanelProps) => props.areaMobile};
-		padding: ${fluidRange(5.93, 14.94)};
+		padding: 1.75vw;
 		--project-desc-margin: 1.5vw;
-		border-radius: ${fluidRange(15.43, 17.14)};
+		border-radius: 4vw;
 	}
 
 	${media.tablet} {
-		padding: ${fluidRange(5.93, 14.94)};
+		padding: 1.5vw;
 		--project-desc-margin: 1.5vw;
-		border-radius: ${fluidRange(15.43, 17.14)};
+		border-radius: 2vw;
 	}
 
 	${media.wide} {
@@ -365,13 +390,13 @@ const ProjectBlogPostList = styled.div`
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
-		gap: ${fluidRange(9.45, 12.5)};
-		margin-top: ${fluidRange(9.45, 12.5)};
+		gap: 2.5vw;
+		margin-top: 2.5vw;
 	}
 
 	${media.tablet} {
-		gap: ${fluidRange(9.45, 12.5)};
-		margin-top: ${fluidRange(9.45, 12.5)};
+		gap: 1.4vw;
+		margin-top: 1.4vw;
 	}
 `;
 
@@ -398,11 +423,18 @@ const ProjectBlogPostCard = styled(Link)`
 		transform: translateY(-0.1vw);
 	}
 
-	${media.belowDesktop} {
-		gap: ${fluidRange(11.57, 12.86)};
-		border-width: ${fluidRange(0.96, 1.07)};
-		border-radius: ${fluidRange(11.57, 12.86)};
-		padding: ${fluidRange(9.71, 10.12)} ${fluidRange(11.44, 14.05)};
+	${media.mobile} {
+		gap: 3vw;
+		border-width: 0.25vw;
+		border-radius: 3vw;
+		padding: 2.5vw 3vw;
+	}
+
+	${media.tablet} {
+		gap: 1.5vw;
+		border-width: 0.125vw;
+		border-radius: 1.5vw;
+		padding: 1.2vw 1.6vw;
 	}
 
 	${media.wide} {
@@ -427,8 +459,8 @@ const ProjectBlogPostIcon = styled.div<{ gradient: string }>`
 	}
 
 	${media.mobile} {
-		width: ${fluidRange(34.06, 44.52)};
-		height: ${fluidRange(34.06, 44.52)};
+		width: 9vw;
+		height: 9vw;
 
 		svg {
 			font-size: 4vw;
@@ -436,8 +468,8 @@ const ProjectBlogPostIcon = styled.div<{ gradient: string }>`
 	}
 
 	${media.tablet} {
-		width: ${fluidRange(34.06, 44.52)};
-		height: ${fluidRange(34.06, 44.52)};
+		width: 5vw;
+		height: 5vw;
 
 		svg {
 			font-size: 2.2vw;
@@ -474,12 +506,12 @@ const ProjectBlogPostTitle = styled.span`
 	white-space: nowrap;
 
 	${media.mobile} {
-		font-size: ${fluidRange(14.4, 18.67)};
+		font-size: 3.8vw;
 		white-space: normal;
 	}
 
 	${media.tablet} {
-		font-size: ${fluidRange(14.4, 18.67)};
+		font-size: 2.1vw;
 	}
 `;
 
@@ -488,8 +520,12 @@ const ProjectBlogPostMeta = styled.span`
 	font-size: ${fluid(0.75)};
 	color: #5e5e5e;
 
-	${media.belowDesktop} {
-		font-size: ${fluidRange(11.76, 15.07)};
+	${media.mobile} {
+		font-size: 3.1vw;
+	}
+
+	${media.tablet} {
+		font-size: 1.7vw;
 	}
 `;
 

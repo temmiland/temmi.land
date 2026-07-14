@@ -8,7 +8,7 @@
 import { useSpring, animated } from 'react-spring';
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { colors, fluid, fluidRange, media } from '@/styles';
+import { colors, fluid, media } from '@/styles';
 
 function useInterval(callback: () => void, delay: number | null) {
 	const savedCallback = useRef<() => void>();
@@ -92,9 +92,14 @@ const Svg = styled.svg`
 	mix-blend-mode: difference;
 	z-index: 3;
 
-	${media.belowDesktop} {
+	${media.mobile} {
 		height: 15vw;
-		margin: ${fluidRange(5.54, -30.61)} 0 0 0;
+		margin: 0.5vw 0 0 0;
+	}
+
+	${media.tablet} {
+		height: 15vw;
+		margin: -2.5vw 0 0 0;
 	}
 `;
 

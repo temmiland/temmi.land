@@ -10,7 +10,7 @@ import { pages } from '@/data/pages';
 import PageCardList from '@/features/header/PageCardList';
 import Signature from '@/features/me/Signature';
 import Link from '@/ui/Link';
-import { fluid, fluidRange, media } from '@/styles';
+import { fluid, media } from '@/styles';
 
 const HeaderContainer = styled.div`
 	background-color: rgba(0, 0, 0, 0.8);
@@ -26,13 +26,13 @@ const HeaderContainer = styled.div`
 	column-gap: 3.47vw;
 
 	${media.mobile} {
-		height: ${fluidRange(77.15, 85.71)};
+		height: 20vw;
 		grid-template-columns: 40% 60%;
 		column-gap: 0;
 	}
 
 	${media.tablet} {
-		height: ${fluidRange(77.15, 85.71)};
+		height: 10vw;
 		grid-template-columns: 40% 65%;
 		column-gap: 0;
 	}

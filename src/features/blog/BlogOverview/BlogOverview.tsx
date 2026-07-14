@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlogCard from '@/features/blog/BlogCard';
 import { Link } from '@/ui/Link/Link';
 import { BlogPost } from '@/models/blogpost';
-import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fonts, fluid, media, whiteAlpha } from '@/styles';
 
 const BlogWrapper = styled.div`
 	display: grid;
@@ -21,13 +21,13 @@ const BlogWrapper = styled.div`
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
-		grid-column-gap: ${fluidRange(23.14, 25.71)};
-		grid-row-gap: ${fluidRange(23.14, 25.71)};
+		grid-column-gap: 6vw;
+		grid-row-gap: 6vw;
 	}
 
 	${media.tablet} {
-		grid-column-gap: ${fluidRange(23.14, 25.71)};
-		grid-row-gap: ${fluidRange(23.14, 25.71)};
+		grid-column-gap: 3vw;
+		grid-row-gap: 3vw;
 	}
 `;
 
@@ -56,19 +56,19 @@ const MoreCard = styled.div`
 	transition: 120ms ease;
 
 	${media.mobile} {
-		gap: ${fluidRange(10.91, 18.81)};
-		padding: ${fluidRange(18.63, 27.38)} 0;
+		gap: 3vw;
+		padding: 5vw 0;
 		border: 0.25vw dashed ${whiteAlpha(0.3)};
-		border-radius: ${fluidRange(19.16, 22.62)};
-		font-size: ${fluidRange(16.9, 23.45)};
+		border-radius: 5vw;
+		font-size: 4.5vw;
 	}
 
 	${media.tablet} {
-		gap: ${fluidRange(10.91, 18.81)};
-		padding: ${fluidRange(18.63, 27.38)} 0;
+		gap: 2vw;
+		padding: 3vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
-		border-radius: ${fluidRange(19.16, 22.62)};
-		font-size: ${fluidRange(16.9, 23.45)};
+		border-radius: 2.6vw;
+		font-size: 2.6vw;
 	}
 
 	${media.wide} {
@@ -84,8 +84,12 @@ const MoreCard = styled.div`
 		color: ${colors.accentBlue};
 		font-size: ${fluid(1.4)};
 
-		${media.belowDesktop} {
-			font-size: ${fluidRange(22.62, 30.48)};
+		${media.mobile} {
+			font-size: 6vw;
+		}
+
+		${media.tablet} {
+			font-size: 3.4vw;
 		}
 	}
 `;

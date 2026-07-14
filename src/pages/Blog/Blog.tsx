@@ -16,7 +16,7 @@ import Header from '@/features/header/Header';
 import Trail from '@/ui/Trail';
 import PageLayout from '@/ui/PageLayout';
 import SearchInput from '@/ui/SearchInput';
-import { colors, fluidRange, media } from '@/styles';
+import { colors, media } from '@/styles';
 
 const BlogSection = styled.section`
 	margin: 0;
@@ -48,8 +48,12 @@ const SearchRow = styled.div`
 	padding: 0 6.5vw;
 	margin: 1.5vw 0 0 0;
 
-	${media.belowDesktop} {
-		margin: ${fluidRange(14.11, 29.05)} 0 0 0;
+	${media.mobile} {
+		margin: 4vw 0 0 0;
+	}
+
+	${media.tablet} {
+		margin: 3vw 0 0 0;
 	}
 `;
 
