@@ -12,14 +12,18 @@ import ProjectTile from '@/features/projects/ProjectTile';
 import { useEffect, useRef, useState } from 'react';
 import { Project } from '@/models/project';
 import { BlogPost } from '@/models/blogpost';
-import { breakpoints, columnsForWidth, fluidRange, media } from '@/styles';
+import { breakpoints, columnsForWidth, media } from '@/styles';
 
 const ProjectGridContainer = styled.div`
 	padding: 0 5.5vw 3vw 5.5vw;
 	max-width: 1545px;
 
-	${media.belowDesktop} {
-		padding: 0 ${fluidRange(41.2, 19.04)};
+	${media.mobile} {
+		padding: 0 10vw;
+	}
+
+	${media.tablet} {
+		padding: 0 3vw;
 	}
 
 	${media.wide} {

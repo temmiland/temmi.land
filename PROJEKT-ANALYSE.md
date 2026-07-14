@@ -467,6 +467,19 @@ iPad Pro 12.9" hochkant (exakt 1024px) bekommt damit das Tablet-Layout statt der
 bleiben weiterhin die `media.wide`-Werte, die **nicht** exakt `vw × 20` sind (bewusste Design-Abweichungen wie
 `outline-offset` oder `SkillChip`s Tooltip-Breite).
 
+**Nachtrag (14.07.2026, Tile-Regel):** Eine weitere Klasse von Werten muss gestuft bleiben — **Innenwerte von
+Komponenten, deren Container selbst gestuft-proportional ist**. `ProjectTile` (80vw mobile / 45vw tablet),
+`MoreTile` und `SkillCard` (Grid `repeat(1/2/4)`) sind bei z. B. 650px _schmaler_ als an beiden
+Referenzpunkten (390px = 1 Spalte breit, 834px = 2 Spalten); viewport-interpolierte Innenwerte (Font,
+line-height, Padding) werden dann zu groß für die Box — beim fix positionierten Beschreibungs-Panel der
+Projekt-Kacheln wurde Text abgeschnitten. Diese drei Komponenten sind auf ihre gestuften `vw`-Werte
+zurückgesetzt: Innenwerte skalieren mit dem Container, nicht mit dem Viewport. Ebenfalls zurückgesetzt: das
+`ProjectGridContainer`-Padding (`0 10vw`/`0 3vw`) — die ExpandableGrid-Spaltenzahl hängt per
+`Math.floor(gridBreite / elementWidth)` messerscharf an der Grid-Breite, das konvertierte Padding kippte sie
+bei ~650px von 2 auf 1 Spalte. `BlogCard` bleibt dagegen konvertiert: dessen Höhe ist content-getrieben, die
+Karte wächst einfach mit. Faustregel: `fluidRange()` nur für Werte, deren umgebende Box
+viewport-kontinuierlich ist ODER mit dem Inhalt wachsen kann — sonst mit dem Container stufen.
+
 ### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 
 `antd` (eine der größten UI-Libraries überhaupt) wird nur für `Typography.Paragraph`
