@@ -9,7 +9,7 @@ import { Skill } from '@/models/skill';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
-import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
 
 const SkillCardContainer = styled.div`
 	min-width: 0;
@@ -23,14 +23,14 @@ const SkillCardContainer = styled.div`
 
 	${media.mobile} {
 		border: 0.25vw solid ${whiteAlpha(0.1)};
-		border-radius: 3.5vw;
-		padding: 4vw 4.5vw;
+		border-radius: ${fluidRange(13.44, 15.59)};
+		padding: ${fluidRange(15.69, 14.76)} ${fluidRange(17.42, 18.69)};
 	}
 
 	${media.tablet} {
 		border: 0.125vw solid ${whiteAlpha(0.1)};
-		border-radius: 1.8vw;
-		padding: 1.8vw 2.2vw;
+		border-radius: ${fluidRange(13.44, 15.59)};
+		padding: ${fluidRange(15.69, 14.76)} ${fluidRange(17.42, 18.69)};
 	}
 
 	${media.wide} {
@@ -66,14 +66,9 @@ const SkillCardContainer = styled.div`
 		color: ${colors.white};
 		font-size: ${fluid(1.05)};
 
-		${media.mobile} {
-			gap: 2.5vw;
-			font-size: 4.5vw;
-		}
-
-		${media.tablet} {
-			gap: 1.2vw;
-			font-size: 2.4vw;
+		${media.belowDesktop} {
+			gap: ${fluidRange(9.71, 10.12)};
+			font-size: ${fluidRange(17.16, 21.07)};
 		}
 
 		span {
@@ -89,12 +84,8 @@ const SkillCardContainer = styled.div`
 			font-size: ${fluid(1.05)};
 			flex-shrink: 0;
 
-			${media.mobile} {
-				font-size: 4.5vw;
-			}
-
-			${media.tablet} {
-				font-size: 2.4vw;
+			${media.belowDesktop} {
+				font-size: ${fluidRange(17.16, 21.07)};
 			}
 		}
 	}
@@ -110,16 +101,10 @@ const SkillCardContainer = styled.div`
 		border-radius: ${fluid(1)};
 		padding: 0.35vw 0.6vw;
 
-		${media.mobile} {
-			width: 24.4vw;
-			border-radius: 4vw;
-			padding: 1.4vw 2.2vw;
-		}
-
-		${media.tablet} {
-			width: 13.2vw;
-			border-radius: 2vw;
-			padding: 0.7vw 1.1vw;
+		${media.belowDesktop} {
+			width: ${fluidRange(92.81, 116.48)};
+			border-radius: ${fluidRange(15.43, 17.14)};
+			padding: ${fluidRange(5.4, 6)} ${fluidRange(8.49, 9.43)};
 		}
 
 		${media.wide} {
@@ -135,16 +120,10 @@ const SkillCardContainer = styled.div`
 		margin-top: ${fluid(0.4)};
 		min-height: ${fluid(3.4)};
 
-		${media.mobile} {
-			gap: 0.8vw;
-			margin-top: 2vw;
-			min-height: 14vw;
-		}
-
-		${media.tablet} {
-			gap: 0.4vw;
-			margin-top: 0.8vw;
-			min-height: 7.6vw;
+		${media.belowDesktop} {
+			gap: ${fluidRange(3.09, 3.43)};
+			margin-top: ${fluidRange(7.98, 6.19)};
+			min-height: ${fluidRange(53.22, 67.14)};
 		}
 	}
 
@@ -154,12 +133,8 @@ const SkillCardContainer = styled.div`
 		font-size: ${fluid(0.85)};
 		color: ${whiteAlpha(0.55)};
 
-		${media.mobile} {
-			font-size: 3.4vw;
-		}
-
-		${media.tablet} {
-			font-size: 1.9vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(12.85, 16.95)};
 		}
 	}
 
@@ -172,24 +147,16 @@ const Stars = styled.div`
 	display: inline-flex;
 	gap: ${fluid(0.2)};
 
-	${media.mobile} {
-		gap: 1vw;
-	}
-
-	${media.tablet} {
-		gap: 0.5vw;
+	${media.belowDesktop} {
+		gap: ${fluidRange(3.86, 4.29)};
 	}
 
 	svg {
 		font-size: ${fluid(0.8)};
 		color: #f5a623;
 
-		${media.mobile} {
-			font-size: 3.2vw;
-		}
-
-		${media.tablet} {
-			font-size: 1.8vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(12.08, 16.1)};
 		}
 	}
 

@@ -8,7 +8,7 @@
 import styled from 'styled-components';
 import { Link } from '@/ui/Link/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { colors, fluid, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fluidRange, media, whiteAlpha } from '@/styles';
 
 /**
  * Container for a MoreTileContainer.
@@ -30,14 +30,14 @@ const MoreTileContainer = styled.div`
 	${media.mobile} {
 		width: 80vw;
 		height: 80vw;
-		border-radius: 7.5vw;
+		border-radius: ${fluidRange(29.26, 29.16)};
 		margin: 0 0 10vw 0;
 	}
 
 	${media.tablet} {
 		width: 45vw;
 		height: 45vw;
-		border-radius: 3.5vw;
+		border-radius: ${fluidRange(29.26, 29.16)};
 		margin: 0 0 10vw 0;
 	}
 
@@ -49,14 +49,9 @@ const MoreTileContainer = styled.div`
 		margin: 1vw 1.5vw;
 		font-size: ${fluid(4.7)};
 
-		${media.mobile} {
-			margin: 27.5vw 20vw;
-			font-size: 25vw;
-		}
-
-		${media.tablet} {
-			margin: 15vw 10vw;
-			font-size: 15vw;
+		${media.belowDesktop} {
+			margin: ${fluidRange(104.44, 132.74)} ${fluidRange(77.15, 85.71)};
+			font-size: ${fluidRange(93.15, 136.91)};
 		}
 
 		${media.wide} {

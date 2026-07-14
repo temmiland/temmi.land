@@ -6,7 +6,7 @@
  */
 
 import styled from 'styled-components';
-import { colors, fonts, fluid, media } from '@/styles';
+import { colors, fluid, fluidRange, fonts, media } from '@/styles';
 
 const H0 = styled.h1`
 	font-family: ${fonts.medium};
@@ -86,12 +86,8 @@ const H2 = styled.h2`
 	z-index: 3;
 	margin: ${fluid(1)} 0;
 
-	${media.mobile} {
-		font-size: 5vw;
-	}
-
-	${media.tablet} {
-		font-size: 4vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(17.31, 39.29)};
 	}
 `;
 
@@ -102,12 +98,8 @@ const H3 = styled.h3`
 	z-index: 3;
 	margin: ${fluid(1)} 0;
 
-	${media.mobile} {
-		font-size: 5.5vw;
-	}
-
-	${media.tablet} {
-		font-size: 4vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(19.57, 38.46)};
 	}
 `;
 
@@ -118,12 +110,8 @@ const H4 = styled.h4`
 	z-index: 3;
 	margin: ${fluid(1)} 0;
 
-	${media.mobile} {
-		font-size: 4vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(14.77, 23.1)};
 	}
 `;
 
@@ -133,14 +121,10 @@ const H2_ProjectHeader = styled.h2`
 	margin: 1.47vw;
 	font-size: ${fluid(1.2)};
 
-	${media.mobile} {
-		font-size: 5.4vw;
-		margin: 6vw;
-	}
-
-	${media.tablet} {
-		font-size: 3vw;
-		margin: 3vw 3.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(20.44, 26.71)};
+		margin: ${fluidRange(23.14, 25.71)} ${fluidRange(22.49, 31.67)} ${fluidRange(23.14, 25.71)}
+			${fluidRange(22.49, 31.67)};
 	}
 
 	${media.wide} {
@@ -164,12 +148,8 @@ const P_Project = styled.p`
 	color: ${colors.surfaceLight};
 	white-space: pre-line;
 
-	${media.mobile} {
-		font-size: 4vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.25vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(15.1, 20.12)};
 	}
 `;
 
@@ -180,12 +160,8 @@ const P_Project_Bold = styled.p`
 	font-family: ${fonts.medium};
 	color: ${colors.surfaceLight};
 
-	${media.mobile} {
-		font-size: 4vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.25vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(15.1, 20.12)};
 	}
 `;
 
@@ -197,12 +173,8 @@ const P = styled.p`
 	color: ${colors.white};
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 4vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(14.77, 23.1)};
 	}
 
 	a {
@@ -213,12 +185,8 @@ const P = styled.p`
 		color: ${colors.white};
 		z-index: 3;
 
-		${media.mobile} {
-			font-size: 4vw;
-		}
-
-		${media.tablet} {
-			font-size: 2.5vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(14.77, 23.1)};
 		}
 
 		&:hover {
@@ -239,12 +207,8 @@ const P_Footer = styled.p`
 	color: ${colors.white};
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 4.8vw;
-	}
-
-	${media.tablet} {
-		font-size: 3.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(17.07, 33.67)};
 	}
 
 	.heart-icon {
@@ -260,12 +224,8 @@ const P_Header = styled.p`
 	color: inherit;
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 3vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(10.26, 24.77)};
 	}
 `;
 
@@ -277,23 +237,15 @@ const P_Copyright = styled.p`
 	color: ${colors.white};
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 4vw;
-	}
-
-	${media.tablet} {
-		font-size: 2.5vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(14.77, 23.1)};
 	}
 
 	.copyright-icon {
 		font-size: ${fluid(1.05)};
 
-		${media.mobile} {
-			font-size: 3.9vw;
-		}
-
-		${media.tablet} {
-			font-size: 2.4vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(14.45, 22.07)};
 		}
 	}
 `;
@@ -306,12 +258,8 @@ const P_Navigation = styled.p`
 	color: inherit;
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 3.25vw;
-	}
-
-	${media.tablet} {
-		font-size: 2vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(12.04, 18.39)};
 	}
 `;
 
@@ -323,12 +271,8 @@ const P_Trademark = styled.p`
 	color: #8383837b;
 	z-index: 3;
 
-	${media.mobile} {
-		font-size: 1.5vw;
-	}
-
-	${media.tablet} {
-		font-size: 1vw;
+	${media.belowDesktop} {
+		font-size: ${fluidRange(5.46, 9.41)};
 	}
 
 	${media.wide} {

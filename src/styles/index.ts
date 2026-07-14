@@ -6,4 +6,4 @@
  */
 
 export { colors, fonts, whiteAlpha } from './theme';
-export { media, fluid, breakpoints, columnsForWidth } from './media';
+export { media, fluid, fluidRange, breakpoints, columnsForWidth } from './media';

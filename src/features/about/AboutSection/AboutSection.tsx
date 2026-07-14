@@ -11,7 +11,7 @@ import Typography from '@/ui/Typography';
 import Link from '@/ui/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
-import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
 import { getTimezoneOffsetMinutes } from '@/utils/timezone';
 
 const AboutContainer = styled.div`
@@ -59,18 +59,20 @@ const AboutContainer = styled.div`
 			width: 100%;
 			height: auto;
 			margin: 6vw 0 8vw;
-			padding: 6vw 6vw 5vw;
+			padding: ${fluidRange(23.14, 25.71)} ${fluidRange(22.49, 31.67)} ${fluidRange(18.63, 27.38)}
+				${fluidRange(22.49, 31.67)};
 			border: 0.25vw solid ${whiteAlpha(0.1)};
-			border-radius: 3.5vw;
+			border-radius: ${fluidRange(13.44, 15.59)};
 		}
 
 		${media.tablet} {
 			width: 45vw;
 			height: auto;
 			margin: 6vw auto 5vw;
-			padding: 3vw 3.5vw;
+			padding: ${fluidRange(23.14, 25.71)} ${fluidRange(22.49, 31.67)} ${fluidRange(18.63, 27.38)}
+				${fluidRange(22.49, 31.67)};
 			border: 0.125vw solid ${whiteAlpha(0.1)};
-			border-radius: 1.8vw;
+			border-radius: ${fluidRange(13.44, 15.59)};
 		}
 
 		${media.wide} {
@@ -88,12 +90,8 @@ const AboutContainer = styled.div`
 			font-size: ${fluid(1.2)};
 			font-family: ${fonts.bold};
 
-			${media.mobile} {
-				font-size: 5vw;
-			}
-
-			${media.tablet} {
-				font-size: 2.8vw;
+			${media.belowDesktop} {
+				font-size: ${fluidRange(18.89, 25)};
 			}
 		}
 
@@ -107,15 +105,15 @@ const AboutContainer = styled.div`
 
 			${media.mobile} {
 				margin: 1vw 0 3vw;
-				padding: 0 0 3vw;
-				font-size: 3.6vw;
+				padding: 0 0 ${fluidRange(11.57, 12.86)};
+				font-size: ${fluidRange(13.62, 17.81)};
 				border-bottom: 0.2vw solid ${whiteAlpha(0.1)};
 			}
 
 			${media.tablet} {
 				margin: 0.5vw 0 1.5vw;
-				padding: 0 0 1.5vw;
-				font-size: 2vw;
+				padding: 0 0 ${fluidRange(11.57, 12.86)};
+				font-size: ${fluidRange(13.62, 17.81)};
 				border-bottom: 0.1vw solid ${whiteAlpha(0.1)};
 			}
 
@@ -139,16 +137,10 @@ const AboutContainer = styled.div`
 				font-size: ${fluid(0.85)};
 				font-family: ${fonts.light};
 
-				${media.mobile} {
-					gap: 2.5vw;
-					padding: 1vw 0;
-					font-size: 3.6vw;
-				}
-
-				${media.tablet} {
-					gap: 1.2vw;
-					padding: 0.5vw 0;
-					font-size: 2vw;
+				${media.belowDesktop} {
+					gap: ${fluidRange(9.71, 10.12)};
+					padding: ${fluidRange(3.86, 4.29)} 0;
+					font-size: ${fluidRange(13.62, 17.81)};
 				}
 
 				${media.wide} {
@@ -161,12 +153,8 @@ const AboutContainer = styled.div`
 					color: ${colors.gray};
 					flex-shrink: 0;
 
-					${media.mobile} {
-						width: 3.8vw;
-					}
-
-					${media.tablet} {
-						width: 2.1vw;
+					${media.belowDesktop} {
+						width: ${fluidRange(14.4, 18.67)};
 					}
 				}
 
@@ -218,12 +206,8 @@ const AboutContainer = styled.div`
 		#hmember {
 			grid-area: hmember;
 
-			${media.mobile} {
-				margin-top: 15vw;
-			}
-
-			${media.tablet} {
-				margin-top: 10vw;
+			${media.belowDesktop} {
+				margin-top: ${fluidRange(54.57, 94.06)};
 			}
 		}
 		#ulwork {
@@ -267,17 +251,17 @@ const AboutContainer = styled.div`
 		transition: 120ms ease;
 
 		${media.mobile} {
-			border-radius: 3.5vw;
-			padding: 5vw;
+			border-radius: ${fluidRange(13.44, 15.59)};
+			padding: ${fluidRange(19.94, 15.47)};
 			border: 0.25vw solid ${whiteAlpha(0.1)};
-			margin-bottom: 2.2vw;
+			margin-bottom: ${fluidRange(8.49, 9.43)};
 		}
 
 		${media.tablet} {
-			border-radius: 1.8vw;
-			padding: 2vw;
+			border-radius: ${fluidRange(13.44, 15.59)};
+			padding: ${fluidRange(19.94, 15.47)};
 			border: 0.125vw solid ${whiteAlpha(0.1)};
-			margin-bottom: 1.1vw;
+			margin-bottom: ${fluidRange(8.49, 9.43)};
 		}
 
 		${media.wide} {
@@ -298,14 +282,14 @@ const AboutContainer = styled.div`
 		margin: 0 auto;
 
 		${media.mobile} {
-			width: 12vw;
-			border-radius: 3vw;
+			width: ${fluidRange(44.32, 69.29)};
+			border-radius: ${fluidRange(11.57, 12.86)};
 			margin-right: 20px;
 		}
 
 		${media.tablet} {
-			width: 7.5vw;
-			border-radius: 1.5vw;
+			width: ${fluidRange(44.32, 69.29)};
+			border-radius: ${fluidRange(11.57, 12.86)};
 		}
 
 		${media.wide} {
@@ -319,12 +303,8 @@ const AboutContainer = styled.div`
 		font-size: ${fluid(1)};
 		font-family: ${fonts.medium};
 
-		${media.mobile} {
-			font-size: 4vw;
-		}
-
-		${media.tablet} {
-			font-size: 2.25vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(15.1, 20.12)};
 		}
 
 		${media.wide} {
@@ -337,12 +317,8 @@ const AboutContainer = styled.div`
 		font-size: 1vw;
 		font-family: ${fonts.light};
 
-		${media.mobile} {
-			font-size: 3.3vw;
-		}
-
-		${media.tablet} {
-			font-size: 2vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(12.27, 18.31)};
 		}
 
 		${media.wide} {
@@ -357,12 +333,12 @@ const AboutContainer = styled.div`
 		font-family: ${fonts.light};
 
 		${media.mobile} {
-			font-size: 3.8vw;
+			font-size: ${fluidRange(14.53, 17.48)};
 			margin-left: 20px;
 		}
 
 		${media.tablet} {
-			font-size: 2vw;
+			font-size: ${fluidRange(14.53, 17.48)};
 		}
 
 		${media.wide} {

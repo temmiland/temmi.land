@@ -180,12 +180,15 @@ lässt aber die in den Einzeleinträgen dokumentierten Reste weg. Hier die volls
 
 ### Übernommen aus PROJEKT-ANALYSE.md (bereits dokumentiert)
 
-- **A4** — ✅ **Teilweise gefixt (14.07.2026).** Der Basis-vw+`media.wide`-Teil ist über alle 18 Dateien
-  migriert, in denen der `wide`-Wert exakt `vw × 20` war (107 Ersetzungen). Mit Playwright verifiziert:
-  `getComputedStyle`/`getBoundingClientRect` für jedes Element auf 5 Routen × 2 Viewportbreiten
-  vorher/nachher identisch. **Weiterhin bewusst offen:** die `mobile`/`tablet`-Stufenwerte auf stetige
-  Skalierung umzustellen ändert das tatsächliche Verhalten — das bleibt eine Design-Entscheidung, keine
-  Codepflege. Laufende Arbeit, siehe Memory „Styles-Token-Migration".
+- **A4** — ✅ **Komplett gefixt (14.07.2026).** Erst der Basis-vw+`media.wide`-Teil über alle 18 Dateien
+  migriert, in denen der `wide`-Wert exakt `vw × 20` war (107 Ersetzungen, Playwright-verifiziert
+  pixel-identisch). Dann die `mobile`/`tablet`-Stufenwerte auf stetige Skalierung per neuem
+  `fluidRange(fromPx, toPx)`-Helper umgestellt (176 Wertepaare, 73 Blöcke zu `belowDesktop` gemerged) — Anker
+  aus den Bestandswerten bei 390px/834px abgeleitet, sodass Referenzgeräte unverändert rendern
+  (Playwright-Diff ≈ 0) und nur die Extreme (599px-Handys, 1023px-Tablets) vernünftig kleiner werden.
+  Layout-proportionale Werte (≥ 40vw, Mountains-Chrome, `PageLayout`) bewusst als `vw`/Breakpoint-Korrekturen
+  belassen. Zusätzlich Tablet-Grenze inklusiv: exakt 1024px (iPad Pro hochkant) bekommt jetzt Tablet- statt
+  Desktop-Layout. Details im A4-Eintrag der PROJEKT-ANALYSE.md.
 - **A3-Rest** — ✅ **GEFIXT (13.07.2026).** `ExpandedProject` (~200 Zeilen JSX inkl. aller zugehörigen
   Styled-Components) aus `ProjectGrid.tsx` nach
   [`features/projects/ExpandedProject/ExpandedProject.tsx`](src/features/projects/ExpandedProject/ExpandedProject.tsx)

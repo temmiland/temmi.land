@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
-import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a blog card.
@@ -35,12 +35,12 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 	${media.mobile} {
 		border: 0.25vw solid ${whiteAlpha(0.1)};
-		border-radius: 5vw;
+		border-radius: ${fluidRange(19.16, 22.62)};
 	}
 
 	${media.tablet} {
 		border: 0.125vw solid ${whiteAlpha(0.1)};
-		border-radius: 2.6vw;
+		border-radius: ${fluidRange(19.16, 22.62)};
 	}
 
 	${media.wide} {
@@ -61,14 +61,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		padding: 1.6vw 1.6vw;
 		color: ${colors.white};
 
-		${media.mobile} {
-			gap: 4vw;
-			padding: 6vw 6vw;
-		}
-
-		${media.tablet} {
-			gap: 2vw;
-			padding: 3vw 3vw;
+		${media.belowDesktop} {
+			gap: ${fluidRange(15.43, 17.14)};
+			padding: ${fluidRange(23.14, 25.71)} ${fluidRange(23.14, 25.71)};
 		}
 
 		${media.wide} {
@@ -79,12 +74,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 			font-size: ${fluid(2.4)};
 			flex-shrink: 0;
 
-			${media.mobile} {
-				font-size: 9vw;
-			}
-
-			${media.tablet} {
-				font-size: 5vw;
+			${media.belowDesktop} {
+				font-size: ${fluidRange(34.06, 44.52)};
 			}
 		}
 	}
@@ -92,12 +83,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 	.blog-card-body {
 		padding: 1.2vw 1.6vw 1.6vw 1.6vw;
 
-		${media.mobile} {
-			padding: 4vw 6vw 6vw 6vw;
-		}
-
-		${media.tablet} {
-			padding: 2vw 3vw 3vw 3vw;
+		${media.belowDesktop} {
+			padding: ${fluidRange(15.43, 17.14)} ${fluidRange(23.14, 25.71)} ${fluidRange(23.14, 25.71)}
+				${fluidRange(23.14, 25.71)};
 		}
 
 		${media.wide} {
@@ -114,14 +102,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		font-size: ${fluid(0.85)};
 		color: ${whiteAlpha(0.55)};
 
-		${media.mobile} {
-			gap: 3vw;
-			font-size: 3.4vw;
-		}
-
-		${media.tablet} {
-			gap: 1.6vw;
-			font-size: 1.9vw;
+		${media.belowDesktop} {
+			gap: ${fluidRange(11.44, 14.05)};
+			font-size: ${fluidRange(12.85, 16.95)};
 		}
 
 		svg {
@@ -140,14 +123,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		font-size: ${fluid(1.5)};
 		line-height: 1.25;
 
-		${media.mobile} {
-			margin: 2.5vw 0 0 0;
-			font-size: 6vw;
-		}
-
-		${media.tablet} {
-			margin: 1.2vw 0 0 0;
-			font-size: 3.2vw;
+		${media.belowDesktop} {
+			margin: ${fluidRange(9.71, 10.12)} 0 0 0;
+			font-size: ${fluidRange(22.88, 28.1)};
 		}
 
 		${media.wide} {
@@ -162,14 +140,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		font-size: ${fluid(1)};
 		line-height: 1.5;
 
-		${media.mobile} {
-			margin: 2.5vw 0 0 0;
-			font-size: 3.8vw;
-		}
-
-		${media.tablet} {
-			margin: 1.2vw 0 0 0;
-			font-size: 2.2vw;
+		${media.belowDesktop} {
+			margin: ${fluidRange(9.71, 10.12)} 0 0 0;
+			font-size: ${fluidRange(14.26, 19.86)};
 		}
 
 		${media.wide} {
@@ -183,14 +156,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		gap: ${fluid(0.5)};
 		margin: 1vw 0 0 0;
 
-		${media.mobile} {
-			gap: 2vw;
-			margin: 4vw 0 0 0;
-		}
-
-		${media.tablet} {
-			gap: 1vw;
-			margin: 2vw 0 0 0;
+		${media.belowDesktop} {
+			gap: ${fluidRange(7.71, 8.57)};
+			margin: ${fluidRange(15.43, 17.14)} 0 0 0;
 		}
 
 		${media.wide} {
@@ -206,16 +174,10 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		border-radius: ${fluid(1)};
 		padding: 0.25vw 0.7vw;
 
-		${media.mobile} {
-			font-size: 3.2vw;
-			border-radius: 4vw;
-			padding: 1vw 2.6vw;
-		}
-
-		${media.tablet} {
-			font-size: 1.8vw;
-			border-radius: 2vw;
-			padding: 0.5vw 1.4vw;
+		${media.belowDesktop} {
+			font-size: ${fluidRange(12.08, 16.1)};
+			border-radius: ${fluidRange(15.43, 17.14)};
+			padding: ${fluidRange(3.86, 4.29)} ${fluidRange(9.9, 12.33)};
 		}
 
 		${media.wide} {
@@ -232,16 +194,10 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		font-size: ${fluid(0.9)};
 		color: ${colors.accentBlue};
 
-		${media.mobile} {
-			gap: 1.8vw;
-			margin: 4.5vw 0 0 0;
-			font-size: 3.6vw;
-		}
-
-		${media.tablet} {
-			gap: 1vw;
-			margin: 2.2vw 0 0 0;
-			font-size: 2vw;
+		${media.belowDesktop} {
+			gap: ${fluidRange(6.81, 8.9)};
+			margin: ${fluidRange(17.42, 18.69)} 0 0 0;
+			font-size: ${fluidRange(13.62, 17.81)};
 		}
 
 		${media.wide} {

@@ -10,17 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@/ui/Typography';
 import PrivacyContent from '@/features/privacy/PrivacyContent';
 import Trail from '@/ui/Trail';
-import { media } from '@/styles';
+import { fluidRange, media } from '@/styles';
 
 const PrivacyContainer = styled.div`
 	.privacy-header {
 		margin: 3.5vw 6.5vw 2.5vw;
 
-		${media.mobile} {
-			margin: 3.5vw 6.5vw 10vw;
-		}
-		${media.tablet} {
-			margin: 3.5vw 6.5vw 7.5vw;
+		${media.belowDesktop} {
+			margin: ${fluidRange(11.2, 35.84)} ${fluidRange(20.8, 66.56)} ${fluidRange(35.29, 72.63)};
 		}
 	}
 `;

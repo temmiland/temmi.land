@@ -343,6 +343,10 @@ frei kommerziell nutzbar) gewechselt — final bestätigt, keine Trial-Lizenz me
 > Vitest-Suite, `vite build` und einem Playwright-Durchlauf (Desktop-/Mobile-Nav, Projekt-Detailseite,
 > Blog-Galerie, Konsolen-Fehler-Check) verifiziert. **A4 bleibt offen** — siehe Begründung dort. **P3 ist
 > ebenfalls in dieser Runde gefixt** (siehe Abschnitt 4).
+>
+> **Status 14.07.2026 (vierte Runde):** A4 ist jetzt vollständig gefixt — erst der Basis+`wide`-Teil per
+> `fluid()`, dann die `mobile`/`tablet`-Stufenwerte per neuem `fluidRange()`-Helper (Details im A4-Eintrag).
+> Zusätzlich ist die Tablet-Grenze jetzt inklusiv (1024px = Tablet, iPad Pro hochkant).
 
 ### 🔴 A1: Seiten-Chrome ist 7-fach copy-gepastet — ✅ GEFIXT
 
@@ -411,7 +415,7 @@ korrekt positioniert) verifiziert. **Offen:** `ExpandedProject` (200 Zeilen JSX)
 in eigene Dateien splitten — die Datei ist durch den Dedupe zwar deutlich kürzer, aber ein Split in mehrere
 Dateien war nicht Teil dieser Runde.
 
-### 🔴 A4: Das 4-Breakpoints-pro-Regel-Muster (der strukturelle Kern des CSS-Problems)
+### 🔴 A4: Das 4-Breakpoints-pro-Regel-Muster (der strukturelle Kern des CSS-Problems) — ✅ GEFIXT
 
 Praktisch jede Style-Regel im Projekt wird viermal geschrieben (Basis + mobile + tablet + wide):
 
@@ -434,21 +438,34 @@ styled-components-Funktionen".
 `wide`-Wert exakt `vw × 20` war, ersetzt jetzt `fluid()` das Basis-`vw` **und** die zugehörige
 `media.wide`-Deklaration (107 Ersetzungen über 18 Dateien). Automatisiert per Skript erkannt und angewendet,
 dabei zwei echte Fälle gefunden und von Hand korrigiert, in denen ein `media.wide`-Block eine verschachtelte
-Selector-Regel enthielt (z. B. `.signature { height: 42px; }` in `HeaderContent.tsx`), die beim naiven
-Löschen des ganzen Blocks mitgerissen worden wäre. Verifiziert mit `tsc`/ESLint/Vitest (24/24) sowie einem
+Selector-Regel enthielt (z. B. `.signature { height: 42px; }` in `HeaderContent.tsx`), die beim naiven Löschen
+des ganzen Blocks mitgerissen worden wäre. Verifiziert mit `tsc`/ESLint/Vitest (24/24) sowie einem
 Playwright-Vorher/Nachher-Vergleich von `getComputedStyle` + `getBoundingClientRect` für **jedes Element** auf
 5 Routen × 2 Viewportbreiten (1500px kontinuierliche Zone, 2200px oberhalb des 2000px-Caps): identisch bis auf
 Subpixel-Rauschen (≤0.02px, Federungs-Timing der `Trail`-Animation) und die live tickende Uhr in
 `AboutSection`. Rendering ist damit nachweislich pixel-identisch geblieben.
 
-**Bewusst weiterhin offen:** Der `mobile`/`tablet`-Teil von A4 (der eigentliche „4-Breakpoints"-Kern) ist
-**nicht** angefasst — das bleibt aus gutem Grund eine separate, größere Entscheidung. `fluid()` bildet eine
-**stetige** Skalierung ab; die bestehenden `mobile`/`tablet`-Blöcke sind dagegen **Stufenwerte**, die an den
-Breakpoints springen. Eine Migration dieses Teils ändert das tatsächliche Skalierungsverhalten auf jedem
-Mobile-/Tablet-Viewport projektweit — eine Design-Entscheidung, keine reine Codepflege. Bleibt laufende
-Arbeit, siehe Memory „Styles-Token-Migration". Ebenfalls unverändert: die Handvoll `media.wide`-Werte, die
-**nicht** exakt `vw × 20` sind (bewusste Design-Abweichungen wie `outline-offset` oder eigene
-Wide-Breakpoint-Werte, z. B. `SkillChip`s Tooltip-Breite) — die bleiben laut Konvention explizit.
+**`mobile`/`tablet`-Teil gefixt (14.07.2026, `fluidRange()`):** Die Stufenwerte unterhalb des
+Desktop-Breakpoints sind auf **stetige** Skalierung migriert. Kern ist der neue Helper
+`fluidRange(fromPx, toPx)` in [`src/styles/media.ts`](src/styles/media.ts): eine Gerade von `fromPx` (bei
+320px Viewport) bis `toPx` (bei 1024px), als einzelnes `clamp()`. Anders als ein roher `vw`-Wert muss die
+Gerade nicht durch den Ursprung — dadurch verdoppeln sich Größen nicht mehr innerhalb eines Bands (das „alles
+riesig auf großen Handys / iPads"-Problem) und der Sprung bei 600px entfällt. Die Anker wurden skriptgestützt
+aus den Bestandswerten abgeleitet: aktueller Wert bei **390px** (Referenz-Phone) und **834px** (iPad hochkant)
+gemessen, Gerade durch beide Punkte auf 320/1024 verlängert — auf den Referenzgeräten sieht alles aus wie
+vorher, dazwischen und an den Extremen wird stetig interpoliert. 176 Wertepaare konvertiert, 73 dabei
+identisch gewordene `mobile`+`tablet`-Blöcke zu `belowDesktop` gemerged. **Bewusst nicht konvertiert:**
+viewport-proportionale Layout-Werte (beide Seiten ≥ 40vw, z. B. Seiten-Paddings, die an die Mountains-Grafik
+gekoppelt sind), das komplette `PageLayout`-Chrome, Werte mit Design-Sprüngen (Zero-Crossings wie
+`gap: 0 → 2.5vw`) sowie `calc()`/`blur()`/`border`-Kurzformen — die bleiben als explizite
+Breakpoint-Korrekturen stehen. Verifiziert wie beim Basis-Teil: Playwright-Vorher/Nachher-Diff aller Elemente
+auf 7 Routen bei 390px und 834px (identisch bis auf Subpixel-Rundung ≤1px auf 18000px Seitenhöhe, die Live-Uhr
+und eine Überschrift exakt auf der Zeilenumbruch-Kante), Screenshots bei 320/599/700/1023/1024,
+`tsc`/ESLint/Vitest (24/24) grün. Im selben Zug: **Tablet-Grenze inklusiv** — `media.tablet` endet jetzt bei
+`max-width: 1024px` statt 1023.98px, Desktop beginnt oberhalb, `columnsForWidth(1024)` liefert 2 Spalten; ein
+iPad Pro 12.9" hochkant (exakt 1024px) bekommt damit das Tablet-Layout statt der Desktop-Variante. Unverändert
+bleiben weiterhin die `media.wide`-Werte, die **nicht** exakt `vw × 20` sind (bewusste Design-Abweichungen wie
+`outline-offset` oder `SkillChip`s Tooltip-Breite).
 
 ### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 
@@ -777,7 +794,7 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 | 6   | ~1 h        | Qualität dauerhaft                     | CI-Job `tsc && lint && build` vor Deploy (S6) — ✅; `react-hooks`-Plugin in ESLint aktivieren (A10) — ✅                                                                                                         |
 | 7   | ~2 h        | −50 % Page-Code                        | `PageLayout`-Komponente extrahieren (A1) — ✅; `SearchInput`/`Dropdown` nach `ui/` (A2) — ✅                                                                                                                     |
 | 8   | ~2 h        | Bundle ↓↓                              | antd durch native Elemente ersetzen (A5) — ✅; FontAwesome auf benannte Imports (A6) — ✅; `React.lazy` pro Route (P4) — ✅                                                                                      |
-| 9   | laufend     | CSS ↓ ~50 %                            | `fluid()`-Migration fortsetzen (A4) — offen, laufende Arbeit (siehe Memory „Styles-Token-Migration"); `ProjectGrid`-Panels dedupliziert (A3) — ✅                                                                |
+| 9   | laufend     | CSS ↓ ~50 %                            | `fluid()`/`fluidRange()`-Migration (A4) — ✅ komplett (Basis+`wide` 14.07., `mobile`/`tablet` 14.07.); `ProjectGrid`-Panels dedupliziert (A3) — ✅                                                               |
 | 10  | ~1 h        | SEO                                    | meta/OG-Tags via Helmet pro Seite, Sitemap aus `data/` generieren (P5) — ✅; dabei entdeckt: `robots.txt`/`sitemap.xml` lagen in `src/` statt `public/` und wurden **nie deployed** (B8-Nachtrag) — ✅ mitgefixt |
 | 11  | ~3 h        | SPA-Geschwindigkeit, A11y, Wartbarkeit | Interne Navigation auf Router-`<Link>` (A7) — ✅; klickbare `<div>`s → `<a>`/`<button>` + a11y-Regeln reaktiviert (A8) — ✅; invalides Nav-HTML + doppelte `<h1>`s (A9) — ✅                                     |
 | 12  | ~1 h        | Qualität dauerhaft                     | Tote ESLint-Regeln raus, a11y-Regeln an (A10) — ✅; `prettier/prettier` geprüft und bewusst zurückgestellt (2.263 Diffs ohne `.prettierrc`)                                                                      |
@@ -787,9 +804,8 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 
 **Noch offen nach diesem dritten Rundumschlag:**
 
-- **A4** (`fluid()`-Migration über 31 weitere Dateien) — laufende Arbeit, siehe Memory
-  „Styles-Token-Migration". Bewusst nicht blind durchgezogen, weil es das tatsächliche Skalierungsverhalten
-  auf Mobile/Tablet ändert (Stufenwerte → stetige Skalierung), keine reine Codepflege.
+- ~~**A4** (`fluid()`-Migration)~~ — ✅ inzwischen komplett gefixt (14.07.2026): Basis+`wide` per `fluid()`,
+  `mobile`/`tablet`-Stufenwerte per `fluidRange()` mit 390/834-Ankern, Details im A4-Eintrag.
 - **Prerendering/SSG** (Teil von P5) — größerer Architektur-Umbau, kein Quick-Fix.
 - **P1 (Brotli)** — kein offizielles `nginx-unprivileged`-Image mit `ngx_brotli`; Cloudflare komprimiert am
   Edge vermutlich ohnehin schon. Ungetestetes Server-Image-Risiko gegen geringen Grenznutzen abgewogen und

@@ -11,7 +11,7 @@ import { Link } from '@/ui/Link/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '@/ui/Typography/Typography';
-import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fluidRange, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a project tile.
@@ -43,13 +43,13 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	${media.mobile} {
 		width: 80vw;
 		height: 80vw;
-		border-radius: 7.5vw;
+		border-radius: ${fluidRange(29.26, 29.16)};
 	}
 
 	${media.tablet} {
 		width: 45vw;
 		height: 45vw;
-		border-radius: 3.5vw;
+		border-radius: ${fluidRange(29.26, 29.16)};
 	}
 
 	&:hover {
@@ -69,13 +69,13 @@ const glassPanel = css`
 	-webkit-backdrop-filter: blur(1vw);
 
 	${media.mobile} {
-		border-width: 0.25vw;
+		border-width: ${fluidRange(0.96, 1.07)};
 		backdrop-filter: blur(3vw);
 		-webkit-backdrop-filter: blur(3vw);
 	}
 
 	${media.tablet} {
-		border-width: 0.125vw;
+		border-width: ${fluidRange(0.96, 1.07)};
 		backdrop-filter: blur(2vw);
 		-webkit-backdrop-filter: blur(2vw);
 	}
@@ -101,18 +101,11 @@ const ProjectDescriptionContainer = styled.div`
 	text-align: left;
 	z-index: 3;
 
-	${media.mobile} {
-		--project-desc-margin: 4vw;
-		padding: 4vw;
-		border-radius: 4vw;
-		line-height: 6vw;
-	}
-
-	${media.tablet} {
-		--project-desc-margin: 2vw;
-		padding: 2vw;
-		border-radius: 2vw;
-		line-height: 3vw;
+	${media.belowDesktop} {
+		--project-desc-margin: ${fluidRange(15.43, 17.14)};
+		padding: ${fluidRange(15.43, 17.14)};
+		border-radius: ${fluidRange(15.43, 17.14)};
+		line-height: ${fluidRange(23.14, 25.71)};
 	}
 
 	a {

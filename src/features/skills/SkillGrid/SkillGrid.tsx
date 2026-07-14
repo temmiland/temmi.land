@@ -11,7 +11,7 @@ import SkillCard from '@/features/skills/SkillCard';
 import { Skill } from '@/models/skill';
 import { SkillCategory } from '@/models/skillcategory';
 import { DEFAULT_SKILL_SORT, sortSkills, SkillSortOption } from '@/utils/skillSort';
-import { media } from '@/styles';
+import { fluidRange, media } from '@/styles';
 
 const SkillGridContainer = styled.div`
 	padding: 0 6.5vw 3vw 6.5vw;
@@ -50,14 +50,14 @@ const SkillCardGrid = styled.div`
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
-		grid-column-gap: 3vw;
-		grid-row-gap: 3vw;
+		grid-column-gap: ${fluidRange(11.57, 12.86)};
+		grid-row-gap: ${fluidRange(11.57, 12.86)};
 	}
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 1.5vw;
-		grid-row-gap: 1.5vw;
+		grid-column-gap: ${fluidRange(11.57, 12.86)};
+		grid-row-gap: ${fluidRange(11.57, 12.86)};
 	}
 
 	${media.wide} {
