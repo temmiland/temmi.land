@@ -31,7 +31,7 @@ const ProjectSection = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 15vw 0vw 65vw 0vw;
+		padding: 11.25vw 0vw 48.75vw 0vw;
 	}
 
 	.project-content {

@@ -29,8 +29,8 @@ const SkillCardContainer = styled.div`
 
 	${media.tablet} {
 		border: 0.125vw solid ${whiteAlpha(0.1)};
-		border-radius: 1.8vw;
-		padding: 1.8vw 2.2vw;
+		border-radius: 1.35vw;
+		padding: 1.35vw 1.65vw;
 	}
 
 	${media.wide} {
@@ -72,8 +72,8 @@ const SkillCardContainer = styled.div`
 		}
 
 		${media.tablet} {
-			gap: 1.2vw;
-			font-size: 2.4vw;
+			gap: 0.9vw;
+			font-size: 1.8vw;
 		}
 
 		span {
@@ -94,7 +94,7 @@ const SkillCardContainer = styled.div`
 			}
 
 			${media.tablet} {
-				font-size: 2.4vw;
+				font-size: 1.8vw;
 			}
 		}
 	}
@@ -118,8 +118,8 @@ const SkillCardContainer = styled.div`
 
 		${media.tablet} {
 			width: 13.2vw;
-			border-radius: 2vw;
-			padding: 0.7vw 1.1vw;
+			border-radius: 1.5vw;
+			padding: 0.525vw 0.825vw;
 		}
 
 		${media.wide} {
@@ -142,9 +142,9 @@ const SkillCardContainer = styled.div`
 		}
 
 		${media.tablet} {
-			gap: 0.4vw;
-			margin-top: 0.8vw;
-			min-height: 7.6vw;
+			gap: 0.3vw;
+			margin-top: 0.6vw;
+			min-height: 5.7vw;
 		}
 	}
 
@@ -159,7 +159,7 @@ const SkillCardContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 1.9vw;
+			font-size: 1.425vw;
 		}
 	}
 
@@ -177,7 +177,7 @@ const Stars = styled.div`
 	}
 
 	${media.tablet} {
-		gap: 0.5vw;
+		gap: 0.375vw;
 	}
 
 	svg {
@@ -189,7 +189,7 @@ const Stars = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 1.8vw;
+			font-size: 1.35vw;
 		}
 	}
 

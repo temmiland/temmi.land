@@ -30,7 +30,7 @@ const BlogSection = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 15vw 0vw 65vw 0vw;
+		padding: 11.25vw 0vw 48.75vw 0vw;
 	}
 
 	.blog-content {
@@ -53,7 +53,7 @@ const SearchRow = styled.div`
 	}
 
 	${media.tablet} {
-		margin: 3vw 0 0 0;
+		margin: 2.25vw 0 0 0;
 	}
 `;
 

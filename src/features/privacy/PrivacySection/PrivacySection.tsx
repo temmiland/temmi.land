@@ -20,7 +20,7 @@ const PrivacyContainer = styled.div`
 			margin: 3.5vw 6.5vw 10vw;
 		}
 		${media.tablet} {
-			margin: 3.5vw 6.5vw 7.5vw;
+			margin: 2.625vw 4.875vw 5.625vw;
 		}
 	}
 `;

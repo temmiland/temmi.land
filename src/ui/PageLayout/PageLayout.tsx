@@ -23,7 +23,7 @@ const FooterSection = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 5vw 0;
+		padding: 3.75vw 0;
 	}
 
 	${media.wide} {
@@ -81,8 +81,8 @@ const PageMountains = styled.div`
 		background-size: 265vw;
 		height: 100vw;
 		background-position: right;
-		margin-top: -120vw;
-		margin-right: -20vw;
+		margin-top: -90vw;
+		margin-right: -15vw;
 	}
 
 	${media.wide} {

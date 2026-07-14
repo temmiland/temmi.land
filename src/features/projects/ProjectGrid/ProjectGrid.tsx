@@ -23,7 +23,7 @@ const ProjectGridContainer = styled.div`
 	}
 
 	${media.tablet} {
-		padding: 0 3vw;
+		padding: 0 2.25vw;
 	}
 
 	${media.wide} {

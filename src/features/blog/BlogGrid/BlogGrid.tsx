@@ -43,9 +43,9 @@ const BlogCardGrid = styled.div`
 	}
 
 	${media.tablet} {
-		grid-column-gap: 3vw;
-		grid-row-gap: 3vw;
-		margin-top: 3vw;
+		grid-column-gap: 2.25vw;
+		grid-row-gap: 2.25vw;
+		margin-top: 2.25vw;
 	}
 `;
 

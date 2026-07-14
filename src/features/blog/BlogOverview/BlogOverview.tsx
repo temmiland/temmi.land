@@ -26,8 +26,8 @@ const BlogWrapper = styled.div`
 	}
 
 	${media.tablet} {
-		grid-column-gap: 3vw;
-		grid-row-gap: 3vw;
+		grid-column-gap: 2.25vw;
+		grid-row-gap: 2.25vw;
 	}
 `;
 
@@ -64,11 +64,11 @@ const MoreCard = styled.div`
 	}
 
 	${media.tablet} {
-		gap: 2vw;
-		padding: 3vw 0;
+		gap: 1.5vw;
+		padding: 2.25vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
-		border-radius: 2.6vw;
-		font-size: 2.6vw;
+		border-radius: 1.95vw;
+		font-size: 1.95vw;
 	}
 
 	${media.wide} {
@@ -89,7 +89,7 @@ const MoreCard = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 3.4vw;
+			font-size: 2.55vw;
 		}
 	}
 `;

@@ -56,8 +56,8 @@ const SkillCardGrid = styled.div`
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 1.5vw;
-		grid-row-gap: 1.5vw;
+		grid-column-gap: 1.125vw;
+		grid-row-gap: 1.125vw;
 	}
 
 	${media.wide} {

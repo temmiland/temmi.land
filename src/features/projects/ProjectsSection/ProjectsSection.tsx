@@ -20,7 +20,7 @@ const ProjectContainer = styled.div`
 		margin: 3.5vw 6.5vw;
 
 		${media.tablet} {
-			margin: 10vw 6.5vw 0vw 6.5vw;
+			margin: 7.5vw 4.875vw 0vw 4.875vw;
 		}
 
 		${media.wide} {
@@ -36,7 +36,7 @@ const ProjectContainer = styled.div`
 		}
 
 		${media.tablet} {
-			margin: 12.5vw 4vw 12vw 4vw;
+			margin: 9.375vw 3vw 9vw 3vw;
 		}
 
 		${media.wide} {

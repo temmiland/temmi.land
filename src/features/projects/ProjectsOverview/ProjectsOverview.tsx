@@ -26,7 +26,7 @@ const ProjectContainer = styled.div`
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 2vw;
+		gap: 1.5vw;
 		width: auto;
 	}
 

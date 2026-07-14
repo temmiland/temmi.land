@@ -40,7 +40,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 	${media.tablet} {
 		border: 0.125vw solid ${whiteAlpha(0.1)};
-		border-radius: 2.6vw;
+		border-radius: 1.95vw;
 	}
 
 	${media.wide} {
@@ -67,8 +67,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			gap: 2vw;
-			padding: 3vw 3vw;
+			gap: 1.5vw;
+			padding: 2.25vw 2.25vw;
 		}
 
 		${media.wide} {
@@ -84,7 +84,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 			}
 
 			${media.tablet} {
-				font-size: 5vw;
+				font-size: 3.75vw;
 			}
 		}
 	}
@@ -97,7 +97,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			padding: 2vw 3vw 3vw 3vw;
+			padding: 1.5vw 2.25vw 2.25vw 2.25vw;
 		}
 
 		${media.wide} {
@@ -120,8 +120,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			gap: 1.6vw;
-			font-size: 1.9vw;
+			gap: 1.2vw;
+			font-size: 1.425vw;
 		}
 
 		svg {
@@ -146,8 +146,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			margin: 1.2vw 0 0 0;
-			font-size: 3.2vw;
+			margin: 0.9vw 0 0 0;
+			font-size: 2.4vw;
 		}
 
 		${media.wide} {
@@ -168,8 +168,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			margin: 1.2vw 0 0 0;
-			font-size: 2.2vw;
+			margin: 0.9vw 0 0 0;
+			font-size: 1.65vw;
 		}
 
 		${media.wide} {
@@ -189,8 +189,8 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			gap: 1vw;
-			margin: 2vw 0 0 0;
+			gap: 0.75vw;
+			margin: 1.5vw 0 0 0;
 		}
 
 		${media.wide} {
@@ -213,9 +213,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			font-size: 1.8vw;
-			border-radius: 2vw;
-			padding: 0.5vw 1.4vw;
+			font-size: 1.35vw;
+			border-radius: 1.5vw;
+			padding: 0.375vw 1.05vw;
 		}
 
 		${media.wide} {
@@ -239,9 +239,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.tablet} {
-			gap: 1vw;
-			margin: 2.2vw 0 0 0;
-			font-size: 2vw;
+			gap: 0.75vw;
+			margin: 1.65vw 0 0 0;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {

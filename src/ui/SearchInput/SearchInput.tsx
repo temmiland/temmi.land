@@ -94,19 +94,19 @@ const SearchInputWrapper = styled.div`
 
 		svg {
 			left: 1.5vw;
-			font-size: 2vw;
+			font-size: 1.5vw;
 		}
 
 		input {
-			padding: 1.8vw 4vw;
+			padding: 1.35vw 3vw;
 			border: 0.125vw solid ${whiteAlpha(0.35)};
-			border-radius: 4vw;
-			font-size: 2vw;
+			border-radius: 3vw;
+			font-size: 1.5vw;
 		}
 
 		.clear-search {
 			right: 1.5vw;
-			font-size: 2vw;
+			font-size: 1.5vw;
 		}
 	}
 

@@ -22,7 +22,7 @@ const ImprintArea = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 15vw 2vw 50vw 2vw;
+		padding: 11.25vw 1.5vw 37.5vw 1.5vw;
 	}
 `;
 

@@ -99,7 +99,7 @@ const Svg = styled.svg`
 
 	${media.tablet} {
 		height: 15vw;
-		margin: -2.5vw 0 0 0;
+		margin: -1.875vw 0 0 0;
 	}
 `;
 

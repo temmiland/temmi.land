@@ -53,8 +53,8 @@ const Wrapper = styled.div`
 		${media.tablet} {
 			width: 46vw;
 			bottom: calc(100% + 2vw);
-			border-radius: 1.8vw;
-			box-shadow: 0 1.2vw 3.6vw rgba(0, 0, 0, 0.55);
+			border-radius: 1.35vw;
+			box-shadow: 0 0.9vw 2.7vw rgba(0, 0, 0, 0.55);
 		}
 
 		${media.wide} {
@@ -134,9 +134,9 @@ const chipStyles = css<{ $linked: boolean }>`
 	}
 
 	${media.tablet} {
-		border-width: 0.125vw;
-		backdrop-filter: blur(1.2vw);
-		-webkit-backdrop-filter: blur(1.2vw);
+		border-width: 0.094vw;
+		backdrop-filter: blur(0.9vw);
+		-webkit-backdrop-filter: blur(0.9vw);
 	}
 
 	${media.wide} {
@@ -154,11 +154,11 @@ const chipStyles = css<{ $linked: boolean }>`
 	}
 
 	${media.tablet} {
-		min-height: 4.25vw;
-		border-radius: 2.5vw;
-		padding: 0.4vw 0.75vw 0.4vw 0.75vw;
-		margin: 0.5vw;
-		font-size: 2vw;
+		min-height: 3.188vw;
+		border-radius: 1.875vw;
+		padding: 0.3vw 0.562vw 0.3vw 0.562vw;
+		margin: 0.375vw;
+		font-size: 1.5vw;
 	}
 
 	${media.wide} {
@@ -182,7 +182,7 @@ const chipStyles = css<{ $linked: boolean }>`
 		}
 
 		${media.tablet} {
-			margin: 0.5vw 0.69vw 0 0.75vw;
+			margin: 0.375vw 0.517vw 0 0.562vw;
 		}
 
 		${media.wide} {

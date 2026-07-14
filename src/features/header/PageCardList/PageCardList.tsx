@@ -98,7 +98,7 @@ const Ul = styled.ul`
 	}
 
 	${media.tablet} {
-		gap: 2.5vw;
+		gap: 1.875vw;
 		height: 10vw;
 	}
 

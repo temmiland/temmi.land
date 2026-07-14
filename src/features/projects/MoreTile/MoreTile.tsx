@@ -37,8 +37,8 @@ const MoreTileContainer = styled.div`
 	${media.tablet} {
 		width: 45vw;
 		height: 45vw;
-		border-radius: 3.5vw;
-		margin: 0 0 10vw 0;
+		border-radius: 2.625vw;
+		margin: 0 0 7.5vw 0;
 	}
 
 	${media.wide} {
@@ -55,8 +55,8 @@ const MoreTileContainer = styled.div`
 		}
 
 		${media.tablet} {
-			margin: 15vw 10vw;
-			font-size: 15vw;
+			margin: 11.25vw 7.5vw;
+			font-size: 11.25vw;
 		}
 
 		${media.wide} {

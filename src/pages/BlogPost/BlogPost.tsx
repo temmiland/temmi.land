@@ -31,7 +31,7 @@ const BlogSection = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 15vw 0vw 65vw 0vw;
+		padding: 11.25vw 0vw 48.75vw 0vw;
 	}
 
 	.blog-content {
@@ -47,7 +47,7 @@ const BlogSection = styled.section`
 
 		${media.tablet} {
 			max-width: 100%;
-			padding: 0 6.5vw;
+			padding: 0 4.875vw;
 			box-sizing: border-box;
 		}
 
@@ -79,9 +79,9 @@ const BackLink = styled(Link)`
 	}
 
 	${media.tablet} {
-		gap: 1vw;
-		margin: 10vw 0 0 0;
-		font-size: 2.1vw;
+		gap: 0.75vw;
+		margin: 7.5vw 0 0 0;
+		font-size: 1.575vw;
 	}
 
 	${media.wide} {
@@ -108,9 +108,9 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 	}
 
 	${media.tablet} {
-		border-radius: 3.5vw;
-		padding: 4vw;
-		margin: 3vw 0 4vw 0;
+		border-radius: 2.625vw;
+		padding: 3vw;
+		margin: 2.25vw 0 3vw 0;
 	}
 
 	${media.wide} {
@@ -125,7 +125,7 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.tablet} {
-			font-size: 6vw;
+			font-size: 4.5vw;
 		}
 	}
 
@@ -145,9 +145,9 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.tablet} {
-			gap: 2vw;
-			margin: 2vw 0 0 0;
-			font-size: 2vw;
+			gap: 1.5vw;
+			margin: 1.5vw 0 0 0;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {
@@ -175,8 +175,8 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.tablet} {
-			margin: 1.5vw 0 0 0;
-			font-size: 4.5vw;
+			margin: 1.125vw 0 0 0;
+			font-size: 3.375vw;
 		}
 
 		${media.wide} {
@@ -196,8 +196,8 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.tablet} {
-			gap: 1.2vw;
-			margin: 2.5vw 0 0 0;
+			gap: 0.9vw;
+			margin: 1.875vw 0 0 0;
 		}
 
 		${media.wide} {
@@ -219,9 +219,9 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.tablet} {
-			font-size: 1.8vw;
-			border-radius: 2vw;
-			padding: 0.5vw 1.4vw;
+			font-size: 1.35vw;
+			border-radius: 1.5vw;
+			padding: 0.375vw 1.05vw;
 		}
 
 		${media.wide} {
@@ -243,8 +243,8 @@ const ArticleBody = styled.article`
 		}
 
 		${media.tablet} {
-			font-size: 3.4vw;
-			margin: 4vw 0 1.5vw 0;
+			font-size: 2.55vw;
+			margin: 3vw 0 1.125vw 0;
 		}
 
 		${media.wide} {
@@ -265,8 +265,8 @@ const ArticleBody = styled.article`
 		}
 
 		${media.tablet} {
-			font-size: 2.5vw;
-			margin: 0 0 2vw 0;
+			font-size: 1.875vw;
+			margin: 0 0 1.5vw 0;
 		}
 
 		${media.wide} {
@@ -283,7 +283,7 @@ const ArticleImage = styled.figure`
 	}
 
 	${media.tablet} {
-		margin: 3vw 0 4vw 0;
+		margin: 2.25vw 0 3vw 0;
 	}
 
 	${media.wide} {
@@ -302,7 +302,7 @@ const ArticleImage = styled.figure`
 		}
 
 		${media.tablet} {
-			border-radius: 3.5vw;
+			border-radius: 2.625vw;
 		}
 	}
 
@@ -320,8 +320,8 @@ const ArticleImage = styled.figure`
 		}
 
 		${media.tablet} {
-			margin: 1.5vw 0 0 0;
-			font-size: 2vw;
+			margin: 1.125vw 0 0 0;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {
@@ -345,8 +345,8 @@ const ImageGallery = styled.div`
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 2vw;
-		margin: 3vw 0 4vw 0;
+		gap: 1.5vw;
+		margin: 2.25vw 0 3vw 0;
 	}
 
 	${media.wide} {
@@ -370,7 +370,7 @@ const ImageGallery = styled.div`
 		}
 
 		${media.tablet} {
-			border-radius: 1.8vw;
+			border-radius: 1.35vw;
 		}
 	}
 
@@ -388,8 +388,8 @@ const ImageGallery = styled.div`
 		}
 
 		${media.tablet} {
-			margin: 1.5vw 0 0 0;
-			font-size: 2vw;
+			margin: 1.125vw 0 0 0;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {
@@ -429,11 +429,11 @@ const CtaButton = styled.a`
 	}
 
 	${media.tablet} {
-		gap: 1.2vw;
-		margin: 2vw 0 3vw 0;
-		font-size: 2.3vw;
-		border-radius: 4vw;
-		padding: 1.6vw 3vw;
+		gap: 0.9vw;
+		margin: 1.5vw 0 2.25vw 0;
+		font-size: 1.725vw;
+		border-radius: 3vw;
+		padding: 1.2vw 2.25vw;
 	}
 
 	${media.wide} {
@@ -461,7 +461,7 @@ const StoreBadgeLink = styled.a`
 	}
 
 	${media.tablet} {
-		margin: 2vw 0 3vw 0;
+		margin: 1.5vw 0 2.25vw 0;
 
 		img {
 			height: 9.75vw;
@@ -499,9 +499,9 @@ const RelatedProject = styled(Link)`
 	}
 
 	${media.tablet} {
-		gap: 1.2vw;
-		margin: 4vw 0 0 0;
-		font-size: 2.3vw;
+		gap: 0.9vw;
+		margin: 3vw 0 0 0;
+		font-size: 1.725vw;
 	}
 
 	${media.wide} {

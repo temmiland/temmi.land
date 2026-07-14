@@ -37,7 +37,7 @@ const SkillSection = styled.section`
 	}
 
 	${media.tablet} {
-		padding: 15vw 0vw 65vw 0vw;
+		padding: 11.25vw 0vw 48.75vw 0vw;
 	}
 
 	.skill-content {
@@ -95,7 +95,7 @@ const SearchRow = styled.div`
 	}
 
 	${media.tablet} {
-		margin: 0 0 2vw 0;
+		margin: 0 0 1.5vw 0;
 	}
 `;
 
@@ -117,9 +117,9 @@ const ControlsCol = styled.div`
 
 	${media.tablet} {
 		align-items: flex-start;
-		gap: 1vw;
-		padding: 0 6.5vw;
-		margin: 3vw 0;
+		gap: 0.75vw;
+		padding: 0 4.875vw;
+		margin: 2.25vw 0;
 	}
 
 	${media.wide} {
@@ -159,7 +159,7 @@ const DropdownTrigger = styled.button`
 		}
 
 		${media.tablet} {
-			font-size: 2vw;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {
@@ -184,11 +184,11 @@ const DropdownTrigger = styled.button`
 	}
 
 	${media.tablet} {
-		gap: 1vw;
-		padding: 0.75vw 1.5vw;
+		gap: 0.75vw;
+		padding: 0.562vw 1.125vw;
 		border: 0.125vw solid ${whiteAlpha(0.35)};
-		border-radius: 2vw;
-		font-size: 2vw;
+		border-radius: 1.5vw;
+		font-size: 1.5vw;
 	}
 
 	${media.wide} {
@@ -259,13 +259,13 @@ const DropdownPanel = styled.div`
 		left: 0;
 		right: auto;
 		min-width: 22vw;
-		padding: 0.8vw;
-		border-radius: 1.6vw;
+		padding: 0.6vw;
+		border-radius: 1.2vw;
 
 		button {
-			padding: 0.9vw 1.2vw;
-			border-radius: 0.9vw;
-			font-size: 2vw;
+			padding: 0.675vw 0.9vw;
+			border-radius: 0.675vw;
+			font-size: 1.5vw;
 		}
 	}
 

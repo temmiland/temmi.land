@@ -67,10 +67,10 @@ const AboutContainer = styled.div`
 		${media.tablet} {
 			width: 45vw;
 			height: auto;
-			margin: 6vw auto 5vw;
-			padding: 3vw 3.5vw;
+			margin: 4.5vw auto 3.75vw;
+			padding: 2.25vw 2.625vw;
 			border: 0.125vw solid ${whiteAlpha(0.1)};
-			border-radius: 1.8vw;
+			border-radius: 1.35vw;
 		}
 
 		${media.wide} {
@@ -93,7 +93,7 @@ const AboutContainer = styled.div`
 			}
 
 			${media.tablet} {
-				font-size: 2.8vw;
+				font-size: 2.1vw;
 			}
 		}
 
@@ -113,9 +113,9 @@ const AboutContainer = styled.div`
 			}
 
 			${media.tablet} {
-				margin: 0.5vw 0 1.5vw;
-				padding: 0 0 1.5vw;
-				font-size: 2vw;
+				margin: 0.375vw 0 1.125vw;
+				padding: 0 0 1.125vw;
+				font-size: 1.5vw;
 				border-bottom: 0.1vw solid ${whiteAlpha(0.1)};
 			}
 
@@ -146,9 +146,9 @@ const AboutContainer = styled.div`
 				}
 
 				${media.tablet} {
-					gap: 1.2vw;
-					padding: 0.5vw 0;
-					font-size: 2vw;
+					gap: 0.9vw;
+					padding: 0.375vw 0;
+					font-size: 1.5vw;
 				}
 
 				${media.wide} {
@@ -223,7 +223,7 @@ const AboutContainer = styled.div`
 			}
 
 			${media.tablet} {
-				margin-top: 10vw;
+				margin-top: 7.5vw;
 			}
 		}
 		#ulwork {
@@ -274,10 +274,10 @@ const AboutContainer = styled.div`
 		}
 
 		${media.tablet} {
-			border-radius: 1.8vw;
-			padding: 2vw;
+			border-radius: 1.35vw;
+			padding: 1.5vw;
 			border: 0.125vw solid ${whiteAlpha(0.1)};
-			margin-bottom: 1.1vw;
+			margin-bottom: 0.825vw;
 		}
 
 		${media.wide} {
@@ -305,7 +305,7 @@ const AboutContainer = styled.div`
 
 		${media.tablet} {
 			width: 7.5vw;
-			border-radius: 1.5vw;
+			border-radius: 1.125vw;
 		}
 
 		${media.wide} {
@@ -324,7 +324,7 @@ const AboutContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 2.25vw;
+			font-size: 1.688vw;
 		}
 
 		${media.wide} {
@@ -342,7 +342,7 @@ const AboutContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 2vw;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {
@@ -362,7 +362,7 @@ const AboutContainer = styled.div`
 		}
 
 		${media.tablet} {
-			font-size: 2vw;
+			font-size: 1.5vw;
 		}
 
 		${media.wide} {

@@ -28,8 +28,8 @@ const SkillsWrapper = styled.div`
 
 	${media.tablet} {
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 1.5vw;
-		grid-row-gap: 1.5vw;
+		grid-column-gap: 1.125vw;
+		grid-row-gap: 1.125vw;
 	}
 
 	${media.wide} {
@@ -93,9 +93,9 @@ const MoreCard = styled.div`
 	${media.tablet} {
 		justify-content: center;
 		height: auto;
-		padding: 1vw 0;
+		padding: 0.75vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
-		border-radius: 1.8vw;
+		border-radius: 1.35vw;
 	}
 
 	${media.wide} {
@@ -119,7 +119,7 @@ const MoreCard = styled.div`
 
 		${media.tablet} {
 			color: ${colors.accentBlue};
-			font-size: 10.5vw;
+			font-size: 7.875vw;
 		}
 
 		${media.wide} {

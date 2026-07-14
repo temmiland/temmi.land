@@ -23,7 +23,7 @@ const FilterRow = styled.div`
 	}
 
 	${media.tablet} {
-		gap: 1.2vw;
+		gap: 0.9vw;
 	}
 
 	${media.wide} {
@@ -59,8 +59,8 @@ const Chip = styled.button`
 	}
 
 	${media.tablet} {
-		font-size: 2vw;
-		padding: 0.85vw 1.75vw;
+		font-size: 1.5vw;
+		padding: 0.637vw 1.312vw;
 		border: 0.125vw solid ${whiteAlpha(0.16)};
 	}
 

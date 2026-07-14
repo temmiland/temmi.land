@@ -33,7 +33,7 @@ const H1 = styled.h1`
 	}
 
 	${media.tablet} {
-		font-size: 5vw;
+		font-size: 3.75vw;
 		margin: 20px 0;
 	}
 
@@ -91,7 +91,7 @@ const H2 = styled.h2`
 	}
 
 	${media.tablet} {
-		font-size: 4vw;
+		font-size: 3vw;
 	}
 `;
 
@@ -107,7 +107,7 @@ const H3 = styled.h3`
 	}
 
 	${media.tablet} {
-		font-size: 4vw;
+		font-size: 3vw;
 	}
 `;
 
@@ -123,7 +123,7 @@ const H4 = styled.h4`
 	}
 
 	${media.tablet} {
-		font-size: 2.5vw;
+		font-size: 1.875vw;
 	}
 `;
 
@@ -139,8 +139,8 @@ const H2_ProjectHeader = styled.h2`
 	}
 
 	${media.tablet} {
-		font-size: 3vw;
-		margin: 3vw 3.5vw;
+		font-size: 2.25vw;
+		margin: 2.25vw 2.625vw;
 	}
 
 	${media.wide} {
@@ -169,7 +169,7 @@ const P_Project = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2.25vw;
+		font-size: 1.688vw;
 	}
 `;
 
@@ -185,7 +185,7 @@ const P_Project_Bold = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2.25vw;
+		font-size: 1.688vw;
 	}
 `;
 
@@ -202,7 +202,7 @@ const P = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2.5vw;
+		font-size: 1.875vw;
 	}
 
 	a {
@@ -218,7 +218,7 @@ const P = styled.p`
 		}
 
 		${media.tablet} {
-			font-size: 2.5vw;
+			font-size: 1.875vw;
 		}
 
 		&:hover {
@@ -244,7 +244,7 @@ const P_Footer = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 3.5vw;
+		font-size: 2.625vw;
 	}
 
 	.heart-icon {
@@ -265,7 +265,7 @@ const P_Header = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2.5vw;
+		font-size: 1.875vw;
 	}
 `;
 
@@ -282,7 +282,7 @@ const P_Copyright = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2.5vw;
+		font-size: 1.875vw;
 	}
 
 	.copyright-icon {
@@ -293,7 +293,7 @@ const P_Copyright = styled.p`
 		}
 
 		${media.tablet} {
-			font-size: 2.4vw;
+			font-size: 1.8vw;
 		}
 	}
 `;
@@ -311,7 +311,7 @@ const P_Navigation = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 2vw;
+		font-size: 1.5vw;
 	}
 `;
 
@@ -328,7 +328,7 @@ const P_Trademark = styled.p`
 	}
 
 	${media.tablet} {
-		font-size: 1vw;
+		font-size: 0.75vw;
 	}
 
 	${media.wide} {
