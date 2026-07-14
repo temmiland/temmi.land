@@ -58,7 +58,7 @@ jobs:
                   COUNT=0
 
                   while true; do
-                    STATUS_RESPONSE=$(curl -s -X POST -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/status-project?repo=temmi.land")
+                    STATUS_RESPONSE=$(curl -s -X GET -H "X-Api-Key: ${{ secrets.CI_KEY }}" "https://ci.temmi.land/hooks/status-project?repo=temmi.land")
 
                     if echo "$STATUS_RESPONSE" | jq empty >/dev/null 2>&1; then
                       STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
