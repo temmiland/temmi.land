@@ -15,7 +15,7 @@ import { ProjectStatus } from '@/models/projectstatus';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
 import { Project } from '@/models/project';
 import { BlogPost } from '@/models/blogpost';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a project tile.
@@ -29,11 +29,11 @@ type ProjectTileContainerProps = {
 const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 	background: ${(props: ProjectTileContainerProps) => props.gradient};
 	width: 100%;
-	border-radius: 1.75vw;
+	border-radius: ${fluid(1.75)};
 	border: 1px solid ${whiteAlpha(0.12)};
 	color: ${colors.white};
 	transition: 100ms linear 50ms;
-	margin-top: 2vw;
+	margin-top: ${fluid(2)};
 	padding-bottom: 0.07vw;
 
 	${media.mobile} {
@@ -50,9 +50,7 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 	}
 
 	${media.wide} {
-		margin-top: 40px;
 		padding-bottom: 1.5px;
-		border-radius: 35px;
 	}
 
 	&:hover {
@@ -62,7 +60,7 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 
 	h1 {
 		margin: 0;
-		padding: 1.5vw;
+		padding: ${fluid(1.5)};
 
 		${media.mobile} {
 			padding: 3vw;
@@ -71,17 +69,13 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 		${media.tablet} {
 			padding: 2vw 2.5vw;
 		}
-
-		${media.wide} {
-			padding: 30px;
-		}
 	}
 `;
 
 const Handles = styled.div`
 	position: relative;
 	float: right;
-	top: -3.5vw;
+	top: ${fluid(-3.5)};
 	display: flex;
 	right: 0.347vw;
 
@@ -104,7 +98,6 @@ const Handles = styled.div`
 	}
 
 	${media.wide} {
-		top: -70px;
 		right: 7px;
 	}
 `;
@@ -145,8 +138,8 @@ const glassChip = css`
  */
 const handleBase = css`
 	box-sizing: border-box;
-	min-height: 2.4vw;
-	border-radius: 1.5vw;
+	min-height: ${fluid(2.4)};
+	border-radius: ${fluid(1.5)};
 	${glassChip}
 	font-size: 1.17vw;
 
@@ -167,8 +160,6 @@ const handleBase = css`
 	}
 
 	${media.wide} {
-		min-height: 48px;
-		border-radius: 30px;
 		font-size: 24px;
 	}
 
@@ -249,8 +240,8 @@ const CloseHandle = styled.button`
 	appearance: none;
 	font: inherit;
 	padding: 0;
-	width: 2.4vw;
-	height: 2.4vw;
+	width: ${fluid(2.4)};
+	height: ${fluid(2.4)};
 	text-align: center;
 	cursor: pointer;
 	margin: 0 0.833vw 0 0.347vw;
@@ -267,8 +258,6 @@ const CloseHandle = styled.button`
 	}
 
 	${media.wide} {
-		width: 48px;
-		height: 48px;
 		margin: 0 17px 0 7px;
 	}
 
@@ -396,8 +385,8 @@ const GlassPanel = styled.div<GlassPanelProps>`
 const ProjectBlogPostList = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 0.7vw;
-	margin-top: 0.6vw;
+	gap: ${fluid(0.7)};
+	margin-top: ${fluid(0.6)};
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
@@ -409,11 +398,6 @@ const ProjectBlogPostList = styled.div`
 		gap: 1.4vw;
 		margin-top: 1.4vw;
 	}
-
-	${media.wide} {
-		gap: 14px;
-		margin-top: 12px;
-	}
 `;
 
 /**
@@ -424,12 +408,12 @@ const ProjectBlogPostList = styled.div`
 const ProjectBlogPostCard = styled(Link)`
 	display: flex;
 	align-items: center;
-	gap: 0.7vw;
+	gap: ${fluid(0.7)};
 	min-width: 0;
 	text-decoration: none;
 	background: linear-gradient(135deg, ${whiteAlpha(0.55)} 0%, ${whiteAlpha(0.32)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.6)};
-	border-radius: 0.7vw;
+	border-radius: ${fluid(0.7)};
 	padding: 0.6vw 0.8vw;
 	transition: 120ms ease;
 
@@ -454,9 +438,7 @@ const ProjectBlogPostCard = styled(Link)`
 	}
 
 	${media.wide} {
-		gap: 14px;
 		border-width: 1px;
-		border-radius: 14px;
 		padding: 12px 16px;
 	}
 `;
@@ -507,21 +489,17 @@ const ProjectBlogPostIcon = styled.div<{ gradient: string }>`
 const ProjectBlogPostInfo = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 0.1vw;
+	gap: ${fluid(0.1)};
 	min-width: 0;
 
 	${media.mobile} {
 		gap: 0.6vw;
 	}
-
-	${media.wide} {
-		gap: 2px;
-	}
 `;
 
 const ProjectBlogPostTitle = styled.span`
 	font-family: ${fonts.medium};
-	font-size: 0.95vw;
+	font-size: ${fluid(0.95)};
 	color: ${colors.ink};
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -535,15 +513,11 @@ const ProjectBlogPostTitle = styled.span`
 	${media.tablet} {
 		font-size: 2.1vw;
 	}
-
-	${media.wide} {
-		font-size: 19px;
-	}
 `;
 
 const ProjectBlogPostMeta = styled.span`
 	font-family: ${fonts.light};
-	font-size: 0.75vw;
+	font-size: ${fluid(0.75)};
 	color: #5e5e5e;
 
 	${media.mobile} {
@@ -552,10 +526,6 @@ const ProjectBlogPostMeta = styled.span`
 
 	${media.tablet} {
 		font-size: 1.7vw;
-	}
-
-	${media.wide} {
-		font-size: 15px;
 	}
 `;
 

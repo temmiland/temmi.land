@@ -7,11 +7,11 @@
 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const SearchInputWrapper = styled.div`
 	position: relative;
-	max-width: 39vw;
+	max-width: ${fluid(39)};
 
 	svg {
 		position: absolute;
@@ -111,8 +111,6 @@ const SearchInputWrapper = styled.div`
 	}
 
 	${media.wide} {
-		max-width: 780px;
-
 		svg {
 			left: 14px;
 			font-size: 18px;

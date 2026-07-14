@@ -10,7 +10,7 @@ import Typography from '@/ui/Typography';
 import Chip from '@/features/me/Chip';
 import LinkIcon from '@/ui/LinkIcon';
 import Signature from '@/features/me/Signature';
-import { colors, media } from '@/styles';
+import { colors, fluid, media } from '@/styles';
 
 const MeTextContainer = styled.div`
 	z-index: 100;
@@ -29,14 +29,10 @@ const MeTextContainer = styled.div`
 	}
 
 	h2 {
-		line-height: 4vw;
+		line-height: ${fluid(4)};
 
 		${media.belowDesktop} {
 			line-height: 9.25vw;
-		}
-
-		${media.wide} {
-			line-height: 80px;
 		}
 
 		span {
@@ -46,7 +42,7 @@ const MeTextContainer = styled.div`
 
 	.signature {
 		position: relative;
-		top: 0.25vw;
+		top: ${fluid(0.25)};
 		left: 1.75vw;
 		scale: 1;
 
@@ -56,7 +52,6 @@ const MeTextContainer = styled.div`
 		}
 
 		${media.wide} {
-			top: 5px;
 			left: 40px;
 		}
 	}

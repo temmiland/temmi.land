@@ -11,7 +11,7 @@ import { Link } from '@/ui/Link/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Typography } from '@/ui/Typography/Typography';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a project tile.
@@ -31,9 +31,9 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-start;
-	width: 18vw;
-	height: 18vw;
-	border-radius: 1.75vw;
+	width: ${fluid(18)};
+	height: ${fluid(18)};
+	border-radius: ${fluid(1.75)};
 	border: 1px solid ${whiteAlpha(0.12)};
 	color: ${colors.white};
 	transition: 100ms linear 50ms;
@@ -50,12 +50,6 @@ const ProjectTileContainer = styled.div<ProjectTileContainerProps>`
 		width: 45vw;
 		height: 45vw;
 		border-radius: 3.5vw;
-	}
-
-	${media.wide} {
-		width: 360px;
-		height: 360px;
-		border-radius: 35px;
 	}
 
 	&:hover {
@@ -97,13 +91,13 @@ const glassPanel = css`
  * Container for the ProjectDescription.
  */
 const ProjectDescriptionContainer = styled.div`
-	--project-desc-margin: 0.9vw;
+	--project-desc-margin: ${fluid(0.9)};
 	margin: var(--project-desc-margin);
-	padding: 0.9vw;
+	padding: ${fluid(0.9)};
 	width: calc(100% - calc(var(--project-desc-margin) * 4));
-	border-radius: 0.9vw;
+	border-radius: ${fluid(0.9)};
 	${glassPanel}
-	line-height: 1.15vw;
+	line-height: ${fluid(1.15)};
 	text-align: left;
 	z-index: 3;
 
@@ -119,13 +113,6 @@ const ProjectDescriptionContainer = styled.div`
 		padding: 2vw;
 		border-radius: 2vw;
 		line-height: 3vw;
-	}
-
-	${media.wide} {
-		--project-desc-margin: 18px;
-		padding: 18px;
-		border-radius: 18px;
-		line-height: 23px;
 	}
 
 	a {

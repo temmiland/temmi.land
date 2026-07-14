@@ -17,7 +17,7 @@ import PageLayout from '@/ui/PageLayout';
 import { blogPosts } from '@/data/blog';
 import { projects } from '@/data/projects';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const BlogSection = styled.section`
 	margin: 0;
@@ -60,12 +60,12 @@ const BlogSection = styled.section`
 const BackLink = styled(Link)`
 	display: inline-flex;
 	align-items: center;
-	gap: 0.5vw;
+	gap: ${fluid(0.5)};
 	margin: 3.5vw 0 0 0;
 	text-decoration: none;
 	color: ${whiteAlpha(0.6)};
 	font-family: ${fonts.medium};
-	font-size: 0.95vw;
+	font-size: ${fluid(0.95)};
 	transition: color 120ms ease;
 
 	&:hover {
@@ -85,9 +85,7 @@ const BackLink = styled(Link)`
 	}
 
 	${media.wide} {
-		gap: 10px;
 		margin: 70px 0 0 0;
-		font-size: 19px;
 	}
 `;
 
@@ -98,9 +96,9 @@ type ArticleBannerProps = {
 const ArticleBanner = styled.div<ArticleBannerProps>`
 	background: ${(props: ArticleBannerProps) => props.gradient};
 	border: 1px solid ${whiteAlpha(0.12)};
-	border-radius: 1.75vw;
+	border-radius: ${fluid(1.75)};
 	color: ${colors.white};
-	padding: 2.4vw;
+	padding: ${fluid(2.4)};
 	margin: 1.5vw 0 2vw 0;
 
 	${media.mobile} {
@@ -116,13 +114,11 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 	}
 
 	${media.wide} {
-		border-radius: 35px;
-		padding: 48px;
 		margin: 30px 0 40px 0;
 	}
 
 	.banner-icon {
-		font-size: 3vw;
+		font-size: ${fluid(3)};
 
 		${media.mobile} {
 			font-size: 11vw;
@@ -131,19 +127,15 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		${media.tablet} {
 			font-size: 6vw;
 		}
-
-		${media.wide} {
-			font-size: 60px;
-		}
 	}
 
 	.banner-meta {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1vw;
+		gap: ${fluid(1)};
 		margin: 1.2vw 0 0 0;
 		font-family: ${fonts.medium};
-		font-size: 0.9vw;
+		font-size: ${fluid(0.9)};
 		color: ${whiteAlpha(0.8)};
 
 		${media.mobile} {
@@ -159,20 +151,14 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.wide} {
-			gap: 20px;
 			margin: 24px 0 0 0;
-			font-size: 18px;
 		}
 
 		svg {
-			margin-right: 0.35vw;
+			margin-right: ${fluid(0.35)};
 
 			${media.mobile} {
 				margin-right: 1.4vw;
-			}
-
-			${media.wide} {
-				margin-right: 7px;
 			}
 		}
 	}
@@ -180,7 +166,7 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 	.banner-title {
 		margin: 0.8vw 0 0 0;
 		font-family: ${fonts.medium};
-		font-size: 2.4vw;
+		font-size: ${fluid(2.4)};
 		line-height: 1.2;
 
 		${media.mobile} {
@@ -195,14 +181,13 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 
 		${media.wide} {
 			margin: 16px 0 0 0;
-			font-size: 48px;
 		}
 	}
 
 	.banner-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.6vw;
+		gap: ${fluid(0.6)};
 		margin: 1.4vw 0 0 0;
 
 		${media.mobile} {
@@ -216,16 +201,15 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.wide} {
-			gap: 12px;
 			margin: 28px 0 0 0;
 		}
 	}
 
 	.banner-tag {
 		font-family: ${fonts.medium};
-		font-size: 0.8vw;
+		font-size: ${fluid(0.8)};
 		background: ${whiteAlpha(0.18)};
-		border-radius: 1vw;
+		border-radius: ${fluid(1)};
 		padding: 0.25vw 0.7vw;
 
 		${media.mobile} {
@@ -241,8 +225,6 @@ const ArticleBanner = styled.div<ArticleBannerProps>`
 		}
 
 		${media.wide} {
-			font-size: 16px;
-			border-radius: 20px;
 			padding: 5px 14px;
 		}
 	}
@@ -252,7 +234,7 @@ const ArticleBody = styled.article`
 	h2 {
 		font-family: ${fonts.medium};
 		color: ${colors.white};
-		font-size: 1.6vw;
+		font-size: ${fluid(1.6)};
 		margin: 2.2vw 0 0.8vw 0;
 
 		${media.mobile} {
@@ -266,7 +248,6 @@ const ArticleBody = styled.article`
 		}
 
 		${media.wide} {
-			font-size: 32px;
 			margin: 44px 0 16px 0;
 		}
 	}
@@ -274,7 +255,7 @@ const ArticleBody = styled.article`
 	p {
 		font-family: ${fonts.light};
 		color: ${whiteAlpha(0.82)};
-		font-size: 1.15vw;
+		font-size: ${fluid(1.15)};
 		line-height: 1.7;
 		margin: 0 0 1vw 0;
 
@@ -289,7 +270,6 @@ const ArticleBody = styled.article`
 		}
 
 		${media.wide} {
-			font-size: 23px;
 			margin: 0 0 20px 0;
 		}
 	}
@@ -315,7 +295,7 @@ const ArticleImage = styled.figure`
 		width: 100%;
 		height: auto;
 		border: 1px solid ${whiteAlpha(0.12)};
-		border-radius: 1.75vw;
+		border-radius: ${fluid(1.75)};
 
 		${media.mobile} {
 			border-radius: 7.5vw;
@@ -323,10 +303,6 @@ const ArticleImage = styled.figure`
 
 		${media.tablet} {
 			border-radius: 3.5vw;
-		}
-
-		${media.wide} {
-			border-radius: 35px;
 		}
 	}
 
@@ -387,7 +363,7 @@ const ImageGallery = styled.div`
 		width: 100%;
 		height: auto;
 		border: 1px solid ${whiteAlpha(0.12)};
-		border-radius: 0.9vw;
+		border-radius: ${fluid(0.9)};
 
 		${media.mobile} {
 			border-radius: 3.5vw;
@@ -395,10 +371,6 @@ const ImageGallery = styled.div`
 
 		${media.tablet} {
 			border-radius: 1.8vw;
-		}
-
-		${media.wide} {
-			border-radius: 18px;
 		}
 	}
 
@@ -430,14 +402,14 @@ const ImageGallery = styled.div`
 const CtaButton = styled.a`
 	display: inline-flex;
 	align-items: center;
-	gap: 0.6vw;
+	gap: ${fluid(0.6)};
 	margin: 0.8vw 0 1.6vw 0;
 	text-decoration: none;
 	background: linear-gradient(135deg, ${whiteAlpha(0.9)} 0%, ${whiteAlpha(0.72)} 100%);
 	color: ${colors.surface};
 	font-family: ${fonts.medium};
-	font-size: 1.05vw;
-	border-radius: 2vw;
+	font-size: ${fluid(1.05)};
+	border-radius: ${fluid(2)};
 	padding: 0.8vw 1.6vw;
 	transition:
 		transform 120ms ease,
@@ -465,10 +437,7 @@ const CtaButton = styled.a`
 	}
 
 	${media.wide} {
-		gap: 12px;
 		margin: 16px 0 32px 0;
-		font-size: 21px;
-		border-radius: 40px;
 		padding: 16px 32px;
 	}
 `;
@@ -511,12 +480,12 @@ const StoreBadgeLink = styled.a`
 const RelatedProject = styled(Link)`
 	display: inline-flex;
 	align-items: center;
-	gap: 0.6vw;
+	gap: ${fluid(0.6)};
 	margin: 2.4vw 0 0 0;
 	text-decoration: none;
 	color: ${colors.accentBlue};
 	font-family: ${fonts.medium};
-	font-size: 1.05vw;
+	font-size: ${fluid(1.05)};
 	transition: color 120ms ease;
 
 	&:hover {
@@ -536,9 +505,7 @@ const RelatedProject = styled(Link)`
 	}
 
 	${media.wide} {
-		gap: 12px;
 		margin: 48px 0 0 0;
-		font-size: 21px;
 	}
 `;
 

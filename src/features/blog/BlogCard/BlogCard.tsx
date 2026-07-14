@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { formatBlogDate, formatReadingTime } from '@/utils/blogFormat';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Props for the container of a blog card.
@@ -28,7 +28,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 	overflow: hidden;
 	background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.1)};
-	border-radius: 1.1vw;
+	border-radius: ${fluid(1.1)};
 	backdrop-filter: blur(0.7vw);
 	-webkit-backdrop-filter: blur(0.7vw);
 	transition: 120ms ease;
@@ -45,7 +45,6 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 	${media.wide} {
 		border: 1px solid ${whiteAlpha(0.1)};
-		border-radius: 22px;
 	}
 
 	&:hover {
@@ -58,7 +57,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		background: ${(props: BlogCardContainerProps) => props.$gradient};
 		display: flex;
 		align-items: center;
-		gap: 1vw;
+		gap: ${fluid(1)};
 		padding: 1.6vw 1.6vw;
 		color: ${colors.white};
 
@@ -73,12 +72,11 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.wide} {
-			gap: 20px;
 			padding: 32px 32px;
 		}
 
 		svg {
-			font-size: 2.4vw;
+			font-size: ${fluid(2.4)};
 			flex-shrink: 0;
 
 			${media.mobile} {
@@ -87,10 +85,6 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 			${media.tablet} {
 				font-size: 5vw;
-			}
-
-			${media.wide} {
-				font-size: 48px;
 			}
 		}
 	}
@@ -115,9 +109,9 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.9vw;
+		gap: ${fluid(0.9)};
 		font-family: ${fonts.medium};
-		font-size: 0.85vw;
+		font-size: ${fluid(0.85)};
 		color: ${whiteAlpha(0.55)};
 
 		${media.mobile} {
@@ -130,20 +124,11 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 			font-size: 1.9vw;
 		}
 
-		${media.wide} {
-			gap: 18px;
-			font-size: 17px;
-		}
-
 		svg {
-			margin-right: 0.35vw;
+			margin-right: ${fluid(0.35)};
 
 			${media.mobile} {
 				margin-right: 1.4vw;
-			}
-
-			${media.wide} {
-				margin-right: 7px;
 			}
 		}
 	}
@@ -152,7 +137,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		margin: 0.6vw 0 0 0;
 		font-family: ${fonts.medium};
 		color: ${colors.white};
-		font-size: 1.5vw;
+		font-size: ${fluid(1.5)};
 		line-height: 1.25;
 
 		${media.mobile} {
@@ -167,7 +152,6 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 		${media.wide} {
 			margin: 12px 0 0 0;
-			font-size: 30px;
 		}
 	}
 
@@ -175,7 +159,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		margin: 0.6vw 0 0 0;
 		font-family: ${fonts.light};
 		color: ${whiteAlpha(0.7)};
-		font-size: 1vw;
+		font-size: ${fluid(1)};
 		line-height: 1.5;
 
 		${media.mobile} {
@@ -190,14 +174,13 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 
 		${media.wide} {
 			margin: 12px 0 0 0;
-			font-size: 20px;
 		}
 	}
 
 	.blog-card-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5vw;
+		gap: ${fluid(0.5)};
 		margin: 1vw 0 0 0;
 
 		${media.mobile} {
@@ -211,17 +194,16 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.wide} {
-			gap: 10px;
 			margin: 20px 0 0 0;
 		}
 	}
 
 	.blog-card-tag {
 		font-family: ${fonts.medium};
-		font-size: 0.8vw;
+		font-size: ${fluid(0.8)};
 		color: ${whiteAlpha(0.75)};
 		background: ${whiteAlpha(0.1)};
-		border-radius: 1vw;
+		border-radius: ${fluid(1)};
 		padding: 0.25vw 0.7vw;
 
 		${media.mobile} {
@@ -237,8 +219,6 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.wide} {
-			font-size: 16px;
-			border-radius: 20px;
 			padding: 5px 14px;
 		}
 	}
@@ -246,10 +226,10 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 	.blog-card-more {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.45vw;
+		gap: ${fluid(0.45)};
 		margin: 1.2vw 0 0 0;
 		font-family: ${fonts.medium};
-		font-size: 0.9vw;
+		font-size: ${fluid(0.9)};
 		color: ${colors.accentBlue};
 
 		${media.mobile} {
@@ -265,9 +245,7 @@ const BlogCardContainer = styled(Link)<BlogCardContainerProps>`
 		}
 
 		${media.wide} {
-			gap: 9px;
 			margin: 24px 0 0 0;
-			font-size: 18px;
 		}
 	}
 `;

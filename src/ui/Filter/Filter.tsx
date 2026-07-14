@@ -8,13 +8,13 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useDropdown from '@/ui/Dropdown';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const FilterRow = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.55vw;
+	gap: ${fluid(0.55)};
 	padding: 0 6.5vw;
 	margin: 1vw 0;
 
@@ -27,7 +27,6 @@ const FilterRow = styled.div`
 	}
 
 	${media.wide} {
-		gap: 11px;
 		margin: 20px 0;
 	}
 `;
@@ -38,7 +37,7 @@ const Chip = styled.button`
 	appearance: none;
 	cursor: pointer;
 	font-family: ${fonts.medium};
-	font-size: 0.9vw;
+	font-size: ${fluid(0.9)};
 	color: ${colors.white};
 	background: ${whiteAlpha(0.08)};
 	border: 0.07vw solid ${whiteAlpha(0.16)};
@@ -66,7 +65,6 @@ const Chip = styled.button`
 	}
 
 	${media.wide} {
-		font-size: 18px;
 		padding: 10px 22px;
 		border: 1px solid ${whiteAlpha(0.16)};
 	}

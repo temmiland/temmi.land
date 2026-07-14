@@ -11,7 +11,7 @@ import Typography from '@/ui/Typography';
 import { Skill } from '@/models/skill';
 import SkillCard from '@/features/skills/SkillCard';
 import { skills } from '@/data/skills';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 /**
  * Lookup of skills by their (lower-cased) name, so a tech-stack label on a
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 		transform: translateX(-50%) translateY(0.4vw);
 		width: 22vw;
 		background: ${colors.surface};
-		border-radius: 0.7vw;
+		border-radius: ${fluid(0.7)};
 		overflow: hidden;
 		box-shadow: 0 0.6vw 1.8vw rgba(0, 0, 0, 0.55);
 		opacity: 0;
@@ -60,7 +60,6 @@ const Wrapper = styled.div`
 		${media.wide} {
 			width: 320px;
 			bottom: calc(100% + 10px);
-			border-radius: 14px;
 			box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
 		}
 

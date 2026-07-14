@@ -11,7 +11,7 @@ import Typography from '@/ui/Typography';
 import Link from '@/ui/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 import { getTimezoneOffsetMinutes } from '@/utils/timezone';
 
 const AboutContainer = styled.div`
@@ -21,7 +21,7 @@ const AboutContainer = styled.div`
 		margin: 3.5vw 6.5vw;
 		display: grid;
 		grid-template-columns: 1fr auto;
-		column-gap: 2.5vw;
+		column-gap: ${fluid(2.5)};
 
 		${media.belowDesktop} {
 			grid-template-columns: 100%;
@@ -29,7 +29,6 @@ const AboutContainer = styled.div`
 
 		${media.wide} {
 			margin: 70px 130px;
-			column-gap: 50px;
 		}
 	}
 
@@ -43,8 +42,8 @@ const AboutContainer = styled.div`
 
 	.about-card {
 		box-sizing: border-box;
-		width: 20vw;
-		height: 20vw;
+		width: ${fluid(20)};
+		height: ${fluid(20)};
 		align-self: start;
 		overflow: hidden;
 		padding: 1.6vw 2vw 1.3vw;
@@ -52,7 +51,7 @@ const AboutContainer = styled.div`
 		background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 		backdrop-filter: blur(0.7vw);
 		-webkit-backdrop-filter: blur(0.7vw);
-		border-radius: 0.7vw;
+		border-radius: ${fluid(0.7)};
 		font-family: ${fonts.medium};
 		transition: 120ms ease;
 
@@ -75,11 +74,8 @@ const AboutContainer = styled.div`
 		}
 
 		${media.wide} {
-			width: 400px;
-			height: 400px;
 			padding: 32px 38px 26px;
 			border: 1px solid ${whiteAlpha(0.1)};
-			border-radius: 14px;
 		}
 
 		&:hover {
@@ -89,7 +85,7 @@ const AboutContainer = styled.div`
 		}
 
 		.card-name {
-			font-size: 1.2vw;
+			font-size: ${fluid(1.2)};
 			font-family: ${fonts.bold};
 
 			${media.mobile} {
@@ -99,16 +95,12 @@ const AboutContainer = styled.div`
 			${media.tablet} {
 				font-size: 2.8vw;
 			}
-
-			${media.wide} {
-				font-size: 24px;
-			}
 		}
 
 		.card-handle {
 			margin: 0.2vw 0 0.9vw;
 			padding: 0 0 0.9vw;
-			font-size: 0.85vw;
+			font-size: ${fluid(0.85)};
 			color: ${colors.gray};
 			border-bottom: 0.1vw solid ${whiteAlpha(0.1)};
 			font-family: ${fonts.light};
@@ -130,7 +122,6 @@ const AboutContainer = styled.div`
 			${media.wide} {
 				margin: 4px 0 18px;
 				padding: 0 0 18px;
-				font-size: 17px;
 				border-bottom: 2px solid ${whiteAlpha(0.1)};
 			}
 		}
@@ -145,7 +136,7 @@ const AboutContainer = styled.div`
 				align-items: center;
 				gap: 0.66vw;
 				padding: 0.25vw 0;
-				font-size: 0.85vw;
+				font-size: ${fluid(0.85)};
 				font-family: ${fonts.light};
 
 				${media.mobile} {
@@ -163,11 +154,10 @@ const AboutContainer = styled.div`
 				${media.wide} {
 					gap: 13px;
 					padding: 5px 0;
-					font-size: 17px;
 				}
 
 				svg {
-					width: 0.9vw;
+					width: ${fluid(0.9)};
 					color: ${colors.gray};
 					flex-shrink: 0;
 
@@ -177,10 +167,6 @@ const AboutContainer = styled.div`
 
 					${media.tablet} {
 						width: 2.1vw;
-					}
-
-					${media.wide} {
-						width: 18px;
 					}
 				}
 
@@ -273,11 +259,11 @@ const AboutContainer = styled.div`
 		border: 0.07vw solid ${whiteAlpha(0.1)};
 		backdrop-filter: blur(0.7vw);
 		-webkit-backdrop-filter: blur(0.7vw);
-		border-radius: 0.7vw;
+		border-radius: ${fluid(0.7)};
 		justify-content: center;
 		align-items: center;
-		padding: 1vw;
-		margin: 0.55vw;
+		padding: ${fluid(1)};
+		margin: ${fluid(0.55)};
 		transition: 120ms ease;
 
 		${media.mobile} {
@@ -296,9 +282,6 @@ const AboutContainer = styled.div`
 
 		${media.wide} {
 			border: 1px solid ${whiteAlpha(0.1)};
-			border-radius: 14px;
-			padding: 20px;
-			margin: 11px;
 		}
 
 		&:hover {
@@ -310,7 +293,7 @@ const AboutContainer = styled.div`
 
 	.aw-company-image {
 		grid-area: 1 / 1 / 4 / 2;
-		width: 3.3vw;
+		width: ${fluid(3.3)};
 		border-radius: 0.66vw;
 		margin: 0 auto;
 
@@ -326,7 +309,6 @@ const AboutContainer = styled.div`
 		}
 
 		${media.wide} {
-			width: 66px;
 			border-radius: 13px;
 		}
 	}
@@ -334,7 +316,7 @@ const AboutContainer = styled.div`
 	.aw-jobtitle {
 		grid-area: 1 / 2 / 2 / 3;
 		text-align: left;
-		font-size: 1vw;
+		font-size: ${fluid(1)};
 		font-family: ${fonts.medium};
 
 		${media.mobile} {
@@ -347,7 +329,6 @@ const AboutContainer = styled.div`
 
 		${media.wide} {
 			border-radius: 30px;
-			font-size: 20px;
 		}
 	}
 

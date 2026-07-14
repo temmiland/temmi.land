@@ -11,7 +11,7 @@ import SkillCard from '@/features/skills/SkillCard';
 import { Link } from '@/ui/Link/Link';
 import { Skill } from '@/models/skill';
 import { sortSkillsForHome } from '@/utils/skillSort';
-import { colors, media, whiteAlpha } from '@/styles';
+import { colors, fluid, media, whiteAlpha } from '@/styles';
 
 const SkillsWrapper = styled.div`
 	display: grid;
@@ -78,7 +78,7 @@ const MoreCard = styled.div`
 	width: 100%;
 	height: 100%;
 	border: 0.07vw dashed ${whiteAlpha(0.3)};
-	border-radius: 0.7vw;
+	border-radius: ${fluid(0.7)};
 	color: ${colors.white};
 	transition: 120ms ease;
 
@@ -100,7 +100,6 @@ const MoreCard = styled.div`
 
 	${media.wide} {
 		border: 1px dashed ${whiteAlpha(0.3)};
-		border-radius: 14px;
 		padding-left: 0;
 	}
 
@@ -111,7 +110,7 @@ const MoreCard = styled.div`
 
 	svg {
 		color: ${colors.white};
-		font-size: 4.7vw;
+		font-size: ${fluid(4.7)};
 
 		${media.mobile} {
 			color: ${colors.accentBlue};
@@ -124,7 +123,6 @@ const MoreCard = styled.div`
 		}
 
 		${media.wide} {
-			font-size: 94px;
 			margin-left: 75px;
 		}
 	}

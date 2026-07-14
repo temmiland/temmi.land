@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import Typography from '@/ui/Typography';
 import BlogCard from '@/features/blog/BlogCard';
 import { BlogPost } from '@/models/blogpost';
-import { media } from '@/styles';
+import { fluid, media } from '@/styles';
 
 const BlogGridContainer = styled.div`
 	padding: 0 6.5vw 3vw 6.5vw;
@@ -31,9 +31,9 @@ const NoResults = styled.div`
 const BlogCardGrid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-column-gap: 1.6vw;
-	grid-row-gap: 1.6vw;
-	margin-top: 2vw;
+	grid-column-gap: ${fluid(1.6)};
+	grid-row-gap: ${fluid(1.6)};
+	margin-top: ${fluid(2)};
 
 	${media.mobile} {
 		grid-template-columns: repeat(1, 1fr);
@@ -46,12 +46,6 @@ const BlogCardGrid = styled.div`
 		grid-column-gap: 3vw;
 		grid-row-gap: 3vw;
 		margin-top: 3vw;
-	}
-
-	${media.wide} {
-		grid-column-gap: 32px;
-		grid-row-gap: 32px;
-		margin-top: 40px;
 	}
 `;
 

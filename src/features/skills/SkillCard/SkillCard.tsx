@@ -9,13 +9,13 @@ import { Skill } from '@/models/skill';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const SkillCardContainer = styled.div`
 	min-width: 0;
 	background: linear-gradient(135deg, ${whiteAlpha(0.08)} 0%, ${whiteAlpha(0.03)} 100%);
 	border: 0.07vw solid ${whiteAlpha(0.1)};
-	border-radius: 0.7vw;
+	border-radius: ${fluid(0.7)};
 	padding: 0.85vw 1.1vw;
 	backdrop-filter: blur(0.7vw);
 	-webkit-backdrop-filter: blur(0.7vw);
@@ -35,7 +35,6 @@ const SkillCardContainer = styled.div`
 
 	${media.wide} {
 		border: 1px solid ${whiteAlpha(0.1)};
-		border-radius: 14px;
 		padding: 17px 22px;
 	}
 
@@ -49,27 +48,23 @@ const SkillCardContainer = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.6vw;
+		gap: ${fluid(0.6)};
 
 		${media.mobile} {
 			gap: 2vw;
-		}
-
-		${media.wide} {
-			gap: 12px;
 		}
 	}
 
 	.skill-name {
 		display: flex;
 		align-items: center;
-		gap: 0.55vw;
+		gap: ${fluid(0.55)};
 		flex: 1 1 auto;
 		min-width: 0;
 		overflow: hidden;
 		font-family: ${fonts.medium};
 		color: ${colors.white};
-		font-size: 1.05vw;
+		font-size: ${fluid(1.05)};
 
 		${media.mobile} {
 			gap: 2.5vw;
@@ -79,11 +74,6 @@ const SkillCardContainer = styled.div`
 		${media.tablet} {
 			gap: 1.2vw;
 			font-size: 2.4vw;
-		}
-
-		${media.wide} {
-			gap: 11px;
-			font-size: 21px;
 		}
 
 		span {
@@ -96,7 +86,7 @@ const SkillCardContainer = styled.div`
 
 		svg {
 			color: ${colors.accentBlue};
-			font-size: 1.05vw;
+			font-size: ${fluid(1.05)};
 			flex-shrink: 0;
 
 			${media.mobile} {
@@ -105,10 +95,6 @@ const SkillCardContainer = styled.div`
 
 			${media.tablet} {
 				font-size: 2.4vw;
-			}
-
-			${media.wide} {
-				font-size: 21px;
 			}
 		}
 	}
@@ -121,7 +107,7 @@ const SkillCardContainer = styled.div`
 		justify-content: center;
 		width: 6vw;
 		background: ${whiteAlpha(0.1)};
-		border-radius: 1vw;
+		border-radius: ${fluid(1)};
 		padding: 0.35vw 0.6vw;
 
 		${media.mobile} {
@@ -138,7 +124,6 @@ const SkillCardContainer = styled.div`
 
 		${media.wide} {
 			width: 118px;
-			border-radius: 20px;
 			padding: 6px 11px;
 		}
 	}
@@ -146,9 +131,9 @@ const SkillCardContainer = styled.div`
 	.skill-details {
 		display: flex;
 		flex-direction: column;
-		gap: 0.15vw;
-		margin-top: 0.4vw;
-		min-height: 3.4vw;
+		gap: ${fluid(0.15)};
+		margin-top: ${fluid(0.4)};
+		min-height: ${fluid(3.4)};
 
 		${media.mobile} {
 			gap: 0.8vw;
@@ -161,18 +146,12 @@ const SkillCardContainer = styled.div`
 			margin-top: 0.8vw;
 			min-height: 7.6vw;
 		}
-
-		${media.wide} {
-			gap: 3px;
-			margin-top: 8px;
-			min-height: 68px;
-		}
 	}
 
 	.detail {
 		font-family: ${fonts.medium};
 		font-weight: 500;
-		font-size: 0.85vw;
+		font-size: ${fluid(0.85)};
 		color: ${whiteAlpha(0.55)};
 
 		${media.mobile} {
@@ -181,10 +160,6 @@ const SkillCardContainer = styled.div`
 
 		${media.tablet} {
 			font-size: 1.9vw;
-		}
-
-		${media.wide} {
-			font-size: 17px;
 		}
 	}
 
@@ -195,7 +170,7 @@ const SkillCardContainer = styled.div`
 
 const Stars = styled.div`
 	display: inline-flex;
-	gap: 0.2vw;
+	gap: ${fluid(0.2)};
 
 	${media.mobile} {
 		gap: 1vw;
@@ -205,12 +180,8 @@ const Stars = styled.div`
 		gap: 0.5vw;
 	}
 
-	${media.wide} {
-		gap: 4px;
-	}
-
 	svg {
-		font-size: 0.8vw;
+		font-size: ${fluid(0.8)};
 		color: #f5a623;
 
 		${media.mobile} {
@@ -219,10 +190,6 @@ const Stars = styled.div`
 
 		${media.tablet} {
 			font-size: 1.8vw;
-		}
-
-		${media.wide} {
-			font-size: 16px;
 		}
 	}
 

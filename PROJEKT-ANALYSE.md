@@ -430,13 +430,25 @@ auf `fluid()` (+ ggf. `clamp()` mit Untergrenze statt der mobile/tablet-Blöcke)
 halbieren und Drift zwischen den vier Varianten unmöglich machen. Das ist die wirksamste Antwort auf „lange
 styled-components-Funktionen".
 
-**Bewusst weiterhin offen (13.07.2026, dritte Runde):** Anders als A3 (reines Umbenennen/Zusammenfassen
-identischer Regeln) ist A4 kein risikoloser mechanischer Fix. `fluid()` bildet eine **stetige** Skalierung ab;
-die bestehenden `mobile`/`tablet`-Blöcke sind dagegen **Stufenwerte**, die an den Breakpoints springen. Eine
-Migration ersetzt also nicht nur Syntax, sondern ändert das tatsächliche Skalierungsverhalten auf jedem
-Mobile-/Tablet-Viewport projektweit — eine Design-Entscheidung, keine reine Codepflege, und über 31 Dateien
-hinweg ohne Visual-Regression-Tooling (nur Ad-hoc-Screenshots) nicht verantwortbar blind durchzuziehen. Bleibt
-laufende Arbeit, siehe Memory „Styles-Token-Migration".
+**Teilweise gefixt (14.07.2026):** Der risikolose Teil der Migration ist durchgezogen — überall dort, wo der
+`wide`-Wert exakt `vw × 20` war, ersetzt jetzt `fluid()` das Basis-`vw` **und** die zugehörige
+`media.wide`-Deklaration (107 Ersetzungen über 18 Dateien). Automatisiert per Skript erkannt und angewendet,
+dabei zwei echte Fälle gefunden und von Hand korrigiert, in denen ein `media.wide`-Block eine verschachtelte
+Selector-Regel enthielt (z. B. `.signature { height: 42px; }` in `HeaderContent.tsx`), die beim naiven
+Löschen des ganzen Blocks mitgerissen worden wäre. Verifiziert mit `tsc`/ESLint/Vitest (24/24) sowie einem
+Playwright-Vorher/Nachher-Vergleich von `getComputedStyle` + `getBoundingClientRect` für **jedes Element** auf
+5 Routen × 2 Viewportbreiten (1500px kontinuierliche Zone, 2200px oberhalb des 2000px-Caps): identisch bis auf
+Subpixel-Rauschen (≤0.02px, Federungs-Timing der `Trail`-Animation) und die live tickende Uhr in
+`AboutSection`. Rendering ist damit nachweislich pixel-identisch geblieben.
+
+**Bewusst weiterhin offen:** Der `mobile`/`tablet`-Teil von A4 (der eigentliche „4-Breakpoints"-Kern) ist
+**nicht** angefasst — das bleibt aus gutem Grund eine separate, größere Entscheidung. `fluid()` bildet eine
+**stetige** Skalierung ab; die bestehenden `mobile`/`tablet`-Blöcke sind dagegen **Stufenwerte**, die an den
+Breakpoints springen. Eine Migration dieses Teils ändert das tatsächliche Skalierungsverhalten auf jedem
+Mobile-/Tablet-Viewport projektweit — eine Design-Entscheidung, keine reine Codepflege. Bleibt laufende
+Arbeit, siehe Memory „Styles-Token-Migration". Ebenfalls unverändert: die Handvoll `media.wide`-Werte, die
+**nicht** exakt `vw × 20` sind (bewusste Design-Abweichungen wie `outline-offset` oder eigene
+Wide-Breakpoint-Werte, z. B. `SkillChip`s Tooltip-Breite) — die bleiben laut Konvention explizit.
 
 ### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 

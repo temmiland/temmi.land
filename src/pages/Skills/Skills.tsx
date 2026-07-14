@@ -21,7 +21,7 @@ import { SkillCategory } from '@/models/skillcategory';
 import { skills } from '@/data/skills';
 import { downloadFile, skillsToCsv, skillsToJson } from '@/utils/skillExport';
 import { DEFAULT_SKILL_SORT, SKILL_SORT_LABELS, SkillSortOption } from '@/utils/skillSort';
-import { colors, fonts, media, whiteAlpha } from '@/styles';
+import { colors, fluid, fonts, media, whiteAlpha } from '@/styles';
 
 const SKILL_SORT_OPTIONS = Object.keys(SKILL_SORT_LABELS) as SkillSortOption[];
 
@@ -104,7 +104,7 @@ const ControlsCol = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 0.6vw;
+	gap: ${fluid(0.6)};
 	padding: 0 6.5vw 0 0;
 	margin: 1.5vw 0 3vw 0;
 
@@ -123,7 +123,6 @@ const ControlsCol = styled.div`
 	}
 
 	${media.wide} {
-		gap: 12px;
 		margin: 30px 0 60px 0;
 	}
 `;
@@ -135,15 +134,15 @@ const DropdownMenu = styled.div`
 const DropdownTrigger = styled.button`
 	display: inline-flex;
 	align-items: center;
-	gap: 0.45vw;
+	gap: ${fluid(0.45)};
 	padding: 0.5vw 1.1vw;
 	border: 0.075vw solid ${whiteAlpha(0.35)};
-	border-radius: 1.3vw;
+	border-radius: ${fluid(1.3)};
 	background: ${whiteAlpha(0.06)};
 	color: ${colors.white};
 	cursor: pointer;
 	font-family: ${fonts.medium};
-	font-size: 0.9vw;
+	font-size: ${fluid(0.9)};
 	transition: 100ms linear;
 
 	&:hover,
@@ -193,11 +192,8 @@ const DropdownTrigger = styled.button`
 	}
 
 	${media.wide} {
-		gap: 9px;
 		padding: 10px 22px;
 		border: 1px solid ${whiteAlpha(0.35)};
-		border-radius: 26px;
-		font-size: 18px;
 	}
 `;
 
@@ -208,12 +204,12 @@ const DropdownPanel = styled.div`
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
-	gap: 0.2vw;
+	gap: ${fluid(0.2)};
 	min-width: 11vw;
-	padding: 0.35vw;
+	padding: ${fluid(0.35)};
 	background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
 	border: 0.07vw solid ${whiteAlpha(0.16)};
-	border-radius: 0.7vw;
+	border-radius: ${fluid(0.7)};
 	backdrop-filter: blur(0.7vw);
 	-webkit-backdrop-filter: blur(0.7vw);
 	box-shadow: 0 0.5vw 1.5vw rgba(0, 0, 0, 0.35);
@@ -275,9 +271,6 @@ const DropdownPanel = styled.div`
 
 	${media.wide} {
 		min-width: 200px;
-		padding: 7px;
-		border-radius: 14px;
-		gap: 4px;
 
 		button {
 			padding: 10px 14px;

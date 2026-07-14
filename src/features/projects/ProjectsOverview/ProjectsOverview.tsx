@@ -9,12 +9,12 @@ import { Project } from '@/models/project';
 import { styled } from 'styled-components';
 import MoreTile from '@/features/projects/MoreTile';
 import ProjectTile from '@/features/projects/ProjectTile';
-import { media } from '@/styles';
+import { fluid, media } from '@/styles';
 
 const ProjectContainer = styled.div`
 	display: grid;
 	width: auto;
-	gap: 1vw;
+	gap: ${fluid(1)};
 	place-items: center;
 	grid-template-columns: repeat(5, 1fr);
 
@@ -31,7 +31,6 @@ const ProjectContainer = styled.div`
 	}
 
 	${media.wide} {
-		gap: 20px;
 		width: auto;
 	}
 `;

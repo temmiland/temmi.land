@@ -8,7 +8,7 @@
 import { useSpring, animated } from 'react-spring';
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { colors, media } from '@/styles';
+import { colors, fluid, media } from '@/styles';
 
 function useInterval(callback: () => void, delay: number | null) {
 	const savedCallback = useRef<() => void>();
@@ -86,7 +86,7 @@ function Path({ toggle, d }: { toggle: boolean; d: string }) {
 }
 
 const Svg = styled.svg`
-	height: 5vw;
+	height: ${fluid(5)};
 	max-width: 100%;
 	color: ${colors.white};
 	mix-blend-mode: difference;
@@ -100,10 +100,6 @@ const Svg = styled.svg`
 	${media.tablet} {
 		height: 15vw;
 		margin: -2.5vw 0 0 0;
-	}
-
-	${media.wide} {
-		height: 100px;
 	}
 `;
 

@@ -12,23 +12,19 @@ import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from '@/ui/Link';
 import Typography from '@/ui/Typography';
-import { colors, media, whiteAlpha } from '@/styles';
+import { colors, fluid, media, whiteAlpha } from '@/styles';
 
 const Nav = styled.nav`
 	position: relative;
 	min-width: 0;
 	height: inherit;
-	padding-right: 6.5vw;
+	padding-right: ${fluid(6.5)};
 
 	${media.mobile} {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
 		padding-right: 0;
-	}
-
-	${media.wide} {
-		padding-right: 130px;
 	}
 `;
 

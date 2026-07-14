@@ -10,7 +10,7 @@ import { pages } from '@/data/pages';
 import PageCardList from '@/features/header/PageCardList';
 import Signature from '@/features/me/Signature';
 import Link from '@/ui/Link';
-import { media } from '@/styles';
+import { fluid, media } from '@/styles';
 
 const HeaderContainer = styled.div`
 	background-color: rgba(0, 0, 0, 0.8);
@@ -57,7 +57,7 @@ const LinkContainer = styled.div`
 	align-items: center;
 	min-width: 0;
 	overflow: hidden;
-	padding-left: 6.5vw;
+	padding-left: ${fluid(6.5)};
 
 	.signature {
 		height: 2.2vw;
@@ -78,8 +78,6 @@ const LinkContainer = styled.div`
 	}
 
 	${media.wide} {
-		padding-left: 130px;
-
 		.signature {
 			height: 42px;
 		}

@@ -180,9 +180,12 @@ lässt aber die in den Einzeleinträgen dokumentierten Reste weg. Hier die volls
 
 ### Übernommen aus PROJEKT-ANALYSE.md (bereits dokumentiert)
 
-- **A4** — `fluid()`-Migration über 32 Dateien mit manuellen `media.mobile`-Blöcken (Stand heute nachgezählt).
-  Bewusst offen: ändert Skalierungsverhalten, Design-Entscheidung. Laufende Arbeit, siehe Memory
-  „Styles-Token-Migration".
+- **A4** — ✅ **Teilweise gefixt (14.07.2026).** Der Basis-vw+`media.wide`-Teil ist über alle 18 Dateien
+  migriert, in denen der `wide`-Wert exakt `vw × 20` war (107 Ersetzungen). Mit Playwright verifiziert:
+  `getComputedStyle`/`getBoundingClientRect` für jedes Element auf 5 Routen × 2 Viewportbreiten
+  vorher/nachher identisch. **Weiterhin bewusst offen:** die `mobile`/`tablet`-Stufenwerte auf stetige
+  Skalierung umzustellen ändert das tatsächliche Verhalten — das bleibt eine Design-Entscheidung, keine
+  Codepflege. Laufende Arbeit, siehe Memory „Styles-Token-Migration".
 - **A3-Rest** — ✅ **GEFIXT (13.07.2026).** `ExpandedProject` (~200 Zeilen JSX inkl. aller zugehörigen
   Styled-Components) aus `ProjectGrid.tsx` nach
   [`features/projects/ExpandedProject/ExpandedProject.tsx`](src/features/projects/ExpandedProject/ExpandedProject.tsx)
