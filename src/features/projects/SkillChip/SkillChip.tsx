@@ -148,7 +148,7 @@ const chipStyles = css<{ $linked: boolean }>`
 	${media.mobile} {
 		min-height: 5.75vw;
 		border-radius: 5vw;
-		padding: 0.5vw 1.25vw 0.5vw 2vw;
+		padding: 0.5vw 1.625vw;
 		margin: 1vw;
 		font-size: 3vw;
 	}
@@ -178,11 +178,11 @@ const chipStyles = css<{ $linked: boolean }>`
 		word-break: break-word;
 
 		${media.mobile} {
-			margin: 1vw 0.69vw 0 0.75vw;
+			margin: 1vw 0.72vw 0;
 		}
 
 		${media.tablet} {
-			margin: 0.375vw 0.517vw 0 0.562vw;
+			margin: 0.375vw 0.54vw 0;
 		}
 
 		${media.wide} {

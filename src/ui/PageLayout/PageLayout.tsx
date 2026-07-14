@@ -66,23 +66,24 @@ const PageMountains = styled.div`
 	z-index: 300;
 	background: url(/footer.svg);
 	background-repeat: no-repeat;
+	background-size: cover;
 	pointer-events: none;
-	margin-top: -46.25vw;
+	margin-top: -45.25vw;
 
 	${media.mobile} {
 		background-size: 265vw;
 		height: 100vw;
 		background-position: right;
-		margin-top: -147.5vw;
-		margin-right: -20vw;
+		margin-top: -154.5vw;
+		margin-right: -45vw;
 	}
 
 	${media.tablet} {
-		background-size: 265vw;
+		background-size: 235vw auto;
 		height: 100vw;
-		background-position: right;
-		margin-top: -90vw;
-		margin-right: -15vw;
+		background-position: right center;
+		margin-top: -106vw;
+		margin-right: -30vw;
 	}
 
 	${media.wide} {

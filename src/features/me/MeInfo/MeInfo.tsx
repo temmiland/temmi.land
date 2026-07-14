@@ -38,6 +38,14 @@ const MeTextContainer = styled.div`
 		span {
 			isolation: isolate;
 		}
+
+		.stack-break {
+			display: none;
+
+			${media.belowDesktop} {
+				display: block;
+			}
+		}
 	}
 
 	.signature {
@@ -82,6 +90,7 @@ export const MeInfo = () => (
 			{"I'm a "}
 			<Chip color={colors.accentBlue} iconName={'mug-hot'} text={'Senior Developer'} />
 			{' based in '}
+			<br className={'stack-break'} />
 			<Chip color={colors.accentPink} iconName={'location-dot'} text={'Leipzig, Germany'} />
 		</Typography>
 		<MeLinkIconContainer>

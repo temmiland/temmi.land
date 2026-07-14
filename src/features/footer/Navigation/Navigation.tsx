@@ -15,8 +15,11 @@ const Div_Navigation = styled.div`
 	justify-content: center;
 
 	p {
-		font-size: 10px;
 		margin: 0.3vw 0.6vw;
+
+		${media.mobile} {
+			margin: 0.3vw 0.6vw 4vw 0.6vw;
+		}
 
 		${media.wide} {
 			margin: 6px 12px;

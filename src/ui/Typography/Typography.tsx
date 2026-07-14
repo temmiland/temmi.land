@@ -46,10 +46,16 @@ const H1 = styled.h1`
 			left: ${fluid(-0.5)};
 			top: ${fluid(-1.8)};
 
-			${media.belowDesktop} {
-				font-size: 2.5vw;
-				left: -1vw;
-				top: -5vw;
+			${media.tablet} {
+				font-size: 2.05vw;
+				left: -0.85vw;
+				top: -3.07vw;
+			}
+
+			${media.mobile} {
+				font-size: 3.27vw;
+				left: -1.36vw;
+				top: -4.91vw;
 			}
 		}
 		&:nth-of-type(2n) {
@@ -58,10 +64,16 @@ const H1 = styled.h1`
 			top: ${fluid(0.1)};
 			left: ${fluid(-0.9)};
 
-			${media.belowDesktop} {
-				font-size: 3vw;
-				left: -1.25vw;
-				top: -0.5vw;
+			${media.tablet} {
+				font-size: 2.22vw;
+				left: -1.53vw;
+				top: 0.17vw;
+			}
+
+			${media.mobile} {
+				font-size: 3.55vw;
+				left: -2.45vw;
+				top: 0.27vw;
 			}
 		}
 		&:last-of-type {
@@ -70,10 +82,16 @@ const H1 = styled.h1`
 			top: ${fluid(1.3)};
 			left: ${fluid(-3.1)};
 
-			${media.belowDesktop} {
-				font-size: 1.8vw;
-				left: -7vw;
-				top: 3vw;
+			${media.tablet} {
+				font-size: 1.36vw;
+				left: -5.28vw;
+				top: 2.22vw;
+			}
+
+			${media.mobile} {
+				font-size: 2.18vw;
+				left: -8.45vw;
+				top: 3.55vw;
 			}
 		}
 	}
@@ -307,7 +325,8 @@ const P_Navigation = styled.p`
 	z-index: 3;
 
 	${media.mobile} {
-		font-size: 3.25vw;
+		font-size: 3.75vw;
+		padding: 0 2vw;
 	}
 
 	${media.tablet} {
@@ -324,7 +343,7 @@ const P_Trademark = styled.p`
 	z-index: 3;
 
 	${media.mobile} {
-		font-size: 1.5vw;
+		font-size: 2.2vw;
 	}
 
 	${media.tablet} {

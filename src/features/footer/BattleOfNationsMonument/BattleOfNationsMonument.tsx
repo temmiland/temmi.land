@@ -15,6 +15,10 @@ const SImage = styled.img<BattleOfNationsMonumentProps>`
 		width: 8vw;
 	}
 
+	${media.mobile} {
+		width: 12vw;
+	}
+
 	${media.wide} {
 		width: ${(props) => ((props.size ?? 3) / 100) * Math.min(window.innerWidth, 2000)}px;
 	}

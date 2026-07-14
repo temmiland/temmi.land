@@ -25,12 +25,20 @@ const ChipTag = styled.span<{ color: string }>`
 	white-space: nowrap;
 	background-color: ${(props) => props.color};
 
-	${media.belowDesktop} {
+	${media.mobile} {
 		font-size: 5vw;
 		border-radius: 2vw;
 		padding: 1.5vw;
 		margin: 0 0 1.5vw 0;
 		line-height: 4vw;
+	}
+
+	${media.tablet} {
+		font-size: 3vw;
+		border-radius: 1.2vw;
+		padding: 0.9vw;
+		margin: 0 0 0.9vw 0;
+		line-height: 2.4vw;
 	}
 
 	${media.wide} {
@@ -44,9 +52,14 @@ const ChipTag = styled.span<{ color: string }>`
 		font-size: 1.6vw;
 		margin-right: 0.8vw;
 
-		${media.belowDesktop} {
+		${media.mobile} {
 			font-size: 4.25vw;
 			margin: 0.3vw 1.3vw 0.3vw 0.5vw;
+		}
+
+		${media.tablet} {
+			font-size: 2.55vw;
+			margin: 0.18vw 0.78vw 0.18vw 0.3vw;
 		}
 
 		${media.wide} {
