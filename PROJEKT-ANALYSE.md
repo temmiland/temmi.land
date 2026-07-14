@@ -465,12 +465,18 @@ line-height, padding, margin, gap, border-radius, …) sind per Skript mit **0.7
 Deklarationen). Weil jeder Wert `vw` bleibt, bleiben die Verhältnisse innerhalb einer Komponente exakt
 erhalten (alles schrumpft um denselben Faktor); nur das Verhältnis Content-zu-Kachel ändert sich bewusst — die
 `45vw`-Kacheln und das 2-Spalten-Grid behalten ihre Größe (strukturelle `width`/`height`/Position
-unangetastet), nur der Text darin „zoomt" eine Stufe raus. **Behalten** aus dem verworfenen Versuch: die
-verhaltensneutrale Basis+`wide`→`fluid()`-Verdichtung und die **inklusive 1024px-Tablet-Grenze**
-(`media.tablet` bis `max-width: 1024px`, Desktop ab 1024.02px, `columnsForWidth(1024) = 2` — iPad Pro 12.9"
-hochkant bleibt Tablet). Verifiziert: 390px-Mobile-Snapshot **byte-identisch** zur Baseline (nur Tablet-Blöcke
-angefasst), Spaltenzahl bleibt 2 über 615–800px, Beschreibungs-Panels fassen ihren Text, Screenshots bei
-834/1023px sauber, ESLint/Vitest (24/24) grün.
+unangetastet), nur der Text darin „zoomt" eine Stufe raus. **Ausnahme vom Shrink: fix-quadratische Kacheln.**
+Der 0.75-Shrink gilt nur für Komponenten, deren **Footprint mit dem Content schrumpft** (content-getriebene
+Höhe → Blog-/Skill-Karten kompaktieren einfach). `ProjectTile`/`MoreTile` sind fixe `45vw × 45vw`-Quadrate:
+schrumpft man ihren Content mit, strandet der Text klein in einem großen Quadrat (Font-zu-Kachel fiel auf
+0.037 vs. 0.05 mobile / 0.055 desktop). Sie sind daher vom Shrink ausgenommen (reines per-Band-`vw`), inkl.
+der **nur** von ihnen genutzten `Typography`-Varianten `H2_ProjectHeader`/`P_Project`/`P_Project_Bold` — der
+Kacheltext rendert über `<Typography variant='project_desc/header'>`, nicht über `ProjectTile.tsx` selbst.
+**Behalten** aus dem verworfenen Versuch: die verhaltensneutrale Basis+`wide`→`fluid()`-Verdichtung und die
+**inklusive 1024px-Tablet-Grenze** (`media.tablet` bis `max-width: 1024px`, Desktop ab 1024.02px,
+`columnsForWidth(1024) = 2` — iPad Pro 12.9" hochkant bleibt Tablet). Verifiziert: 390px-Mobile-Snapshot
+**byte-identisch** zur Baseline (nur Tablet-Blöcke angefasst), Spaltenzahl bleibt 2 über 615–800px,
+Beschreibungs-Panels fassen ihren Text, Screenshots bei 834/1023px sauber, ESLint/Vitest (24/24) grün.
 
 **Faustregel (bestätigt):** Unterhalb Desktop wird **proportional** skaliert (reines `vw`, alles im
 Gleichschritt) — das ist der einzige Ansatz, der Element-Verhältnisse erhält. Größen-Kontrolle passiert über
