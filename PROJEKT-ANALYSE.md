@@ -344,9 +344,11 @@ frei kommerziell nutzbar) gewechselt — final bestätigt, keine Trial-Lizenz me
 > Blog-Galerie, Konsolen-Fehler-Check) verifiziert. **A4 bleibt offen** — siehe Begründung dort. **P3 ist
 > ebenfalls in dieser Runde gefixt** (siehe Abschnitt 4).
 >
-> **Status 14.07.2026 (vierte Runde):** A4 ist jetzt vollständig gefixt — erst der Basis+`wide`-Teil per
-> `fluid()`, dann die `mobile`/`tablet`-Stufenwerte per neuem `fluidRange()`-Helper (Details im A4-Eintrag).
-> Zusätzlich ist die Tablet-Grenze jetzt inklusiv (1024px = Tablet, iPad Pro hochkant).
+> **Status 14.07.2026 (vierte Runde):** A4 ist jetzt vollständig gefixt — Basis+`wide` per `fluid()`, und die
+> `mobile`/`tablet`-Skalierung auf reines per-Band-`vw` mit einem Tablet-Content-Faktor von 0.75. Ein
+> zwischenzeitlicher `fluidRange()`-Versuch wurde verworfen (verzog die Proportionen — kleine Werte flach,
+> Container steil → Drift; Details im A4-Eintrag). Zusätzlich ist die Tablet-Grenze jetzt inklusiv (1024px =
+> Tablet, iPad Pro hochkant).
 
 ### 🔴 A1: Seiten-Chrome ist 7-fach copy-gepastet — ✅ GEFIXT
 
@@ -445,40 +447,38 @@ Playwright-Vorher/Nachher-Vergleich von `getComputedStyle` + `getBoundingClientR
 Subpixel-Rauschen (≤0.02px, Federungs-Timing der `Trail`-Animation) und die live tickende Uhr in
 `AboutSection`. Rendering ist damit nachweislich pixel-identisch geblieben.
 
-**`mobile`/`tablet`-Teil gefixt (14.07.2026, `fluidRange()`):** Die Stufenwerte unterhalb des
-Desktop-Breakpoints sind auf **stetige** Skalierung migriert. Kern ist der neue Helper
-`fluidRange(fromPx, toPx)` in [`src/styles/media.ts`](src/styles/media.ts): eine Gerade von `fromPx` (bei
-320px Viewport) bis `toPx` (bei 1024px), als einzelnes `clamp()`. Anders als ein roher `vw`-Wert muss die
-Gerade nicht durch den Ursprung — dadurch verdoppeln sich Größen nicht mehr innerhalb eines Bands (das „alles
-riesig auf großen Handys / iPads"-Problem) und der Sprung bei 600px entfällt. Die Anker wurden skriptgestützt
-aus den Bestandswerten abgeleitet: aktueller Wert bei **390px** (Referenz-Phone) und **834px** (iPad hochkant)
-gemessen, Gerade durch beide Punkte auf 320/1024 verlängert — auf den Referenzgeräten sieht alles aus wie
-vorher, dazwischen und an den Extremen wird stetig interpoliert. 176 Wertepaare konvertiert, 73 dabei
-identisch gewordene `mobile`+`tablet`-Blöcke zu `belowDesktop` gemerged. **Bewusst nicht konvertiert:**
-viewport-proportionale Layout-Werte (beide Seiten ≥ 40vw, z. B. Seiten-Paddings, die an die Mountains-Grafik
-gekoppelt sind), das komplette `PageLayout`-Chrome, Werte mit Design-Sprüngen (Zero-Crossings wie
-`gap: 0 → 2.5vw`) sowie `calc()`/`blur()`/`border`-Kurzformen — die bleiben als explizite
-Breakpoint-Korrekturen stehen. Verifiziert wie beim Basis-Teil: Playwright-Vorher/Nachher-Diff aller Elemente
-auf 7 Routen bei 390px und 834px (identisch bis auf Subpixel-Rundung ≤1px auf 18000px Seitenhöhe, die Live-Uhr
-und eine Überschrift exakt auf der Zeilenumbruch-Kante), Screenshots bei 320/599/700/1023/1024,
-`tsc`/ESLint/Vitest (24/24) grün. Im selben Zug: **Tablet-Grenze inklusiv** — `media.tablet` endet jetzt bei
-`max-width: 1024px` statt 1023.98px, Desktop beginnt oberhalb, `columnsForWidth(1024)` liefert 2 Spalten; ein
-iPad Pro 12.9" hochkant (exakt 1024px) bekommt damit das Tablet-Layout statt der Desktop-Variante. Unverändert
-bleiben weiterhin die `media.wide`-Werte, die **nicht** exakt `vw × 20` sind (bewusste Design-Abweichungen wie
-`outline-offset` oder `SkillChip`s Tooltip-Breite).
+**`mobile`/`tablet`-Teil (14.07.2026): `fluidRange()` versucht und wieder verworfen.** Zuerst wurden die
+Stufenwerte auf einen `fluidRange(fromPx, toPx)`-Helper migriert (`clamp()`-Gerade 320px→1024px, nicht durch
+den Ursprung). Das war **konzeptionell falsch** und wurde komplett zurückgerollt: `fluidRange` skaliert die
+kleinen Werte (Font, Padding) auf einer flachen Geraden, während die großen Layout-Werte (`45vw`-Breiten,
+Ränder) bewusst `vw` blieben. Innerhalb **einer** Komponente skalierte der Container dann steil (`vw`) und die
+Schrift flach (`clamp`) — ihr Verhältnis **driftete** mit der Viewportbreite, die Komposition sah sichtbar
+verzogen aus (genau das Gegenteil der lockstep-proportionalen Skalierung, die den Desktop sauber aussehen
+lässt). Der Nutzer hat das Drift sofort erkannt.
 
-**Nachtrag (14.07.2026, Tile-Regel):** Eine weitere Klasse von Werten muss gestuft bleiben — **Innenwerte von
-Komponenten, deren Container selbst gestuft-proportional ist**. `ProjectTile` (80vw mobile / 45vw tablet),
-`MoreTile` und `SkillCard` (Grid `repeat(1/2/4)`) sind bei z. B. 650px _schmaler_ als an beiden
-Referenzpunkten (390px = 1 Spalte breit, 834px = 2 Spalten); viewport-interpolierte Innenwerte (Font,
-line-height, Padding) werden dann zu groß für die Box — beim fix positionierten Beschreibungs-Panel der
-Projekt-Kacheln wurde Text abgeschnitten. Diese drei Komponenten sind auf ihre gestuften `vw`-Werte
-zurückgesetzt: Innenwerte skalieren mit dem Container, nicht mit dem Viewport. Ebenfalls zurückgesetzt: das
-`ProjectGridContainer`-Padding (`0 10vw`/`0 3vw`) — die ExpandableGrid-Spaltenzahl hängt per
-`Math.floor(gridBreite / elementWidth)` messerscharf an der Grid-Breite, das konvertierte Padding kippte sie
-bei ~650px von 2 auf 1 Spalte. `BlogCard` bleibt dagegen konvertiert: dessen Höhe ist content-getrieben, die
-Karte wächst einfach mit. Faustregel: `fluidRange()` nur für Werte, deren umgebende Box
-viewport-kontinuierlich ist ODER mit dem Inhalt wachsen kann — sonst mit dem Container stufen.
+**Der richtige Ansatz: reines per-Band-`vw` + Tablet-Content ×0.75.** Alle Komponenten sind auf reines
+per-Band-`vw` zurückgesetzt (wie Desktop, wie ursprünglich): **jede** Eigenschaft skaliert mit derselben Rate,
+Element-Verhältnisse bleiben bei jeder Breite konstant — kein Drift. Das ursprüngliche „auf Tablet zu
+groß"-Problem (reines `vw` wächst steil: Blog-Titel 33px bei 1023px vs. 15px auf Desktop) wird
+**proportionserhaltend** gelöst: alle _Content_-`vw`-Werte in `${media.tablet}`-Blöcken (font-size,
+line-height, padding, margin, gap, border-radius, …) sind per Skript mit **0.75** multipliziert (229
+Deklarationen). Weil jeder Wert `vw` bleibt, bleiben die Verhältnisse innerhalb einer Komponente exakt
+erhalten (alles schrumpft um denselben Faktor); nur das Verhältnis Content-zu-Kachel ändert sich bewusst — die
+`45vw`-Kacheln und das 2-Spalten-Grid behalten ihre Größe (strukturelle `width`/`height`/Position
+unangetastet), nur der Text darin „zoomt" eine Stufe raus. **Behalten** aus dem verworfenen Versuch: die
+verhaltensneutrale Basis+`wide`→`fluid()`-Verdichtung und die **inklusive 1024px-Tablet-Grenze**
+(`media.tablet` bis `max-width: 1024px`, Desktop ab 1024.02px, `columnsForWidth(1024) = 2` — iPad Pro 12.9"
+hochkant bleibt Tablet). Verifiziert: 390px-Mobile-Snapshot **byte-identisch** zur Baseline (nur Tablet-Blöcke
+angefasst), Spaltenzahl bleibt 2 über 615–800px, Beschreibungs-Panels fassen ihren Text, Screenshots bei
+834/1023px sauber, ESLint/Vitest (24/24) grün.
+
+**Faustregel (bestätigt):** Unterhalb Desktop wird **proportional** skaliert (reines `vw`, alles im
+Gleichschritt) — das ist der einzige Ansatz, der Element-Verhältnisse erhält. Größen-Kontrolle passiert über
+**Bänder** (mobile < 600, tablet 600–1024) und einen **einheitlichen Faktor pro Band** (Tablet ×0.75), nie
+über pro-Property-Kurven wie `fluidRange` (die driften). Der Preis: der Größensprung bei 600px bleibt (fällt
+mit dem 1→2-Spalten-Layoutwechsel zusammen, daher unauffällig), und ein einheitlicher Faktor kann nicht beide
+Bandenden unabhängig steuern. Wer den Tablet-Faktor nachjustieren will: es ist ein einzelner Multiplikator auf
+alle `${media.tablet}`-Content-`vw` (Skript `shrink_tablet.py`).
 
 ### 🟠 A5: antd als Dependency für Paragraph, Link und einen Button — ✅ GEFIXT
 
@@ -807,7 +807,7 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 | 6   | ~1 h        | Qualität dauerhaft                     | CI-Job `tsc && lint && build` vor Deploy (S6) — ✅; `react-hooks`-Plugin in ESLint aktivieren (A10) — ✅                                                                                                         |
 | 7   | ~2 h        | −50 % Page-Code                        | `PageLayout`-Komponente extrahieren (A1) — ✅; `SearchInput`/`Dropdown` nach `ui/` (A2) — ✅                                                                                                                     |
 | 8   | ~2 h        | Bundle ↓↓                              | antd durch native Elemente ersetzen (A5) — ✅; FontAwesome auf benannte Imports (A6) — ✅; `React.lazy` pro Route (P4) — ✅                                                                                      |
-| 9   | laufend     | CSS ↓ ~50 %                            | `fluid()`/`fluidRange()`-Migration (A4) — ✅ komplett (Basis+`wide` 14.07., `mobile`/`tablet` 14.07.); `ProjectGrid`-Panels dedupliziert (A3) — ✅                                                               |
+| 9   | laufend     | CSS ↓ ~50 %                            | A4 ✅ komplett: Basis+`wide`→`fluid()`, `mobile`/`tablet` auf per-Band-`vw` + Tablet-Content ×0.75 (14.07., `fluidRange`-Versuch verworfen); `ProjectGrid`-Panels dedupliziert (A3) — ✅                         |
 | 10  | ~1 h        | SEO                                    | meta/OG-Tags via Helmet pro Seite, Sitemap aus `data/` generieren (P5) — ✅; dabei entdeckt: `robots.txt`/`sitemap.xml` lagen in `src/` statt `public/` und wurden **nie deployed** (B8-Nachtrag) — ✅ mitgefixt |
 | 11  | ~3 h        | SPA-Geschwindigkeit, A11y, Wartbarkeit | Interne Navigation auf Router-`<Link>` (A7) — ✅; klickbare `<div>`s → `<a>`/`<button>` + a11y-Regeln reaktiviert (A8) — ✅; invalides Nav-HTML + doppelte `<h1>`s (A9) — ✅                                     |
 | 12  | ~1 h        | Qualität dauerhaft                     | Tote ESLint-Regeln raus, a11y-Regeln an (A10) — ✅; `prettier/prettier` geprüft und bewusst zurückgestellt (2.263 Diffs ohne `.prettierrc`)                                                                      |
@@ -818,7 +818,8 @@ Damit die Liste oben nicht das Bild verzerrt — vieles ist überdurchschnittlic
 **Noch offen nach diesem dritten Rundumschlag:**
 
 - ~~**A4** (`fluid()`-Migration)~~ — ✅ inzwischen komplett gefixt (14.07.2026): Basis+`wide` per `fluid()`,
-  `mobile`/`tablet`-Stufenwerte per `fluidRange()` mit 390/834-Ankern, Details im A4-Eintrag.
+  `mobile`/`tablet` auf reines per-Band-`vw` + Tablet-Content ×0.75 (`fluidRange`-Versuch verworfen), Details
+  im A4-Eintrag.
 - **Prerendering/SSG** (Teil von P5) — größerer Architektur-Umbau, kein Quick-Fix.
 - **P1 (Brotli)** — kein offizielles `nginx-unprivileged`-Image mit `ngx_brotli`; Cloudflare komprimiert am
   Edge vermutlich ohnehin schon. Ungetestetes Server-Image-Risiko gegen geringen Grenznutzen abgewogen und

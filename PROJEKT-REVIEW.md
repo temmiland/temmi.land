@@ -180,15 +180,16 @@ lässt aber die in den Einzeleinträgen dokumentierten Reste weg. Hier die volls
 
 ### Übernommen aus PROJEKT-ANALYSE.md (bereits dokumentiert)
 
-- **A4** — ✅ **Komplett gefixt (14.07.2026).** Erst der Basis-vw+`media.wide`-Teil über alle 18 Dateien
-  migriert, in denen der `wide`-Wert exakt `vw × 20` war (107 Ersetzungen, Playwright-verifiziert
-  pixel-identisch). Dann die `mobile`/`tablet`-Stufenwerte auf stetige Skalierung per neuem
-  `fluidRange(fromPx, toPx)`-Helper umgestellt (176 Wertepaare, 73 Blöcke zu `belowDesktop` gemerged) — Anker
-  aus den Bestandswerten bei 390px/834px abgeleitet, sodass Referenzgeräte unverändert rendern
-  (Playwright-Diff ≈ 0) und nur die Extreme (599px-Handys, 1023px-Tablets) vernünftig kleiner werden.
-  Layout-proportionale Werte (≥ 40vw, Mountains-Chrome, `PageLayout`) bewusst als `vw`/Breakpoint-Korrekturen
-  belassen. Zusätzlich Tablet-Grenze inklusiv: exakt 1024px (iPad Pro hochkant) bekommt jetzt Tablet- statt
-  Desktop-Layout. Details im A4-Eintrag der PROJEKT-ANALYSE.md.
+- **A4** — ✅ **Komplett gefixt (14.07.2026).** Basis-vw+`media.wide`-Teil über 18 Dateien per `fluid()`
+  verdichtet (107 Ersetzungen, Playwright-verifiziert pixel-identisch). Für `mobile`/`tablet` wurde zuerst ein
+  `fluidRange()`-Helper (`clamp()`-Gerade) versucht, aber **wieder verworfen**: er skalierte kleine Werte
+  flach und ließ die großen Layout-`vw` steil, sodass Container und Text innerhalb einer Komponente
+  auseinander drifteten und die Proportionen sichtbar verzogen. Stattdessen jetzt **reines per-Band-`vw`**
+  (alles im Gleichschritt, Verhältnisse konstant wie auf Desktop), und das ursprüngliche „auf Tablet zu groß"
+  wird proportionserhaltend über einen **einheitlichen Faktor 0.75 auf alle Tablet-Content-`vw`** gelöst (229
+  Deklarationen; strukturelle `45vw`-Kacheln/2-Spalten-Grid unangetastet). Mobile 390px byte-identisch zur
+  Baseline, Spalten stabil 615–800px, ESLint/Vitest grün. Tablet-Grenze inklusiv (1024px = iPad Pro hochkant →
+  Tablet). Details im A4-Eintrag der PROJEKT-ANALYSE.md.
 - **A3-Rest** — ✅ **GEFIXT (13.07.2026).** `ExpandedProject` (~200 Zeilen JSX inkl. aller zugehörigen
   Styled-Components) aus `ProjectGrid.tsx` nach
   [`features/projects/ExpandedProject/ExpandedProject.tsx`](src/features/projects/ExpandedProject/ExpandedProject.tsx)
