@@ -41,6 +41,11 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 		margin-top: 10vw;
 		border-radius: 7.5vw;
 		width: calc(100% - 6vw);
+
+		h2 {
+			margin: 0;
+			padding: 3vw;
+		}
 	}
 
 	${media.tablet} {
@@ -61,10 +66,6 @@ const ExpandableContainer = styled.div<ProjectTileContainerProps>`
 	h1 {
 		margin: 0;
 		padding: ${fluid(1.5)};
-
-		${media.mobile} {
-			padding: 3vw;
-		}
 
 		${media.tablet} {
 			padding: 1.5vw 1.875vw;
@@ -247,8 +248,8 @@ const CloseHandle = styled.button`
 	margin: 0 0.833vw 0 0.347vw;
 
 	${media.mobile} {
-		width: 5.75vw;
-		height: 5.75vw;
+		width: 8.5vw;
+		height: 8.5vw;
 	}
 
 	${media.tablet} {
