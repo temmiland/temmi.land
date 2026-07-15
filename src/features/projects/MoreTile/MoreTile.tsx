@@ -18,7 +18,7 @@ const MoreTileContainer = styled.div`
 	border: 1px solid ${whiteAlpha(0.12)};
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: flex-start;
 	width: ${fluid(18)};
 	height: ${fluid(18)};
@@ -48,7 +48,7 @@ const MoreTileContainer = styled.div`
 	}
 
 	svg {
-		margin: 6.5vw 2.5vw;
+		margin-left: ${fluid(2.5)};
 		font-size: ${fluid(4.7)};
 
 		${media.mobile} {

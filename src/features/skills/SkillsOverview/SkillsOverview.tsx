@@ -55,19 +55,18 @@ const MoreLink = styled(Link)`
 	grid-column: 5;
 	top: 0;
 	bottom: 0;
-	left: 0.9vw;
+	left: ${fluid(0.9)};
 	width: 18.825vw;
 
 	${media.belowDesktop} {
 		position: static;
 		grid-column: 1 / -1;
-		grid-row: auto;
 		width: auto;
 	}
 
 	${media.wide} {
 		left: 14px;
-		width: 369.5px;
+		width: 744px;
 	}
 `;
 
@@ -75,17 +74,25 @@ const MoreCard = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding-left: 1.5vw;
 	width: 100%;
 	height: 100%;
+	padding-left: 1.5vw;
 	border: 0.07vw dashed ${whiteAlpha(0.3)};
 	border-radius: ${fluid(0.7)};
 	color: ${colors.white};
 	transition: 120ms ease;
 
-	${media.mobile} {
+	${media.belowDesktop} {
 		justify-content: center;
 		height: auto;
+		gap: ${fluid(1)};
+		padding: ${fluid(1.4)} 0;
+		border-radius: ${fluid(1.1)};
+		font-family: ${fonts.medium};
+		font-size: ${fluid(1.1)};
+	}
+
+	${media.mobile} {
 		gap: 3vw;
 		padding: 5vw 0;
 		border: 0.25vw dashed ${whiteAlpha(0.3)};
@@ -94,8 +101,6 @@ const MoreCard = styled.div`
 	}
 
 	${media.tablet} {
-		justify-content: center;
-		height: auto;
 		gap: 1.5vw;
 		padding: 2.25vw 0;
 		border: 0.125vw dashed ${whiteAlpha(0.3)};
@@ -104,7 +109,7 @@ const MoreCard = styled.div`
 	}
 
 	${media.wide} {
-		border: 1px dashed ${whiteAlpha(0.3)};
+		border-width: 1px;
 		padding-left: 0;
 	}
 
@@ -115,7 +120,6 @@ const MoreCard = styled.div`
 
 	.more-label {
 		display: none;
-		font-family: ${fonts.medium};
 
 		${media.belowDesktop} {
 			display: inline;
@@ -126,13 +130,16 @@ const MoreCard = styled.div`
 		color: ${colors.white};
 		font-size: ${fluid(4.7)};
 
-		${media.mobile} {
+		${media.belowDesktop} {
 			color: ${colors.accentBlue};
+			font-size: ${fluid(1.4)};
+		}
+
+		${media.mobile} {
 			font-size: 6vw;
 		}
 
 		${media.tablet} {
-			color: ${colors.accentBlue};
 			font-size: 2.55vw;
 		}
 

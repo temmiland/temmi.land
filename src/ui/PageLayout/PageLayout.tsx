@@ -89,7 +89,7 @@ const PageMountains = styled.div`
 	${media.wide} {
 		background-size: cover;
 		height: 1000px;
-		margin-top: -1230px;
+		margin-top: -1195px;
 		background-position: center;
 	}
 `;
