@@ -66,23 +66,35 @@ jobs:
                   curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/v0.72.0/contrib/install.sh \
                       | sh -s -- -b /usr/local/bin v0.72.0
 
+            # Only the last FROM in the Dockerfile is what actually ships (the
+            # earlier stages are build-only and never leave the runner), so
+            # findings there are always reported but don't gate `found` -
+            # they can't reach production and don't warrant a ticket alone.
             - name: Scan base images
               id: scan
               run: |
                   set +e
                   FOUND=false
                   REPORT=""
-                  IMAGES=$(grep -E '^FROM ' docker/Dockerfile | awk '{print $2}' | sort -u)
+                  IMAGES=$(grep -E '^FROM ' docker/Dockerfile | awk '{print $2}')
+                  LAST_IMAGE=$(echo "$IMAGES" | tail -n1)
 
                   while read -r IMAGE; do
                       [ -z "$IMAGE" ] && continue
                       IMAGE_REPORT=$(trivy image --severity CRITICAL,HIGH --exit-code 1 --format table --quiet "$IMAGE" 2>&1)
                       IMAGE_EXIT=$?
-                      [ "$IMAGE_EXIT" -ne 0 ] && FOUND=true
-                      REPORT="$REPORT
-                  ## $IMAGE
+                      if [ "$IMAGE_EXIT" -ne 0 ]; then
+                          if [ "$IMAGE" = "$LAST_IMAGE" ]; then
+                              FOUND=true
+                              LABEL="$IMAGE"
+                          else
+                              LABEL="$IMAGE (Build-Stage, wird nicht ausgeliefert)"
+                          fi
+                          REPORT="$REPORT
+                  ## $LABEL
                   $IMAGE_REPORT
                   "
+                      fi
                   done <<< "$IMAGES"
                   set -e
 
