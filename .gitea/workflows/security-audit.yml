@@ -125,7 +125,7 @@ jobs:
                   TARGETS=""
                   [ -d .gitea/workflows ] && TARGETS="$TARGETS .gitea/workflows"
                   [ -d .github/workflows ] && TARGETS="$TARGETS .github/workflows"
-                  OUTPUT=$(zizmor --no-online-audits $TARGETS 2>&1)
+                  OUTPUT=$(zizmor --color=never --no-online-audits $TARGETS 2>&1)
                   EXIT_CODE=$?
                   set -e
                   echo "$OUTPUT"
