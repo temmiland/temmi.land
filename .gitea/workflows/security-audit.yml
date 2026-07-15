@@ -111,7 +111,10 @@ jobs:
                           continue
                       fi
 
-                      IMAGE_REPORT=$(trivy image --severity CRITICAL,HIGH --exit-code 1 --format table --quiet "$TAG" 2>&1)
+                      # --pkg-types os: npm packages inside node_modules are
+                      # already covered by the bun-audit job and would otherwise
+                      # pad the table with a zero-finding row per package.json.
+                      IMAGE_REPORT=$(trivy image --severity CRITICAL,HIGH --exit-code 1 --format table --quiet --pkg-types os "$TAG" 2>&1)
                       IMAGE_EXIT=$?
                       if [ "$IMAGE_EXIT" -ne 0 ]; then
                           if [ "$IS_FINAL" = true ]; then
