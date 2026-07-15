@@ -16,6 +16,15 @@ FROM nginxinc/nginx-unprivileged:stable-alpine
 
 LABEL maintainer="Temmi Pietsch <welcome@temmi.land>"
 
+# The stable-alpine tag doesn't get rebuilt for every upstream Alpine
+# security patch, so pull current package versions (curl/libcurl CVEs etc.)
+# at build time instead of trusting whatever's baked into the base layer.
+# apk needs root; the base image drops to the unprivileged "nginx" user by
+# default, so switch back afterwards.
+USER root
+RUN apk update && apk upgrade --no-cache
+USER nginx
+
 COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
