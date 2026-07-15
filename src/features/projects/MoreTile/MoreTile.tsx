@@ -51,14 +51,22 @@ const MoreTileContainer = styled.div`
 		margin-left: ${fluid(2.5)};
 		font-size: ${fluid(4.7)};
 
+		/*
+		 * The caret-right glyph sits flush against the right edge of its own
+		 * viewBox (almost no gap) but has a wide empty margin on the left, so
+		 * centering the svg box doesn't visually center the triangle - nudge
+		 * it left to compensate.
+		 */
 		${media.mobile} {
 			margin: 0;
 			font-size: 25vw;
+			transform: translateX(-12.5%);
 		}
 
 		${media.tablet} {
 			margin: 0;
 			font-size: 10vw;
+			transform: translateX(-12.5%);
 		}
 	}
 
