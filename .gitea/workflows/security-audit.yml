@@ -48,8 +48,10 @@ jobs:
                       echo "found=false" >> "$GITHUB_OUTPUT"
                   fi
 
-    # Scans the Docker base images from docker/Dockerfile for known OS/package
-    # CVEs (not just "is a newer tag available" - only flags actual vulnerabilities).
+    # Scans the actual Dockerfile stages (built locally, not the raw upstream
+    # tags) for known OS/package CVEs - so fixes baked into the Dockerfile
+    # itself (e.g. an `apk upgrade` layer) are reflected, not just "is a newer
+    # tag available".
     docker-images:
         runs-on: ubuntu-latest
         outputs:
@@ -66,36 +68,61 @@ jobs:
                   curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/v0.72.0/contrib/install.sh \
                       | sh -s -- -b /usr/local/bin v0.72.0
 
+            # Builds every stage so the scan reflects what actually gets
+            # produced (e.g. an `apk upgrade` in the final stage) instead of
+            # the pristine upstream base image.
+            - name: Build stages
+              shell: bash
+              run: |
+                  STAGES=$(grep -oP '^FROM \S+ AS \K\S+' docker/Dockerfile || true)
+                  for STAGE in $STAGES; do
+                      docker build -f docker/Dockerfile --target "$STAGE" -t "audit-stage-${STAGE}:local" .
+                  done
+                  docker build -f docker/Dockerfile -t audit-stage-final:local .
+
             # Only the last FROM in the Dockerfile is what actually ships (the
             # earlier stages are build-only and never leave the runner), so
             # findings there are always reported but don't gate `found` -
             # they can't reach production and don't warrant a ticket alone.
-            - name: Scan base images
+            - name: Scan built images
               id: scan
+              shell: bash
               run: |
                   set +e
                   FOUND=false
                   REPORT=""
-                  IMAGES=$(grep -E '^FROM ' docker/Dockerfile | awk '{print $2}')
-                  LAST_IMAGE=$(echo "$IMAGES" | tail -n1)
+                  FROM_LINES=$(grep -E '^FROM ' docker/Dockerfile)
+                  LAST_LINE=$(echo "$FROM_LINES" | tail -n1)
 
-                  while read -r IMAGE; do
-                      [ -z "$IMAGE" ] && continue
-                      IMAGE_REPORT=$(trivy image --severity CRITICAL,HIGH --exit-code 1 --format table --quiet "$IMAGE" 2>&1)
+                  while IFS= read -r LINE; do
+                      [ -z "$LINE" ] && continue
+                      BASE=$(echo "$LINE" | awk '{print $2}')
+                      STAGE=$(echo "$LINE" | grep -oP ' AS \K\S+' || true)
+
+                      if [ "$LINE" = "$LAST_LINE" ]; then
+                          TAG="audit-stage-final:local"
+                          LABEL="$BASE"
+                          IS_FINAL=true
+                      elif [ -n "$STAGE" ]; then
+                          TAG="audit-stage-${STAGE}:local"
+                          LABEL="$BASE (Build-Stage, wird nicht ausgeliefert)"
+                          IS_FINAL=false
+                      else
+                          continue
+                      fi
+
+                      IMAGE_REPORT=$(trivy image --severity CRITICAL,HIGH --exit-code 1 --format table --quiet "$TAG" 2>&1)
                       IMAGE_EXIT=$?
                       if [ "$IMAGE_EXIT" -ne 0 ]; then
-                          if [ "$IMAGE" = "$LAST_IMAGE" ]; then
+                          if [ "$IS_FINAL" = true ]; then
                               FOUND=true
-                              LABEL="$IMAGE"
-                          else
-                              LABEL="$IMAGE (Build-Stage, wird nicht ausgeliefert)"
                           fi
                           REPORT="$REPORT
                   ## $LABEL
                   $IMAGE_REPORT
                   "
                       fi
-                  done <<< "$IMAGES"
+                  done <<< "$FROM_LINES"
                   set -e
 
                   echo "$REPORT"
