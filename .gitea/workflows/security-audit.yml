@@ -104,8 +104,19 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
+            # Installed from the prebuilt release binary (checksum-verified)
+            # instead of pip, since the runner's system Python is externally
+            # managed (PEP 668) and rejects unscoped `pip install`.
             - name: Install zizmor
-              run: pip install --quiet zizmor==1.27.0
+              run: |
+                  cd /tmp
+                  ARCHIVE="zizmor-x86_64-unknown-linux-gnu.tar.gz"
+                  curl -sfLO "https://github.com/zizmorcore/zizmor/releases/download/v1.27.0/${ARCHIVE}"
+                  echo "277f2bd8fd37cf60c42ab7afca6faa884e65440fa31e02b44bdaae60f62a358f  ${ARCHIVE}" | sha256sum -c -
+                  tar -xzf "$ARCHIVE"
+                  mkdir -p "$HOME/.local/bin"
+                  install -m 755 zizmor "$HOME/.local/bin/zizmor"
+                  echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
             - name: Run zizmor
               id: zizmor
