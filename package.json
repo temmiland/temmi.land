@@ -19,12 +19,12 @@
 		"@fortawesome/free-solid-svg-icons": "^6.5.1",
 		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@react-spring/parallax": "^9.7.3",
+		"@react-spring/web": "^9.7.5",
 		"@temmiland/react-expandable-grid": "^1.1.6",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-helmet-async": "^2.0.5",
 		"react-router-dom": "^7.18.2",
-		"react-spring": "^9.7.3",
 		"styled-components": "^6.1.8"
 	},
 	"devDependencies": {

@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring } from '@react-spring/web';
 import HeaderContent from '@/features/header/HeaderContent';
 import { styled } from 'styled-components';
 

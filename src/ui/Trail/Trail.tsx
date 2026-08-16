@@ -6,7 +6,7 @@
  */
 
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { animated, useTrail } from 'react-spring';
+import { animated, useTrail } from '@react-spring/web';
 
 const Trail: React.FC<{
 	animationDirection?: 'top' | 'right' | 'bottom' | 'left';

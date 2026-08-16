@@ -5,7 +5,7 @@
  * permission of the author.
  */
 
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/web';
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { colors, fluid, media } from '@/styles';
