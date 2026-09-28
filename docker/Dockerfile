@@ -4,6 +4,13 @@ FROM oven/bun:1.3.14 AS builder
 
 LABEL MAINTAINER="Temmi Pietsch <welcome@temmi.land>"
 
+# Same reasoning as the apk upgrade in the final stage: the pinned Bun tag
+# isn't rebuilt for every Debian security update (util-linux, openssl,
+# sqlite, pcre2 CVEs etc.), so pull the patched packages at build time.
+RUN apt-get update && \
+	apt-get upgrade -y --no-install-recommends && \
+	rm -rf /var/lib/apt/lists/*
+
 COPY . /app
 
 WORKDIR /app
