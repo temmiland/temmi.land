@@ -1,6 +1,5 @@
-# Pinned so every server build uses the same Bun version as local dev/CI
-# instead of whatever "latest" resolves to on a given day.
-FROM oven/bun:1.3.14 AS builder
+# Pin a patched Bun release with the fix for CVE-2026-111497 (Node2Shell).
+FROM oven/bun:1.4.4 AS builder
 
 LABEL MAINTAINER="Temmi Pietsch <welcome@temmi.land>"
 
